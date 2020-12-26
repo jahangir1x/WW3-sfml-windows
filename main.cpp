@@ -16,7 +16,7 @@ int main()
             if (event.type == Event::KeyPressed){
 				Vector2i globalposition = Mouse::getPosition(window);
 				if (event.key.code == Keyboard::Z){
-					cout << "the \"Z\" key was pressed... mouse location:" << endl;
+					cout << "the \"z\" key was pressed... mouse location:" << endl;
 					cout << "x: " << globalposition.x << " y: " << globalposition.y << endl;
 				}
 			}
