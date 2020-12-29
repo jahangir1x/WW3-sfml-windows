@@ -1,55 +1,22 @@
 # depslib dependency file v1.0
-1609008534 source:c:\users\zinis\cdblk\sfml_demo\main.cpp
-	<SFML/Graphics.hpp>
-	<SFML/Audio.hpp>
-	<SFML/System.hpp>
-	<bits/stdc++.h>
+1609173334 source:c:\users\zinis\cdblk\sfml_demo\main.cpp
+	"GameHandler.hpp"
 
-1525797620 c:\sfml-2.5.1\include\sfml\graphics.hpp
-	<SFML/Window.hpp>
-	<SFML/Graphics/BlendMode.hpp>
-	<SFML/Graphics/CircleShape.hpp>
-	<SFML/Graphics/Color.hpp>
-	<SFML/Graphics/ConvexShape.hpp>
-	<SFML/Graphics/Drawable.hpp>
-	<SFML/Graphics/Font.hpp>
-	<SFML/Graphics/Glyph.hpp>
-	<SFML/Graphics/Image.hpp>
-	<SFML/Graphics/PrimitiveType.hpp>
-	<SFML/Graphics/Rect.hpp>
-	<SFML/Graphics/RectangleShape.hpp>
-	<SFML/Graphics/RenderStates.hpp>
-	<SFML/Graphics/RenderTarget.hpp>
-	<SFML/Graphics/RenderTexture.hpp>
-	<SFML/Graphics/RenderWindow.hpp>
-	<SFML/Graphics/Shader.hpp>
-	<SFML/Graphics/Shape.hpp>
-	<SFML/Graphics/Sprite.hpp>
-	<SFML/Graphics/Text.hpp>
-	<SFML/Graphics/Texture.hpp>
-	<SFML/Graphics/Transform.hpp>
-	<SFML/Graphics/Transformable.hpp>
-	<SFML/Graphics/Vertex.hpp>
-	<SFML/Graphics/VertexArray.hpp>
-	<SFML/Graphics/VertexBuffer.hpp>
-	<SFML/Graphics/View.hpp>
-
-1525797620 c:\sfml-2.5.1\include\sfml\window.hpp
+1525797620 c:\sfml-2.5.1\include\sfml\audio.hpp
 	<SFML/System.hpp>
-	<SFML/Window/Clipboard.hpp>
-	<SFML/Window/Context.hpp>
-	<SFML/Window/ContextSettings.hpp>
-	<SFML/Window/Cursor.hpp>
-	<SFML/Window/Event.hpp>
-	<SFML/Window/Joystick.hpp>
-	<SFML/Window/Keyboard.hpp>
-	<SFML/Window/Mouse.hpp>
-	<SFML/Window/Sensor.hpp>
-	<SFML/Window/Touch.hpp>
-	<SFML/Window/VideoMode.hpp>
-	<SFML/Window/Window.hpp>
-	<SFML/Window/WindowHandle.hpp>
-	<SFML/Window/WindowStyle.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
 
 1525797620 c:\sfml-2.5.1\include\sfml\system.hpp
 	<SFML/Config.hpp>
@@ -169,6 +136,140 @@
 	<SFML/System/Vector3.inl>
 
 1525797620 c:\sfml-2.5.1\include\sfml\system\vector3.inl
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<algorithm>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilefactory.inl
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1525797620 c:\sfml-2.5.1\include\sfml\graphics.hpp
+	<SFML/Window.hpp>
+	<SFML/Graphics/BlendMode.hpp>
+	<SFML/Graphics/CircleShape.hpp>
+	<SFML/Graphics/Color.hpp>
+	<SFML/Graphics/ConvexShape.hpp>
+	<SFML/Graphics/Drawable.hpp>
+	<SFML/Graphics/Font.hpp>
+	<SFML/Graphics/Glyph.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Graphics/PrimitiveType.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/Graphics/RectangleShape.hpp>
+	<SFML/Graphics/RenderStates.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/Graphics/RenderTexture.hpp>
+	<SFML/Graphics/RenderWindow.hpp>
+	<SFML/Graphics/Shader.hpp>
+	<SFML/Graphics/Shape.hpp>
+	<SFML/Graphics/Sprite.hpp>
+	<SFML/Graphics/Text.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Graphics/Transform.hpp>
+	<SFML/Graphics/Transformable.hpp>
+	<SFML/Graphics/Vertex.hpp>
+	<SFML/Graphics/VertexArray.hpp>
+	<SFML/Graphics/VertexBuffer.hpp>
+	<SFML/Graphics/View.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\window.hpp
+	<SFML/System.hpp>
+	<SFML/Window/Clipboard.hpp>
+	<SFML/Window/Context.hpp>
+	<SFML/Window/ContextSettings.hpp>
+	<SFML/Window/Cursor.hpp>
+	<SFML/Window/Event.hpp>
+	<SFML/Window/Joystick.hpp>
+	<SFML/Window/Keyboard.hpp>
+	<SFML/Window/Mouse.hpp>
+	<SFML/Window/Sensor.hpp>
+	<SFML/Window/Touch.hpp>
+	<SFML/Window/VideoMode.hpp>
+	<SFML/Window/Window.hpp>
+	<SFML/Window/WindowHandle.hpp>
+	<SFML/Window/WindowStyle.hpp>
 
 1539621090 c:\sfml-2.5.1\include\sfml\window\clipboard.hpp
 	<SFML/Window/Export.hpp>
@@ -414,107 +515,151 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio.hpp
+1609216152 c:\users\zinis\cdblk\sfml_demo\gamehandler.hpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
 	<SFML/System.hpp>
-	<SFML/Audio/InputSoundFile.hpp>
-	<SFML/Audio/Listener.hpp>
-	<SFML/Audio/Music.hpp>
-	<SFML/Audio/OutputSoundFile.hpp>
-	<SFML/Audio/Sound.hpp>
-	<SFML/Audio/SoundBuffer.hpp>
-	<SFML/Audio/SoundBufferRecorder.hpp>
-	<SFML/Audio/SoundFileFactory.hpp>
-	<SFML/Audio/SoundFileReader.hpp>
-	<SFML/Audio/SoundFileWriter.hpp>
-	<SFML/Audio/SoundRecorder.hpp>
-	<SFML/Audio/SoundSource.hpp>
-	<SFML/Audio/SoundStream.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\inputsoundfile.hpp
-	<SFML/Audio/Export.hpp>
+1609212033 source:c:\users\zinis\cdblk\sfml_demo\mainmenu.cpp
+	"MainMenu.hpp"
+
+1609216242 c:\users\zinis\cdblk\sfml_demo\mainmenu.hpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
+
+1609216002 source:c:\users\zinis\cdblk\sfml_demo\gamehandler.cpp
+	"GameHandler.hpp"
+	"Level1.hpp"
+	"Level2.hpp"
+	"Level3.hpp"
+	"MainMenu.hpp"
+
+1525797620 c:\sfml-2.5.1\include\sfml\network.hpp
+	<SFML/System.hpp>
+	<SFML/Network/Ftp.hpp>
+	<SFML/Network/Http.hpp>
+	<SFML/Network/IpAddress.hpp>
+	<SFML/Network/Packet.hpp>
+	<SFML/Network/Socket.hpp>
+	<SFML/Network/SocketHandle.hpp>
+	<SFML/Network/SocketSelector.hpp>
+	<SFML/Network/TcpListener.hpp>
+	<SFML/Network/TcpSocket.hpp>
+	<SFML/Network/UdpSocket.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\network\ftp.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/TcpSocket.hpp>
 	<SFML/System/NonCopyable.hpp>
 	<SFML/System/Time.hpp>
 	<string>
-	<algorithm>
+	<vector>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\export.hpp
+1525797620 c:\sfml-2.5.1\include\sfml\network\export.hpp
 	<SFML/Config.hpp>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\listener.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/System/Vector3.hpp>
-
-1525797620 c:\sfml-2.5.1\include\sfml\audio\music.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/SoundStream.hpp>
-	<SFML/Audio/InputSoundFile.hpp>
-	<SFML/System/Mutex.hpp>
+1525797620 c:\sfml-2.5.1\include\sfml\network\tcpsocket.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/Socket.hpp>
 	<SFML/System/Time.hpp>
-	<string>
-	<vector>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundstream.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/SoundSource.hpp>
-	<SFML/System/Thread.hpp>
-	<SFML/System/Time.hpp>
-	<SFML/System/Mutex.hpp>
-	<cstdlib>
-
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundsource.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/AlResource.hpp>
-	<SFML/System/Vector3.hpp>
-
-1525797620 c:\sfml-2.5.1\include\sfml\audio\alresource.hpp
-	<SFML/Audio/Export.hpp>
-
-1525797620 c:\sfml-2.5.1\include\sfml\audio\outputsoundfile.hpp
-	<SFML/Audio/Export.hpp>
+1525797620 c:\sfml-2.5.1\include\sfml\network\socket.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/SocketHandle.hpp>
 	<SFML/System/NonCopyable.hpp>
-	<string>
+	<vector>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\sound.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/SoundSource.hpp>
+1525797620 c:\sfml-2.5.1\include\sfml\network\sockethandle.hpp
+	<SFML/Config.hpp>
+	<basetsd.h>
+
+1525797620 c:\sfml-2.5.1\include\sfml\network\http.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/IpAddress.hpp>
+	<SFML/Network/TcpSocket.hpp>
+	<SFML/System/NonCopyable.hpp>
 	<SFML/System/Time.hpp>
-	<cstdlib>
+	<map>
+	<string>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundbuffer.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/AlResource.hpp>
+1525797620 c:\sfml-2.5.1\include\sfml\network\ipaddress.hpp
+	<SFML/Network/Export.hpp>
 	<SFML/System/Time.hpp>
+	<istream>
+	<ostream>
+	<string>
+
+1525797620 c:\sfml-2.5.1\include\sfml\network\packet.hpp
+	<SFML/Network/Export.hpp>
 	<string>
 	<vector>
-	<set>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundbufferrecorder.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/SoundBuffer.hpp>
-	<SFML/Audio/SoundRecorder.hpp>
-	<vector>
-
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundrecorder.hpp
-	<SFML/Audio/Export.hpp>
-	<SFML/Audio/AlResource.hpp>
-	<SFML/System/Thread.hpp>
+1525797620 c:\sfml-2.5.1\include\sfml\network\socketselector.hpp
+	<SFML/Network/Export.hpp>
 	<SFML/System/Time.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\network\tcplistener.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/Socket.hpp>
+	<SFML/Network/IpAddress.hpp>
+
+1525797620 c:\sfml-2.5.1\include\sfml\network\udpsocket.hpp
+	<SFML/Network/Export.hpp>
+	<SFML/Network/Socket.hpp>
+	<SFML/Network/IpAddress.hpp>
 	<vector>
-	<string>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilefactory.hpp
-	<SFML/Audio/Export.hpp>
-	<string>
-	<vector>
-	<SFML/Audio/SoundFileFactory.inl>
+1609216192 c:\users\zinis\cdblk\sfml_demo\level1.hpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilefactory.inl
+1609216198 c:\users\zinis\cdblk\sfml_demo\level2.hpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilereader.hpp
-	<SFML/Audio/Export.hpp>
-	<string>
+1609216214 c:\users\zinis\cdblk\sfml_demo\level3.hpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
 
-1525797620 c:\sfml-2.5.1\include\sfml\audio\soundfilewriter.hpp
-	<SFML/Audio/Export.hpp>
-	<string>
+1609214167 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
+	"Level1.hpp"
+	"LevelFailed.hpp"
+
+1609216230 c:\users\zinis\cdblk\sfml_demo\levelfailed.hpp
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
+
+1609214167 source:c:\users\zinis\cdblk\sfml_demo\level2.cpp
+	"Level2.hpp"
+	"LevelFailed.hpp"
+
+1609214167 source:c:\users\zinis\cdblk\sfml_demo\level3.cpp
+	"Level3.hpp"
+	"LevelFailed.hpp"
+
+1609216053 source:c:\users\zinis\cdblk\sfml_demo\levelfailed.cpp
+	"LevelFailed.hpp"
 
