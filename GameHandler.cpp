@@ -7,11 +7,28 @@
 using namespace std;
 using namespace sf;
 
+float timePerFrame;
+Clock gameClock;
+
 void GameHandler::Start()
 {
 	window.create(VideoMode(1000, 800), "CoolGame");
+	window.setFramerateLimit(60);
 
 	ShowMenu();
+}
+
+void GameHandler::setClock()
+{
+	// timePerFrame = 10;
+	timePerFrame = gameClock.restart().asSeconds();
+	// cout << "called" << timePerFrame << endl;
+}
+
+float GameHandler::getElapsedTime()
+{
+	// cout << "time: " << timePerFrame << endl;
+	return timePerFrame;
 }
 
 void GameHandler::ShowMenu()
@@ -45,14 +62,14 @@ void GameHandler::ExitConfirm()
 void GameHandler::Play()
 {
 	cout << "level1" << endl;
-	Level1 level1;                  //create level object
-	level1.Show(window, event);     //show level
+	Level1 level1;				//create level object
+	level1.Show(window, event); //show level
 
 	cout << "level2" << endl;
-	Level2 level2;                  //create level object
-	level2.Show(window, event);     //show level
+	Level2 level2;				//create level object
+	level2.Show(window, event); //show level
 
 	cout << "level3" << endl;
-	Level3 level3;                  //create level object
-	level3.Show(window, event);     //show level
+	Level3 level3;				//create level object
+	level3.Show(window, event); //show level
 }

@@ -49,6 +49,8 @@
 			<Add directory="C:/SFML-2.5.1/lib" />
 		</Linker>
 		<Unit filename="Main.cpp" />
+		<Unit filename="Collision.cpp" />
+		<Unit filename="Collision.h" />
 		<Unit filename="GameHandler.cpp" />
 		<Unit filename="GameHandler.hpp" />
 		<Unit filename="Level1.cpp" />
@@ -61,6 +63,12 @@
 		<Unit filename="MainMenu.hpp" />
 		<Unit filename="LevelFailed.cpp" />
 		<Unit filename="LevelFailed.cpp" />
+		<Unit filename="Enemy1.cpp" />
+		<Unit filename="Enemy1.hpp" />
+		<Unit filename="helperFunc.cpp" />
+		<Unit filename="helperFunc.hpp" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.hpp" />
 		<Unit filename="openal32.dll" />
 		<Unit filename="sfml-audio-2.dll" />
 		<Unit filename="sfml-audio-d-2.dll" />
