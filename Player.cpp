@@ -13,6 +13,7 @@ using namespace sf;
 
 Player::Player(RenderWindow& window)
 {
+	srand(time(NULL));
 	windowSizeX = window.getSize().x;
 	windowSizeY = window.getSize().y;
 
@@ -24,8 +25,6 @@ Player::Player(RenderWindow& window)
 	rect.width = 88;
 	playerSprite.setTextureRect(rect);
 	playerSprite.setPosition(windowSizeX / 2 - rect.width / 2, windowSizeY - rect.height - 30);
-
-	prevCollisionSprite = 0;
 
 	playerHealth.healthValue = 100;
 	playerHealth.outsideRect.setPosition(33, 9);
@@ -42,8 +41,26 @@ Player::Player(RenderWindow& window)
 	playerHealth.healthtext.setPosition(5, 8);
 	playerHealth.healthtext.setStyle(Text::Bold);
 
+	explosion.texture.loadFromFile("res/explosion.png");
+	explosion.sprite.setTexture(explosion.texture);
+	explosion.rect.left = 0;
+	explosion.rect.top = 0;
+	explosion.rect.height = 65;
+	explosion.rect.width = 51;
+	explosion.sprite.setTextureRect(explosion.rect);
+
+	bigExplosion.sprite.setTexture(explosion.texture);
+	bigExplosion.rect.left = 0;
+	bigExplosion.rect.top = 0;
+	bigExplosion.rect.height = 65;
+	bigExplosion.rect.width = 51;
+	bigExplosion.sprite.setTextureRect(explosion.rect);
+
 	moveSpeed = 400;
 	isDead = false;
+	shouldDisappear = false;
+	shouldExplode = false;
+	explosionFin = false;
 	bulletDamage = 5;
 	missileDamage = 8;
 
@@ -110,10 +127,43 @@ void Player::Show(RenderWindow& window)
 
 	for (i = 0; i < bulletsLeft.size(); i++)
 	{
+		bulletsLeft[i].sprite.move(0, -bulletsLeft[i].speed * gamehandler.getElapsedTime());
+		// cout << "size: " << bulletsLeft.size() << endl;
+		if (bulletsLeft[i].sprite.getPosition().x < 0 || bulletsLeft[i].sprite.getPosition().x > windowSizeX || bulletsLeft[i].sprite.getPosition().y < 0 || bulletsLeft[i].sprite.getPosition().y > windowSizeY)
+		{
+			// cout << "left: " << &bulletsLeft[i].sprite << endl;
+
+			bulletsLeft.erase(bulletsLeft.begin() + i);
+		}
+		bulletsRight[i].sprite.move(0, -bulletsRight[i].speed * gamehandler.getElapsedTime());
+		if (bulletsRight[i].sprite.getPosition().x < 0 || bulletsRight[i].sprite.getPosition().x > windowSizeX || bulletsRight[i].sprite.getPosition().y < 0 || bulletsRight[i].sprite.getPosition().y > windowSizeY)
+		{
+			// cout << "leftr: " << &bulletsLeft[i].sprite << endl;
+			// for (j = 0; j < prevCollidedObj.size(); j++)
+			// {
+			// 	if (&bulletsRight[i].sprite == prevCollidedObj[j])
+			// 	{
+			// 		cout << "rem bl: " << &bulletsRight[i].sprite << endl;
+			// 		prevCollidedObj.erase(prevCollidedObj.begin() + j);
+			// 	}
+			// }
+			bulletsRight.erase(bulletsRight.begin() + i);
+		}
+	}
+	for (i = 0; i < bulletsLeft.size(); i++)
+	{
 		window.draw(bulletsLeft[i].sprite);
 		window.draw(bulletsRight[i].sprite);
 	}
 
+	for (i = 0; i < missiles.size(); i++)
+	{
+		missiles[i].sprite.move(0, -missiles[i].speed * gamehandler.getElapsedTime());
+		if (missiles[i].sprite.getPosition().x < 0 || missiles[i].sprite.getPosition().x > windowSizeX || missiles[i].sprite.getPosition().y < 0 || missiles[i].sprite.getPosition().y > windowSizeY)
+		{
+			missiles.erase(missiles.begin() + i);
+		}
+	}
 	for (i = 0; i < missiles.size(); i++)
 	{
 		window.draw(missiles[i].sprite);
@@ -124,63 +174,116 @@ void Player::Show(RenderWindow& window)
 	// cout << "missile: " << missiles.size() << endl;
 	// cout << "bullets: " << bulletsLeft.size() << endl;
 	window.draw(playerSprite);
+
+	if (!shouldDisappear)
+		window.draw(playerSprite);
+
+	if (shouldExplode)
+	{
+		if (bigExplosion.rect.left >= 255)
+		{
+			shouldDisappear = true;
+		}
+		if (bigExplosionClock.getElapsedTime().asSeconds() > 0.2)
+		{
+			if (bigExplosion.rect.left <= 306)
+				bigExplosion.rect.left += 51;
+			else
+			{
+				explosionFin = true;
+			}
+
+			bigExplosion.sprite.setTextureRect(bigExplosion.rect);
+			window.draw(bigExplosion.sprite);
+			bigExplosionClock.restart();
+		}
+		window.draw(bigExplosion.sprite);
+	}
+	for (i = 0; i < explosions.size(); i++)
+	{
+		if (explosions[i].rect.left >= 306)
+		{
+			explosions.erase(explosions.begin() + i);
+		}
+		if (explosions[i].clock.getElapsedTime().asSeconds() > 0.2)
+		{
+			explosions[i].rect.left += 51;
+			// cout << "expl rect: " << i << " " << explosions[i].rect.left << endl;
+			// explosions[i].sprite.setTexture(explosion.texture);
+			explosions[i].sprite.setTextureRect(explosions[i].rect);
+			// window.draw(explosions[i].sprite);
+			explosions[i].clock.restart();
+		}
+		// window.draw(explosions[i].sprite);
+	}
+	for (i = 0; i < explosions.size(); i++)
+	{
+		window.draw(explosions[i].sprite);
+	}
+
 	window.draw(playerHealth.healthtext);
 	window.draw(missile.missileText);
 	window.draw(missile.missileCountString);
 	window.draw(playerHealth.outsideRect);
 	window.draw(playerHealth.insideRect);
 	// window.draw(collisionCircle);
+	if (prevCollidedObj.size() > 100)
+	{
+		prevCollidedObj.erase(prevCollidedObj.begin(), prevCollidedObj.begin() + 30);
+	}
 }
 
-void Player::isHit(Sprite& targetSprite, float damage)
+void Player::isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit)
 {
-	if (Collision::BoundingBoxTest(playerSprite, targetSprite))
+	if (playerHealth.healthValue > 0)
 	{
-		if (Collision::PixelPerfectTest(playerSprite, targetSprite))
+		if (Collision::BoundingBoxTest(playerSprite, targetSprite))
 		{
-			if (prevCollisionSprite != &targetSprite)
+			if (should_disappear_after_hit == false)
 			{
-				if (playerHealth.healthValue > 0)
+				if (hitClock.getElapsedTime().asMilliseconds() > 1700)
 				{
-					cout << "in different" << endl;
-					playerHealth.healthValue -= damage;
-					cout << "plh: " << playerHealth.healthValue << endl;
-					prevCollisionSprite = &targetSprite;
+					if (Collision::PixelPerfectTest(playerSprite, targetSprite))
+					{
+						cout << "hit non disappered:" << id << endl;
+						playerHealth.healthValue -= damage;
+						cout << "player health: " << playerHealth.healthValue << endl;
+					}
 					hitClock.restart();
 				}
-				else
-				{
-					isDead = true;
-					Die();
-				}
 			}
-			else
+			else if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end())
 			{
-				if (hitClock.getElapsedTime().asSeconds() > 1.5)
+				if (Collision::PixelPerfectTest(playerSprite, targetSprite))
 				{
-					if (playerHealth.healthValue > 0)
+					prevCollidedObj.push_back(id);
+					cout << "hit: " << id << endl;
+					show_explosion(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
+					playerHealth.healthValue -= damage;
+					cout << "player health: " << playerHealth.healthValue << endl;
+					if (should_disappear_after_hit)
 					{
-						cout << "in same" << endl;
-						playerHealth.healthValue -= damage;
-						cout << "plh: " << playerHealth.healthValue << endl;
-						hitClock.restart();
-					}
-					else
-					{
-						isDead = true;
-						Die();
+						targetSprite.setColor(Color(0, 0, 0, 0));
 					}
 				}
 			}
 		}
 	}
-	// cout << "object: " << collisionCircle.getGlobalBounds().left << " " << collisionCircle.getGlobalBounds().top << " " << collisionCircle.getGlobalBounds().width << " " << collisionCircle.getGlobalBounds().height << endl;
-	// cout << "target: " << targetCircleShape.getGlobalBounds().left << " " << targetCircleShape.getGlobalBounds().top << " " << targetCircleShape.getGlobalBounds().width << " " << targetCircleShape.getGlobalBounds().height << endl;
+	else
+	{
+		isDead = true;
+		Die();
+	}
 }
 
 void Player::Die()
 {
 	cout << "player dead" << endl;
+	bigExplosion.sprite.setOrigin(25.5, 32.5);
+	bigExplosion.sprite.setPosition(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2);
+	bigExplosion.sprite.setScale(3, 3);
+	cout << "big explosion: " << bigExplosion.sprite.getPosition().x << " " << bigExplosion.sprite.getPosition().y << endl;
+	shouldExplode = true;
 }
 
 void Player::fireBullet()
@@ -188,24 +291,15 @@ void Player::fireBullet()
 	if (bulletClock.getElapsedTime().asSeconds() > 0.2)
 	{
 		bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
+		bulletLeft.id = rand() + rand() + rand();
+		cout << "playerleftbullet: " << bulletLeft.id << endl;
 		bulletsLeft.push_back(bulletLeft);
 		bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
+		bulletRight.id = rand() + rand() + rand();
+		cout << "playerrightbullet: " << bulletRight.id << endl;
 		bulletsRight.push_back(bulletRight);
 		cout << "player fired bullet" << endl;
 		bulletClock.restart();
-	}
-	for (i = 0; i < bulletsLeft.size(); i++)
-	{
-		bulletsLeft[i].sprite.move(0, -bulletsLeft[i].speed * gamehandler.getElapsedTime());
-		if (bulletsLeft[i].sprite.getPosition().x < 0 || bulletsLeft[i].sprite.getPosition().x > windowSizeX || bulletsLeft[i].sprite.getPosition().y < 0 || bulletsLeft[i].sprite.getPosition().y > windowSizeY)
-		{
-			bulletsLeft.erase(bulletsLeft.begin() + i);
-		}
-		bulletsRight[i].sprite.move(0, -bulletsRight[i].speed * gamehandler.getElapsedTime());
-		if (bulletsRight[i].sprite.getPosition().x < 0 || bulletsRight[i].sprite.getPosition().x > windowSizeX || bulletsRight[i].sprite.getPosition().y < 0 || bulletsRight[i].sprite.getPosition().y > windowSizeY)
-		{
-			bulletsRight.erase(bulletsRight.begin() + i);
-		}
 	}
 }
 
@@ -216,19 +310,13 @@ void Player::fireMissile()
 		if (missileClock.getElapsedTime().asSeconds() > 0.5)
 		{
 			missile.sprite.setPosition(playerSprite.getPosition().x + rect.width / 2 - 5, playerSprite.getPosition().y + 20);
+			missile.id = rand() + rand() + rand();
+			cout << "playermissile: " << missile.id << endl;
 			missiles.push_back(missile);
 			missileClock.restart();
 			missile.missileCount--;
 			missile.missileCountString.setString(to_string(missile.missileCount));
 			cout << "player fired missile" << endl;
-		}
-	}
-	for (i = 0; i < missiles.size(); i++)
-	{
-		missiles[i].sprite.move(0, -missiles[i].speed * gamehandler.getElapsedTime());
-		if (missiles[i].sprite.getPosition().x < 0 || missiles[i].sprite.getPosition().x > windowSizeX || missiles[i].sprite.getPosition().y < 0 || missiles[i].sprite.getPosition().y > windowSizeY)
-		{
-			missiles.erase(missiles.begin() + i);
 		}
 	}
 }
@@ -238,22 +326,45 @@ void Player::moveDown()
 	// cout << "player moved down" << endl;
 	// playerMovementDT = playerMovementClock.restart().asSeconds();
 	playerSprite.move(0, moveSpeed * gamehandler.getElapsedTime());
+	for (i = 0; i < explosions.size(); i++)
+	{
+		explosions[i].sprite.move(0, moveSpeed * gamehandler.getElapsedTime());
+	}
 }
 
 void Player::moveUp()
 {
 	// cout << "player moved up" << endl;
 	playerSprite.move(0, -moveSpeed * gamehandler.getElapsedTime());
+	for (i = 0; i < explosions.size(); i++)
+	{
+		explosions[i].sprite.move(0, -moveSpeed * gamehandler.getElapsedTime());
+	}
 }
 
 void Player::moveLeft()
 {
 	playerSprite.move(-moveSpeed * gamehandler.getElapsedTime(), 0);
 	// cout << "player moved left" << endl;
+	for (i = 0; i < explosions.size(); i++)
+	{
+		explosions[i].sprite.move(-moveSpeed * gamehandler.getElapsedTime(), 0);
+	}
 }
 
 void Player::moveRight()
 {
 	playerSprite.move(moveSpeed * gamehandler.getElapsedTime(), 0);
 	// cout << "player moved right" << endl;
+	for (i = 0; i < explosions.size(); i++)
+	{
+		explosions[i].sprite.move(moveSpeed * gamehandler.getElapsedTime(), 0);
+	}
+}
+
+void Player::show_explosion(Vector2f pos)
+{
+	explosion.sprite.setOrigin(25.5, 32.5);
+	explosion.sprite.setPosition(pos);
+	explosions.push_back(explosion);
 }

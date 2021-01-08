@@ -18,26 +18,18 @@ class Player
 public:
 	Player(RenderWindow& window);
 	void Show(RenderWindow& window);
-	void isHit(Sprite& targetSprite, float damage); //damage of player
-	bool isDead;									//isDead is check to show level failed scene
+	void isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit = true); //damage of player
+	bool isDead;																							 //isDead is check to show level failed scene
 	void moveLeft();
 	void moveRight();
 	void moveUp();
 	void moveDown();
 	void fireBullet();
 	void fireMissile();
+	void show_explosion(Vector2f pos);
 	Sprite playerSprite;
 	float bulletDamage;	 //damage of enemy
 	float missileDamage; //damage of enemy
-
-private:
-	void Die();
-	int windowSizeX;
-	int windowSizeY;
-	float moveSpeed;
-	unsigned int i;
-	LevelFailed levelfailed;
-	GameHandler gamehandler;
 	struct Health
 	{
 		float healthValue;
@@ -53,6 +45,7 @@ private:
 		Texture texture;
 		Sprite sprite;
 		float speed;
+		unsigned int id;
 	};
 	struct Missile
 	{
@@ -62,20 +55,46 @@ private:
 		Texture texture;
 		Sprite sprite;
 		float speed;
+		unsigned int id;
 	};
+	struct Explosion
+	{
+		Clock clock;
+		Sprite sprite;
+		Texture texture;
+		IntRect rect;
+		Vector2f pos;
+	};
+	Explosion explosion;
+	Explosion bigExplosion;
+	vector<Explosion> explosions;
 	Health playerHealth;
-	Bullet bulletLeft;
-	Bullet bulletRight;
 	vector<Bullet> bulletsLeft;
 	vector<Bullet> bulletsRight;
+	Bullet bulletLeft;
+	Bullet bulletRight;
 	Missile missile;
 	vector<Missile> missiles;
+	vector<unsigned int> prevCollidedObj;
+	bool explosionFin;
+
+private:
+	void Die();
+	int windowSizeX;
+	int windowSizeY;
+	float moveSpeed;
+	unsigned int i;
+	unsigned int j;
+	LevelFailed levelfailed;
+	GameHandler gamehandler;
 	IntRect rect;
-	Sprite* prevCollisionSprite; // store addres of previously collided object
 	Clock hitClock;
 	Clock playerClock;
 	Clock bulletClock;
 	Clock missileClock;
+	Clock bigExplosionClock;
 	Texture playerTexture;
+	bool shouldDisappear;
+	bool shouldExplode;
 };
 #endif

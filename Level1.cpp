@@ -10,15 +10,16 @@ using namespace sf;
 
 void Level1::Show(RenderWindow& window, Event& event)
 {
-	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
-	Player yuri(window); // our hero
-	Enemy1 doe(window); // our villain
-	doe.enemy1Sprite.setPosition(100,300); // set villain position randomly
+	unsigned int i;
+	Texture backgroundTex;
+	backgroundTex.loadFromFile("res/background.png");
+	Sprite backgroundSprite;
+	backgroundSprite.setTexture(backgroundTex);
+	LevelFailed levelFailedObj;				// create levelFailed object to show level failed message
+	Player yuri(window);					// our hero
+	Enemy1 doe(window);						// our villain
+	doe.enemy1Sprite.setPosition(-500, -500); // set villain position randomly
 	GameHandler gamehandler;
-	Texture mouseTexture;
-	mouseTexture.loadFromFile("res/player_bullet.png");
-	Sprite mouseSprite;
-	mouseSprite.setTexture(mouseTexture);
 
 	while (window.isOpen())
 	{
@@ -28,12 +29,6 @@ void Level1::Show(RenderWindow& window, Event& event)
 			if (event.type == Event::Closed)
 			{
 				window.close();
-			}
-			if (event.type == Event::MouseMoved)
-			{
-				// cout << "mouse: " << mouseRect.left << " " << mouseRect.top << " " << mouseRect.left + mouseRect.width << " " << mouseRect.top + mouseRect.height << endl;
-				// mouseSprite.setPosition(Mouse::getPosition(window).x, Mouse::getPosition(window).y);
-				// yuri.isHit(mouseSprite, 5);
 			}
 			if (event.type == Event::KeyPressed)
 			{
@@ -52,6 +47,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 				levelFailedObj.Show(window, event); // show level failed message
 			}
 		}
+		window.clear(Color::Black);
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			yuri.fireBullet();
@@ -76,17 +72,35 @@ void Level1::Show(RenderWindow& window, Event& event)
 		{
 			yuri.moveDown();
 		}
-		doe.move_to(Vector2f(window.getSize().x/2 - 100,window.getSize().y/2),3000,1000,400,200);
-		// doe.fireBullet_to(Vector2f(yuri.playerSprite.getPosition().x, yuri.playerSprite.getPosition().y),0,2,5000,250);
-		// doe.fireMissile_to(Vector2f(yuri.playerSprite.getPosition().x, yuri.playerSprite.getPosition().y),0,2, 4000, 250);
-		window.clear(Color::Black);
+		doe.move_to(Vector2f(300, 300), 200, 200);
+		doe.fireBullet(2000, 1000, 100);
+		doe.fireMissile(4000, 1000, 50);
 
+		yuri.isHit(doe.enemy1Sprite, 1, 8, false);
+		for (i = 0; i < doe.bulletsLeft.size(); i++)
+		{
+			yuri.isHit(doe.bulletsLeft[i].sprite, doe.bulletsLeft[i].id, 5);
+			yuri.isHit(doe.bulletsRight[i].sprite, doe.bulletsRight[i].id, 5);
+		}
+		for (i = 0; i < doe.missiles.size(); i++)
+		{
+			yuri.isHit(doe.missiles[i].sprite, doe.missiles[i].id, 9);
+		}
+		doe.isHit(yuri.playerSprite, 1, 8, false);
+		for ( i = 0; i < yuri.bulletsLeft.size(); i++)
+		{
+			doe.isHit(yuri.bulletsLeft[i].sprite, yuri.bulletsLeft[i].id, 5);
+			doe.isHit(yuri.bulletsRight[i].sprite, yuri.bulletsRight[i].id, 5);
+		}
+		for (i = 0; i< yuri.missiles.size(); i++){
+			doe.isHit(yuri.missiles[i].sprite, yuri.missiles[i].id, 9);
+		}
+
+		window.draw(backgroundSprite);
 		doe.Show(window);
 		yuri.Show(window);
-		if (yuri.isDead)
+		if (yuri.isDead && yuri.explosionFin)
 			levelFailedObj.Show(window, event);
-		window.draw(mouseSprite);
-		// window.draw(someThing);
 		window.display();
 	}
 }

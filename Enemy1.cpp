@@ -27,10 +27,31 @@ Enemy1::Enemy1(RenderWindow& window)
 	enemy1Sprite.setTextureRect(rect);
 	enemy1Sprite.setPosition(windowSizeX / 2 - rect.width / 2, windowSizeY - rect.height - 30);
 
+	explosion.texture.loadFromFile("res/explosion.png");
+	explosion.sprite.setTexture(explosion.texture);
+	explosion.rect.left = 0;
+	explosion.rect.top = 0;
+	explosion.rect.height = 65;
+	explosion.rect.width = 51;
+	explosion.sprite.setTextureRect(explosion.rect);
+
+	bigExplosion.sprite.setTexture(explosion.texture);
+	bigExplosion.rect.left = 0;
+	bigExplosion.rect.top = 0;
+	bigExplosion.rect.height = 65;
+	bigExplosion.rect.width = 51;
+	bigExplosion.sprite.setTextureRect(explosion.rect);
+
 	healthValue = 100;
 	bulletInterval = 0.8;
 	missileInterval = 1.5;
 	isDead = false;
+	moveInit = false;
+	moveFin = false;
+	moveLeftFin = false;
+	moveRightFin = false;
+	shouldDisappear = false;
+	shouldExplode = false;
 	bulletDamage = 5;
 	missileDamage = 8;
 
@@ -68,8 +89,31 @@ void Enemy1::Show(RenderWindow& window)
 
 	for (i = 0; i < bulletsLeft.size(); i++)
 	{
+		bulletsLeft[i].sprite.move(0, bulletsLeft[i].speed * gamehandler.getElapsedTime());
+		if (bulletsLeft[i].sprite.getPosition().x < 0 || bulletsLeft[i].sprite.getPosition().x > windowSizeX || bulletsLeft[i].sprite.getPosition().y < 0 || bulletsLeft[i].sprite.getPosition().y > windowSizeY)
+		{
+			bulletsLeft.erase(bulletsLeft.begin() + i);
+		}
+		bulletsRight[i].sprite.move(0, bulletsRight[i].speed * gamehandler.getElapsedTime());
+		if (bulletsRight[i].sprite.getPosition().x < 0 || bulletsRight[i].sprite.getPosition().x > windowSizeX || bulletsRight[i].sprite.getPosition().y < 0 || bulletsRight[i].sprite.getPosition().y > windowSizeY)
+		{
+			bulletsRight.erase(bulletsRight.begin() + i);
+		}
+	}
+
+	for (i = 0; i < bulletsLeft.size(); i++)
+	{
 		window.draw(bulletsLeft[i].sprite);
 		window.draw(bulletsRight[i].sprite);
+	}
+
+	for (i = 0; i < missiles.size(); i++)
+	{
+		missiles[i].sprite.move(0, missiles[i].speed * gamehandler.getElapsedTime());
+		if (missiles[i].sprite.getPosition().x < 0 || missiles[i].sprite.getPosition().x > windowSizeX || missiles[i].sprite.getPosition().y < 0 || missiles[i].sprite.getPosition().y > windowSizeY)
+		{
+			missiles.erase(missiles.begin() + i);
+		}
 	}
 
 	for (i = 0; i < missiles.size(); i++)
@@ -77,60 +121,147 @@ void Enemy1::Show(RenderWindow& window)
 		window.draw(missiles[i].sprite);
 	}
 
+	// cout << "explosions: " << explosions.size() << endl;
+
 	// cout << "missile: " << missiles.size() << endl;
 	// cout << "bullets: " << bulletsLeft.size() << endl;
-	window.draw(enemy1Sprite);
+	if (!shouldDisappear)
+		window.draw(enemy1Sprite);
+
+	if (shouldExplode)
+	{
+		if (bigExplosion.rect.left >= 255)
+		{
+			shouldDisappear = true;
+		}
+		if (bigExplosionClock.getElapsedTime().asSeconds() > 0.2)
+		{
+			if(bigExplosion.rect.left <= 306) bigExplosion.rect.left += 51;
+			bigExplosion.sprite.setTextureRect(bigExplosion.rect);
+			window.draw(bigExplosion.sprite);
+			bigExplosionClock.restart();
+		}
+		window.draw(bigExplosion.sprite);
+	}
+	// cout << "rect left: " << bigExplosion.rect.left << endl;
+
+	for (i = 0; i < explosions.size(); i++)
+	{
+		if (explosions[i].rect.left >= 306)
+		{
+			explosions.erase(explosions.begin() + i);
+		}
+		if (explosions[i].clock.getElapsedTime().asSeconds() > 0.2)
+		{
+			explosions[i].rect.left += 51;
+			// cout << "expl rect: " << i << " " << explosions[i].rect.left << endl;
+			// explosions[i].sprite.setTexture(explosion.texture);
+			explosions[i].sprite.setTextureRect(explosions[i].rect);
+			// window.draw(explosions[i].sprite);
+			explosions[i].clock.restart();
+		}
+		// window.draw(explosions[i].sprite);
+	}
+	for (i = 0; i < explosions.size(); i++)
+	{
+		window.draw(explosions[i].sprite);
+	}
 }
 
-void Enemy1::isHit(Sprite& targetSprite, float damage)
+void Enemy1::isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit)
 {
-	if (Collision::BoundingBoxTest(enemy1Sprite, targetSprite))
+	if (healthValue > 0)
 	{
-		if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
+		if (Collision::BoundingBoxTest(enemy1Sprite, targetSprite))
 		{
-			if (prevCollisionSprite != &targetSprite)
+			if (should_disappear_after_hit == false)
 			{
-				if (healthValue > 0)
+				if (hitClock.getElapsedTime().asMilliseconds() > 1700)
 				{
-					cout << "in different" << endl;
-					healthValue -= damage;
-					cout << "plh: " << healthValue << endl;
-					prevCollisionSprite = &targetSprite;
+					if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
+					{
+						cout << "hit non disappered:" << id << endl;
+						healthValue -= damage;
+
+						cout << "enemy1 health: " << healthValue << endl;
+					}
 					hitClock.restart();
 				}
-				else
-				{
-					isDead = true;
-					Die();
-				}
 			}
-			else
+			else if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end())
 			{
-				if (hitClock.getElapsedTime().asSeconds() > 1.5)
+				if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
 				{
-					if (healthValue > 0)
+					prevCollidedObj.push_back(id);
+					cout << "hit: " << id << endl;
+					show_explosion(targetSprite.getPosition());
+					healthValue -= damage;
+					cout << "enemy1 health: " << healthValue << endl;
+					if (should_disappear_after_hit)
 					{
-						cout << "in same" << endl;
-						healthValue -= damage;
-						cout << "plh: " << healthValue << endl;
-						hitClock.restart();
-					}
-					else
-					{
-						isDead = true;
-						Die();
+						targetSprite.setColor(Color(0, 0, 0, 0));
 					}
 				}
 			}
 		}
 	}
-	// cout << "object: " << collisionCircle.getGlobalBounds().left << " " << collisionCircle.getGlobalBounds().top << " " << collisionCircle.getGlobalBounds().width << " " << collisionCircle.getGlobalBounds().height << endl;
-	// cout << "target: " << targetCircleShape.getGlobalBounds().left << " " << targetCircleShape.getGlobalBounds().top << " " << targetCircleShape.getGlobalBounds().width << " " << targetCircleShape.getGlobalBounds().height << endl;
+	else
+	{
+		isDead = true;
+		Die();
+	}
 }
 
 void Enemy1::Die()
 {
 	cout << "enemy dead" << endl;
+	bigExplosion.sprite.setOrigin(25.5, 32.5);
+	bigExplosion.sprite.setPosition(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width / 2, enemy1Sprite.getGlobalBounds().top + enemy1Sprite.getGlobalBounds().height / 2);
+	bigExplosion.sprite.setScale(3, 3);
+	shouldExplode = true;
+}
+
+void Enemy1::fireBullet(int interval_milliseconds, int interval_offset, float speed)
+{
+	if (!isDead)
+	{
+		if (bulletClock.getElapsedTime().asMilliseconds() > helperFunc::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
+		{
+			bulletLeft.sprite.setPosition(enemy1Sprite.getPosition().x + 16, enemy1Sprite.getPosition().y + 80);
+			bulletLeft.speed = speed;
+			bulletLeft.id = rand() + rand() + rand();
+			cout << "enemyleftbullet: " << bulletLeft.id << endl;
+			bulletsLeft.push_back(bulletLeft);
+			bulletRight.sprite.setPosition(enemy1Sprite.getPosition().x + 66, enemy1Sprite.getPosition().y + 80);
+			bulletRight.speed = speed;
+			bulletRight.id = rand() + rand() + rand();
+			cout << "enemyrightbullet: " << bulletRight.id << endl;
+			bulletsRight.push_back(bulletRight);
+			bulletClock.restart();
+			// cout << "enemy1 fired bullets" << endl;
+		}
+	}
+}
+
+void Enemy1::fireMissile(int interval_milliseconds, int interval_offset, float speed)
+{
+	if (!isDead)
+	{
+		if (missile.missileCount > 0)
+		{
+			if (missileClock.getElapsedTime().asMilliseconds() > helperFunc::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
+			{
+				missile.sprite.setPosition(enemy1Sprite.getPosition().x + rect.width / 2 - 5, enemy1Sprite.getPosition().y + 40);
+				missile.speed = speed;
+				missile.id = rand() + rand() + rand();
+				cout << "enemymissile: " << missile.id << endl;
+				missiles.push_back(missile);
+				missileClock.restart();
+				missile.missileCount--;
+				// cout << "enemy1 fired missile" << endl;
+			}
+		}
+	}
 }
 
 void Enemy1::fireBullet_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
@@ -211,62 +342,124 @@ void Enemy1::fireMissile_to(Vector2f targetPos, int interval_milliseconds, int i
 
 void Enemy1::moveDown(float speed)
 {
-	cout << "player moved down" << endl;
-	enemy1Sprite.move(0, speed * gamehandler.getElapsedTime());
+	tempVect = helperFunc::getNormalizedVector(Vector2f(enemy1Sprite.getPosition().x, windowSizeY + 100), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
+	tempVect.x *= gamehandler.getElapsedTime() * speed;
+	tempVect.y *= gamehandler.getElapsedTime() * speed;
+
+	// cout << "enemy1 moved down" << endl;
+	enemy1Sprite.move(tempVect);
 }
 
 void Enemy1::moveUp(float speed)
 {
-	cout << "player moved up" << endl;
-	enemy1Sprite.move(0, -speed * gamehandler.getElapsedTime());
+	tempVect = helperFunc::getNormalizedVector(Vector2f(enemy1Sprite.getPosition().x, -windowSizeY), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
+	tempVect.x *= gamehandler.getElapsedTime() * speed;
+	tempVect.y *= gamehandler.getElapsedTime() * speed;
+
+	// cout << "enemy1 moved up" << endl;
+	enemy1Sprite.move(tempVect);
 }
 
 void Enemy1::moveLeft(float speed)
 {
-	enemy1Sprite.move(-speed * gamehandler.getElapsedTime(), 0);
-	cout << "player moved left" << endl;
+	tempVect = helperFunc::getNormalizedVector(Vector2f(-windowSizeX, enemy1Sprite.getPosition().y), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
+	tempVect.x *= gamehandler.getElapsedTime() * speed;
+	tempVect.y *= gamehandler.getElapsedTime() * speed;
+	// cout << "temp: " << tempVect.x << " " << tempVect.y << endl;
+
+	enemy1Sprite.move(tempVect);
+	for (i = 0; i < explosions.size(); i++)
+	{
+		explosions[i].sprite.move(tempVect);
+	}
+	// cout << "enemy1 moved left" << endl;
 }
 
 void Enemy1::moveRight(float speed)
 {
-	enemy1Sprite.move(speed * gamehandler.getElapsedTime(), 0);
-	cout << "player moved right" << endl;
+	tempVect = helperFunc::getNormalizedVector(Vector2f(windowSizeX + 100, enemy1Sprite.getPosition().y), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
+	tempVect.x *= gamehandler.getElapsedTime() * speed;
+	tempVect.y *= gamehandler.getElapsedTime() * speed;
+
+	enemy1Sprite.move(tempVect);
+	for (i = 0; i < explosions.size(); i++)
+	{
+		explosions[i].sprite.move(tempVect);
+	}
+	// cout << "enemy1 moved right" << endl;
 }
 
-void Enemy1::move_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
+void Enemy1::move_to(Vector2f targetPos, float speed, int offset)
 {
-	if (moveClock.getElapsedTime().asMilliseconds() > helperFunc::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
+	if (!isDead)
 	{
-		if (moveInit != targetPos){
+		// if (moveClock.getElapsedTime().asMilliseconds() > helperFunc::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
+		if (moveInit == false)
+		{
 			movePos.x = helperFunc::randRange(targetPos.x - offset, targetPos.x + offset);
 			movePos.y = helperFunc::randRange(targetPos.y - offset, targetPos.y + offset);
-			cout << "init: " << movePos.x << " " << movePos.y << endl;
-
+			// cout << "init: " << movePos.x << " " << movePos.y << endl;
+			// cout << interval_milliseconds << " " << interval_offset << endl;
 			moveNorm = helperFunc::getNormalizedVector(movePos, enemy1Sprite.getPosition());
 			moveNorm.x *= gamehandler.getElapsedTime() * speed;
 			moveNorm.y *= gamehandler.getElapsedTime() * speed;
-
+			// cout << "initm: " << moveNorm.x << " " << moveNorm.y << endl;
 			enemy1Sprite.move(moveNorm);
+			for (i = 0; i < explosions.size(); i++)
+			{
+				explosions[i].sprite.move(moveNorm);
+			}
 			moveClock.restart();
-			moveInit = targetPos;
+			moveInit = true;
 		}
 		else
 		{
-			movePos.x = helperFunc::randRange(windowSizeX - offset, windowSizeX + offset);
-			movePos.y = helperFunc::randRange(windowSizeY - offset, windowSizeY + offset);
-
-			cout << "rand: " << movePos.x << " " << movePos.y << endl;
-			moveNorm = helperFunc::getNormalizedVector(movePos, enemy1Sprite.getPosition());
-			moveNorm.x *= gamehandler.getElapsedTime() * speed;
-			moveNorm.y *= gamehandler.getElapsedTime() * speed;
-
-			enemy1Sprite.move(moveNorm);
-			moveClock.restart();
+			if (enemy1Sprite.getGlobalBounds().contains(movePos) == false && moveFin == false)
+			{
+				moveNorm = helperFunc::getNormalizedVector(movePos, enemy1Sprite.getPosition());
+				moveNorm.x *= gamehandler.getElapsedTime() * speed;
+				moveNorm.y *= gamehandler.getElapsedTime() * speed;
+				enemy1Sprite.move(moveNorm);
+				for (i = 0; i < explosions.size(); i++)
+				{
+					explosions[i].sprite.move(moveNorm);
+				}
+			}
+			if (enemy1Sprite.getGlobalBounds().contains(movePos) == true && moveFin == false)
+			{
+				moveFin = true;
+				moveRightFin = true;
+			}
+			if (moveFin == true)
+			{
+				if (moveLeftFin == false)
+				{
+					moveLeft(speed);
+				}
+				if (enemy1Sprite.getGlobalBounds().contains(0, enemy1Sprite.getGlobalBounds().top) == true)
+				{
+					moveLeftFin = true;
+					moveRightFin = false;
+				}
+				if (moveRightFin == false)
+				{
+					moveRight(speed);
+				}
+				if (enemy1Sprite.getGlobalBounds().contains(windowSizeX, enemy1Sprite.getGlobalBounds().top) == true)
+				{
+					moveLeftFin = false;
+					moveRightFin = true;
+				}
+			}
 		}
+		// cout << "init: " << movePos.x << " " << movePos.y << endl;
+		// cout << "enem: " << enemy1Sprite.getPosition().x << " " << enemy1Sprite.getPosition().y << endl;
+	}
+}
 
-	}
-	else
-	{
-		enemy1Sprite.move(moveNorm);
-	}
+void Enemy1::show_explosion(Vector2f pos)
+{
+	explosion.sprite.setOrigin(25.5, 32.5);
+	explosion.sprite.setPosition(pos);
+	explosions.push_back(explosion);
 }
