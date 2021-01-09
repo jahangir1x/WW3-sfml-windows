@@ -18,7 +18,9 @@ class Player
 public:
 	Player(RenderWindow& window);
 	void Show(RenderWindow& window);
-	void isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit = true); //damage of player
+	void isHitBody(Sprite& targetSprite, float damage);
+	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
+	void isHitMissile(Sprite& targetSprite, unsigned int id, float damage);
 	bool isDead;																							 //isDead is check to show level failed scene
 	void moveLeft();
 	void moveRight();
@@ -26,7 +28,8 @@ public:
 	void moveDown();
 	void fireBullet();
 	void fireMissile();
-	void show_explosion(Vector2f pos);
+	void show_explosion_bullet(Vector2f pos);
+	void show_explosion_missile(Vector2f pos);
 	Sprite playerSprite;
 	float bulletDamage;	 //damage of enemy
 	float missileDamage; //damage of enemy

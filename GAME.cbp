@@ -65,6 +65,8 @@
 		<Unit filename="LevelFailed.cpp" />
 		<Unit filename="Enemy1.cpp" />
 		<Unit filename="Enemy1.hpp" />
+		<Unit filename="Enemy2.cpp" />
+		<Unit filename="Enemy2.hpp" />
 		<Unit filename="helperFunc.cpp" />
 		<Unit filename="helperFunc.hpp" />
 		<Unit filename="Player.cpp" />

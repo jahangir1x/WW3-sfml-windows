@@ -233,38 +233,21 @@ void Player::Show(RenderWindow& window)
 	}
 }
 
-void Player::isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit)
+void Player::isHitBody(Sprite& targetSprite, float damage)
 {
 	if (playerHealth.healthValue > 0)
 	{
 		if (Collision::BoundingBoxTest(playerSprite, targetSprite))
 		{
-			if (should_disappear_after_hit == false)
-			{
-				if (hitClock.getElapsedTime().asMilliseconds() > 1700)
-				{
-					if (Collision::PixelPerfectTest(playerSprite, targetSprite))
-					{
-						cout << "hit non disappered:" << id << endl;
-						playerHealth.healthValue -= damage;
-						cout << "player health: " << playerHealth.healthValue << endl;
-					}
-					hitClock.restart();
-				}
-			}
-			else if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end())
+			if (hitClock.getElapsedTime().asMilliseconds() > 1700)
 			{
 				if (Collision::PixelPerfectTest(playerSprite, targetSprite))
 				{
-					prevCollidedObj.push_back(id);
-					cout << "hit: " << id << endl;
-					show_explosion(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
+					cout << "hit body" << endl;
+					show_explosion_missile(Vector2f(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2));
 					playerHealth.healthValue -= damage;
 					cout << "player health: " << playerHealth.healthValue << endl;
-					if (should_disappear_after_hit)
-					{
-						targetSprite.setColor(Color(0, 0, 0, 0));
-					}
+					hitClock.restart();
 				}
 			}
 		}
@@ -275,6 +258,100 @@ void Player::isHit(Sprite& targetSprite, unsigned int id, float damage, bool sho
 		Die();
 	}
 }
+
+void Player::isHitBullet(Sprite& targetSprite, unsigned int id, float damage)
+{
+	if (playerHealth.healthValue > 0){
+		if (Collision::BoundingBoxTest(playerSprite, targetSprite)){
+			if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end()){
+				if (Collision::PixelPerfectTest(playerSprite, targetSprite)){
+					prevCollidedObj.push_back(id);
+					cout << "hit bullet: " << id << endl;
+					show_explosion_bullet(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
+					playerHealth.healthValue -= damage;
+					cout << "player health: " << playerHealth.healthValue << endl;
+					targetSprite.setColor(Color(0,0,0,0));
+				}
+			}
+		}
+	}
+	else
+	{
+		isDead = true;
+		Die();
+	}
+
+}
+
+void Player::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
+{
+	if (playerHealth.healthValue > 0)
+	{
+		if (Collision::BoundingBoxTest(playerSprite, targetSprite))
+		{
+			if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end())
+			{
+				if (Collision::PixelPerfectTest(playerSprite, targetSprite))
+				{
+					prevCollidedObj.push_back(id);
+					cout << "hit missile: " << id << endl;
+					show_explosion_missile(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
+					playerHealth.healthValue -= damage;
+					cout << "player health: " << playerHealth.healthValue << endl;
+					targetSprite.setColor(Color(0, 0, 0, 0));
+				}
+			}
+		}
+	}
+	else
+	{
+		isDead = true;
+		Die();
+	}
+}
+
+// void Player::isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit)
+// {
+// 	if (playerHealth.healthValue > 0)
+// 	{
+// 		if (Collision::BoundingBoxTest(playerSprite, targetSprite))
+// 		{
+// 			if (should_disappear_after_hit == false)
+// 			{
+// 				if (hitClock.getElapsedTime().asMilliseconds() > 1700)
+// 				{
+// 					if (Collision::PixelPerfectTest(playerSprite, targetSprite))
+// 					{
+// 						cout << "hit non disappered:" << id << endl;
+// 						playerHealth.healthValue -= damage;
+// 						cout << "player health: " << playerHealth.healthValue << endl;
+// 					}
+// 					hitClock.restart();
+// 				}
+// 			}
+// 			else if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end())
+// 			{
+// 				if (Collision::PixelPerfectTest(playerSprite, targetSprite))
+// 				{
+// 					prevCollidedObj.push_back(id);
+// 					cout << "hit: " << id << endl;
+// 					show_explosion(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
+// 					playerHealth.healthValue -= damage;
+// 					cout << "player health: " << playerHealth.healthValue << endl;
+// 					if (should_disappear_after_hit)
+// 					{
+// 						targetSprite.setColor(Color(0, 0, 0, 0));
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// 	else
+// 	{
+// 		isDead = true;
+// 		Die();
+// 	}
+// }
 
 void Player::Die()
 {
@@ -362,9 +439,17 @@ void Player::moveRight()
 	}
 }
 
-void Player::show_explosion(Vector2f pos)
+void Player::show_explosion_bullet(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
+	explosion.sprite.setScale(1, 1);
+	explosion.sprite.setPosition(pos);
+	explosions.push_back(explosion);
+}
+void Player::show_explosion_missile(Vector2f pos)
+{
+	explosion.sprite.setOrigin(25.5, 32.5);
+	explosion.sprite.setScale(2, 2);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 }

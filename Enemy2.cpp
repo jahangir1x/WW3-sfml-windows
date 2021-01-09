@@ -1,4 +1,4 @@
-#include "Enemy1.hpp" // fix level with intervals
+#include "Enemy2.hpp" // fix level with intervals
 #include "Collision.h"
 #include "GameHandler.hpp"
 #include "LevelFailed.hpp"
@@ -12,7 +12,7 @@
 using namespace std;
 using namespace sf;
 
-Enemy1::Enemy1(RenderWindow& window)
+Enemy2::Enemy2(RenderWindow& window)
 {
 	srand(time(NULL));
 	windowSizeX = window.getSize().x;
@@ -69,7 +69,7 @@ Enemy1::Enemy1(RenderWindow& window)
 	missile.missileCount = 9;
 }
 
-void Enemy1::Show(RenderWindow& window)
+void Enemy2::Show(RenderWindow& window)
 {
 	if (enemy1Clock.getElapsedTime().asSeconds() > 0.2)
 	{
@@ -169,7 +169,7 @@ void Enemy1::Show(RenderWindow& window)
 	}
 }
 
-void Enemy1::isHitBody(Sprite& targetSprite, float damage)
+void Enemy2::isHitBody(Sprite& targetSprite, float damage)
 {
 	if (healthValue > 0)
 	{
@@ -195,7 +195,7 @@ void Enemy1::isHitBody(Sprite& targetSprite, float damage)
 	}
 }
 
-void Enemy1::isHitBullet(Sprite& targetSprite, unsigned int id, float damage)
+void Enemy2::isHitBullet(Sprite& targetSprite, unsigned int id, float damage)
 {
 	if (healthValue > 0)
 	{
@@ -222,7 +222,7 @@ void Enemy1::isHitBullet(Sprite& targetSprite, unsigned int id, float damage)
 	}
 }
 
-void Enemy1::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
+void Enemy2::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
 {
 	if (healthValue > 0)
 	{
@@ -249,51 +249,7 @@ void Enemy1::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
 	}
 }
 
-// void Enemy1::isHit(Sprite& targetSprite, unsigned int id, float damage, bool should_disappear_after_hit)
-// {
-// 	if (healthValue > 0)
-// 	{
-// 		if (Collision::BoundingBoxTest(enemy1Sprite, targetSprite))
-// 		{
-// 			if (should_disappear_after_hit == false)
-// 			{
-// 				if (hitClock.getElapsedTime().asMilliseconds() > 1700)
-// 				{
-// 					if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
-// 					{
-// 						cout << "hit non disappered:" << id << endl;
-// 						healthValue -= damage;
-
-// 						cout << "enemy1 health: " << healthValue << endl;
-// 					}
-// 					hitClock.restart();
-// 				}
-// 			}
-// 			else if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end())
-// 			{
-// 				if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
-// 				{
-// 					prevCollidedObj.push_back(id);
-// 					cout << "hit: " << id << endl;
-// 					show_explosion(targetSprite.getPosition());
-// 					healthValue -= damage;
-// 					cout << "enemy1 health: " << healthValue << endl;
-// 					if (should_disappear_after_hit)
-// 					{
-// 						targetSprite.setColor(Color(0, 0, 0, 0));
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// 	else
-// 	{
-// 		isDead = true;
-// 		Die();
-// 	}
-// }
-
-void Enemy1::Die()
+void Enemy2::Die()
 {
 	cout << "enemy dead" << endl;
 	bigExplosion.sprite.setOrigin(25.5, 32.5);
@@ -302,7 +258,7 @@ void Enemy1::Die()
 	shouldExplode = true;
 }
 
-void Enemy1::fireBullet(int interval_milliseconds, int interval_offset, float speed)
+void Enemy2::fireBullet(int interval_milliseconds, int interval_offset, float speed)
 {
 	if (!isDead)
 	{
@@ -324,7 +280,7 @@ void Enemy1::fireBullet(int interval_milliseconds, int interval_offset, float sp
 	}
 }
 
-void Enemy1::fireMissile(int interval_milliseconds, int interval_offset, float speed)
+void Enemy2::fireMissile(int interval_milliseconds, int interval_offset, float speed)
 {
 	if (!isDead)
 	{
@@ -345,7 +301,7 @@ void Enemy1::fireMissile(int interval_milliseconds, int interval_offset, float s
 	}
 }
 
-void Enemy1::fireBullet_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
+void Enemy2::fireBullet_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
 {
 	if (bulletClock.getElapsedTime().asMilliseconds() > helperFunc::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
 	{
@@ -389,7 +345,7 @@ void Enemy1::fireBullet_to(Vector2f targetPos, int interval_milliseconds, int in
 	}
 }
 
-void Enemy1::fireMissile_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
+void Enemy2::fireMissile_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
 {
 	if (missile.missileCount > 0)
 	{
@@ -421,7 +377,7 @@ void Enemy1::fireMissile_to(Vector2f targetPos, int interval_milliseconds, int i
 	}
 }
 
-void Enemy1::moveDown(float speed)
+void Enemy2::moveDown(float speed)
 {
 	tempVect = helperFunc::getNormalizedVector(Vector2f(enemy1Sprite.getPosition().x, windowSizeY + 100), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
 	tempVect.x *= gamehandler.getElapsedTime() * speed;
@@ -431,7 +387,7 @@ void Enemy1::moveDown(float speed)
 	enemy1Sprite.move(tempVect);
 }
 
-void Enemy1::moveUp(float speed)
+void Enemy2::moveUp(float speed)
 {
 	tempVect = helperFunc::getNormalizedVector(Vector2f(enemy1Sprite.getPosition().x, -windowSizeY), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
 	tempVect.x *= gamehandler.getElapsedTime() * speed;
@@ -441,7 +397,7 @@ void Enemy1::moveUp(float speed)
 	enemy1Sprite.move(tempVect);
 }
 
-void Enemy1::moveLeft(float speed)
+void Enemy2::moveLeft(float speed)
 {
 	tempVect = helperFunc::getNormalizedVector(Vector2f(-windowSizeX, enemy1Sprite.getPosition().y), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
 	tempVect.x *= gamehandler.getElapsedTime() * speed;
@@ -456,7 +412,7 @@ void Enemy1::moveLeft(float speed)
 	// cout << "enemy1 moved left" << endl;
 }
 
-void Enemy1::moveRight(float speed)
+void Enemy2::moveRight(float speed)
 {
 	tempVect = helperFunc::getNormalizedVector(Vector2f(windowSizeX + 100, enemy1Sprite.getPosition().y), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
 	tempVect.x *= gamehandler.getElapsedTime() * speed;
@@ -470,7 +426,7 @@ void Enemy1::moveRight(float speed)
 	// cout << "enemy1 moved right" << endl;
 }
 
-void Enemy1::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
+void Enemy2::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 {
 	targetPos = Vector2f(targetPos_x, targetPos_y);
 	if (!isDead)
@@ -510,19 +466,10 @@ void Enemy1::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 			if (enemy1Sprite.getGlobalBounds().contains(movePos) == true && moveFin == false)
 			{
 				moveFin = true;
-				moveRightFin = true;
+				moveLeftFin = true;
 			}
 			if (moveFin == true)
 			{
-				if (moveLeftFin == false)
-				{
-					moveLeft(speed);
-				}
-				if (enemy1Sprite.getGlobalBounds().contains(0, enemy1Sprite.getGlobalBounds().top) == true)
-				{
-					moveLeftFin = true;
-					moveRightFin = false;
-				}
 				if (moveRightFin == false)
 				{
 					moveRight(speed);
@@ -532,6 +479,15 @@ void Enemy1::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 					moveLeftFin = false;
 					moveRightFin = true;
 				}
+				if (moveLeftFin == false)
+				{
+					moveLeft(speed);
+				}
+				if (enemy1Sprite.getGlobalBounds().contains(0, enemy1Sprite.getGlobalBounds().top) == true)
+				{
+					moveLeftFin = true;
+					moveRightFin = false;
+				}
 			}
 		}
 		// cout << "init: " << movePos.x << " " << movePos.y << endl;
@@ -539,14 +495,14 @@ void Enemy1::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 	}
 }
 
-void Enemy1::show_explosion_bullet(Vector2f pos)
+void Enemy2::show_explosion_bullet(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
 	explosion.sprite.setScale(1, 1);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 }
-void Enemy1::show_explosion_missile(Vector2f pos)
+void Enemy2::show_explosion_missile(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
 	explosion.sprite.setScale(2, 2);

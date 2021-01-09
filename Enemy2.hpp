@@ -1,5 +1,5 @@
-#ifndef Enemy1_air321
-#define Enemy1_air321
+#ifndef Enemy2_air321
+#define Enemy2_air321
 
 #include "GameHandler.hpp"
 #include "LevelFailed.hpp"
@@ -11,10 +11,10 @@
 #include <bits/stdc++.h>
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy1
+class Enemy2
 {
 public:
-	Enemy1(RenderWindow& window);
+	Enemy2(RenderWindow& window);
 	void Show(RenderWindow& window);
 	void isHitBody(Sprite& targetSprite, float damage);
 	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
