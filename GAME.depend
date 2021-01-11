@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1609395265 source:c:\users\zinis\cdblk\sfml_demo\main.cpp
+1610286980 source:c:\users\zinis\cdblk\sfml_demo\main.cpp
 	"GameHandler.hpp"
 
 1525797620 c:\sfml-2.5.1\include\sfml\audio.hpp
@@ -640,7 +640,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610176450 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
+1610278298 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
 	"Level1.hpp"
 	"Collision.h"
 	"Enemy1.hpp"
@@ -676,10 +676,10 @@
 1609433656 c:\users\zinis\cdblk\sfml_demo\collision.h
 	<SFML/Graphics.hpp>
 
-1609522867 source:c:\users\zinis\cdblk\sfml_demo\helperfunc.cpp
+1610274854 source:c:\users\zinis\cdblk\sfml_demo\helperfunc.cpp
 	"helperFunc.hpp"
 
-1609523261 c:\users\zinis\cdblk\sfml_demo\helperfunc.hpp
+1610274855 c:\users\zinis\cdblk\sfml_demo\helperfunc.hpp
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
@@ -687,7 +687,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610176232 c:\users\zinis\cdblk\sfml_demo\enemy1.hpp
+1610275337 c:\users\zinis\cdblk\sfml_demo\enemy1.hpp
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
 	<SFML/Audio.hpp>
@@ -707,7 +707,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610176229 source:c:\users\zinis\cdblk\sfml_demo\enemy1.cpp
+1610254183 source:c:\users\zinis\cdblk\sfml_demo\enemy1.cpp
 	"Enemy1.hpp"
 	"Collision.h"
 	"GameHandler.hpp"
@@ -720,7 +720,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610171616 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
+1610254183 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
 	"Player.hpp"
 	"Collision.h"
 	"GameHandler.hpp"
@@ -732,9 +732,22 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610176324 c:\users\zinis\cdblk\sfml_demo\enemy2.hpp
+1610275337 c:\users\zinis\cdblk\sfml_demo\enemy2.hpp
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
+
+1610278202 source:c:\users\zinis\cdblk\sfml_demo\enemy2.cpp
+	"Enemy2.hpp"
+	"Collision.h"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"helperFunc.hpp"
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>

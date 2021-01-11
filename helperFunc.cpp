@@ -9,11 +9,13 @@ sf::Vector2f getNormalizedVector(sf::Vector2f to, sf::Vector2f from)
 	Vector2f direction = to - from;
 	return (direction / sqrt(direction.x * direction.x + direction.y * direction.y));
 }
-int randRange(int a, int b)
+
+int randRange(int min, int max)
 {
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> distr(a, b);
-	return distr(gen);
+	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+	default_random_engine generator;
+	generator.seed(seed);
+	uniform_int_distribution<int> distr(min, max);
+	return distr(generator);
 }
 }

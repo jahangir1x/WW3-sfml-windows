@@ -18,10 +18,10 @@ void Level1::Show(RenderWindow& window, Event& event)
 	backgroundSprite.setTexture(backgroundTex);
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	Player yuri(window);		// our hero
-	Enemy2 doe(window);			// our villain
+	// Enemy2 doe(window);			// our villain
 	Enemy1 don(window);
-	doe.enemy1Sprite.setPosition(100, 100); // set villain position randomly
-	don.enemy1Sprite.setPosition(500, 500);
+	// doe.enemy1Sprite.setPosition(300, 300); // set villain position randomly
+	don.setPosition(-200,-300,100);
 	GameHandler gamehandler;
 
 	while (window.isOpen())
@@ -38,7 +38,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 				if (event.key.code == Keyboard::Escape)
 				{
 					cout << "mouse :" << Mouse::getPosition(window).x << " " << Mouse::getPosition(window).y << endl;
-					cout << "player:" << yuri.playerSprite.getPosition().x << " " << yuri.playerSprite.getPosition().y << endl;
+					cout << "enemy:" << don.enemy1Sprite.getPosition().x << " " << don.enemy1Sprite.getPosition().y << endl;
 				}
 			}
 			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space)
@@ -75,33 +75,33 @@ void Level1::Show(RenderWindow& window, Event& event)
 		{
 			yuri.moveDown();
 		}
-		doe.move_to(300, 300, 300, 200);
-		doe.fireBullet(1000, 500, 400);
-		doe.fireMissile(2000, 1000, 400);
-		don.move_to(400, 400, 400, 300);
+		// doe.move_to(300, 300, 100, 200);
+		// doe.fireBullet(1000, 500, 400);
+		// doe.fireMissile(2000, 1000, 400);
+		don.move_to(400, 3000, 100);
 		don.fireBullet(2000, 500, 600);
 		don.fireMissile(2000, 1000, 400);
 
-		yuri.isHitBody(doe.enemy1Sprite, 8);
-		for (i = 0; i < doe.bulletsLeft.size(); i++)
-		{
-			yuri.isHitBullet(doe.bulletsLeft[i].sprite, doe.bulletsLeft[i].id, 5);
-			yuri.isHitBullet(doe.bulletsRight[i].sprite, doe.bulletsRight[i].id, 5);
-		}
-		for (i = 0; i < doe.missiles.size(); i++)
-		{
-			yuri.isHitMissile(doe.missiles[i].sprite, doe.missiles[i].id, 9);
-		}
-		doe.isHitBody(yuri.playerSprite, 8);
-		for (i = 0; i < yuri.bulletsLeft.size(); i++)
-		{
-			doe.isHitBullet(yuri.bulletsLeft[i].sprite, yuri.bulletsLeft[i].id, 5);
-			doe.isHitBullet(yuri.bulletsRight[i].sprite, yuri.bulletsRight[i].id, 5);
-		}
-		for (i = 0; i < yuri.missiles.size(); i++)
-		{
-			doe.isHitMissile(yuri.missiles[i].sprite, yuri.missiles[i].id, 9);
-		}
+		// yuri.isHitBody(doe.enemy1Sprite, 8);
+		// for (i = 0; i < doe.bulletsLeft.size(); i++)
+		// {
+		// 	yuri.isHitBullet(doe.bulletsLeft[i].sprite, doe.bulletsLeft[i].id, 5);
+		// 	yuri.isHitBullet(doe.bulletsRight[i].sprite, doe.bulletsRight[i].id, 5);
+		// }
+		// for (i = 0; i < doe.missiles.size(); i++)
+		// {
+		// 	yuri.isHitMissile(doe.missiles[i].sprite, doe.missiles[i].id, 9);
+		// }
+		// doe.isHitBody(yuri.playerSprite, 8);
+		// for (i = 0; i < yuri.bulletsLeft.size(); i++)
+		// {
+		// 	doe.isHitBullet(yuri.bulletsLeft[i].sprite, yuri.bulletsLeft[i].id, 5);
+		// 	doe.isHitBullet(yuri.bulletsRight[i].sprite, yuri.bulletsRight[i].id, 5);
+		// }
+		// for (i = 0; i < yuri.missiles.size(); i++)
+		// {
+		// 	doe.isHitMissile(yuri.missiles[i].sprite, yuri.missiles[i].id, 9);
+		// }
 
 		yuri.isHitBody(don.enemy1Sprite, 8);
 		for (i = 0; i < don.bulletsLeft.size(); i++)
@@ -125,7 +125,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 		}
 
 		window.draw(backgroundSprite);
-		doe.Show(window);
+		// doe.Show(window);
 		don.Show(window);
 		yuri.Show(window);
 		if (yuri.isDead && yuri.explosionFin)

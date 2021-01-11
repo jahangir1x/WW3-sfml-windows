@@ -16,6 +16,7 @@ class Enemy2
 public:
 	Enemy2(RenderWindow& window);
 	void Show(RenderWindow& window);
+	void setPosition(int targetPos_x, int targetPos_y, int offset);
 	void isHitBody(Sprite& targetSprite, float damage);
 	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
 	void isHitMissile(Sprite& targetSprite, unsigned int id, float damage);

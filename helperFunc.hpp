@@ -10,7 +10,6 @@
 namespace helperFunc
 {
 sf::Vector2f getNormalizedVector(sf::Vector2f to, sf::Vector2f from);
-int randRange(int a, int b);
-
+int randRange(int min, int max);
 }
 #endif

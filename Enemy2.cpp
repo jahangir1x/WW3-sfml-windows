@@ -48,7 +48,7 @@ Enemy2::Enemy2(RenderWindow& window)
 	isDead = false;
 	moveInit = false;
 	moveFin = false;
-	moveLeftFin = false;
+	moveLeftFin = true;
 	moveRightFin = false;
 	shouldDisappear = false;
 	shouldExplode = false;
@@ -169,6 +169,15 @@ void Enemy2::Show(RenderWindow& window)
 	}
 }
 
+void Enemy2::setPosition(int targetPos_x, int targetPos_y, int offset)
+{
+
+	targetPos = Vector2f(helperFunc::randRange(targetPos_x - offset, targetPos_x + offset), helperFunc::randRange(targetPos_y - offset, targetPos_y + offset));
+	if (targetPos.y > -120)
+		targetPos.y = -120; // since height of enemysprite is 118
+	enemy1Sprite.setPosition(targetPos);
+}
+
 void Enemy2::isHitBody(Sprite& targetSprite, float damage)
 {
 	if (healthValue > 0)
@@ -179,10 +188,10 @@ void Enemy2::isHitBody(Sprite& targetSprite, float damage)
 			{
 				if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
 				{
-					cout << "hit body" << endl;
+					// cout << "hit body" << endl;
 					show_explosion_missile(Vector2f(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width / 2, enemy1Sprite.getGlobalBounds().top + enemy1Sprite.getGlobalBounds().height / 2));
 					healthValue -= damage;
-					cout << "enemy1 health: " << healthValue << endl;
+					// cout << "enemy1 health: " << healthValue << endl;
 					hitClock.restart();
 				}
 			}
@@ -206,10 +215,10 @@ void Enemy2::isHitBullet(Sprite& targetSprite, unsigned int id, float damage)
 				if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
 				{
 					prevCollidedObj.push_back(id);
-					cout << "hit bullet: " << id << endl;
+					// cout << "hit bullet: " << id << endl;
 					show_explosion_bullet(targetSprite.getPosition());
 					healthValue -= damage;
-					cout << "enemy1 health: " << healthValue << endl;
+					// cout << "enemy1 health: " << healthValue << endl;
 					targetSprite.setColor(Color(0, 0, 0, 0));
 				}
 			}
@@ -233,10 +242,10 @@ void Enemy2::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
 				if (Collision::PixelPerfectTest(enemy1Sprite, targetSprite))
 				{
 					prevCollidedObj.push_back(id);
-					cout << "hit bullet: " << id << endl;
+					// cout << "hit bullet: " << id << endl;
 					show_explosion_missile(targetSprite.getPosition());
 					healthValue -= damage;
-					cout << "enemy1 health: " << healthValue << endl;
+					// cout << "enemy1 health: " << healthValue << endl;
 					targetSprite.setColor(Color(0, 0, 0, 0));
 				}
 			}
@@ -251,7 +260,7 @@ void Enemy2::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
 
 void Enemy2::Die()
 {
-	cout << "enemy dead" << endl;
+	// cout << "enemy dead" << endl;
 	bigExplosion.sprite.setOrigin(25.5, 32.5);
 	bigExplosion.sprite.setPosition(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width / 2, enemy1Sprite.getGlobalBounds().top + enemy1Sprite.getGlobalBounds().height / 2);
 	bigExplosion.sprite.setScale(3, 3);
@@ -267,12 +276,12 @@ void Enemy2::fireBullet(int interval_milliseconds, int interval_offset, float sp
 			bulletLeft.sprite.setPosition(enemy1Sprite.getPosition().x + 16, enemy1Sprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
 			bulletLeft.id = rand() + rand() + rand();
-			cout << "enemyleftbullet: " << bulletLeft.id << endl;
+			// cout << "enemyleftbullet: " << bulletLeft.id << endl;
 			bulletsLeft.push_back(bulletLeft);
 			bulletRight.sprite.setPosition(enemy1Sprite.getPosition().x + 66, enemy1Sprite.getPosition().y + 60);
 			bulletRight.speed = speed;
 			bulletRight.id = rand() + rand() + rand();
-			cout << "enemyrightbullet: " << bulletRight.id << endl;
+			// cout << "enemyrightbullet: " << bulletRight.id << endl;
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();
 			// cout << "enemy1 fired bullets" << endl;
@@ -291,7 +300,7 @@ void Enemy2::fireMissile(int interval_milliseconds, int interval_offset, float s
 				missile.sprite.setPosition(enemy1Sprite.getPosition().x + rect.width / 2 - 5, enemy1Sprite.getPosition().y + 40);
 				missile.speed = speed;
 				missile.id = rand() + rand() + rand();
-				cout << "enemymissile: " << missile.id << endl;
+				// cout << "enemymissile: " << missile.id << endl;
 				missiles.push_back(missile);
 				missileClock.restart();
 				missile.missileCount--;
@@ -313,7 +322,7 @@ void Enemy2::fireBullet_to(Vector2f targetPos, int interval_milliseconds, int in
 
 		bulletRight.sprite.setPosition(bulletOriginPosRight);
 		// bulletsRight.push_back(bulletRight);
-		cout << "enemy fired bullet" << endl;
+		// cout << "enemy fired bullet" << endl;
 		bulletClock.restart();
 	}
 	for (i = 0; i < bulletsLeft.size(); i++)
@@ -356,7 +365,7 @@ void Enemy2::fireMissile_to(Vector2f targetPos, int interval_milliseconds, int i
 			// missiles.push_back(missile);
 			missile.missileCount--;
 			missileClock.restart();
-			cout << "enemy fired missile" << endl;
+			// cout << "enemy fired missile" << endl;
 		}
 
 		for (i = 0; i < missiles.size(); i++)
@@ -431,17 +440,24 @@ void Enemy2::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 	targetPos = Vector2f(targetPos_x, targetPos_y);
 	if (!isDead)
 	{
-		// if (moveClock.getElapsedTime().asMilliseconds() > helperFunc::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
 		if (moveInit == false)
 		{
 			movePos.x = helperFunc::randRange(targetPos.x - offset, targetPos.x + offset);
 			movePos.y = helperFunc::randRange(targetPos.y - offset, targetPos.y + offset);
-			// cout << "init: " << movePos.x << " " << movePos.y << endl;
-			// cout << interval_milliseconds << " " << interval_offset << endl;
+
+			if (movePos.x < 0)
+				movePos.x = 0;
+			if (movePos.y < 0)
+				movePos.y = 0;
+			if (movePos.x > windowSizeX)
+				movePos.x = windowSizeX;
+			if (movePos.y > windowSizeY - 450)
+				movePos.y = windowSizeY - 450;
+
 			moveNorm = helperFunc::getNormalizedVector(movePos, enemy1Sprite.getPosition());
 			moveNorm.x *= gamehandler.getElapsedTime() * speed;
 			moveNorm.y *= gamehandler.getElapsedTime() * speed;
-			// cout << "initm: " << moveNorm.x << " " << moveNorm.y << endl;
+
 			enemy1Sprite.move(moveNorm);
 			for (i = 0; i < explosions.size(); i++)
 			{
@@ -452,8 +468,9 @@ void Enemy2::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 		}
 		else
 		{
-			if (enemy1Sprite.getGlobalBounds().contains(movePos) == false && moveFin == false)
+			if (abs(enemy1Sprite.getGlobalBounds().left - movePos.x) > 6 && abs(enemy1Sprite.getGlobalBounds().top - movePos.y) > 6 && moveFin == false)
 			{
+				cout << "moving to pos" << endl;
 				moveNorm = helperFunc::getNormalizedVector(movePos, enemy1Sprite.getPosition());
 				moveNorm.x *= gamehandler.getElapsedTime() * speed;
 				moveNorm.y *= gamehandler.getElapsedTime() * speed;
@@ -463,30 +480,33 @@ void Enemy2::move_to(int targetPos_x, int targetPos_y, float speed, int offset)
 					explosions[i].sprite.move(moveNorm);
 				}
 			}
-			if (enemy1Sprite.getGlobalBounds().contains(movePos) == true && moveFin == false)
+			else
 			{
+				cout << "moved" << endl;
 				moveFin = true;
-				moveLeftFin = true;
-			}
-			if (moveFin == true)
-			{
+
 				if (moveRightFin == false)
 				{
+					cout << "moving right" << endl;
 					moveRight(speed);
+
+					if (abs(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width - windowSizeX) < 6)
+					{
+						cout << "moved right" << endl;
+						moveLeftFin = false;
+						moveRightFin = true;
+					}
 				}
-				if (enemy1Sprite.getGlobalBounds().contains(windowSizeX, enemy1Sprite.getGlobalBounds().top) == true)
+				else if (moveLeftFin == false)
 				{
-					moveLeftFin = false;
-					moveRightFin = true;
-				}
-				if (moveLeftFin == false)
-				{
+					cout << "moving left" << endl;
 					moveLeft(speed);
-				}
-				if (enemy1Sprite.getGlobalBounds().contains(0, enemy1Sprite.getGlobalBounds().top) == true)
-				{
-					moveLeftFin = true;
-					moveRightFin = false;
+					if (abs(enemy1Sprite.getGlobalBounds().left - 0) < 6)
+					{
+						cout << "moved left" << endl;
+						moveLeftFin = true;
+						moveRightFin = false;
+					}
 				}
 			}
 		}

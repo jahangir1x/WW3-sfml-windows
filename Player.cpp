@@ -243,10 +243,10 @@ void Player::isHitBody(Sprite& targetSprite, float damage)
 			{
 				if (Collision::PixelPerfectTest(playerSprite, targetSprite))
 				{
-					cout << "hit body" << endl;
+					// cout << "hit body" << endl;
 					show_explosion_missile(Vector2f(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2));
 					playerHealth.healthValue -= damage;
-					cout << "player health: " << playerHealth.healthValue << endl;
+					// cout << "player health: " << playerHealth.healthValue << endl;
 					hitClock.restart();
 				}
 			}
@@ -266,10 +266,10 @@ void Player::isHitBullet(Sprite& targetSprite, unsigned int id, float damage)
 			if (find(prevCollidedObj.begin(), prevCollidedObj.end(), id) == prevCollidedObj.end()){
 				if (Collision::PixelPerfectTest(playerSprite, targetSprite)){
 					prevCollidedObj.push_back(id);
-					cout << "hit bullet: " << id << endl;
+					// cout << "hit bullet: " << id << endl;
 					show_explosion_bullet(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
 					playerHealth.healthValue -= damage;
-					cout << "player health: " << playerHealth.healthValue << endl;
+					// cout << "player health: " << playerHealth.healthValue << endl;
 					targetSprite.setColor(Color(0,0,0,0));
 				}
 			}
@@ -294,10 +294,10 @@ void Player::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
 				if (Collision::PixelPerfectTest(playerSprite, targetSprite))
 				{
 					prevCollidedObj.push_back(id);
-					cout << "hit missile: " << id << endl;
+					// cout << "hit missile: " << id << endl;
 					show_explosion_missile(Vector2f(targetSprite.getGlobalBounds().left + targetSprite.getGlobalBounds().width, targetSprite.getGlobalBounds().top + targetSprite.getGlobalBounds().height));
 					playerHealth.healthValue -= damage;
-					cout << "player health: " << playerHealth.healthValue << endl;
+					// cout << "player health: " << playerHealth.healthValue << endl;
 					targetSprite.setColor(Color(0, 0, 0, 0));
 				}
 			}
@@ -355,11 +355,11 @@ void Player::isHitMissile(Sprite& targetSprite, unsigned int id, float damage)
 
 void Player::Die()
 {
-	cout << "player dead" << endl;
+	// cout << "player dead" << endl;
 	bigExplosion.sprite.setOrigin(25.5, 32.5);
 	bigExplosion.sprite.setPosition(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2);
 	bigExplosion.sprite.setScale(3, 3);
-	cout << "big explosion: " << bigExplosion.sprite.getPosition().x << " " << bigExplosion.sprite.getPosition().y << endl;
+	// cout << "big explosion: " << bigExplosion.sprite.getPosition().x << " " << bigExplosion.sprite.getPosition().y << endl;
 	shouldExplode = true;
 }
 
@@ -369,13 +369,13 @@ void Player::fireBullet()
 	{
 		bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
 		bulletLeft.id = rand() + rand() + rand();
-		cout << "playerleftbullet: " << bulletLeft.id << endl;
+		// cout << "playerleftbullet: " << bulletLeft.id << endl;
 		bulletsLeft.push_back(bulletLeft);
 		bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
 		bulletRight.id = rand() + rand() + rand();
-		cout << "playerrightbullet: " << bulletRight.id << endl;
+		// cout << "playerrightbullet: " << bulletRight.id << endl;
 		bulletsRight.push_back(bulletRight);
-		cout << "player fired bullet" << endl;
+		// cout << "player fired bullet" << endl;
 		bulletClock.restart();
 	}
 }
@@ -388,12 +388,12 @@ void Player::fireMissile()
 		{
 			missile.sprite.setPosition(playerSprite.getPosition().x + rect.width / 2 - 5, playerSprite.getPosition().y + 20);
 			missile.id = rand() + rand() + rand();
-			cout << "playermissile: " << missile.id << endl;
+			// cout << "playermissile: " << missile.id << endl;
 			missiles.push_back(missile);
 			missileClock.restart();
 			missile.missileCount--;
 			missile.missileCountString.setString(to_string(missile.missileCount));
-			cout << "player fired missile" << endl;
+			// cout << "player fired missile" << endl;
 		}
 	}
 }
