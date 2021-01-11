@@ -68,8 +68,8 @@
 		<Unit filename="MainMenu.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
-		<Unit filename="helperFunc.cpp" />
-		<Unit filename="helperFunc.hpp" />
+		<Unit filename="Helper.cpp" />
+		<Unit filename="Helper.hpp" />
 		<Unit filename="openal32.dll" />
 		<Unit filename="sfml-audio-2.dll" />
 		<Unit filename="sfml-audio-d-2.dll" />

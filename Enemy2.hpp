@@ -14,13 +14,14 @@ using namespace std;
 class Enemy2
 {
 public:
-	Enemy2(RenderWindow& window);
+	Enemy2();
 	void Show(RenderWindow& window);
 	void setPosition(int targetPos_x, int targetPos_y, int offset);
 	void isHitBody(Sprite& targetSprite, float damage);
 	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
 	void isHitMissile(Sprite& targetSprite, unsigned int id, float damage);
 	bool isDead;
+	bool isDying;
 	void moveLeft(float speed = 400);
 	void moveRight(float speed = 400);
 	void moveUp(float speed = 400);
@@ -75,8 +76,6 @@ public:
 
 private:
 	void Die();
-	int windowSizeX;
-	int windowSizeY;
 	unsigned int i;
 	unsigned int j;
 	GameHandler gamehandler;

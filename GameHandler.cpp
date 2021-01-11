@@ -1,4 +1,5 @@
 #include "GameHandler.hpp"
+#include "Helper.hpp"
 #include "Level1.hpp" //include level headers
 #include "Level2.hpp" //include level headers
 #include "Level3.hpp" //include level headers
@@ -7,28 +8,13 @@
 using namespace std;
 using namespace sf;
 
-float timePerFrame;
-Clock gameClock;
-
 void GameHandler::Start()
 {
 	window.create(VideoMode(1000, 800), "CoolGame");
 	window.setFramerateLimit(60);
+	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 
 	ShowMenu();
-}
-
-void GameHandler::setClock()
-{
-	// timePerFrame = 10;
-	timePerFrame = gameClock.restart().asSeconds();
-	// cout << "called" << timePerFrame << endl;
-}
-
-float GameHandler::getElapsedTime()
-{
-	// cout << "time: " << timePerFrame << endl;
-	return timePerFrame;
 }
 
 void GameHandler::ShowMenu()

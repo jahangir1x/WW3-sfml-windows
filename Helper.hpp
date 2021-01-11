@@ -1,5 +1,5 @@
-#ifndef helperFunc_air321
-#define helperFunc_air321
+#ifndef Helper_air321
+#define Helper_air321
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -7,9 +7,16 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <bits/stdc++.h>
-namespace helperFunc
+namespace Helper
 {
 sf::Vector2f getNormalizedVector(sf::Vector2f to, sf::Vector2f from);
 int randRange(int min, int max);
+void resetClock();
+float SecondsPerFrame();
+void storeWindowSize(int width, int height);
+int windowWidth();
+int windowHeight();
+int enemiesDied();
+void newEnemyDied();
 }
 #endif

@@ -16,7 +16,7 @@ using namespace std;
 class Player
 {
 public:
-	Player(RenderWindow& window);
+	Player();
 	void Show(RenderWindow& window);
 	void isHitBody(Sprite& targetSprite, float damage);
 	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
@@ -79,12 +79,9 @@ public:
 	Missile missile;
 	vector<Missile> missiles;
 	vector<unsigned int> prevCollidedObj;
-	bool explosionFin;
 
 private:
 	void Die();
-	int windowSizeX;
-	int windowSizeY;
 	float moveSpeed;
 	unsigned int i;
 	unsigned int j;
@@ -99,5 +96,6 @@ private:
 	Texture playerTexture;
 	bool shouldDisappear;
 	bool shouldExplode;
+	bool isDying;
 };
 #endif

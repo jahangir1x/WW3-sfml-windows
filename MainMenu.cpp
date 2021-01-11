@@ -53,13 +53,11 @@ MainMenu::MenuResult MainMenu::GetMenuResponse(RenderWindow& window, Event& menu
 				}
 			}
 			mousePosition = Mouse::getPosition(window);
+
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
-				// cout << "mouse: " << mousePosition.x << " " << mousePosition.y << endl;
-				// cout << "m: " << _menuItems[0].rect.left << " " << _menuItems[0].rect.top << " " << _menuItems[0].rect.height << " " << _menuItems[0].rect.width << endl;
 				for (unsigned int i = 0; i < _menuItems.size(); i++)
 				{
-					// cout << "i:" << _menuItems[i].rect.left << " " << _menuItems[i].rect.top << " " << _menuItems[i].rect.width + _menuItems[i].rect.left << " " << _menuItems[i].rect.height + _menuItems[i].rect.top << " " << _menuItems.size() << endl;
 					if (_menuItems[i].rect.contains(Mouse::getPosition(window)))
 					{
 						return _menuItems[i].action;
