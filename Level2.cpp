@@ -7,6 +7,13 @@ using namespace sf;
 void Level2::Show(RenderWindow& window, Event& event)
 {
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
+	Font testFont;
+	testFont.loadFromFile("res/Roboto-Regular.ttf");
+	Text testText;
+	testText.setFont(testFont);
+	testText.setString("Next level");
+	testText.setCharacterSize(80);
+	testText.setFillColor(Color::Red);
 	while (window.isOpen())
 	{
 
@@ -26,6 +33,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 			}
 		}
 		window.clear(Color::Green);
+		window.draw(testText);
 		// window.draw(someThing);
 		window.display();
 	}

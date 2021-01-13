@@ -10,9 +10,10 @@ using namespace sf;
 
 void GameHandler::Start()
 {
-	window.create(VideoMode(1000, 800), "CoolGame");
+	window.create(VideoMode(1000, 900), "CoolGame");
 	window.setFramerateLimit(60);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
+	Helper::seedRand();
 
 	ShowMenu();
 }

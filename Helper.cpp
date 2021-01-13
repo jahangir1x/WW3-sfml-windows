@@ -10,14 +10,26 @@ sf::Vector2f getNormalizedVector(sf::Vector2f to, sf::Vector2f from)
 	return (direction / sqrt(direction.x * direction.x + direction.y * direction.y));
 }
 
+unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+
+float pointsDistance(float x1, float y1, float x2, float y2)
+{
+	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
+
+default_random_engine generator;
+
+void seedRand()
+{
+	generator.seed(seed);
+}
+
 int randRange(int min, int max)
 {
-	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-	default_random_engine generator;
-	generator.seed(seed);
 	uniform_int_distribution<int> distr(min, max);
 	return distr(generator);
 }
+
 float timePerFrame;
 Clock gameClock;
 
@@ -53,5 +65,10 @@ int enemiesDied()
 void newEnemyDied()
 {
 	_enemiesDied++;
+}
+
+void resetEnemyDiedCounter()
+{
+	_enemiesDied = 0;
 }
 }

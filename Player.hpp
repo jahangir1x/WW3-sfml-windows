@@ -18,10 +18,14 @@ class Player
 public:
 	Player();
 	void Show(RenderWindow& window);
-	void isHitBody(Sprite& targetSprite, float damage);
-	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
-	void isHitMissile(Sprite& targetSprite, unsigned int id, float damage);
-	bool isDead;																							 //isDead is check to show level failed scene
+	// void isHitBody(Enemy1& enemy);
+	// void isHitBody(Enemy2& enemy);
+	// void isHitBullet(Enemy1& enemy);
+	// void isHitBullet(Enemy2& enemy);
+	// void isHitMissile(Enemy1& enemy);
+	// void isHitMissile(Enemy2& enemy);
+	bool isDead;
+	bool isDying; //isDead is check to show level failed scene
 	void moveLeft();
 	void moveRight();
 	void moveUp();
@@ -30,9 +34,11 @@ public:
 	void fireMissile();
 	void show_explosion_bullet(Vector2f pos);
 	void show_explosion_missile(Vector2f pos);
+	void Die();
 	Sprite playerSprite;
 	float bulletDamage;	 //damage of enemy
 	float missileDamage; //damage of enemy
+	float hitBodyDamage;
 	struct Health
 	{
 		float healthValue;
@@ -79,16 +85,17 @@ public:
 	Missile missile;
 	vector<Missile> missiles;
 	vector<unsigned int> prevCollidedObj;
+	Clock hitClock;
 
 private:
-	void Die();
+
 	float moveSpeed;
 	unsigned int i;
 	unsigned int j;
 	LevelFailed levelfailed;
 	GameHandler gamehandler;
 	IntRect rect;
-	Clock hitClock;
+
 	Clock playerClock;
 	Clock bulletClock;
 	Clock missileClock;
@@ -96,6 +103,6 @@ private:
 	Texture playerTexture;
 	bool shouldDisappear;
 	bool shouldExplode;
-	bool isDying;
+
 };
 #endif

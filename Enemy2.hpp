@@ -3,6 +3,7 @@
 
 #include "GameHandler.hpp"
 #include "LevelFailed.hpp"
+
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
@@ -17,25 +18,27 @@ public:
 	Enemy2();
 	void Show(RenderWindow& window);
 	void setPosition(int targetPos_x, int targetPos_y, int offset);
-	void isHitBody(Sprite& targetSprite, float damage);
-	void isHitBullet(Sprite& targetSprite, unsigned int id, float damage);
-	void isHitMissile(Sprite& targetSprite, unsigned int id, float damage);
+	// void isHitBody(Player& player);
+	// void isHitBullet(Player& player);
+	// void isHitMissile(Player& player);
 	bool isDead;
 	bool isDying;
 	void moveLeft(float speed = 400);
 	void moveRight(float speed = 400);
 	void moveUp(float speed = 400);
 	void moveDown(float speed = 400);
-	void move_to(int targetPos_x, int targetPos_y, float speed = 400, int offset = 0);
+	void move(float speed = 400);
 	void fireBullet(int interval_milliseconds, int interval_offset, float speed = 500);
 	void fireMissile(int interval_milliseconds, int interval_offset, float speed = 400);
 	void fireBullet_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed = 500, int offset = 0);
 	void fireMissile_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed = 400, int offset = 0);
 	void show_explosion_bullet(Vector2f pos);
 	void show_explosion_missile(Vector2f pos);
+	void Die();
 	float healthValue;
 	float bulletDamage;	 //damage of player
 	float missileDamage; //damage of player
+	float hitBodyDamage;
 	struct Bullet
 	{
 		Texture texture;
@@ -75,7 +78,7 @@ public:
 	vector<unsigned int> prevCollidedObj;
 
 private:
-	void Die();
+
 	unsigned int i;
 	unsigned int j;
 	GameHandler gamehandler;
@@ -89,8 +92,6 @@ private:
 	Clock bigExplosionClock;
 	Vector2f shootPos;
 	Vector2f movePos;
-	Vector2f shootBulletTemp;
-	Vector2f shootMissileTemp;
 	Vector2f moveNorm;
 	Vector2f tempVect;
 	Vector2f targetPos;
