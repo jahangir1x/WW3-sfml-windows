@@ -10,18 +10,18 @@ using namespace sf;
 
 void GameHandler::Start()
 {
-	window.create(VideoMode(1000, 900), "CoolGame");
+	window.create(VideoMode(1100, 900), "CoolGame");
 	window.setFramerateLimit(60);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 	Helper::seedRand();
+	srand(time(0));
 
 	ShowMenu();
 }
 
 void GameHandler::ShowMenu()
 {
-	MainMenu mainmenu;
-	MainMenu::MenuResult result = mainmenu.Show(window, event);
+	result = mainmenu.Show(window, event);
 	if (result == MainMenu::Play)
 	{
 		Play();
@@ -29,6 +29,10 @@ void GameHandler::ShowMenu()
 	else if (result == MainMenu::Help)
 	{
 		Help();
+	}
+	else if (result == MainMenu::Credits)
+	{
+		Credits();
 	}
 	else if (result == MainMenu::Exit)
 	{
@@ -39,6 +43,11 @@ void GameHandler::ShowMenu()
 void GameHandler::Help()
 {
 	cout << "help" << endl;
+}
+
+void GameHandler::Credits()
+{
+	cout << "credits" << endl;
 }
 
 void GameHandler::ExitConfirm()

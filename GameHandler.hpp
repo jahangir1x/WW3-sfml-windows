@@ -7,6 +7,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <bits/stdc++.h>
+#include "MainMenu.hpp"
+
 
 
 class GameHandler
@@ -15,6 +17,7 @@ public:
 	void Start();
 	void ShowMenu();
 	void Help();
+	void Credits();
 	void Play();
 	void ExitConfirm();
 	// add more level here
@@ -22,6 +25,8 @@ public:
 	sf::Event event;
 
 private:
+	MainMenu::MenuResult result;
+	MainMenu mainmenu;
 	// static sf::Clock gameClock;
 };
 #endif

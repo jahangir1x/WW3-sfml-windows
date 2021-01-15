@@ -1,9 +1,5 @@
 #include "Enemy1.hpp" // fix level with intervals
-
-#include "Collision.h"
-#include "GameHandler.hpp"
 #include "Helper.hpp"
-#include "LevelFailed.hpp"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
@@ -15,8 +11,6 @@ using namespace sf;
 
 Enemy1::Enemy1()
 {
-	srand(time(NULL));
-
 	enemy1Texture.loadFromFile("res/enemy1_spritesheet.png");
 	enemy1Sprite.setTexture(enemy1Texture);
 	rect.left = 0;
@@ -24,7 +18,7 @@ Enemy1::Enemy1()
 	rect.height = 118;
 	rect.width = 88;
 	enemy1Sprite.setTextureRect(rect);
-	enemy1Sprite.setPosition(Helper::windowWidth() / 2 - rect.width / 2, Helper::windowHeight() - rect.height - 30);
+	enemy1Sprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(-800, -300));
 
 	explosion.texture.loadFromFile("res/explosion.png");
 	explosion.sprite.setTexture(explosion.texture);
@@ -47,6 +41,7 @@ Enemy1::Enemy1()
 	isDead = false;
 	isDying = false;
 	moveInit = false;
+	firstTime = true;
 	moveFin = false;
 	moveLeftFin = false;
 	moveRightFin = true;
@@ -170,15 +165,15 @@ void Enemy1::Show(RenderWindow& window)
 	}
 }
 
-void Enemy1::setPosition(int targetPos_x, int targetPos_y, int offset)
-{
+// void Enemy1::setPosition(int targetPos_x, int targetPos_y, int offset)
+// {
 
-	targetPos = Vector2f(Helper::randRange(targetPos_x - offset, targetPos_x + offset), Helper::randRange(targetPos_y - offset, targetPos_y + offset));
-	if (targetPos.y > -120)
-		targetPos.y = -120; // since height of enemysprite is 118
-	cout << "enemy: " << targetPos.x << " " << targetPos.y << endl;
-	enemy1Sprite.setPosition(targetPos);
-}
+// 	targetPos = Vector2f(Helper::randRange(targetPos_x - offset, targetPos_x + offset), Helper::randRange(targetPos_y - offset, targetPos_y + offset));
+// 	if (targetPos.y > -120)
+// 		targetPos.y = -120; // since height of enemysprite is 118
+// 	cout << "enemy: " << targetPos.x << " " << targetPos.y << endl;
+// 	enemy1Sprite.setPosition(targetPos);
+// }
 
 void Enemy1::Die()
 {
@@ -362,64 +357,72 @@ void Enemy1::moveRight(float speed)
 
 void Enemy1::move(float speed)
 {
-	if (!isDying)
-	{
-		if (moveInit == false)
+	if (!firstTime){
+		if (!isDying)
 		{
-			movePos.x = Helper::randRange(0, Helper::windowWidth() - enemy1Sprite.getGlobalBounds().width);
-			movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemy1Sprite.getGlobalBounds().height * 4));
-
-			moveNorm = Helper::getNormalizedVector(movePos, enemy1Sprite.getPosition());
-			moveNorm.x *= Helper::SecondsPerFrame() * speed;
-			moveNorm.y *= Helper::SecondsPerFrame() * speed;
-
-			enemy1Sprite.move(moveNorm);
-			for (i = 0; i < explosions.size(); i++)
+			if (moveInit == false)
 			{
-				explosions[i].sprite.move(moveNorm);
-			}
-			moveClock.restart();
-			moveInit = true;
-		}
-		else
-		{
-			if (Helper::pointsDistance(enemy1Sprite.getGlobalBounds().left, enemy1Sprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
-			{
+				movePos.x = Helper::randRange(0, Helper::windowWidth() - enemy1Sprite.getGlobalBounds().width);
+				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemy1Sprite.getGlobalBounds().height * 4));
+
 				moveNorm = Helper::getNormalizedVector(movePos, enemy1Sprite.getPosition());
 				moveNorm.x *= Helper::SecondsPerFrame() * speed;
 				moveNorm.y *= Helper::SecondsPerFrame() * speed;
+
 				enemy1Sprite.move(moveNorm);
 				for (i = 0; i < explosions.size(); i++)
 				{
 					explosions[i].sprite.move(moveNorm);
 				}
+				moveClock.restart();
+				moveInit = true;
 			}
 			else
 			{
-				moveFin = true;
-
-				if (moveRightFin == false)
+				if (Helper::pointsDistance(enemy1Sprite.getGlobalBounds().left, enemy1Sprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
 				{
-					moveRight(speed);
-
-					if (abs(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
+					moveNorm = Helper::getNormalizedVector(movePos, enemy1Sprite.getPosition());
+					moveNorm.x *= Helper::SecondsPerFrame() * speed;
+					moveNorm.y *= Helper::SecondsPerFrame() * speed;
+					enemy1Sprite.move(moveNorm);
+					for (i = 0; i < explosions.size(); i++)
 					{
-						moveLeftFin = false;
-						moveRightFin = true;
+						explosions[i].sprite.move(moveNorm);
 					}
 				}
-				else if (moveLeftFin == false)
+				else
 				{
-					moveLeft(speed);
-					if (abs(enemy1Sprite.getGlobalBounds().left - 0) < 6)
+					moveFin = true;
+
+					if (moveRightFin == false)
 					{
-						moveLeftFin = true;
-						moveRightFin = false;
+						moveRight(speed);
+
+						if (abs(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
+						{
+							moveLeftFin = false;
+							moveRightFin = true;
+						}
+					}
+					else if (moveLeftFin == false)
+					{
+						moveLeft(speed);
+						if (abs(enemy1Sprite.getGlobalBounds().left - 0) < 6)
+						{
+							moveLeftFin = true;
+							moveRightFin = false;
+						}
 					}
 				}
 			}
 		}
 	}
+	else
+	{
+		firstTime = false;
+	}
+
+
 }
 
 void Enemy1::show_explosion_bullet(Vector2f pos)

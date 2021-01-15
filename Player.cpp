@@ -14,8 +14,6 @@ using namespace sf;
 
 Player::Player()
 {
-	srand(time(NULL));
-
 	playerTexture.loadFromFile("res/player_spritesheet.png");
 	playerSprite.setTexture(playerTexture);
 	rect.left = 0;

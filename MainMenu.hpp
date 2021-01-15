@@ -7,28 +7,49 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <bits/stdc++.h>
+using namespace std;
+using namespace sf;
 
 class MainMenu
 {
 public:
 	enum MenuResult
 	{
+		Nothing,
 		Play,
 		Help,
+		Credits,
 		Exit
 	};
-	struct MenuItem
-	{
-	public:
-		sf::Rect<int> rect;
-		MenuResult action;
-	};
-	MenuResult Show(sf::RenderWindow& window, sf::Event& menuEvent);
+
+	MenuResult Show(RenderWindow& window, Event& menuEvent);
 
 private:
-	sf::Vector2i mousePosition;
-	sf::Sprite menuSprite;
-	MenuResult GetMenuResponse(sf::RenderWindow& window, sf::Event& menuEvent);
-	std::vector<MenuItem> _menuItems;
+	Vector2i mousePosition;
+	bool clicked;
+	MenuResult result;
+
+	Texture gameLogoTex;
+	Sprite gameLogoSprite;
+
+	Texture playTex;
+	IntRect playRect;
+	Sprite playSprite;
+	Clock playClock;
+
+	Texture helpTex;
+	IntRect helpRect;
+	Sprite helpSprite;
+	Clock helpClock;
+
+	Texture creditsTex;
+	IntRect creditsRect;
+	Sprite creditsSprite;
+	Clock creditsClock;
+
+	Texture exitTex;
+	IntRect exitRect;
+	Sprite exitSprite;
+	Clock exitClock;
 };
 #endif

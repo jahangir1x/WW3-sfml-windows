@@ -515,18 +515,19 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1610381266 c:\users\zinis\cdblk\sfml_demo\gamehandler.hpp
+1610643478 c:\users\zinis\cdblk\sfml_demo\gamehandler.hpp
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
-
-1610371906 source:c:\users\zinis\cdblk\sfml_demo\mainmenu.cpp
 	"MainMenu.hpp"
 
-1609216242 c:\users\zinis\cdblk\sfml_demo\mainmenu.hpp
+1610644516 source:c:\users\zinis\cdblk\sfml_demo\mainmenu.cpp
+	"MainMenu.hpp"
+
+1610642997 c:\users\zinis\cdblk\sfml_demo\mainmenu.hpp
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
@@ -534,7 +535,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610431356 source:c:\users\zinis\cdblk\sfml_demo\gamehandler.cpp
+1610721893 source:c:\users\zinis\cdblk\sfml_demo\gamehandler.cpp
 	"GameHandler.hpp"
 	"Helper.hpp"
 	"Level1.hpp"
@@ -689,7 +690,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610535776 c:\users\zinis\cdblk\sfml_demo\enemy1.hpp
+1610725962 c:\users\zinis\cdblk\sfml_demo\enemy1.hpp
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
 	<SFML/Audio.hpp>
@@ -709,12 +710,9 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610536513 source:c:\users\zinis\cdblk\sfml_demo\enemy1.cpp
+1610725962 source:c:\users\zinis\cdblk\sfml_demo\enemy1.cpp
 	"Enemy1.hpp"
-	"Collision.h"
-	"GameHandler.hpp"
 	"Helper.hpp"
-	"LevelFailed.hpp"
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
@@ -722,7 +720,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610536395 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
+1610721893 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
 	"Player.hpp"
 	"Collision.h"
 	"GameHandler.hpp"
@@ -735,7 +733,7 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610535776 c:\users\zinis\cdblk\sfml_demo\enemy2.hpp
+1610725962 c:\users\zinis\cdblk\sfml_demo\enemy2.hpp
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
 	<SFML/Audio.hpp>
@@ -745,12 +743,9 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610536626 source:c:\users\zinis\cdblk\sfml_demo\enemy2.cpp
+1610725962 source:c:\users\zinis\cdblk\sfml_demo\enemy2.cpp
 	"Enemy2.hpp"
-	"Collision.h"
-	"GameHandler.hpp"
 	"Helper.hpp"
-	"LevelFailed.hpp"
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>

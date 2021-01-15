@@ -17,10 +17,6 @@ class Enemy2
 public:
 	Enemy2();
 	void Show(RenderWindow& window);
-	void setPosition(int targetPos_x, int targetPos_y, int offset);
-	// void isHitBody(Player& player);
-	// void isHitBullet(Player& player);
-	// void isHitMissile(Player& player);
 	bool isDead;
 	bool isDying;
 	void moveLeft(float speed = 400);
@@ -78,10 +74,8 @@ public:
 	vector<unsigned int> prevCollidedObj;
 
 private:
-
 	unsigned int i;
 	unsigned int j;
-	GameHandler gamehandler;
 	IntRect rect;
 	Sprite* prevCollisionSprite; // store addres of previously collided object
 	Clock enemy1Clock;
@@ -96,6 +90,7 @@ private:
 	Vector2f tempVect;
 	Vector2f targetPos;
 	bool moveInit;
+	bool firstTime;
 	bool moveFin;
 	bool moveLeftFin;
 	bool moveRightFin;
