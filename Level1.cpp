@@ -1,26 +1,14 @@
 #include "Level1.hpp" // level header file
-#include "Collision.h"
-#include "Enemy1.hpp"
-#include "Enemy2.hpp"
-#include "Helper.hpp"
-#include "LevelFailed.hpp" // level failed header file
-#include "LevelHelper.hpp"
-#include "Player.hpp"
-
 using namespace std;
 using namespace sf;
 
 void Level1::Show(RenderWindow& window, Event& event)
 {
-	unsigned int i;
-	Texture backgroundTex;
-	backgroundTex.loadFromFile("res/background.png");
-	Sprite backgroundSprite;
-	backgroundSprite.setTexture(backgroundTex);
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
-	LevelHelper levelhelper;    // levelhelper to check collisions
+	LevelHelper levelhelper;
 	Player yuri; // our hero
-	vector<Enemy2> enemies(3);  // 3 enemies
+	Helper::resetEnemyDiedCounter();
+	vector<Enemy2> enemies2(3);
 	while (window.isOpen())
 	{
 		Helper::resetClock();
@@ -32,7 +20,6 @@ void Level1::Show(RenderWindow& window, Event& event)
 			}
 		}
 		window.clear(Color::Black);
-		window.draw(backgroundSprite);
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			yuri.fireBullet();
@@ -57,21 +44,23 @@ void Level1::Show(RenderWindow& window, Event& event)
 		{
 			yuri.moveDown();
 		}
-		for (i = 0; i < enemies.size() ; i++){
-			enemies[i].move(300);
-			enemies[i].fireBullet(6000, 1000, 400);
-			enemies[i].fireMissile(7000, 1000, 300);
-			levelhelper.isHitBody(yuri, enemies[i]);
-			levelhelper.isHitBullet(yuri, enemies[i]);
-			levelhelper.isHitMissile(yuri, enemies[i]);
-			enemies[i].Show(window);
+		for (auto& enemy : enemies2)
+		{
+			enemy.move(200);
+			enemy.fireBullet(yuri, 7000, 5000, 400);
+			enemy.fireMissile(yuri, 8000, 6000, 300);
+			levelhelper.isHitBody(yuri, enemy);
+			levelhelper.isHitBullet(yuri, enemy);
+			levelhelper.isHitMissile(yuri, enemy);
+			enemy.Show(window);
 		}
-		if(Helper::enemiesDied() == 3){
-			return;
+		if (Helper::enemiesDied() == 3)
+		{
+			return; // show next level
 		}
 		yuri.Show(window);
 		if (yuri.isDead)
-			levelFailedObj.Show(window, event);
+			levelFailedObj.Show(window, event); // show level failed
 		window.display();
 	}
 }

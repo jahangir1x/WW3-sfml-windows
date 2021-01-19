@@ -71,4 +71,22 @@ void resetEnemyDiedCounter()
 {
 	_enemiesDied = 0;
 }
+
+float dir_x;
+float dir_y;
+float temp;
+
+float getRotation(float to_x, float to_y, float from_x, float from_y)
+{
+	dir_x = to_x - from_x;
+	dir_y = to_y - from_y;
+
+	temp = 180 * acos(dir_x * from_x / (sqrt(dir_x * dir_x + dir_y * dir_y) * sqrt(from_x * from_x))) / 3.14159;
+	if (to_y < from_y)
+	{
+		temp = temp * (-1);
+	}
+	return temp;
+}
+
 }

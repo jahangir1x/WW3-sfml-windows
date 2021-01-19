@@ -1,12 +1,6 @@
 #ifndef Helper_air321
 #define Helper_air321
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <bits/stdc++.h>
 namespace Helper
 {
 sf::Vector2f getNormalizedVector(sf::Vector2f to, sf::Vector2f from);
@@ -21,5 +15,6 @@ int windowHeight();
 int enemiesDied();
 void newEnemyDied(); // increase enemy died counter for level completion
 void resetEnemyDiedCounter();
+float getRotation(float to_x, float to_y, float from_x, float from_y);
 }
 #endif

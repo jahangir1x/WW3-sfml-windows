@@ -3,12 +3,6 @@
 
 #include "GameHandler.hpp"
 #include "LevelFailed.hpp"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <bits/stdc++.h>
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
@@ -54,7 +48,6 @@ public:
 		Texture texture;
 		Sprite sprite;
 		float speed;
-		unsigned int id;
 	};
 	struct Missile
 	{
@@ -64,7 +57,6 @@ public:
 		Texture texture;
 		Sprite sprite;
 		float speed;
-		unsigned int id;
 	};
 	struct Explosion
 	{
@@ -84,17 +76,17 @@ public:
 	Bullet bulletRight;
 	Missile missile;
 	vector<Missile> missiles;
-	vector<unsigned int> prevCollidedObj;
 	Clock hitClock;
+	static bool shouldRemoveBullet(Bullet& bullet);
+	static bool shouldRemoveMissile(Missile& missile);
+	static bool shouldRemoveExplosion(Explosion& explosion);
 
 private:
 
 	float moveSpeed;
 	unsigned int i;
 	unsigned int j;
-	LevelFailed levelfailed;
-	GameHandler gamehandler;
-	IntRect rect;
+	IntRect playerRect;
 
 	Clock playerClock;
 	Clock bulletClock;

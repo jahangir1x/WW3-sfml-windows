@@ -1,123 +1,63 @@
-#include "Enemy1.hpp" // fix level with intervals
+#include "Enemy1.hpp"
 #include "Helper.hpp"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <bits/stdc++.h>
+
 using namespace std;
 using namespace sf;
 
-Enemy1::Enemy1()
-{
-	enemy1Texture.loadFromFile("res/enemy1_spritesheet.png");
-	enemy1Sprite.setTexture(enemy1Texture);
-	rect.left = 0;
-	rect.top = 0;
-	rect.height = 118;
-	rect.width = 88;
-	enemy1Sprite.setTextureRect(rect);
-	enemy1Sprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(-800, -300));
-
-	explosion.texture.loadFromFile("res/explosion.png");
-	explosion.sprite.setTexture(explosion.texture);
-	explosion.rect.left = 0;
-	explosion.rect.top = 0;
-	explosion.rect.height = 65;
-	explosion.rect.width = 51;
-	explosion.sprite.setTextureRect(explosion.rect);
-
-	bigExplosion.sprite.setTexture(explosion.texture);
-	bigExplosion.rect.left = 0;
-	bigExplosion.rect.top = 0;
-	bigExplosion.rect.height = 65;
-	bigExplosion.rect.width = 51;
-	bigExplosion.sprite.setTextureRect(explosion.rect);
-
-	healthValue = 100;
-	bulletInterval = 0.8;
-	missileInterval = 1.5;
-	isDead = false;
-	isDying = false;
-	moveInit = false;
-	firstTime = true;
-	moveFin = false;
-	moveLeftFin = false;
-	moveRightFin = true;
-	shouldDisappear = false;
-	shouldExplode = false;
-	bulletDamage = 5;
-	missileDamage = 8;
-	hitBodyDamage = 9;
-
-	bulletLeft.speed = 500;
-	bulletLeft.texture.loadFromFile("res/enemy1_bullet.png");
-	bulletLeft.sprite.setTexture(bulletLeft.texture);
-
-	bulletRight.speed = 500;
-	bulletRight.texture.loadFromFile("res/enemy1_bullet.png");
-	bulletRight.sprite.setTexture(bulletRight.texture);
-
-	missile.speed = 400;
-	missile.texture.loadFromFile("res/enemy1_missile.png");
-	missile.sprite.setTexture(missile.texture);
-	missile.missileCount = 9;
-}
-
 void Enemy1::Show(RenderWindow& window)
 {
-	if (enemy1Clock.getElapsedTime().asSeconds() > 0.2)
+	if (enemyClock.getElapsedTime().asSeconds() > 0.2)
 	{
-		if (rect.left == 264)
+		if (enemyRect.left == 264)
 		{
-			rect.left = 0;
+			enemyRect.left = 0;
 		}
 		else
 		{
-			rect.left += 88;
+			enemyRect.left += 88;
 		}
-		enemy1Sprite.setTexture(enemy1Texture);
-		enemy1Sprite.setTextureRect(rect);
-		enemy1Clock.restart();
+		// cout << "left: " << playerRect.left << endl;
+		enemySprite.setTexture(enemyTexture);
+		enemySprite.setTextureRect(enemyRect);
+		enemyClock.restart();
 	}
 
-	for (i = 0; i < bulletsLeft.size(); i++)
+	for (auto& bullet : bulletsLeft)
 	{
-		bulletsLeft[i].sprite.move(0, bulletsLeft[i].speed * Helper::SecondsPerFrame());
-		if (bulletsLeft[i].sprite.getPosition().x < 0 || bulletsLeft[i].sprite.getPosition().x > Helper::windowWidth() || bulletsLeft[i].sprite.getPosition().y < 0 || bulletsLeft[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			bulletsLeft.erase(bulletsLeft.begin() + i);
-		}
-		bulletsRight[i].sprite.move(0, bulletsRight[i].speed * Helper::SecondsPerFrame());
-		if (bulletsRight[i].sprite.getPosition().x < 0 || bulletsRight[i].sprite.getPosition().x > Helper::windowWidth() || bulletsRight[i].sprite.getPosition().y < 0 || bulletsRight[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			bulletsRight.erase(bulletsRight.begin() + i);
-		}
+		bullet.sprite.move(0, bullet.speed * Helper::SecondsPerFrame());
+	}
+	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Enemy1::shouldRemoveBullet), bulletsLeft.end());
+
+	for (auto& bullet : bulletsRight)
+	{
+		bullet.sprite.move(0, bullet.speed * Helper::SecondsPerFrame());
+	}
+	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Enemy1::shouldRemoveBullet), bulletsRight.end());
+
+	for (auto& bullet : bulletsLeft)
+	{
+		window.draw(bullet.sprite);
 	}
 
-	for (i = 0; i < bulletsLeft.size(); i++)
+	for (auto& bullet : bulletsRight)
 	{
-		window.draw(bulletsLeft[i].sprite);
-		window.draw(bulletsRight[i].sprite);
+		window.draw(bullet.sprite);
 	}
 
-	for (i = 0; i < missiles.size(); i++)
+	for (auto& missile : missiles)
 	{
-		missiles[i].sprite.move(0, missiles[i].speed * Helper::SecondsPerFrame());
-		if (missiles[i].sprite.getPosition().x < 0 || missiles[i].sprite.getPosition().x > Helper::windowWidth() || missiles[i].sprite.getPosition().y < 0 || missiles[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			missiles.erase(missiles.begin() + i);
-		}
+		missile.sprite.move(0, missile.speed * Helper::SecondsPerFrame());
+	}
+	missiles.erase(remove_if(missiles.begin(), missiles.end(), Enemy1::shouldRemoveMissile), missiles.end());
+
+	for (auto& missile : missiles)
+	{
+		window.draw(missile.sprite);
 	}
 
-	for (i = 0; i < missiles.size(); i++)
-	{
-		window.draw(missiles[i].sprite);
-	}
 	if (!shouldDisappear)
 	{
-		window.draw(enemy1Sprite);
+		window.draw(enemySprite);
 	}
 
 	if (shouldExplode == true && isDead == false)
@@ -125,8 +65,7 @@ void Enemy1::Show(RenderWindow& window)
 		if (bigExplosion.rect.left >= 255)
 		{
 			shouldDisappear = true;
-			enemy1Sprite.setColor(Color(0, 0, 0, 0));
-			enemy1Sprite.setPosition(Helper::windowWidth() + 10, Helper::windowHeight() + 10);
+			enemySprite.setPosition(Helper::windowWidth() + 10, Helper::windowHeight() + 10);
 		}
 		if (bigExplosionClock.getElapsedTime().asSeconds() > 0.2)
 		{
@@ -137,7 +76,6 @@ void Enemy1::Show(RenderWindow& window)
 			else
 			{
 				isDead = true;
-				cout << "dead" << endl;
 				Helper::newEnemyDied();
 			}
 			bigExplosion.sprite.setTextureRect(bigExplosion.rect);
@@ -146,43 +84,22 @@ void Enemy1::Show(RenderWindow& window)
 		}
 		window.draw(bigExplosion.sprite);
 	}
-	for (i = 0; i < explosions.size(); i++)
+
+	for (auto& explosion : explosions)
 	{
-		if (explosions[i].rect.left >= 306)
+		if (explosion.clock.getElapsedTime().asSeconds() > 0.2)
 		{
-			explosions.erase(explosions.begin() + i);
-		}
-		if (explosions[i].clock.getElapsedTime().asSeconds() > 0.2)
-		{
-			explosions[i].rect.left += 51;
-			explosions[i].sprite.setTextureRect(explosions[i].rect);
-			explosions[i].clock.restart();
+			explosion.rect.left += 51;
+			explosion.sprite.setTextureRect(explosion.rect);
+			explosion.clock.restart();
 		}
 	}
-	for (i = 0; i < explosions.size(); i++)
+
+	explosions.erase(remove_if(explosions.begin(), explosions.end(), Enemy1::shouldRemoveExplosion), explosions.end());
+
+	for (auto& explosion : explosions)
 	{
-		window.draw(explosions[i].sprite);
-	}
-}
-
-// void Enemy1::setPosition(int targetPos_x, int targetPos_y, int offset)
-// {
-
-// 	targetPos = Vector2f(Helper::randRange(targetPos_x - offset, targetPos_x + offset), Helper::randRange(targetPos_y - offset, targetPos_y + offset));
-// 	if (targetPos.y > -120)
-// 		targetPos.y = -120; // since height of enemysprite is 118
-// 	cout << "enemy: " << targetPos.x << " " << targetPos.y << endl;
-// 	enemy1Sprite.setPosition(targetPos);
-// }
-
-void Enemy1::Die()
-{
-	bigExplosion.sprite.setOrigin(25.5, 32.5);
-	bigExplosion.sprite.setPosition(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width / 2, enemy1Sprite.getGlobalBounds().top + enemy1Sprite.getGlobalBounds().height / 2);
-	bigExplosion.sprite.setScale(3, 3);
-	if (!shouldExplode)
-	{
-		shouldExplode = true;
+		window.draw(explosion.sprite);
 	}
 }
 
@@ -190,17 +107,21 @@ void Enemy1::fireBullet(int interval_milliseconds, int interval_offset, float sp
 {
 	if (!isDying)
 	{
-		if (bulletClock.getElapsedTime().asMilliseconds() > Helper::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
+		if (!isBulletIntervalSet)
 		{
-			bulletLeft.sprite.setPosition(enemy1Sprite.getPosition().x + 16, enemy1Sprite.getPosition().y + 60);
+			bulletInterval = Helper::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset);
+			isBulletIntervalSet = true;
+		}
+		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
+		{
+			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
-			bulletLeft.id = rand() + rand() + rand();
 			bulletsLeft.push_back(bulletLeft);
-			bulletRight.sprite.setPosition(enemy1Sprite.getPosition().x + 66, enemy1Sprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
 			bulletRight.speed = speed;
-			bulletRight.id = rand() + rand() + rand();
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();
+			isBulletIntervalSet = false;
 		}
 	}
 }
@@ -211,183 +132,57 @@ void Enemy1::fireMissile(int interval_milliseconds, int interval_offset, float s
 	{
 		if (missile.missileCount > 0)
 		{
-			if (missileClock.getElapsedTime().asMilliseconds() > Helper::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
+			if (!isMissileIntervalSet)
 			{
-				missile.sprite.setPosition(enemy1Sprite.getPosition().x + rect.width / 2 - 5, enemy1Sprite.getPosition().y + 40);
+				missileInterval = Helper::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset);
+				isMissileIntervalSet = true;
+			}
+			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
+			{
+				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
-				missile.id = rand() + rand() + rand();
 				missiles.push_back(missile);
 				missileClock.restart();
 				missile.missileCount--;
+				isMissileIntervalSet = false;
 			}
-		}
-	}
-}
-
-void Enemy1::fireBullet_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
-{
-	if (bulletClock.getElapsedTime().asMilliseconds() > Helper::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
-	{
-		bulletOriginPosLeft = Vector2f(enemy1Sprite.getPosition().x + 16, enemy1Sprite.getPosition().y + 68);
-		bulletLeft.sprite.setPosition(bulletOriginPosLeft);
-		bulletOriginPosRight = Vector2f(enemy1Sprite.getPosition().x + 66, enemy1Sprite.getPosition().y + 68);
-		bulletRight.sprite.setPosition(bulletOriginPosRight);
-		bulletClock.restart();
-	}
-	for (i = 0; i < bulletsLeft.size(); i++)
-	{
-		shootPos.x = Helper::randRange(targetPos.x - offset, targetPos.x + offset);
-		shootPos.y = Helper::randRange(targetPos.y - offset, targetPos.y + offset);
-
-		tempVect = Helper::getNormalizedVector(shootPos, bulletOriginPosLeft);
-		tempVect.x *= Helper::SecondsPerFrame() * speed;
-		tempVect.y *= Helper::SecondsPerFrame() * speed;
-
-		bulletsLeft[i].sprite.move(tempVect);
-
-		if (bulletsLeft[i].sprite.getPosition().x < 0 || bulletsLeft[i].sprite.getPosition().x > Helper::windowWidth() || bulletsLeft[i].sprite.getPosition().y < 0 || bulletsLeft[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			bulletsLeft.erase(bulletsLeft.begin() + i);
-		}
-
-		tempVect = Helper::getNormalizedVector(shootPos, bulletOriginPosRight);
-		tempVect.x *= Helper::SecondsPerFrame() * speed;
-		tempVect.y *= Helper::SecondsPerFrame() * speed;
-
-		bulletsRight[i].sprite.move(tempVect); // need to calculate vector shoot pos according to left
-
-		if (bulletsRight[i].sprite.getPosition().x < 0 || bulletsRight[i].sprite.getPosition().x > Helper::windowWidth() || bulletsRight[i].sprite.getPosition().y < 0 || bulletsRight[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			bulletsRight.erase(bulletsRight.begin() + i);
-		}
-	}
-}
-
-void Enemy1::fireMissile_to(Vector2f targetPos, int interval_milliseconds, int interval_offset, float speed, int offset)
-{
-	if (missile.missileCount > 0)
-	{
-		if (missileClock.getElapsedTime().asMilliseconds() > Helper::randRange(interval_milliseconds - interval_offset, interval_milliseconds + interval_offset))
-		{
-			missileOriginPos = Vector2f(enemy1Sprite.getPosition().x + rect.width / 2 - 5, enemy1Sprite.getPosition().y + 20);
-			missile.sprite.setPosition(missileOriginPos);
-			missile.missileCount--;
-			missileClock.restart();
-		}
-
-		for (i = 0; i < missiles.size(); i++)
-		{
-			shootPos.x = Helper::randRange(targetPos.x - offset, targetPos.x + offset);
-			shootPos.y = Helper::randRange(targetPos.y - offset, targetPos.y + offset);
-
-			tempVect = Helper::getNormalizedVector(shootPos, missileOriginPos);
-			tempVect.x *= Helper::SecondsPerFrame() * speed;
-			tempVect.y *= Helper::SecondsPerFrame() * speed;
-
-			missiles[i].sprite.move(tempVect);
-			if (missiles[i].sprite.getPosition().x < 0 || missiles[i].sprite.getPosition().x > Helper::windowWidth() || missiles[i].sprite.getPosition().y < 0 || missiles[i].sprite.getPosition().y > Helper::windowHeight())
-			{
-				missiles.erase(missiles.begin() + i);
-			}
-		}
-	}
-}
-
-void Enemy1::moveDown(float speed)
-{
-	if (!isDying)
-	{
-		tempVect = Helper::getNormalizedVector(Vector2f(enemy1Sprite.getPosition().x, Helper::windowHeight() + 100), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
-		tempVect.x *= Helper::SecondsPerFrame() * speed;
-		tempVect.y *= Helper::SecondsPerFrame() * speed;
-		enemy1Sprite.move(tempVect);
-		for (i = 0; i < explosions.size(); i++)
-		{
-			explosions[i].sprite.move(tempVect);
-		}
-	}
-}
-
-void Enemy1::moveUp(float speed)
-{
-	if (!isDying)
-	{
-		tempVect = Helper::getNormalizedVector(Vector2f(enemy1Sprite.getPosition().x, -Helper::windowHeight()), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
-		tempVect.x *= Helper::SecondsPerFrame() * speed;
-		tempVect.y *= Helper::SecondsPerFrame() * speed;
-		enemy1Sprite.move(tempVect);
-		for (i = 0; i < explosions.size(); i++)
-		{
-			explosions[i].sprite.move(tempVect);
-		}
-	}
-}
-
-void Enemy1::moveLeft(float speed)
-{
-	if (!isDying)
-	{
-		tempVect = Helper::getNormalizedVector(Vector2f(-Helper::windowWidth(), enemy1Sprite.getPosition().y), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
-		tempVect.x *= Helper::SecondsPerFrame() * speed;
-		tempVect.y *= Helper::SecondsPerFrame() * speed;
-
-		enemy1Sprite.move(tempVect);
-		for (i = 0; i < explosions.size(); i++)
-		{
-			explosions[i].sprite.move(tempVect);
-		}
-	}
-}
-
-void Enemy1::moveRight(float speed)
-{
-	if (!isDying)
-	{
-		tempVect = Helper::getNormalizedVector(Vector2f(Helper::windowWidth() + 100, enemy1Sprite.getPosition().y), Vector2f(enemy1Sprite.getPosition().x, enemy1Sprite.getPosition().y));
-		tempVect.x *= Helper::SecondsPerFrame() * speed;
-		tempVect.y *= Helper::SecondsPerFrame() * speed;
-
-		enemy1Sprite.move(tempVect);
-		for (i = 0; i < explosions.size(); i++)
-		{
-			explosions[i].sprite.move(tempVect);
 		}
 	}
 }
 
 void Enemy1::move(float speed)
 {
-	if (!firstTime){
+	if (!firstTime)
+	{
 		if (!isDying)
 		{
 			if (moveInit == false)
 			{
-				movePos.x = Helper::randRange(0, Helper::windowWidth() - enemy1Sprite.getGlobalBounds().width);
-				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemy1Sprite.getGlobalBounds().height * 4));
+				movePos.x = Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width);
+				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemySprite.getGlobalBounds().height * 4));
 
-				moveNorm = Helper::getNormalizedVector(movePos, enemy1Sprite.getPosition());
-				moveNorm.x *= Helper::SecondsPerFrame() * speed;
-				moveNorm.y *= Helper::SecondsPerFrame() * speed;
+				moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
+				moveNorm *= Helper::SecondsPerFrame() * speed;
 
-				enemy1Sprite.move(moveNorm);
-				for (i = 0; i < explosions.size(); i++)
+				enemySprite.move(moveNorm);
+				for (auto& explosion : explosions)
 				{
-					explosions[i].sprite.move(moveNorm);
+					explosion.sprite.move(moveNorm);
 				}
 				moveClock.restart();
 				moveInit = true;
 			}
 			else
 			{
-				if (Helper::pointsDistance(enemy1Sprite.getGlobalBounds().left, enemy1Sprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
+				if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
 				{
-					moveNorm = Helper::getNormalizedVector(movePos, enemy1Sprite.getPosition());
-					moveNorm.x *= Helper::SecondsPerFrame() * speed;
-					moveNorm.y *= Helper::SecondsPerFrame() * speed;
-					enemy1Sprite.move(moveNorm);
-					for (i = 0; i < explosions.size(); i++)
+					// moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
+					// moveNorm.x *= Helper::SecondsPerFrame() * speed;
+					// moveNorm.y *= Helper::SecondsPerFrame() * speed;
+					enemySprite.move(moveNorm);
+					for (auto& explosion : explosions)
 					{
-						explosions[i].sprite.move(moveNorm);
+						explosion.sprite.move(moveNorm);
 					}
 				}
 				else
@@ -398,7 +193,7 @@ void Enemy1::move(float speed)
 					{
 						moveRight(speed);
 
-						if (abs(enemy1Sprite.getGlobalBounds().left + enemy1Sprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
+						if (abs(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
 						{
 							moveLeftFin = false;
 							moveRightFin = true;
@@ -407,7 +202,7 @@ void Enemy1::move(float speed)
 					else if (moveLeftFin == false)
 					{
 						moveLeft(speed);
-						if (abs(enemy1Sprite.getGlobalBounds().left - 0) < 6)
+						if (abs(enemySprite.getGlobalBounds().left - 0) < 6)
 						{
 							moveLeftFin = true;
 							moveRightFin = false;
@@ -421,21 +216,4 @@ void Enemy1::move(float speed)
 	{
 		firstTime = false;
 	}
-
-
-}
-
-void Enemy1::show_explosion_bullet(Vector2f pos)
-{
-	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(1, 1);
-	explosion.sprite.setPosition(pos);
-	explosions.push_back(explosion);
-}
-void Enemy1::show_explosion_missile(Vector2f pos)
-{
-	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(2, 2);
-	explosion.sprite.setPosition(pos);
-	explosions.push_back(explosion);
 }

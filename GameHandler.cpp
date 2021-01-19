@@ -10,8 +10,8 @@ using namespace sf;
 
 void GameHandler::Start()
 {
-	window.create(VideoMode(1100, 900), "CoolGame");
-	window.setFramerateLimit(60);
+	window.create(VideoMode(1100, 900), "World War 3", Style::Default);
+	window.setFramerateLimit(90);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 	Helper::seedRand();
 	srand(time(0));

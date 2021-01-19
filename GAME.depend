@@ -515,27 +515,15 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1610643478 c:\users\zinis\cdblk\sfml_demo\gamehandler.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
+1610877297 c:\users\zinis\cdblk\sfml_demo\gamehandler.hpp
 	"MainMenu.hpp"
 
 1610644516 source:c:\users\zinis\cdblk\sfml_demo\mainmenu.cpp
 	"MainMenu.hpp"
 
-1610642997 c:\users\zinis\cdblk\sfml_demo\mainmenu.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
+1610877297 c:\users\zinis\cdblk\sfml_demo\mainmenu.hpp
 
-1610721893 source:c:\users\zinis\cdblk\sfml_demo\gamehandler.cpp
+1610951366 source:c:\users\zinis\cdblk\sfml_demo\gamehandler.cpp
 	"GameHandler.hpp"
 	"Helper.hpp"
 	"Level1.hpp"
@@ -618,33 +606,7 @@
 	<SFML/Network/IpAddress.hpp>
 	<vector>
 
-1610378342 c:\users\zinis\cdblk\sfml_demo\level1.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-
-1609216198 c:\users\zinis\cdblk\sfml_demo\level2.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-
-1609216214 c:\users\zinis\cdblk\sfml_demo\level3.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-
-1610537635 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
-	"Level1.hpp"
-	"Collision.h"
+1611057640 c:\users\zinis\cdblk\sfml_demo\level1.hpp
 	"Enemy1.hpp"
 	"Enemy2.hpp"
 	"Helper.hpp"
@@ -652,13 +614,14 @@
 	"LevelHelper.hpp"
 	"Player.hpp"
 
-1609216230 c:\users\zinis\cdblk\sfml_demo\levelfailed.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
+1610877297 c:\users\zinis\cdblk\sfml_demo\level2.hpp
+
+1610877297 c:\users\zinis\cdblk\sfml_demo\level3.hpp
+
+1611057779 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
+	"Level1.hpp"
+
+1610877297 c:\users\zinis\cdblk\sfml_demo\levelfailed.hpp
 
 1610537048 source:c:\users\zinis\cdblk\sfml_demo\level2.cpp
 	"Level2.hpp"
@@ -690,92 +653,67 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1610725962 c:\users\zinis\cdblk\sfml_demo\enemy1.hpp
+1611051123 c:\users\zinis\cdblk\sfml_demo\enemy1.hpp
+	"BaseEnemy.hpp"
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
 
-1610535810 c:\users\zinis\cdblk\sfml_demo\player.hpp
+1610898589 c:\users\zinis\cdblk\sfml_demo\player.hpp
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
 
-1610725962 source:c:\users\zinis\cdblk\sfml_demo\enemy1.cpp
+1611057057 source:c:\users\zinis\cdblk\sfml_demo\enemy1.cpp
 	"Enemy1.hpp"
 	"Helper.hpp"
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
 
-1610721893 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
+1610991794 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
 	"Player.hpp"
 	"Collision.h"
 	"GameHandler.hpp"
 	"Helper.hpp"
 	"LevelFailed.hpp"
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
 
-1610725962 c:\users\zinis\cdblk\sfml_demo\enemy2.hpp
+1611051036 c:\users\zinis\cdblk\sfml_demo\enemy2.hpp
+	"BaseEnemy.hpp"
 	"GameHandler.hpp"
+	"Helper.hpp"
 	"LevelFailed.hpp"
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-
-1610725962 source:c:\users\zinis\cdblk\sfml_demo\enemy2.cpp
-	"Enemy2.hpp"
-	"Helper.hpp"
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-
-1610536513 c:\users\zinis\cdblk\sfml_demo\helper.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-
-1610536237 source:c:\users\zinis\cdblk\sfml_demo\helper.cpp
-	"Helper.hpp"
-
-1610536513 c:\users\zinis\cdblk\sfml_demo\levelhelper.hpp
-	<SFML/Audio.hpp>
-	<SFML/Graphics.hpp>
-	<SFML/Network.hpp>
-	<SFML/System.hpp>
-	<SFML/Window.hpp>
-	<bits/stdc++.h>
-	"Enemy1.hpp"
-	"Enemy2.hpp"
 	"Player.hpp"
 
-1610536513 source:c:\users\zinis\cdblk\sfml_demo\levelhelper.cpp
+1611056911 source:c:\users\zinis\cdblk\sfml_demo\enemy2.cpp
+	"Enemy2.hpp"
+	"Helper.hpp"
+
+1611053689 c:\users\zinis\cdblk\sfml_demo\helper.hpp
+
+1611053710 source:c:\users\zinis\cdblk\sfml_demo\helper.cpp
+	"Helper.hpp"
+
+1611054877 c:\users\zinis\cdblk\sfml_demo\levelhelper.hpp
+	"BaseEnemy.hpp"
+	"Collision.h"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Helper.hpp"
+	"Player.hpp"
+
+1611054877 source:c:\users\zinis\cdblk\sfml_demo\levelhelper.cpp
 	"LevelHelper.hpp"
-	"Collision.h"
+
+1610876740 source:c:\users\zinis\cdblk\sfml_demo\pre_compiled_header.h
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<bits/stdc++.h>
+
+1611057125 source:c:\users\zinis\cdblk\sfml_demo\baseenemy.cpp
+	"BaseEnemy.hpp"
+	"Helper.hpp"
+
+1611057125 c:\users\zinis\cdblk\sfml_demo\baseenemy.hpp
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
 

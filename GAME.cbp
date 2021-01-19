@@ -43,13 +43,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-Winvalid-pch" />
+			<Add option='-include &quot;PRE_COMPILED_HEADER.h&quot;' />
 			<Add directory="C:/SFML-2.5.1/include" />
 		</Compiler>
 		<Linker>
 			<Add directory="C:/SFML-2.5.1/lib" />
 		</Linker>
-		<Unit filename="Collision.cpp" />
-		<Unit filename="Collision.h" />
 		<Unit filename="Main.cpp" />
 		<Unit filename="Collision.cpp" />
 		<Unit filename="Collision.h" />
@@ -65,6 +65,8 @@
 		<Unit filename="MainMenu.hpp" />
 		<Unit filename="LevelFailed.cpp" />
 		<Unit filename="LevelFailed.cpp" />
+		<Unit filename="BaseEnemy.cpp" />
+		<Unit filename="BaseEnemy.hpp" />
 		<Unit filename="Enemy1.cpp" />
 		<Unit filename="Enemy1.hpp" />
 		<Unit filename="Enemy2.cpp" />
@@ -73,6 +75,12 @@
 		<Unit filename="Helper.hpp" />
 		<Unit filename="LevelHelper.cpp" />
 		<Unit filename="LevelHelper.hpp" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.hpp" />
+		<Unit filename="PRE_COMPILED_HEADER.h">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
 		<Unit filename="openal32.dll" />

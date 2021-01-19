@@ -1,12 +1,6 @@
 #ifndef MainMenu_air321
 #define MainMenu_air321
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <bits/stdc++.h>
 using namespace std;
 using namespace sf;
 

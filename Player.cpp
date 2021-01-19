@@ -3,12 +3,7 @@
 #include "GameHandler.hpp"
 #include "Helper.hpp"
 #include "LevelFailed.hpp"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <bits/stdc++.h>
+
 using namespace std;
 using namespace sf;
 
@@ -16,12 +11,12 @@ Player::Player()
 {
 	playerTexture.loadFromFile("res/player_spritesheet.png");
 	playerSprite.setTexture(playerTexture);
-	rect.left = 0;
-	rect.top = 0;
-	rect.height = 118;
-	rect.width = 88;
-	playerSprite.setTextureRect(rect);
-	playerSprite.setPosition(Helper::windowWidth() / 2 - rect.width / 2, Helper::windowHeight() - rect.height - 30);
+	playerRect.left = 0;
+	playerRect.top = 0;
+	playerRect.height = 118;
+	playerRect.width = 88;
+	playerSprite.setTextureRect(playerRect);
+	playerSprite.setPosition(Helper::windowWidth() / 2 - playerRect.width / 2, Helper::windowHeight() - playerRect.height - 30);
 
 	playerHealth.healthValue = 100;
 	playerHealth.outsideRect.setPosition(33, 9);
@@ -40,7 +35,7 @@ Player::Player()
 
 	explosion.texture.loadFromFile("res/explosion.png");
 	explosion.sprite.setTexture(explosion.texture);
-	explosion.rect.left = 0;
+	explosion.rect.left = -51;
 	explosion.rect.top = 0;
 	explosion.rect.height = 65;
 	explosion.rect.width = 51;
@@ -88,53 +83,95 @@ Player::Player()
 	missile.missileCountString.setStyle(Text::Bold);
 }
 
+bool Player::shouldRemoveBullet(Bullet& bullet)
+{
+	if (bullet.sprite.getPosition().x < 0 || bullet.sprite.getPosition().x > Helper::windowWidth() || bullet.sprite.getPosition().y < 0 || bullet.sprite.getPosition().y > Helper::windowHeight())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Player::shouldRemoveMissile(Missile& missile)
+{
+	if (missile.sprite.getPosition().x < 0 || missile.sprite.getPosition().x > Helper::windowWidth() || missile.sprite.getPosition().y < 0 || missile.sprite.getPosition().y > Helper::windowHeight())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Player::shouldRemoveExplosion(Explosion& explosion)
+{
+	if (explosion.rect.left > 306)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void Player::Show(RenderWindow& window)
 {
 	if (playerClock.getElapsedTime().asSeconds() > 0.2)
 	{
-		if (rect.left == 264)
+		if (playerRect.left == 264)
 		{
-			rect.left = 0;
+			playerRect.left = 0;
 		}
 		else
 		{
-			rect.left += 88;
+			playerRect.left += 88;
 		}
 		playerSprite.setTexture(playerTexture);
-		playerSprite.setTextureRect(rect);
+		playerSprite.setTextureRect(playerRect);
 		playerClock.restart();
 	}
 
-	for (i = 0; i < bulletsLeft.size(); i++)
+	for (auto& bullet : bulletsLeft)
 	{
-		bulletsLeft[i].sprite.move(0, -bulletsLeft[i].speed * Helper::SecondsPerFrame());
-		if (bulletsLeft[i].sprite.getPosition().x < 0 || bulletsLeft[i].sprite.getPosition().x > Helper::windowWidth() || bulletsLeft[i].sprite.getPosition().y < 0 || bulletsLeft[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			bulletsLeft.erase(bulletsLeft.begin() + i);
-		}
-		bulletsRight[i].sprite.move(0, -bulletsRight[i].speed * Helper::SecondsPerFrame());
-		if (bulletsRight[i].sprite.getPosition().x < 0 || bulletsRight[i].sprite.getPosition().x > Helper::windowWidth() || bulletsRight[i].sprite.getPosition().y < 0 || bulletsRight[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			bulletsRight.erase(bulletsRight.begin() + i);
-		}
+		bullet.sprite.move(0, -bullet.speed * Helper::SecondsPerFrame());
 	}
-	for (i = 0; i < bulletsLeft.size(); i++)
+	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Player::shouldRemoveBullet), bulletsLeft.end());
+
+	for (auto& bullet : bulletsRight)
 	{
-		window.draw(bulletsLeft[i].sprite);
-		window.draw(bulletsRight[i].sprite);
+		bullet.sprite.move(0, -bullet.speed * Helper::SecondsPerFrame());
+	}
+	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Player::shouldRemoveBullet), bulletsRight.end());
+
+	for (auto& bullet : bulletsLeft)
+	{
+		window.draw(bullet.sprite);
 	}
 
-	for (i = 0; i < missiles.size(); i++)
+	for (auto& bullet : bulletsRight)
 	{
-		missiles[i].sprite.move(0, -missiles[i].speed * Helper::SecondsPerFrame());
-		if (missiles[i].sprite.getPosition().x < 0 || missiles[i].sprite.getPosition().x > Helper::windowWidth() || missiles[i].sprite.getPosition().y < 0 || missiles[i].sprite.getPosition().y > Helper::windowHeight())
-		{
-			missiles.erase(missiles.begin() + i);
-		}
+		window.draw(bullet.sprite);
 	}
-	for (i = 0; i < missiles.size(); i++)
+
+	for (auto& missile : missiles)
 	{
-		window.draw(missiles[i].sprite);
+		missile.sprite.move(0, -missile.speed * Helper::SecondsPerFrame());
+	}
+	missiles.erase(remove_if(missiles.begin(), missiles.end(), Player::shouldRemoveMissile), missiles.end());
+
+	for (auto& missile : missiles)
+	{
+		window.draw(missile.sprite);
+	}
+
+	if (playerHealth.healthValue < 0)
+	{
+		playerHealth.healthValue = 0;
 	}
 
 	playerHealth.insideRect.setSize(Vector2f(192 * playerHealth.healthValue / 100, 8));
@@ -169,22 +206,22 @@ void Player::Show(RenderWindow& window)
 		}
 		window.draw(bigExplosion.sprite);
 	}
-	for (i = 0; i < explosions.size(); i++)
+
+	for (auto& explosion : explosions)
 	{
-		if (explosions[i].rect.left >= 306)
+		if (explosion.clock.getElapsedTime().asSeconds() > 0.2)
 		{
-			explosions.erase(explosions.begin() + i);
-		}
-		if (explosions[i].clock.getElapsedTime().asSeconds() > 0.2)
-		{
-			explosions[i].rect.left += 51;
-			explosions[i].sprite.setTextureRect(explosions[i].rect);
-			explosions[i].clock.restart();
+			explosion.rect.left += 51;
+			explosion.sprite.setTextureRect(explosion.rect);
+			explosion.clock.restart();
 		}
 	}
-	for (i = 0; i < explosions.size(); i++)
+
+	explosions.erase(remove_if(explosions.begin(), explosions.end(), Player::shouldRemoveExplosion), explosions.end());
+
+	for (auto& explosion : explosions)
 	{
-		window.draw(explosions[i].sprite);
+		window.draw(explosion.sprite);
 	}
 
 	window.draw(playerHealth.healthtext);
@@ -192,10 +229,6 @@ void Player::Show(RenderWindow& window)
 	window.draw(missile.missileCountString);
 	window.draw(playerHealth.outsideRect);
 	window.draw(playerHealth.insideRect);
-	if (prevCollidedObj.size() > 100)
-	{
-		prevCollidedObj.erase(prevCollidedObj.begin(), prevCollidedObj.begin() + 30);
-	}
 }
 
 void Player::Die()
@@ -216,10 +249,8 @@ void Player::fireBullet()
 		if (bulletClock.getElapsedTime().asSeconds() > 0.2)
 		{
 			bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
-			bulletLeft.id = rand() + rand() + rand();
 			bulletsLeft.push_back(bulletLeft);
 			bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
-			bulletRight.id = rand() + rand() + rand();
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();
 		}
@@ -234,8 +265,7 @@ void Player::fireMissile()
 		{
 			if (missileClock.getElapsedTime().asSeconds() > 0.5)
 			{
-				missile.sprite.setPosition(playerSprite.getPosition().x + rect.width / 2 - 5, playerSprite.getPosition().y + 20);
-				missile.id = rand() + rand() + rand();
+				missile.sprite.setPosition(playerSprite.getPosition().x + playerRect.width / 2 - 5, playerSprite.getPosition().y + 20);
 				missiles.push_back(missile);
 				missileClock.restart();
 				missile.missileCount--;
