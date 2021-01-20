@@ -1,10 +1,10 @@
-#include "Enemy1.hpp"
+#include "Enemy3.hpp"
 #include "Helper.hpp"
 
 using namespace std;
 using namespace sf;
 
-void Enemy1::Show(RenderWindow& window)
+void Enemy3::Show(RenderWindow& window)
 {
 	if (enemyClock.getElapsedTime().asSeconds() > 0.2)
 	{
@@ -26,13 +26,13 @@ void Enemy1::Show(RenderWindow& window)
 	{
 		bullet.sprite.move(0, bullet.speed * Helper::SecondsPerFrame());
 	}
-	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Enemy1::shouldRemoveBullet), bulletsLeft.end());
+	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Enemy3::shouldRemoveBullet), bulletsLeft.end());
 
 	for (auto& bullet : bulletsRight)
 	{
 		bullet.sprite.move(0, bullet.speed * Helper::SecondsPerFrame());
 	}
-	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Enemy1::shouldRemoveBullet), bulletsRight.end());
+	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Enemy3::shouldRemoveBullet), bulletsRight.end());
 
 	for (auto& bullet : bulletsLeft)
 	{
@@ -48,7 +48,7 @@ void Enemy1::Show(RenderWindow& window)
 	{
 		missile.sprite.move(0, missile.speed * Helper::SecondsPerFrame());
 	}
-	missiles.erase(remove_if(missiles.begin(), missiles.end(), Enemy1::shouldRemoveMissile), missiles.end());
+	missiles.erase(remove_if(missiles.begin(), missiles.end(), Enemy3::shouldRemoveMissile), missiles.end());
 
 	for (auto& missile : missiles)
 	{
@@ -95,7 +95,7 @@ void Enemy1::Show(RenderWindow& window)
 		}
 	}
 
-	explosions.erase(remove_if(explosions.begin(), explosions.end(), Enemy1::shouldRemoveExplosion), explosions.end());
+	explosions.erase(remove_if(explosions.begin(), explosions.end(), Enemy3::shouldRemoveExplosion), explosions.end());
 
 	for (auto& explosion : explosions)
 	{
@@ -103,7 +103,7 @@ void Enemy1::Show(RenderWindow& window)
 	}
 }
 
-void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
+void Enemy3::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
 	if (!isDying)
 	{
@@ -128,7 +128,7 @@ void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_
 	}
 }
 
-void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
+void Enemy3::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
 	if (!isDying)
 	{
@@ -147,14 +147,14 @@ void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval
 				missileClock.restart();
 				missile.missileCount--;
 				isMissileIntervalSet = false;
-				if (0) // to bypass g++ -Werror=unused-variable
+				if (0)
 					cout << "dummy: " << player.playerHealth.healthValue << endl;
 			}
 		}
 	}
 }
 
-void Enemy1::move(float speed)
+void Enemy3::move(float speed)
 {
 	if (!firstTime)
 	{
@@ -163,7 +163,9 @@ void Enemy1::move(float speed)
 			if (moveInit == false)
 			{
 				movePos.x = Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width);
-				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemySprite.getGlobalBounds().height * 4)); // we don't want to collide with the player and shoot at nothing
+				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemySprite.getGlobalBounds().height * 4));
+
+				cout << "movepos: " << movePos.x << " " << movePos.y << endl;
 				moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
 				moveNorm *= Helper::SecondsPerFrame() * speed;
 
@@ -175,43 +177,17 @@ void Enemy1::move(float speed)
 				moveClock.restart();
 				moveInit = true;
 			}
+			else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6)
+			{
+				enemySprite.move(moveNorm);
+				for (auto& explosion : explosions)
+				{
+					explosion.sprite.move(moveNorm);
+				}
+			}
 			else
 			{
-				if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
-				{
-					// moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
-					// moveNorm.x *= Helper::SecondsPerFrame() * speed;
-					// moveNorm.y *= Helper::SecondsPerFrame() * speed;
-					enemySprite.move(moveNorm);
-					for (auto& explosion : explosions)
-					{
-						explosion.sprite.move(moveNorm);
-					}
-				}
-				else
-				{
-					moveFin = true;
-
-					if (moveRightFin == false)
-					{
-						moveRight(speed);
-
-						if (abs(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
-						{
-							moveLeftFin = false;
-							moveRightFin = true;
-						}
-					}
-					else if (moveLeftFin == false)
-					{
-						moveLeft(speed);
-						if (abs(enemySprite.getGlobalBounds().left - 0) < 6)
-						{
-							moveLeftFin = true;
-							moveRightFin = false;
-						}
-					}
-				}
+				moveInit = false;
 			}
 		}
 	}

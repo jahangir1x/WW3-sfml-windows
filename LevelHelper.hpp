@@ -5,6 +5,10 @@
 #include "Collision.h"
 #include "Enemy1.hpp"
 #include "Enemy2.hpp"
+#include "Enemy3.hpp"
+#include "Enemy4.hpp"
+#include "Enemy5.hpp"
+#include "Enemy6.hpp"
 #include "Helper.hpp"
 #include "Player.hpp"
 using namespace std;
@@ -20,6 +24,22 @@ public:
 	void isHitBody(Player& player, Enemy2& enemy);
 	void isHitBullet(Player& player, Enemy2& enemy);
 	void isHitMissile(Player& player, Enemy2& enemy);
+
+	void isHitBody(Player& player, Enemy3& enemy);
+	void isHitBullet(Player& player, Enemy3& enemy);
+	void isHitMissile(Player& player, Enemy3& enemy);
+
+	void isHitBody(Player& player, Enemy4& enemy);
+	void isHitBullet(Player& player, Enemy4& enemy);
+	void isHitMissile(Player& player, Enemy4& enemy);
+
+	void isHitBody(Player& player, Enemy5& enemy);
+	void isHitBullet(Player& player, Enemy5& enemy);
+	void isHitMissile(Player& player, Enemy5& enemy);
+
+	void isHitBody(Player& player, Enemy6& enemy);
+	void isHitBullet(Player& player, Enemy6& enemy);
+	void isHitMissile(Player& player, Enemy6& enemy);
 
 private:
 	unsigned int i;

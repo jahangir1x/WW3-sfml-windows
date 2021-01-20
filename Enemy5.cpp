@@ -1,10 +1,10 @@
-#include "Enemy1.hpp"
+#include "Enemy5.hpp"
 #include "Helper.hpp"
 
 using namespace std;
 using namespace sf;
 
-void Enemy1::Show(RenderWindow& window)
+void Enemy5::Show(RenderWindow& window)
 {
 	if (enemyClock.getElapsedTime().asSeconds() > 0.2)
 	{
@@ -24,15 +24,29 @@ void Enemy1::Show(RenderWindow& window)
 
 	for (auto& bullet : bulletsLeft)
 	{
-		bullet.sprite.move(0, bullet.speed * Helper::SecondsPerFrame());
+		bullet.sprite.move(sin(bullet.rotation) * 200 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
+		if (bullet.rotation >= 180){
+			bullet.rotation = 0.1;
+		}
+		else{
+			bullet.rotation += 0.1;
+		}
 	}
-	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Enemy1::shouldRemoveBullet), bulletsLeft.end());
+	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Enemy5::shouldRemoveBullet), bulletsLeft.end());
 
 	for (auto& bullet : bulletsRight)
 	{
-		bullet.sprite.move(0, bullet.speed * Helper::SecondsPerFrame());
+		bullet.sprite.move(sin(bullet.rotation) * 200 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
+		if (bullet.rotation >= 180)
+		{
+			bullet.rotation = 0.1;
+		}
+		else
+		{
+			bullet.rotation += 0.1;
+		}
 	}
-	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Enemy1::shouldRemoveBullet), bulletsRight.end());
+	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Enemy5::shouldRemoveBullet), bulletsRight.end());
 
 	for (auto& bullet : bulletsLeft)
 	{
@@ -46,9 +60,17 @@ void Enemy1::Show(RenderWindow& window)
 
 	for (auto& missile : missiles)
 	{
-		missile.sprite.move(0, missile.speed * Helper::SecondsPerFrame());
+		missile.sprite.move(sin(missile.rotation) * 200 * Helper::SecondsPerFrame(), missile.speed * Helper::SecondsPerFrame());
+		if (missile.rotation >= 180)
+		{
+			missile.rotation = 0.1;
+		}
+		else
+		{
+			missile.rotation += 0.1;
+		}
 	}
-	missiles.erase(remove_if(missiles.begin(), missiles.end(), Enemy1::shouldRemoveMissile), missiles.end());
+	missiles.erase(remove_if(missiles.begin(), missiles.end(), Enemy5::shouldRemoveMissile), missiles.end());
 
 	for (auto& missile : missiles)
 	{
@@ -95,7 +117,7 @@ void Enemy1::Show(RenderWindow& window)
 		}
 	}
 
-	explosions.erase(remove_if(explosions.begin(), explosions.end(), Enemy1::shouldRemoveExplosion), explosions.end());
+	explosions.erase(remove_if(explosions.begin(), explosions.end(), Enemy5::shouldRemoveExplosion), explosions.end());
 
 	for (auto& explosion : explosions)
 	{
@@ -103,7 +125,7 @@ void Enemy1::Show(RenderWindow& window)
 	}
 }
 
-void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
+void Enemy5::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
 {
 	if (!isDying)
 	{
@@ -116,9 +138,14 @@ void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_
 		{
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
+			bulletLeft.rotation = 0;
+			bulletLeft.sprite.setRotation(Helper::getRotation(bulletLeft.sprite.getPosition().x + (sin(bulletLeft.rotation + 0.1) * 2), bulletLeft.sprite.getPosition().y + 25, bulletLeft.sprite.getPosition().x, bulletLeft.sprite.getPosition().y) - 90);
 			bulletsLeft.push_back(bulletLeft);
+
 			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
 			bulletRight.speed = speed;
+			bulletRight.rotation = 0;
+			bulletRight.sprite.setRotation(Helper::getRotation(bulletRight.sprite.getPosition().x + (sin(bulletRight.rotation + 0.1) * 2), bulletRight.sprite.getPosition().y + 25, bulletRight.sprite.getPosition().x, bulletRight.sprite.getPosition().y) - 90);
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();
 			isBulletIntervalSet = false;
@@ -128,7 +155,7 @@ void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_
 	}
 }
 
-void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
+void Enemy5::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
 {
 	if (!isDying)
 	{
@@ -143,6 +170,8 @@ void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval
 			{
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
+				missile.rotation = 0;
+				missile.sprite.setRotation(Helper::getRotation(missile.sprite.getPosition().x + (sin(missile.rotation + 0.1) * 2), missile.sprite.getPosition().y + 25, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90);
 				missiles.push_back(missile);
 				missileClock.restart();
 				missile.missileCount--;
@@ -154,7 +183,7 @@ void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval
 	}
 }
 
-void Enemy1::move(float speed)
+void Enemy5::move(float speed)
 {
 	if (!firstTime)
 	{

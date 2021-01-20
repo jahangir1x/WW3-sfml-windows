@@ -24,6 +24,7 @@ public:
 	void moveRight();
 	void moveUp();
 	void moveDown();
+	void startFiringBullet();
 	void fireBullet();
 	void fireMissile();
 	void show_explosion_bullet(Vector2f pos);
@@ -82,12 +83,10 @@ public:
 	static bool shouldRemoveExplosion(Explosion& explosion);
 
 private:
-
 	float moveSpeed;
 	unsigned int i;
 	unsigned int j;
 	IntRect playerRect;
-
 	Clock playerClock;
 	Clock bulletClock;
 	Clock missileClock;
@@ -95,6 +94,7 @@ private:
 	Texture playerTexture;
 	bool shouldDisappear;
 	bool shouldExplode;
-
+	bool startedFiring;
+	bool firstTime;
 };
 #endif

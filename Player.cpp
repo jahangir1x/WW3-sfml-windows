@@ -53,6 +53,8 @@ Player::Player()
 	isDying = false;
 	shouldDisappear = false;
 	shouldExplode = false;
+	startedFiring = false;
+	firstTime = true;
 	bulletDamage = 5;
 	missileDamage = 8;
 	hitBodyDamage = 9;
@@ -246,14 +248,29 @@ void Player::fireBullet()
 {
 	if (!isDying)
 	{
-		if (bulletClock.getElapsedTime().asSeconds() > 0.2)
+		if (startedFiring)
 		{
-			bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
-			bulletsLeft.push_back(bulletLeft);
-			bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
-			bulletsRight.push_back(bulletRight);
-			bulletClock.restart();
+			if (bulletClock.getElapsedTime().asSeconds() > 0.2)
+			{
+				bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
+				bulletsLeft.push_back(bulletLeft);
+				bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
+				bulletsRight.push_back(bulletRight);
+				bulletClock.restart();
+			}
 		}
+	}
+}
+
+void Player::startFiringBullet()
+{
+	if (firstTime == false)
+	{
+		startedFiring = !startedFiring;
+	}
+	else
+	{
+		firstTime = false;
 	}
 }
 

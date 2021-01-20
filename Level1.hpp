@@ -2,6 +2,10 @@
 #define Level1_air321
 #include "Enemy1.hpp"
 #include "Enemy2.hpp"
+#include "Enemy3.hpp"
+#include "Enemy4.hpp"
+#include "Enemy5.hpp"
+#include "Enemy6.hpp"
 #include "Helper.hpp"
 #include "LevelFailed.hpp" // level failed header file
 #include "LevelHelper.hpp"

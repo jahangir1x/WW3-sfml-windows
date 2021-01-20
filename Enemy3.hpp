@@ -1,15 +1,14 @@
-#ifndef Enemy2_air321
-#define Enemy2_air321
+#ifndef Enemy3_air321
+#define Enemy3_air321
 
 #include "BaseEnemy.hpp"
 #include "GameHandler.hpp"
-#include "Helper.hpp"
 #include "LevelFailed.hpp"
 #include "Player.hpp"
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy2 : public BaseEnemy // code name: dabbu_sharpShooter
+class Enemy3 : public BaseEnemy // code name: rando_vertical
 {
 public:
 	void Show(RenderWindow& window);

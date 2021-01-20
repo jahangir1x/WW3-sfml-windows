@@ -71,6 +71,14 @@
 		<Unit filename="Enemy1.hpp" />
 		<Unit filename="Enemy2.cpp" />
 		<Unit filename="Enemy2.hpp" />
+		<Unit filename="Enemy3.cpp" />
+		<Unit filename="Enemy3.hpp" />
+		<Unit filename="Enemy4.cpp" />
+		<Unit filename="Enemy4.hpp" />
+		<Unit filename="Enemy5.cpp" />
+		<Unit filename="Enemy5.hpp" />
+		<Unit filename="Enemy6.cpp" />
+		<Unit filename="Enemy6.hpp" />
 		<Unit filename="Helper.cpp" />
 		<Unit filename="Helper.hpp" />
 		<Unit filename="LevelHelper.cpp" />

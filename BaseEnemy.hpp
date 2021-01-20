@@ -27,6 +27,7 @@ public:
 		Sprite sprite;
 		float speed;
 		Vector2f velocity; // need this for non vertical shooting
+		float rotation;	   // need this for sine wave like shooting
 	};
 	struct Missile
 	{
@@ -35,6 +36,7 @@ public:
 		Sprite sprite;
 		float speed;
 		Vector2f velocity; // need this for non vertical shooting
+		float rotation;	   // need this for sine wave like shooting
 	};
 	struct Explosion
 	{
