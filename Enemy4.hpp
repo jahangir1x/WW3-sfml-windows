@@ -1,3 +1,7 @@
+// code name: rando_sharpShooter
+// movement: 	random position
+// shooting:	player position
+
 #ifndef Enemy4_air321
 #define Enemy4_air321
 
@@ -8,7 +12,7 @@
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy4 : public BaseEnemy // code name: rando_sharpshooter
+class Enemy4 : public BaseEnemy
 {
 public:
 	void Show(RenderWindow& window);

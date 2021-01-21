@@ -1,7 +1,6 @@
 // code name: dabbu_vertical
-//	movement: Left, Right
-//	shoot:    Vertical
-
+// movement:	Left, Right
+// shooting:	Vertical
 
 #ifndef Enemy1_air321
 #define Enemy1_air321

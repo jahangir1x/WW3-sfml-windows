@@ -1,7 +1,6 @@
-// code name: dabbu_sharpshooter
-//	movement: Left, Right
-//	shoot:    player position
-
+// code name: dabbu_sharpShooter
+// movement: 	Left, Right
+// shooting:	player position
 
 #ifndef Enemy2_air321
 #define Enemy2_air321

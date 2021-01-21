@@ -1,7 +1,6 @@
 // code name: rando_vertical
-//	movement: Random position
-//	shoot:    Vertical
-
+// movement:	random position
+// shooting:	Vertical
 
 #ifndef Enemy3_air321
 #define Enemy3_air321
@@ -13,7 +12,7 @@
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy3 : public BaseEnemy // code name: rando_vertical
+class Enemy3 : public BaseEnemy
 {
 public:
 	void Show(RenderWindow& window);

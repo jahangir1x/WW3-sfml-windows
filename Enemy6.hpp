@@ -1,3 +1,7 @@
+// code name: rando_sine_vertical
+// movement: 	random position
+// shooting:	Vertical Sine wave
+
 #ifndef Enemy6_air321
 #define Enemy6_air321
 
@@ -8,7 +12,7 @@
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy6 : public BaseEnemy // code name: rando_sine_vertical
+class Enemy6 : public BaseEnemy
 {
 public:
 	void Show(RenderWindow& window);

@@ -1,3 +1,7 @@
+// code name: dabbu_sine_vertical
+// movement: 	Left, Right
+// shooting:	Vertical Sine wave
+
 #ifndef Enemy5_air321
 #define Enemy5_air321
 
@@ -8,7 +12,7 @@
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy5 : public BaseEnemy // code name: dabbu_sine_vertical
+class Enemy5 : public BaseEnemy
 {
 public:
 	void Show(RenderWindow& window);
