@@ -1,3 +1,8 @@
+// code name: rando_vertical
+//	movement: Random position
+//	shoot:    Vertical
+
+
 #ifndef Enemy3_air321
 #define Enemy3_air321
 
