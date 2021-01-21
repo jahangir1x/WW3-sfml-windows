@@ -51,6 +51,8 @@
 			<Add directory="C:/SFML-2.5.1/lib" />
 		</Linker>
 		<Unit filename="Main.cpp" />
+		<Unit filename="Background.cpp" />
+		<Unit filename="Background.hpp" />
 		<Unit filename="Collision.cpp" />
 		<Unit filename="Collision.h" />
 		<Unit filename="GameHandler.cpp" />

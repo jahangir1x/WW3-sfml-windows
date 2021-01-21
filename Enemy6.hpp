@@ -8,7 +8,7 @@
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy6 : public BaseEnemy // code name: dabbu_sine_vertical
+class Enemy6 : public BaseEnemy // code name: rando_sine_vertical
 {
 public:
 	void Show(RenderWindow& window);

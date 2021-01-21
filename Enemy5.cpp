@@ -171,7 +171,7 @@ void Enemy5::fireMissile(Player& player, int interval_milliseconds, int interval
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
 				missile.rotation = 0;
-				missile.sprite.setRotation(Helper::getRotation(missile.sprite.getPosition().x + (sin(missile.rotation + 0.1) * 2), missile.sprite.getPosition().y + 25, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90);
+				missile.sprite.setRotation(Helper::getRotation(missile.sprite.getPosition().x + (sin(missile.rotation + 0.1)*2), missile.sprite.getPosition().y + 25, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90);
 				missiles.push_back(missile);
 				missileClock.restart();
 				missile.missileCount--;

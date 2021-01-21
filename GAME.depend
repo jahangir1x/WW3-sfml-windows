@@ -606,7 +606,8 @@
 	<SFML/Network/IpAddress.hpp>
 	<vector>
 
-1611161549 c:\users\zinis\cdblk\sfml_demo\level1.hpp
+1611223589 c:\users\zinis\cdblk\sfml_demo\level1.hpp
+	"Background.hpp"
 	"Enemy1.hpp"
 	"Enemy2.hpp"
 	"Enemy3.hpp"
@@ -618,18 +619,28 @@
 	"LevelHelper.hpp"
 	"Player.hpp"
 
-1610877297 c:\users\zinis\cdblk\sfml_demo\level2.hpp
+1611229018 c:\users\zinis\cdblk\sfml_demo\level2.hpp
+	"Background.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
 
 1610877297 c:\users\zinis\cdblk\sfml_demo\level3.hpp
 
-1611162378 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
+1611230068 source:c:\users\zinis\cdblk\sfml_demo\level1.cpp
 	"Level1.hpp"
 
 1610877297 c:\users\zinis\cdblk\sfml_demo\levelfailed.hpp
 
-1610537048 source:c:\users\zinis\cdblk\sfml_demo\level2.cpp
+1611229375 source:c:\users\zinis\cdblk\sfml_demo\level2.cpp
 	"Level2.hpp"
-	"LevelFailed.hpp"
 
 1609214167 source:c:\users\zinis\cdblk\sfml_demo\level3.cpp
 	"Level3.hpp"
@@ -671,7 +682,7 @@
 	"Enemy1.hpp"
 	"Helper.hpp"
 
-1611150221 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
+1611229520 source:c:\users\zinis\cdblk\sfml_demo\player.cpp
 	"Player.hpp"
 	"Collision.h"
 	"GameHandler.hpp"
@@ -744,7 +755,7 @@
 	"LevelFailed.hpp"
 	"Player.hpp"
 
-1611161560 c:\users\zinis\cdblk\sfml_demo\enemy6.hpp
+1611229719 c:\users\zinis\cdblk\sfml_demo\enemy6.hpp
 	"BaseEnemy.hpp"
 	"GameHandler.hpp"
 	"LevelFailed.hpp"
@@ -758,11 +769,17 @@
 	"Enemy4.hpp"
 	"Helper.hpp"
 
-1611160092 source:c:\users\zinis\cdblk\sfml_demo\enemy5.cpp
+1611164460 source:c:\users\zinis\cdblk\sfml_demo\enemy5.cpp
 	"Enemy5.hpp"
 	"Helper.hpp"
 
 1611161560 source:c:\users\zinis\cdblk\sfml_demo\enemy6.cpp
 	"Enemy6.hpp"
 	"Helper.hpp"
+
+1611228766 c:\users\zinis\cdblk\sfml_demo\background.hpp
+	"Helper.hpp"
+
+1611229407 source:c:\users\zinis\cdblk\sfml_demo\background.cpp
+	"Background.hpp"
 

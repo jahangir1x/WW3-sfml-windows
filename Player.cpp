@@ -264,14 +264,7 @@ void Player::fireBullet()
 
 void Player::startFiringBullet()
 {
-	if (firstTime == false)
-	{
-		startedFiring = !startedFiring;
-	}
-	else
-	{
-		firstTime = false;
-	}
+	startedFiring = !startedFiring;
 }
 
 void Player::fireMissile()
