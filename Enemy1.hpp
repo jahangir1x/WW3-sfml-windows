@@ -1,3 +1,8 @@
+// code name: dabbu_vertical
+//	movement: Left, Right
+//	shoot:    Vertical
+
+
 #ifndef Enemy1_air321
 #define Enemy1_air321
 
@@ -8,7 +13,7 @@
 
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 using namespace std;
-class Enemy1 : public BaseEnemy // code name: dabbu_vertical
+class Enemy1 : public BaseEnemy
 {
 public:
 	void Show(RenderWindow& window);
