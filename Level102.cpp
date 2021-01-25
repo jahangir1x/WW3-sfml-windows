@@ -1,10 +1,10 @@
-#include "Level2.hpp" // level header file
+#include "Level102.hpp" // level header file
 using namespace std;
 using namespace sf;
 
-void Level2::Show(RenderWindow& window, Event& event)
+void Level102::Show(RenderWindow& window, Event& event)
 {
-	cout << "in level 2 " << endl;
+	cout << "in level 102 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
 	Helper::resetEnemyDiedCounter();
@@ -15,20 +15,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 	unsigned int i;
 	vector<Enemy3> first_enemies(3);  // create 2 enemies
 	vector<Enemy1> second_enemies(7); // create 3 enemies
-	vector<Enemy4> third_enemies(8);
-
-	for (auto& enemy : first_enemies)
-	{
-		enemy.setStyle(Enemy3::Style::BlueBolt);
-	}
-	for (auto& enemy : second_enemies)
-	{
-		enemy.setStyle(Enemy1::Style::PurplePunk);
-	}
-	for (auto& enemy : third_enemies)
-	{
-		enemy.setStyle(Enemy4::Style::YellowZen);
-	}
+	vector<Enemy1> third_enemies(8);
 
 	while (window.isOpen())
 	{

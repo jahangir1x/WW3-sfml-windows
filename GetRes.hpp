@@ -7,7 +7,6 @@ class GetRes
 {
 public:
 	GetRes();
-
 	static Font boldFont;
 	static Font gameFont;
 	static Texture explosionTex;
@@ -20,7 +19,13 @@ public:
 
 	static Texture enemyBulletTex;
 	static Texture enemyMissileTex;
-	static Texture enemyBodyTex;
+	static Texture enemyBodyTex1;
+	static Texture enemyBodyTex2;
+	static Texture enemyBodyTex3;
+	static Texture enemyBodyTex4;
+	static Texture enemyBodyTex5;
+	static Texture enemyBodyTex6;
+	static Texture enemyBodyTex7;
 
 	static Texture playerBulletTex;
 	static Texture playerMissileTex;

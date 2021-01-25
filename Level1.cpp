@@ -11,7 +11,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 
 	Background background;
 	Player yuri; // our hero
-	Enemy5 enemy;
+	vector<Enemy5> enemies(5);
 
 	while (window.isOpen())
 	{
@@ -55,18 +55,22 @@ void Level1::Show(RenderWindow& window, Event& event)
 			yuri.moveDown();
 		}
 
-		enemy.move(300);
-		enemy.fireBullet(yuri, 4000, 2000, 400);
-		enemy.fireMissile(yuri, 5000, 1000, 300);
-		levelhelp.isHitBody(yuri, enemy);
-		levelhelp.isHitBullet(yuri, enemy);
-		levelhelp.isHitMissile(yuri, enemy);
+		for (auto& enemy : enemies)
+		{
 
-		if (Helper::enemiesDied() == 1)
+			enemy.move(300);
+			enemy.fireBullet(yuri, 4000, 2000, 400);
+			enemy.fireMissile(yuri, 5000, 1000, 300);
+			levelhelp.isHitBody(yuri, enemy);
+			levelhelp.isHitBullet(yuri, enemy);
+			levelhelp.isHitMissile(yuri, enemy);
+			enemy.Show(window);
+		}
+		if (Helper::enemiesDied() == 5)
 		{
 			return; // show next level
 		}
-		enemy.Show(window);
+
 		yuri.Show(window);
 		if (yuri.isDead)
 			levelFailedObj.Show(window, event); // show level failed

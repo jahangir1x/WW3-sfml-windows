@@ -9,16 +9,16 @@ void Enemy6::Show(RenderWindow& window)
 {
 	if (enemyClock.getElapsedTime().asSeconds() > 0.2)
 	{
-		if (enemyRect.left == 264)
+		if (enemyRect.left == 510)
 		{
 			enemyRect.left = 0;
 		}
 		else
 		{
-			enemyRect.left += 88;
+			enemyRect.left += enemyRect.width;
 		}
 		// cout << "left: " << playerRect.left << endl;
-		enemySprite.setTexture(GetRes::enemyBodyTex);
+		enemySprite.setTexture(*chosenTexture);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
 	}

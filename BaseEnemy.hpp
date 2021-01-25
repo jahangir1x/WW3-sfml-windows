@@ -11,7 +11,18 @@ class BaseEnemy
 {
 public:
 	BaseEnemy();
+	enum Style
+	{
+		RedRider = 0,
+		YellowZen = 1,
+		BlueBolt = 2,
+		BlueHazard = 3,
+		GreenGwen = 4,
+		RedRanger = 5,
+		PurplePunk = 6
+	};
 	void Show(RenderWindow& window);
+	void setStyle(Style style);
 	bool isDead;
 	bool isDying;
 	void show_explosion_bullet(Vector2f pos);
@@ -21,6 +32,7 @@ public:
 	float bulletDamage;	 //damage of player
 	float missileDamage; //damage of player
 	float hitBodyDamage;
+
 	struct Bullet
 	{
 		Sprite sprite;
@@ -67,6 +79,7 @@ protected:
 	unsigned int j;
 	int bulletInterval;
 	int missileInterval;
+	Texture* chosenTexture;
 	IntRect enemyRect;
 	Clock enemyClock;
 	Clock bulletClock;

@@ -19,7 +19,13 @@ Texture GetRes::helpButtonTex;
 Texture GetRes::playButtonTex;
 Texture GetRes::enemyBulletTex;
 Texture GetRes::enemyMissileTex;
-Texture GetRes::enemyBodyTex;
+Texture GetRes::enemyBodyTex1;
+Texture GetRes::enemyBodyTex2;
+Texture GetRes::enemyBodyTex3;
+Texture GetRes::enemyBodyTex4;
+Texture GetRes::enemyBodyTex5;
+Texture GetRes::enemyBodyTex6;
+Texture GetRes::enemyBodyTex7;
 Texture GetRes::playerBulletTex;
 Texture GetRes::playerMissileTex;
 Texture GetRes::playerBodyTex;
@@ -77,6 +83,9 @@ void GameHandler::ExitConfirm()
 
 void GameHandler::Play()
 {
+	cout << "level3" << endl;
+	Level3 level3;				//create level object
+	level3.Show(window, event); //show level
 	cout << "level1" << endl;
 	Level1 level1;				//create level object
 	level1.Show(window, event); //show level
@@ -85,7 +94,4 @@ void GameHandler::Play()
 	Level2 level2;				//create level object
 	level2.Show(window, event); //show level
 
-	cout << "level3" << endl;
-	Level3 level3;				//create level object
-	level3.Show(window, event); //show level
 }

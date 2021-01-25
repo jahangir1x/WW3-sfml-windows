@@ -7,12 +7,41 @@ using namespace sf;
 
 BaseEnemy::BaseEnemy()
 {
-	enemySprite.setTexture(GetRes::enemyBodyTex);
+	i = rand() % 7;
+	switch (i)
+	{
+		case 0:
+			chosenTexture = &GetRes::enemyBodyTex1;
+			break;
+		case 1:
+			chosenTexture = &GetRes::enemyBodyTex2;
+			break;
+		case 2:
+			chosenTexture = &GetRes::enemyBodyTex3;
+			break;
+		case 3:
+			chosenTexture = &GetRes::enemyBodyTex4;
+			break;
+		case 4:
+			chosenTexture = &GetRes::enemyBodyTex5;
+			break;
+		case 5:
+			chosenTexture = &GetRes::enemyBodyTex6;
+			break;
+		case 6:
+			chosenTexture = &GetRes::enemyBodyTex7;
+			break;
+		default:
+			chosenTexture = &GetRes::enemyBodyTex1;
+			break;
+	}
+	enemySprite.setTexture(*chosenTexture);
 	enemyRect.left = 0;
 	enemyRect.top = 0;
-	enemyRect.height = 118;
-	enemyRect.width = 88;
+	enemyRect.height = 224;
+	enemyRect.width = 170;
 	enemySprite.setTextureRect(enemyRect);
+	enemySprite.setScale(0.5, 0.5);
 	enemySprite.setPosition(Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width - 10), Helper::randRange(-800, -300));
 
 	explosion.sprite.setTexture(GetRes::explosionTex);
@@ -97,16 +126,16 @@ void BaseEnemy::Show(RenderWindow& window)
 {
 	if (enemyClock.getElapsedTime().asSeconds() > 0.2)
 	{
-		if (enemyRect.left == 264)
+		if (enemyRect.left == 510)
 		{
 			enemyRect.left = 0;
 		}
 		else
 		{
-			enemyRect.left += 88;
+			enemyRect.left += enemyRect.width;
 		}
 		// cout << "left: " << playerRect.left << endl;
-		enemySprite.setTexture(GetRes::enemyBodyTex);
+		enemySprite.setTexture(*chosenTexture);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
 	}
@@ -189,6 +218,37 @@ void BaseEnemy::Show(RenderWindow& window)
 	for (auto& explosion : explosions)
 	{
 		window.draw(explosion.sprite);
+	}
+}
+
+void BaseEnemy::setStyle(Style style)
+{
+	switch (style)
+	{
+		case RedRider:
+			chosenTexture = &GetRes::enemyBodyTex1;
+			break;
+		case YellowZen:
+			chosenTexture = &GetRes::enemyBodyTex2;
+			break;
+		case BlueBolt:
+			chosenTexture = &GetRes::enemyBodyTex3;
+			break;
+		case BlueHazard:
+			chosenTexture = &GetRes::enemyBodyTex4;
+			break;
+		case GreenGwen:
+			chosenTexture = &GetRes::enemyBodyTex5;
+			break;
+		case RedRanger:
+			chosenTexture = &GetRes::enemyBodyTex6;
+			break;
+		case PurplePunk:
+			chosenTexture = &GetRes::enemyBodyTex7;
+			break;
+		default:
+			chosenTexture = &GetRes::enemyBodyTex1;
+			break;
 	}
 }
 

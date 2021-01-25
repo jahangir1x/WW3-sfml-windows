@@ -13,10 +13,11 @@ Player::Player()
 	playerSprite.setTexture(GetRes::playerBodyTex);
 	playerRect.left = 0;
 	playerRect.top = 0;
-	playerRect.height = 118;
-	playerRect.width = 88;
+	playerRect.height = 224;
+	playerRect.width = 170;
 	playerSprite.setTextureRect(playerRect);
 	playerSprite.setPosition(Helper::windowWidth() / 2 - playerRect.width / 2, Helper::windowHeight() - playerRect.height - 30);
+	playerSprite.setScale(0.5, 0.5);
 
 	playerHealth.healthValue = 100;
 	playerHealth.outsideRect.setPosition(33, 9);
@@ -123,13 +124,13 @@ void Player::Show(RenderWindow& window)
 	Helper::storePlayerHeight(playerSprite.getGlobalBounds().height);
 	if (playerClock.getElapsedTime().asSeconds() > 0.2)
 	{
-		if (playerRect.left == 264)
+		if (playerRect.left == 510)
 		{
 			playerRect.left = 0;
 		}
 		else
 		{
-			playerRect.left += 88;
+			playerRect.left += playerRect.width;
 		}
 		playerSprite.setTexture(GetRes::playerBodyTex);
 		playerSprite.setTextureRect(playerRect);
