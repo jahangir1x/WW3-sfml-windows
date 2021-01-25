@@ -42,7 +42,7 @@ public:
 	void isHitMissile(Player& player, Enemy6& enemy);
 
 private:
-	unsigned int i;
+	// unsigned int i;
 };
 
 #endif

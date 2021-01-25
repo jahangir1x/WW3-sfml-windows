@@ -4,10 +4,11 @@ using namespace sf;
 
 void Level1::Show(RenderWindow& window, Event& event)
 {
-    cout << "in level 1 " << endl;
+	cout << "in level 1 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
 	Helper::resetEnemyDiedCounter();
+
 	Background background;
 	Player yuri; // our hero
 	Enemy5 enemy;
@@ -21,6 +22,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 			{
 				window.close();
 			}
+
 			else if (event.type == Event::MouseButtonReleased)
 			{
 				if (event.mouseButton.button == Mouse::Left)
@@ -54,8 +56,8 @@ void Level1::Show(RenderWindow& window, Event& event)
 		}
 
 		enemy.move(300);
-		enemy.fireBullet(yuri, 4000,2000,400);
-		enemy.fireMissile(yuri, 5000,1000,300);
+		enemy.fireBullet(yuri, 4000, 2000, 400);
+		enemy.fireMissile(yuri, 5000, 1000, 300);
 		levelhelp.isHitBody(yuri, enemy);
 		levelhelp.isHitBullet(yuri, enemy);
 		levelhelp.isHitMissile(yuri, enemy);

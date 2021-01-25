@@ -1,8 +1,10 @@
 #include "Enemy4.hpp"
+#include "GetRes.hpp"
 #include "Helper.hpp"
 
 using namespace std;
 using namespace sf;
+
 void Enemy4::Show(RenderWindow& window)
 {
 	if (enemyClock.getElapsedTime().asSeconds() > 0.2)
@@ -16,7 +18,7 @@ void Enemy4::Show(RenderWindow& window)
 			enemyRect.left += 88;
 		}
 		// cout << "left: " << playerRect.left << endl;
-		enemySprite.setTexture(enemyTexture);
+		enemySprite.setTexture(GetRes::enemyBodyTex);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
 	}
@@ -172,43 +174,38 @@ void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval
 
 void Enemy4::move(float speed)
 {
-	if (!firstTime)
+
+	if (!isDying)
 	{
-		if (!isDying)
+		if (moveInit == false)
 		{
-			if (moveInit == false)
-			{
-				movePos.x = Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width);
-				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemySprite.getGlobalBounds().height * 4));
+			movePos.x = Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width);
+			movePos.y = Helper::randRange(0, Helper::windowHeight() - (Helper::getPlayerHeight() * 2 + enemySprite.getGlobalBounds().height)); // we don't want to collide with the player and shoot at nothing
 
-				cout << "movepos: " << movePos.x << " " << movePos.y << endl;
-				moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
-				moveNorm *= Helper::SecondsPerFrame() * speed;
+			moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
+			moveNorm *= Helper::SecondsPerFrame() * speed;
 
-				enemySprite.move(moveNorm);
-				for (auto& explosion : explosions)
-				{
-					explosion.sprite.move(moveNorm);
-				}
-				moveClock.restart();
-				moveInit = true;
-			}
-			else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6)
+			enemySprite.move(moveNorm);
+			for (auto& explosion : explosions)
 			{
-				enemySprite.move(moveNorm);
-				for (auto& explosion : explosions)
-				{
-					explosion.sprite.move(moveNorm);
-				}
+				explosion.sprite.move(moveNorm);
 			}
-			else
+			moveInit = true;
+		}
+		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6)
+		{
+			moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
+			moveNorm *= Helper::SecondsPerFrame() * speed;
+
+			enemySprite.move(moveNorm);
+			for (auto& explosion : explosions)
 			{
-				moveInit = false;
+				explosion.sprite.move(moveNorm);
 			}
 		}
-	}
-	else
-	{
-		firstTime = false;
+		else
+		{
+			moveInit = false;
+		}
 	}
 }

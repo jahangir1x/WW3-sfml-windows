@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include "Collision.h"
 #include "GameHandler.hpp"
+#include "GetRes.hpp"
 #include "Helper.hpp"
 #include "LevelFailed.hpp"
 
@@ -9,8 +10,7 @@ using namespace sf;
 
 Player::Player()
 {
-	playerTexture.loadFromFile("res/player_spritesheet.png");
-	playerSprite.setTexture(playerTexture);
+	playerSprite.setTexture(GetRes::playerBodyTex);
 	playerRect.left = 0;
 	playerRect.top = 0;
 	playerRect.height = 118;
@@ -25,23 +25,21 @@ Player::Player()
 	playerHealth.insideRect.setPosition(36, 11);
 	playerHealth.insideRect.setSize(Vector2f(192, 8));
 	playerHealth.insideRect.setFillColor(Color(0, 255, 0, 190));
-	playerHealth.healthfont.loadFromFile("res/Roboto-Regular.ttf");
-	playerHealth.healthtext.setFont(playerHealth.healthfont);
+	playerHealth.healthtext.setFont(GetRes::gameFont);
 	playerHealth.healthtext.setCharacterSize(12);
 	playerHealth.healthtext.setFillColor(Color(0, 255, 0, 190));
 	playerHealth.healthtext.setString("HP :");
 	playerHealth.healthtext.setPosition(5, 8);
 	playerHealth.healthtext.setStyle(Text::Bold);
 
-	explosion.texture.loadFromFile("res/explosion.png");
-	explosion.sprite.setTexture(explosion.texture);
+	explosion.sprite.setTexture(GetRes::explosionTex);
 	explosion.rect.left = -51;
 	explosion.rect.top = 0;
 	explosion.rect.height = 65;
 	explosion.rect.width = 51;
 	explosion.sprite.setTextureRect(explosion.rect);
 
-	bigExplosion.sprite.setTexture(explosion.texture);
+	bigExplosion.sprite.setTexture(GetRes::explosionTex);
 	bigExplosion.rect.left = 0;
 	bigExplosion.rect.top = 0;
 	bigExplosion.rect.height = 65;
@@ -60,29 +58,28 @@ Player::Player()
 	hitBodyDamage = 9;
 
 	bulletLeft.speed = 500;
-	bulletLeft.texture.loadFromFile("res/player_bullet.png");
-	bulletLeft.sprite.setTexture(bulletLeft.texture);
+	bulletLeft.sprite.setTexture(GetRes::playerBulletTex);
 
 	bulletRight.speed = 500;
-	bulletRight.texture.loadFromFile("res/player_bullet.png");
-	bulletRight.sprite.setTexture(bulletRight.texture);
+	bulletRight.sprite.setTexture(GetRes::playerBulletTex);
 
 	missile.speed = 400;
-	missile.texture.loadFromFile("res/player_missile.png");
-	missile.sprite.setTexture(missile.texture);
-	missile.missileText.setFont(playerHealth.healthfont);
+	missile.sprite.setTexture(GetRes::playerMissileTex);
+	missile.missileText.setFont(GetRes::gameFont);
 	missile.missileText.setCharacterSize(14);
 	missile.missileText.setFillColor(Color(255, 0, 0, 190));
 	missile.missileText.setString("Missile :");
 	missile.missileText.setPosition(5, 25);
 	missile.missileText.setStyle(Text::Bold);
 	missile.missileCount = 9;
-	missile.missileCountString.setFont(playerHealth.healthfont);
+	missile.missileCountString.setFont(GetRes::gameFont);
 	missile.missileCountString.setCharacterSize(14);
 	missile.missileCountString.setFillColor(Color(255, 0, 0, 190));
 	missile.missileCountString.setString(to_string(missile.missileCount));
 	missile.missileCountString.setPosition(70, 25);
 	missile.missileCountString.setStyle(Text::Bold);
+	Helper::storePlayerHeight(playerSprite.getGlobalBounds().height);
+	Helper::resetClock();
 }
 
 bool Player::shouldRemoveBullet(Bullet& bullet)
@@ -123,6 +120,7 @@ bool Player::shouldRemoveExplosion(Explosion& explosion)
 
 void Player::Show(RenderWindow& window)
 {
+	Helper::storePlayerHeight(playerSprite.getGlobalBounds().height);
 	if (playerClock.getElapsedTime().asSeconds() > 0.2)
 	{
 		if (playerRect.left == 264)
@@ -133,7 +131,7 @@ void Player::Show(RenderWindow& window)
 		{
 			playerRect.left += 88;
 		}
-		playerSprite.setTexture(playerTexture);
+		playerSprite.setTexture(GetRes::playerBodyTex);
 		playerSprite.setTextureRect(playerRect);
 		playerClock.restart();
 	}

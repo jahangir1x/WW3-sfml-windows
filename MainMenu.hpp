@@ -23,25 +23,20 @@ private:
 	bool clicked;
 	MenuResult result;
 
-	Texture gameLogoTex;
 	Sprite gameLogoSprite;
 
-	Texture playTex;
 	IntRect playRect;
 	Sprite playSprite;
 	Clock playClock;
 
-	Texture helpTex;
 	IntRect helpRect;
 	Sprite helpSprite;
 	Clock helpClock;
 
-	Texture creditsTex;
 	IntRect creditsRect;
 	Sprite creditsSprite;
 	Clock creditsClock;
 
-	Texture exitTex;
 	IntRect exitRect;
 	Sprite exitSprite;
 	Clock exitClock;

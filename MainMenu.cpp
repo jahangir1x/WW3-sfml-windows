@@ -1,14 +1,15 @@
 #include "MainMenu.hpp"
+#include "GetRes.hpp"
+
 using namespace std;
 using namespace sf;
+
 MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 {
-	gameLogoTex.loadFromFile("res/game_logo.png");
-	gameLogoSprite.setTexture(gameLogoTex);
+	gameLogoSprite.setTexture(GetRes::gameLogoTex);
 	gameLogoSprite.setPosition(286, 46);
 
-	playTex.loadFromFile("res/play_button.png");
-	playSprite.setTexture(playTex);
+	playSprite.setTexture(GetRes::playButtonTex);
 	playRect.left = 0;
 	playRect.top = 0;
 	playRect.width = 371;
@@ -16,8 +17,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	playSprite.setTextureRect(playRect);
 	playSprite.setPosition(366, 245);
 
-	helpTex.loadFromFile("res/help_button.png");
-	helpSprite.setTexture(helpTex);
+	helpSprite.setTexture(GetRes::helpButtonTex);
 	helpRect.left = 0;
 	helpRect.top = 0;
 	helpRect.width = 371;
@@ -25,8 +25,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	helpSprite.setTextureRect(helpRect);
 	helpSprite.setPosition(366, 393);
 
-	creditsTex.loadFromFile("res/credits_button.png");
-	creditsSprite.setTexture(creditsTex);
+	creditsSprite.setTexture(GetRes::creditsButtonTex);
 	creditsRect.left = 0;
 	creditsRect.top = 0;
 	creditsRect.width = 371;
@@ -34,8 +33,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	creditsSprite.setTextureRect(creditsRect);
 	creditsSprite.setPosition(366, 541);
 
-	exitTex.loadFromFile("res/exit_button.png");
-	exitSprite.setTexture(exitTex);
+	exitSprite.setTexture(GetRes::exitButtonTex);
 	exitRect.left = 0;
 	exitRect.top = 0;
 	exitRect.width = 371;

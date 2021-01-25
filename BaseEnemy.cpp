@@ -1,4 +1,5 @@
 #include "BaseEnemy.hpp"
+#include "GetRes.hpp"
 #include "Helper.hpp"
 
 using namespace std;
@@ -6,24 +7,22 @@ using namespace sf;
 
 BaseEnemy::BaseEnemy()
 {
-	enemyTexture.loadFromFile("res/enemy1_spritesheet.png");
-	enemySprite.setTexture(enemyTexture);
+	enemySprite.setTexture(GetRes::enemyBodyTex);
 	enemyRect.left = 0;
 	enemyRect.top = 0;
 	enemyRect.height = 118;
 	enemyRect.width = 88;
 	enemySprite.setTextureRect(enemyRect);
-	enemySprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(-800, -300));
+	enemySprite.setPosition(Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width - 10), Helper::randRange(-800, -300));
 
-	explosion.texture.loadFromFile("res/explosion.png");
-	explosion.sprite.setTexture(explosion.texture);
+	explosion.sprite.setTexture(GetRes::explosionTex);
 	explosion.rect.left = -51; // since explosion clock starts at instantiation the elapsed time would be greater than 0.2 seconds most of the time. so we need to start with -width in left
 	explosion.rect.top = 0;
 	explosion.rect.height = 65;
 	explosion.rect.width = 51;
 	explosion.sprite.setTextureRect(explosion.rect);
 
-	bigExplosion.sprite.setTexture(explosion.texture);
+	bigExplosion.sprite.setTexture(GetRes::explosionTex);
 	bigExplosion.rect.left = -51; // since explosion clock starts at instantiation the elapsed time would be greater than 0.2 seconds most of the time. so we need to start with -width in left
 	bigExplosion.rect.top = 0;
 	bigExplosion.rect.height = 65;
@@ -48,16 +47,13 @@ BaseEnemy::BaseEnemy()
 	hitBodyDamage = 9;
 
 	bulletLeft.speed = 500;
-	bulletLeft.texture.loadFromFile("res/enemy1_bullet.png");
-	bulletLeft.sprite.setTexture(bulletLeft.texture);
+	bulletLeft.sprite.setTexture(GetRes::enemyBulletTex);
 
 	bulletRight.speed = 500;
-	bulletRight.texture.loadFromFile("res/enemy1_bullet.png");
-	bulletRight.sprite.setTexture(bulletRight.texture);
+	bulletRight.sprite.setTexture(GetRes::enemyBulletTex);
 
 	missile.speed = 400;
-	missile.texture.loadFromFile("res/enemy1_missile.png");
-	missile.sprite.setTexture(missile.texture);
+	missile.sprite.setTexture(GetRes::enemyMissileTex);
 	missile.missileCount = 9;
 }
 
@@ -110,7 +106,7 @@ void BaseEnemy::Show(RenderWindow& window)
 			enemyRect.left += 88;
 		}
 		// cout << "left: " << playerRect.left << endl;
-		enemySprite.setTexture(enemyTexture);
+		enemySprite.setTexture(GetRes::enemyBodyTex);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
 	}

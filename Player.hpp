@@ -37,7 +37,6 @@ public:
 	struct Health
 	{
 		float healthValue;
-		Font healthfont;
 		Text healthtext;
 		RectangleShape outsideRect;
 		RectangleShape insideRect;
@@ -46,7 +45,6 @@ public:
 
 	struct Bullet
 	{
-		Texture texture;
 		Sprite sprite;
 		float speed;
 	};
@@ -55,7 +53,6 @@ public:
 		int missileCount;
 		Text missileCountString;
 		Text missileText;
-		Texture texture;
 		Sprite sprite;
 		float speed;
 	};
@@ -63,7 +60,6 @@ public:
 	{
 		Clock clock;
 		Sprite sprite;
-		Texture texture;
 		IntRect rect;
 		Vector2f pos;
 	};
@@ -91,7 +87,6 @@ private:
 	Clock bulletClock;
 	Clock missileClock;
 	Clock bigExplosionClock;
-	Texture playerTexture;
 	bool shouldDisappear;
 	bool shouldExplode;
 	bool startedFiring;

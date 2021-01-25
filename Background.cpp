@@ -1,28 +1,24 @@
 #include "Background.hpp"
+#include "GetRes.hpp"
 
 Background::Background()
 {
 	scenery = Scenes(rand() % 2); // set random scenery
 	if (scenery == Sea)
 	{
-//		cout << "scene: sea" << endl;
-		backScene.backTexture.loadFromFile("res/sea.png");
-		backScene.element1Texture.loadFromFile("res/ship1.png");
-		backScene.element2Texture.loadFromFile("res/ship2.png");
 		backScene.blending_pos = -3736;
+		backScene.backSprite.setTexture(GetRes::seaTex);
+		backScene.element1Sprite.setTexture(GetRes::seaElem1);
+		backScene.element2Sprite.setTexture(GetRes::seaElem2);
 	}
 	else if (scenery == Land)
 	{
-//		cout << "scene: land" << endl;
-		backScene.backTexture.loadFromFile("res/sea.png");
-		backScene.element1Texture.loadFromFile("res/ship1.png");
-		backScene.element2Texture.loadFromFile("res/ship2.png");
+		//		cout << "scene: land" << endl;
 		backScene.blending_pos = -3736;
+		backScene.backSprite.setTexture(GetRes::seaTex);
+		backScene.element1Sprite.setTexture(GetRes::seaElem1);
+		backScene.element2Sprite.setTexture(GetRes::seaElem2);
 	}
-
-	backScene.backSprite.setTexture(backScene.backTexture);
-	backScene.element1Sprite.setTexture(backScene.element1Texture);
-	backScene.element2Sprite.setTexture(backScene.element2Texture);
 	backScene.backSprite.setPosition(0, -backScene.backSprite.getGlobalBounds().height + Helper::windowHeight());
 	shouldRenewElements = false;
 }
@@ -31,7 +27,7 @@ void Background::Show(RenderWindow& window)
 {
 	if (shouldRenewElements)
 	{
-//		cout << "in should renew" << endl;
+		//		cout << "in should renew" << endl;
 		if (rand() % 2) // choose randomly whether we should show elements1
 		{
 			j = rand() % 4; // choose random number of elements
@@ -49,7 +45,7 @@ void Background::Show(RenderWindow& window)
 			}
 		}
 
-//		cout << "total elems: " << elements.size() << endl;
+		//		cout << "total elems: " << elements.size() << endl;
 
 		for (auto& element : elements)
 		{
@@ -79,8 +75,9 @@ void Background::Show(RenderWindow& window)
 		shouldRenewElements = false;
 	}
 
-	if (backScene.backSprite.getPosition().y >= 0){
-		backScene.backSprite.setPosition(0,backScene.blending_pos);
+	if (backScene.backSprite.getPosition().y >= 0)
+	{
+		backScene.backSprite.setPosition(0, backScene.blending_pos);
 	}
 
 	backScene.backSprite.move(0, 500 * Helper::SecondsPerFrame());

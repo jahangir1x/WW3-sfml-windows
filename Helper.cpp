@@ -89,4 +89,20 @@ float getRotation(float to_x, float to_y, float from_x, float from_y)
 	return temp;
 }
 
+float _playerHeight;
+void storePlayerHeight(float height)
+{
+	_playerHeight = height;
+}
+float getPlayerHeight()
+{
+	return _playerHeight;
+}
+
+
+
+
+
+
+
 }

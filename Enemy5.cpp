@@ -1,4 +1,5 @@
 #include "Enemy5.hpp"
+#include "GetRes.hpp"
 #include "Helper.hpp"
 
 using namespace std;
@@ -17,7 +18,7 @@ void Enemy5::Show(RenderWindow& window)
 			enemyRect.left += 88;
 		}
 		// cout << "left: " << playerRect.left << endl;
-		enemySprite.setTexture(enemyTexture);
+		enemySprite.setTexture(GetRes::enemyBodyTex);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
 	}
@@ -25,10 +26,12 @@ void Enemy5::Show(RenderWindow& window)
 	for (auto& bullet : bulletsLeft)
 	{
 		bullet.sprite.move(sin(bullet.rotation) * 200 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
-		if (bullet.rotation >= 180){
+		if (bullet.rotation >= 180)
+		{
 			bullet.rotation = 0.1;
 		}
-		else{
+		else
+		{
 			bullet.rotation += 0.1;
 		}
 	}
@@ -171,7 +174,7 @@ void Enemy5::fireMissile(Player& player, int interval_milliseconds, int interval
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
 				missile.rotation = 0;
-				missile.sprite.setRotation(Helper::getRotation(missile.sprite.getPosition().x + (sin(missile.rotation + 0.1)*2), missile.sprite.getPosition().y + 25, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90);
+				missile.sprite.setRotation(Helper::getRotation(missile.sprite.getPosition().x + (sin(missile.rotation + 0.1) * 2), missile.sprite.getPosition().y + 25, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90);
 				missiles.push_back(missile);
 				missileClock.restart();
 				missile.missileCount--;
@@ -185,14 +188,28 @@ void Enemy5::fireMissile(Player& player, int interval_milliseconds, int interval
 
 void Enemy5::move(float speed)
 {
-	if (!firstTime)
+
+	if (!isDying)
 	{
-		if (!isDying)
+		if (moveInit == false)
 		{
-			if (moveInit == false)
+			movePos.x = Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width);
+			movePos.y = Helper::randRange(0, Helper::windowHeight() - (Helper::getPlayerHeight() * 2 + enemySprite.getGlobalBounds().height)); // we don't want to collide with the player and shoot at nothing
+
+			moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
+			moveNorm *= Helper::SecondsPerFrame() * speed;
+
+			enemySprite.move(moveNorm);
+			for (auto& explosion : explosions)
 			{
-				movePos.x = Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width);
-				movePos.y = Helper::randRange(0, Helper::windowHeight() - (enemySprite.getGlobalBounds().height * 4)); // we don't want to collide with the player and shoot at nothing
+				explosion.sprite.move(moveNorm);
+			}
+			moveInit = true;
+		}
+		else
+		{
+			if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
+			{
 				moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
 				moveNorm *= Helper::SecondsPerFrame() * speed;
 
@@ -201,51 +218,31 @@ void Enemy5::move(float speed)
 				{
 					explosion.sprite.move(moveNorm);
 				}
-				moveClock.restart();
-				moveInit = true;
 			}
 			else
 			{
-				if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6 && moveFin == false)
+				moveFin = true;
+
+				if (moveRightFin == false)
 				{
-					// moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
-					// moveNorm.x *= Helper::SecondsPerFrame() * speed;
-					// moveNorm.y *= Helper::SecondsPerFrame() * speed;
-					enemySprite.move(moveNorm);
-					for (auto& explosion : explosions)
+					moveRight(speed);
+
+					if (abs(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
 					{
-						explosion.sprite.move(moveNorm);
+						moveLeftFin = false;
+						moveRightFin = true;
 					}
 				}
-				else
+				else if (moveLeftFin == false)
 				{
-					moveFin = true;
-
-					if (moveRightFin == false)
+					moveLeft(speed);
+					if (abs(enemySprite.getGlobalBounds().left - 0) < 6)
 					{
-						moveRight(speed);
-
-						if (abs(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width - Helper::windowWidth()) < 6)
-						{
-							moveLeftFin = false;
-							moveRightFin = true;
-						}
-					}
-					else if (moveLeftFin == false)
-					{
-						moveLeft(speed);
-						if (abs(enemySprite.getGlobalBounds().left - 0) < 6)
-						{
-							moveLeftFin = true;
-							moveRightFin = false;
-						}
+						moveLeftFin = true;
+						moveRightFin = false;
 					}
 				}
 			}
 		}
-	}
-	else
-	{
-		firstTime = false;
 	}
 }

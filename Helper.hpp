@@ -16,5 +16,8 @@ int enemiesDied();
 void newEnemyDied(); // increase enemy died counter for level completion
 void resetEnemyDiedCounter();
 float getRotation(float to_x, float to_y, float from_x, float from_y);
+void storePlayerHeight(float height);
+float getPlayerHeight();
+
 }
 #endif

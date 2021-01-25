@@ -23,7 +23,6 @@ public:
 	float hitBodyDamage;
 	struct Bullet
 	{
-		Texture texture;
 		Sprite sprite;
 		float speed;
 		Vector2f velocity; // need this for non vertical shooting
@@ -32,7 +31,6 @@ public:
 	struct Missile
 	{
 		int missileCount;
-		Texture texture;
 		Sprite sprite;
 		float speed;
 		Vector2f velocity; // need this for non vertical shooting
@@ -42,7 +40,6 @@ public:
 	{
 		Clock clock;
 		Sprite sprite;
-		Texture texture;
 		IntRect rect;
 		Vector2f pos;
 	};
@@ -52,7 +49,11 @@ public:
 	vector<Bullet> bulletsRight;
 	vector<Missile> missiles;
 	Sprite enemySprite;
-	Texture enemyTexture;
+	Explosion bigExplosion;
+	Bullet bulletLeft;
+	Bullet bulletRight;
+	Missile missile;
+	Explosion explosion;
 	static bool shouldRemoveBullet(Bullet& bullet);
 	static bool shouldRemoveMissile(Missile& missile);
 	static bool shouldRemoveExplosion(Explosion& explosion);
@@ -66,11 +67,6 @@ protected:
 	unsigned int j;
 	int bulletInterval;
 	int missileInterval;
-	Explosion bigExplosion;
-	Bullet bulletLeft;
-	Bullet bulletRight;
-	Missile missile;
-	Explosion explosion;
 	IntRect enemyRect;
 	Clock enemyClock;
 	Clock bulletClock;

@@ -15,12 +15,9 @@ public:
 private:
 	struct Scene
 	{
-		Texture backTexture;
 		Sprite backSprite;
 		float blending_pos; // to avoid background sprite glitch
-		Texture element1Texture;
 		Sprite element1Sprite;
-		Texture element2Texture;
 		Sprite element2Sprite;
 	};
 	Scene backScene;

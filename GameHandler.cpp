@@ -1,4 +1,5 @@
 #include "GameHandler.hpp"
+#include "GetRes.hpp"
 #include "Helper.hpp"
 #include "Level1.hpp" //include level headers
 #include "Level2.hpp" //include level headers
@@ -8,12 +9,31 @@
 using namespace std;
 using namespace sf;
 
+Font GetRes::boldFont;
+Font GetRes::gameFont;
+Texture GetRes::explosionTex;
+Texture GetRes::gameLogoTex;
+Texture GetRes::creditsButtonTex;
+Texture GetRes::exitButtonTex;
+Texture GetRes::helpButtonTex;
+Texture GetRes::playButtonTex;
+Texture GetRes::enemyBulletTex;
+Texture GetRes::enemyMissileTex;
+Texture GetRes::enemyBodyTex;
+Texture GetRes::playerBulletTex;
+Texture GetRes::playerMissileTex;
+Texture GetRes::playerBodyTex;
+Texture GetRes::seaTex;
+Texture GetRes::seaElem1;
+Texture GetRes::seaElem2;
+
 void GameHandler::Start()
 {
 	window.create(VideoMode(1100, 900), "World War 3", Style::Default);
 	window.setFramerateLimit(90);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 	Helper::seedRand();
+	GetRes gettexture;
 	srand(time(0));
 
 	ShowMenu();
