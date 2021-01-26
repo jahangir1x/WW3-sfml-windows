@@ -29,7 +29,7 @@ protected:
 	State currentState;
 
 	Text completeText;
-	sf::String completeString = "Objective Completed";
+	sf::String completeString = "Objective Complete";
 	unsigned int length;
 
 	float bodyScale;

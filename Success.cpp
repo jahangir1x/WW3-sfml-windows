@@ -83,7 +83,7 @@ void Success::Show(RenderWindow& window)
 	if (length <= completeString.getSize())
 	{
 
-		textShow(window, completeString, 75, bodySprite.getGlobalBounds().left + 364, bodySprite.getGlobalBounds().top + 90);
+		textShow(window, completeString, 75, bodySprite.getGlobalBounds().left + 85, bodySprite.getGlobalBounds().top + 102);
 	}
 	else
 	{
