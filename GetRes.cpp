@@ -7,6 +7,7 @@ GetRes::GetRes()
 {
 	boldFont.loadFromFile("res/Roboto-Bold.ttf");
 	gameFont.loadFromFile("res/Roboto-Regular.ttf");
+	techFont.loadFromFile("res/AgencyFB-Regular.ttf");
 	explosionTex.loadFromFile("res/explosion.png");
 	gameLogoTex.loadFromFile("res/game_logo.png");
 	creditsButtonTex.loadFromFile("res/credits_button.png");
@@ -28,6 +29,10 @@ GetRes::GetRes()
 	seaTex.loadFromFile("res/sea.png");
 	seaElem1.loadFromFile("res/sea_elem1.png");
 	seaElem2.loadFromFile("res/sea_elem2.png");
+	CompleteBody.loadFromFile("res/objective_completed_body.png");
+	CompleteStar.loadFromFile("res/objective_completed_star.png");
+	CompleteText.loadFromFile("res/objective_completed_text.png");
+	CompleteButton.loadFromFile("res/proceed_spritesheet.png");
 
 	explosionTex.setSmooth(true);
 	gameLogoTex.setSmooth(true);
@@ -50,4 +55,8 @@ GetRes::GetRes()
 	seaTex.setSmooth(true);
 	seaElem1.setSmooth(true);
 	seaElem2.setSmooth(true);
+	CompleteBody.setSmooth(true);
+	CompleteStar.setSmooth(true);
+	CompleteText.setSmooth(true);
+	CompleteButton.setSmooth(true);
 }

@@ -11,6 +11,7 @@ using namespace sf;
 
 Font GetRes::boldFont;
 Font GetRes::gameFont;
+Font GetRes::techFont;
 Texture GetRes::explosionTex;
 Texture GetRes::gameLogoTex;
 Texture GetRes::creditsButtonTex;
@@ -32,6 +33,10 @@ Texture GetRes::playerBodyTex;
 Texture GetRes::seaTex;
 Texture GetRes::seaElem1;
 Texture GetRes::seaElem2;
+Texture GetRes::CompleteBody;
+Texture GetRes::CompleteStar;
+Texture GetRes::CompleteText;
+Texture GetRes::CompleteButton;
 
 void GameHandler::Start()
 {
@@ -83,15 +88,15 @@ void GameHandler::ExitConfirm()
 
 void GameHandler::Play()
 {
-	cout << "level3" << endl;
-	Level3 level3;				//create level object
-	level3.Show(window, event); //show level
 	cout << "level1" << endl;
 	Level1 level1;				//create level object
 	level1.Show(window, event); //show level
 
+	cout << "level3" << endl;
+	Level3 level3;				//create level object
+	level3.Show(window, event); //show level
+
 	cout << "level2" << endl;
 	Level2 level2;				//create level object
 	level2.Show(window, event); //show level
-
 }

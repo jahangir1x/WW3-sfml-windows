@@ -7,6 +7,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 	cout << "in level 2 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
+	Success successObj;
 	Helper::resetEnemyDiedCounter();
 	Helper::resetClock();
 	Background background;
@@ -19,7 +20,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 
 	for (auto& enemy : first_enemies)
 	{
-		enemy.setStyle(Enemy3::Style::BlueBolt);
+		enemy.setStyle(Enemy3::Style::RedRanger);
 	}
 	for (auto& enemy : second_enemies)
 	{
@@ -126,14 +127,17 @@ void Level2::Show(RenderWindow& window, Event& event)
 				}
 			}
 		}
-
-		if (Helper::enemiesDied() == 18)
-		{
-			return; // show next level
-		}
 		yuri.Show(window);
 		if (yuri.isDead)
 			levelFailedObj.Show(window, event); // show level failed
+		if (Helper::enemiesDied() == 18)
+		{
+			successObj.Show(window);
+			if (successObj.getState() == Success::Proceed)
+			{
+				return;
+			}
+		}
 		window.display();
 	}
 }

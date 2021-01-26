@@ -826,7 +826,7 @@
 
 1611519685 c:\users\zinis\cdblk\main_ww3_project\helper.hpp
 
-1611577611 c:\users\zinis\cdblk\main_ww3_project\getres.hpp
+1611634574 c:\users\zinis\cdblk\main_ww3_project\getres.hpp
 
 1611579520 source:c:\users\zinis\cdblk\main_ww3_project\baseenemy.cpp
 	"BaseEnemy.hpp"
@@ -924,17 +924,17 @@
 	"LevelFailed.hpp"
 	"Player.hpp"
 
-1611577612 source:c:\users\zinis\cdblk\main_ww3_project\getres.cpp
+1611638056 source:c:\users\zinis\cdblk\main_ww3_project\getres.cpp
 	"GetRes.hpp"
 	"Helper.hpp"
 
 1611519684 source:c:\users\zinis\cdblk\main_ww3_project\helper.cpp
 	"Helper.hpp"
 
-1611578307 source:c:\users\zinis\cdblk\main_ww3_project\level1.cpp
+1611644986 source:c:\users\zinis\cdblk\main_ww3_project\level1.cpp
 	"Level1.hpp"
 
-1611223589 c:\users\zinis\cdblk\main_ww3_project\level1.hpp
+1611606700 c:\users\zinis\cdblk\main_ww3_project\level1.hpp
 	"Background.hpp"
 	"Enemy1.hpp"
 	"Enemy2.hpp"
@@ -946,6 +946,7 @@
 	"LevelFailed.hpp"
 	"LevelHelper.hpp"
 	"Player.hpp"
+	"Success.hpp"
 
 1611247989 c:\users\zinis\cdblk\main_ww3_project\levelhelper.hpp
 	"BaseEnemy.hpp"
@@ -959,10 +960,10 @@
 	"Helper.hpp"
 	"Player.hpp"
 
-1611582188 source:c:\users\zinis\cdblk\main_ww3_project\level2.cpp
+1611644807 source:c:\users\zinis\cdblk\main_ww3_project\level2.cpp
 	"Level2.hpp"
 
-1611229018 c:\users\zinis\cdblk\main_ww3_project\level2.hpp
+1611642939 c:\users\zinis\cdblk\main_ww3_project\level2.hpp
 	"Background.hpp"
 	"Enemy1.hpp"
 	"Enemy2.hpp"
@@ -974,11 +975,12 @@
 	"LevelFailed.hpp"
 	"LevelHelper.hpp"
 	"Player.hpp"
+	"Success.hpp"
 
-1611582533 source:c:\users\zinis\cdblk\main_ww3_project\level3.cpp
+1611645304 source:c:\users\zinis\cdblk\main_ww3_project\level3.cpp
 	"Level3.hpp"
 
-1611509727 c:\users\zinis\cdblk\main_ww3_project\level3.hpp
+1611643006 c:\users\zinis\cdblk\main_ww3_project\level3.hpp
 	"Background.hpp"
 	"Enemy1.hpp"
 	"Enemy2.hpp"
@@ -990,6 +992,7 @@
 	"LevelFailed.hpp"
 	"LevelHelper.hpp"
 	"Player.hpp"
+	"Success.hpp"
 
 1609216053 source:c:\users\zinis\cdblk\main_ww3_project\levelfailed.cpp
 	"LevelFailed.hpp"
@@ -1012,7 +1015,7 @@
 	"Helper.hpp"
 	"LevelFailed.hpp"
 
-1611582209 source:c:\users\zinis\cdblk\main_ww3_project\gamehandler.cpp
+1611636022 source:c:\users\zinis\cdblk\main_ww3_project\gamehandler.cpp
 	"GameHandler.hpp"
 	"GetRes.hpp"
 	"Helper.hpp"
@@ -1052,4 +1055,11 @@
 	"LevelFailed.hpp"
 	"LevelHelper.hpp"
 	"Player.hpp"
+
+1611642323 c:\users\zinis\cdblk\main_ww3_project\success.hpp
+
+1611645223 source:c:\users\zinis\cdblk\main_ww3_project\success.cpp
+	"Success.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
 

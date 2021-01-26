@@ -7,11 +7,12 @@ void Level1::Show(RenderWindow& window, Event& event)
 	cout << "in level 1 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
+	Success successObj;
 	Helper::resetEnemyDiedCounter();
 
 	Background background;
 	Player yuri; // our hero
-	vector<Enemy5> enemies(5);
+	vector<Enemy5> enemies(1);
 
 	while (window.isOpen())
 	{
@@ -66,14 +67,20 @@ void Level1::Show(RenderWindow& window, Event& event)
 			levelhelp.isHitMissile(yuri, enemy);
 			enemy.Show(window);
 		}
-		if (Helper::enemiesDied() == 5)
-		{
-			return; // show next level
-		}
 
 		yuri.Show(window);
+
+		// cout << "state: " << success.getState() << endl;
 		if (yuri.isDead)
 			levelFailedObj.Show(window, event); // show level failed
+		if (Helper::enemiesDied() == 1)
+		{
+			successObj.Show(window);
+			if (successObj.getState() == Success::Proceed)
+			{
+				return;
+			}
+		}
 		window.display();
 	}
 }

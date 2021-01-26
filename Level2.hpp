@@ -11,6 +11,7 @@
 #include "LevelFailed.hpp" // level failed header file
 #include "LevelHelper.hpp"
 #include "Player.hpp"
+#include "Success.hpp"
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
 class Level2
 {

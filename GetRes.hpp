@@ -9,6 +9,7 @@ public:
 	GetRes();
 	static Font boldFont;
 	static Font gameFont;
+	static Font techFont;
 	static Texture explosionTex;
 	static Texture gameLogoTex;
 
@@ -34,5 +35,10 @@ public:
 	static Texture seaTex;
 	static Texture seaElem1;
 	static Texture seaElem2;
+
+	static Texture CompleteBody;
+	static Texture CompleteStar;
+	static Texture CompleteText;
+	static Texture CompleteButton;
 };
 #endif

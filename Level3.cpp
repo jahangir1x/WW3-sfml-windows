@@ -7,20 +7,21 @@ void Level3::Show(RenderWindow& window, Event& event)
 	cout << "in level 3 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
+	Success successObj;
 	Helper::resetEnemyDiedCounter();
 	Helper::resetClock();
 	Background background;
 	Player yuri; // our hero
 	Enemy5 enemy;
 	enemy.enemySprite.setScale(1, 1);		// 2x enemy. আমাদের enemy sprite ভালো করার জন্য sprite গুলা ২ গুন সাইজের বানানো হইছে... তাই scale = 1 = ২ গুন sprite
-	enemy.bulletLeft.sprite.setScale(2, 2); // 2x left bullets < notice: it is bulletLeft not bulletsLeft >
+	enemy.bulletLeft.sprite.setScale(1, 1); // 2x left bullets < notice: it is bulletLeft not bulletsLeft >
 	enemy.bulletRight.sprite.setScale(2, 2);
 	enemy.missile.sprite.setScale(2, 2);
 	enemy.bigExplosion.sprite.setScale(2, 2);
+	enemy.explosion.sprite.setScale(2, 2);
 	enemy.bulletDamage = 20;  // একটা বুলেট প্লেয়ারের গায়ে লাগলে প্লেয়ারের ২০ লাইফ কমবে...
 	enemy.missileDamage = 30; // একটা মিসাইল প্লেয়ারের গায়ে লাগলে প্লেয়ারের ৩০ লাইফ কমবে...
 	enemy.healthValue = 300;  // enemey এর লাইফ এখন ৩০০
-	yuri.playerHealth.healthValue = 200;
 
 	while (window.isOpen())
 	{
@@ -73,14 +74,18 @@ void Level3::Show(RenderWindow& window, Event& event)
 		cout << "enemy health: " << enemy.healthValue << endl;
 		cout << "player health: " << yuri.playerHealth.healthValue << endl;
 
-		if (Helper::enemiesDied() == 1)
-		{
-			return; // show next level
-		}
 		enemy.Show(window);
 		yuri.Show(window);
 		if (yuri.isDead)
 			levelFailedObj.Show(window, event); // show level failed
+		if (Helper::enemiesDied() == 1)
+		{
+			successObj.Show(window);
+			if (successObj.getState() == Success::Proceed)
+			{
+				return;
+			}
+		}
 		window.display();
 	}
 }

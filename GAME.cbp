@@ -92,6 +92,8 @@
 		</Unit>
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
+		<Unit filename="Success.cpp" />
+		<Unit filename="Success.hpp" />
 		<Unit filename="openal32.dll" />
 		<Unit filename="sfml-audio-2.dll" />
 		<Unit filename="sfml-audio-d-2.dll" />
