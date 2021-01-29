@@ -3,8 +3,7 @@
 
 Background::Background()
 {
-	// scenery = Scenes(rand() % 2); // set random scenery
-	scenery = Land;
+	scenery = Scenes(rand() % 2); // set random scenery
 	if (scenery == Sea)
 	{
 		backScene.blending_pos = -3095;
