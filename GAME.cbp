@@ -111,6 +111,7 @@
 		<Unit filename="Level3.cpp" />
 		<Unit filename="Level3.hpp" />
 		<Unit filename="LevelFailed.cpp" />
+		<Unit filename="LevelFailed.hpp" />
 		<Unit filename="LevelHelper.cpp" />
 		<Unit filename="LevelHelper.hpp" />
 		<Unit filename="Main.cpp" />
