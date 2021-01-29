@@ -145,7 +145,7 @@ void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval
 {
 	if (!isDying)
 	{
-		if (missile.missileCount > 0)
+		if (missileCount > 0)
 		{
 			if (!isMissileIntervalSet)
 			{
@@ -154,7 +154,7 @@ void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
-				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
+				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.sprite.setOrigin(missile.sprite.getGlobalBounds().width / 2, 0);
 
 				tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
@@ -165,7 +165,7 @@ void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval
 				missile.velocity *= speed;
 				missiles.push_back(missile);
 				missileClock.restart();
-				missile.missileCount--;
+				missileCount--;
 				isMissileIntervalSet = false;
 			}
 		}

@@ -19,6 +19,9 @@ private:
 		float blending_pos; // to avoid background sprite glitch
 		Sprite element1Sprite;
 		Sprite element2Sprite;
+		Sprite element3Sprite;
+		Sprite element4Sprite;
+		Sprite element5Sprite;
 	};
 	Scene backScene;
 	bool shouldRenewElements;

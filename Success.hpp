@@ -1,5 +1,6 @@
 #ifndef Success_air321
 #define Success_air321
+#include "CustomText.hpp"
 
 using namespace std;
 using namespace sf;
@@ -8,28 +9,25 @@ class Success
 {
 public:
 	Success();
-	void Show(RenderWindow& window);
+	bool isFinishedShowing(RenderWindow& window);
 	void textShow(RenderWindow& window, String str, unsigned int char_size, float pos_x, float pos_y);
-	enum State
-	{
-		Nothing = 0,
-		Proceed = 1
-	};
-	State getState();
+	void handleClose(Vector2i mousePos);
+	Sprite buttonSprite;
 
 protected:
+	CustomText custext;
+	Vector2i mousePos;
+	bool clicked;
+	Sprite titleSprite;
 	Sprite bodySprite;
 	Sprite starSprite;
 	Sprite textSprite;
-	Sprite buttonSprite;
 
 	IntRect buttonRect;
 	RectangleShape screenRect;
 
-	State currentState;
-
 	Text completeText;
-	sf::String completeString = "Objective Complete";
+	sf::String completeString;
 	unsigned int length;
 
 	float bodyScale;

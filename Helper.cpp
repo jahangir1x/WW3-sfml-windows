@@ -26,6 +26,10 @@ void seedRand()
 
 int randRange(int min, int max)
 {
+	if (min > max)
+	{
+		swap(min, max);
+	}
 	uniform_int_distribution<int> distr(min, max);
 	return distr(generator);
 }
@@ -98,11 +102,5 @@ float getPlayerHeight()
 {
 	return _playerHeight;
 }
-
-
-
-
-
-
 
 }

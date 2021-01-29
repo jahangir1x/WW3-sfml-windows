@@ -17,7 +17,6 @@ void Enemy1::Show(RenderWindow& window)
 		{
 			enemyRect.left += enemyRect.width;
 		}
-		// cout << "left: " << playerRect.left << endl;
 		enemySprite.setTexture(*chosenTexture);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
@@ -124,7 +123,7 @@ void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_
 			bulletClock.restart();
 			isBulletIntervalSet = false;
 			if (0)
-				cout << "dummy: " << player.playerHealth.healthValue << endl;
+				cout << "dummy: " << player.healthValue << endl;
 		}
 	}
 }
@@ -133,7 +132,7 @@ void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval
 {
 	if (!isDying)
 	{
-		if (missile.missileCount > 0)
+		if (missileCount > 0)
 		{
 			if (!isMissileIntervalSet)
 			{
@@ -142,14 +141,14 @@ void Enemy1::fireMissile(Player& player, int interval_milliseconds, int interval
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
-				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
+				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
 				missiles.push_back(missile);
 				missileClock.restart();
-				missile.missileCount--;
+				missileCount--;
 				isMissileIntervalSet = false;
 				if (0) // to bypass g++ -Werror=unused-variable
-					cout << "dummy: " << player.playerHealth.healthValue << endl;
+					cout << "dummy: " << player.healthValue << endl;
 			}
 		}
 	}

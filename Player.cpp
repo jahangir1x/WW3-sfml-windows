@@ -8,6 +8,10 @@
 using namespace std;
 using namespace sf;
 
+float Player::healthValue;
+unsigned int Player::missileCount = 9;
+bool Player::startedFiring;
+
 Player::Player()
 {
 	playerSprite.setTexture(GetRes::playerBodyTex);
@@ -19,19 +23,19 @@ Player::Player()
 	playerSprite.setPosition(Helper::windowWidth() / 2 - playerRect.width / 2, Helper::windowHeight() - playerRect.height - 30);
 	playerSprite.setScale(0.5, 0.5);
 
-	playerHealth.healthValue = 100;
-	playerHealth.outsideRect.setPosition(33, 9);
-	playerHealth.outsideRect.setSize(Vector2f(198, 12));
-	playerHealth.outsideRect.setFillColor(Color(255, 0, 0, 190));
-	playerHealth.insideRect.setPosition(36, 11);
-	playerHealth.insideRect.setSize(Vector2f(192, 8));
-	playerHealth.insideRect.setFillColor(Color(0, 255, 0, 190));
-	playerHealth.healthtext.setFont(GetRes::gameFont);
-	playerHealth.healthtext.setCharacterSize(12);
-	playerHealth.healthtext.setFillColor(Color(0, 255, 0, 190));
-	playerHealth.healthtext.setString("HP :");
-	playerHealth.healthtext.setPosition(5, 8);
-	playerHealth.healthtext.setStyle(Text::Bold);
+	healthValue = 100;
+	// playerHealth.outsideRect.setPosition(33, 9);
+	// playerHealth.outsideRect.setSize(Vector2f(198, 12));
+	// playerHealth.outsideRect.setFillColor(Color(255, 0, 0, 190));
+	// playerHealth.insideRect.setPosition(36, 11);
+	// playerHealth.insideRect.setSize(Vector2f(192, 8));
+	// playerHealth.insideRect.setFillColor(Color(0, 255, 0, 190));
+	// playerHealth.healthtext.setFont(GetRes::gameFont);
+	// playerHealth.healthtext.setCharacterSize(12);
+	// playerHealth.healthtext.setFillColor(Color(0, 255, 0, 190));
+	// playerHealth.healthtext.setString("HP :");
+	// playerHealth.healthtext.setPosition(5, 8);
+	// playerHealth.healthtext.setStyle(Text::Bold);
 
 	explosion.sprite.setTexture(GetRes::explosionTex);
 	explosion.rect.left = -51;
@@ -66,19 +70,19 @@ Player::Player()
 
 	missile.speed = 400;
 	missile.sprite.setTexture(GetRes::playerMissileTex);
-	missile.missileText.setFont(GetRes::gameFont);
-	missile.missileText.setCharacterSize(14);
-	missile.missileText.setFillColor(Color(255, 0, 0, 190));
-	missile.missileText.setString("Missile :");
-	missile.missileText.setPosition(5, 25);
-	missile.missileText.setStyle(Text::Bold);
-	missile.missileCount = 9;
-	missile.missileCountString.setFont(GetRes::gameFont);
-	missile.missileCountString.setCharacterSize(14);
-	missile.missileCountString.setFillColor(Color(255, 0, 0, 190));
-	missile.missileCountString.setString(to_string(missile.missileCount));
-	missile.missileCountString.setPosition(70, 25);
-	missile.missileCountString.setStyle(Text::Bold);
+	// missile.missileText.setFont(GetRes::gameFont);
+	// missile.missileText.setCharacterSize(14);
+	// missile.missileText.setFillColor(Color(255, 0, 0, 190));
+	// missile.missileText.setString("Missile :");
+	// missile.missileText.setPosition(5, 25);
+	// missile.missileText.setStyle(Text::Bold);
+	// missileCount = 9;
+	// missileCountString.setFont(GetRes::gameFont);
+	// missileCountString.setCharacterSize(14);
+	// missileCountString.setFillColor(Color(255, 0, 0, 190));
+	// missileCountString.setString(to_string(missileCount));
+	// missileCountString.setPosition(70, 25);
+	// missileCountString.setStyle(Text::Bold);
 	Helper::storePlayerHeight(playerSprite.getGlobalBounds().height);
 	Helper::resetClock();
 }
@@ -117,6 +121,11 @@ bool Player::shouldRemoveExplosion(Explosion& explosion)
 	{
 		return false;
 	}
+}
+
+void Player::resetMissileCounter()
+{
+	Player::missileCount = 9;
 }
 
 void Player::Show(RenderWindow& window)
@@ -170,12 +179,12 @@ void Player::Show(RenderWindow& window)
 		window.draw(missile.sprite);
 	}
 
-	if (playerHealth.healthValue < 0)
+	if (healthValue < 0)
 	{
-		playerHealth.healthValue = 0;
+		healthValue = 0;
 	}
 
-	playerHealth.insideRect.setSize(Vector2f(192 * playerHealth.healthValue / 100, 8));
+	// playerHealth.insideRect.setSize(Vector2f(192 * playerHealth.healthValue / 100, 8));
 
 	if (!shouldDisappear)
 	{
@@ -186,7 +195,6 @@ void Player::Show(RenderWindow& window)
 	{
 		if (bigExplosion.rect.left >= 255)
 		{
-			cout << "disappear" << endl;
 			shouldDisappear = true;
 		}
 		if (bigExplosionClock.getElapsedTime().asSeconds() > 0.2)
@@ -225,11 +233,11 @@ void Player::Show(RenderWindow& window)
 		window.draw(explosion.sprite);
 	}
 
-	window.draw(playerHealth.healthtext);
-	window.draw(missile.missileText);
-	window.draw(missile.missileCountString);
-	window.draw(playerHealth.outsideRect);
-	window.draw(playerHealth.insideRect);
+	// window.draw(playerHealth.healthtext);
+	// window.draw(missile.missileText);
+	// window.draw(missileCountString);
+	// window.draw(playerHealth.outsideRect);
+	// window.draw(playerHealth.insideRect);
 }
 
 void Player::Die()
@@ -270,15 +278,16 @@ void Player::fireMissile()
 {
 	if (!isDying)
 	{
-		if (missile.missileCount > 0)
+		if (missileCount > 0)
 		{
 			if (missileClock.getElapsedTime().asSeconds() > 0.5)
 			{
-				missile.sprite.setPosition(playerSprite.getPosition().x + playerRect.width / 2 - 5, playerSprite.getPosition().y + 20);
+				missile.sprite.setPosition(playerSprite.getPosition().x + playerSprite.getGlobalBounds().width / 2 - 5, playerSprite.getPosition().y + 20);
 				missiles.push_back(missile);
 				missileClock.restart();
-				missile.missileCount--;
-				missile.missileCountString.setString(to_string(missile.missileCount));
+				missileCount--;
+				cout << "missile: " << missileCount << endl;
+				// missileCountString.setString(to_string(missileCount));
 			}
 		}
 	}

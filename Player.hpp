@@ -34,25 +34,16 @@ public:
 	float bulletDamage;	 //damage of enemy
 	float missileDamage; //damage of enemy
 	float hitBodyDamage;
-	struct Health
-	{
-		float healthValue;
-		Text healthtext;
-		RectangleShape outsideRect;
-		RectangleShape insideRect;
-		Vector2f insideSize;
-	};
+	static float healthValue;
 
 	struct Bullet
 	{
 		Sprite sprite;
 		float speed;
 	};
+	static unsigned int missileCount;
 	struct Missile
 	{
-		int missileCount;
-		Text missileCountString;
-		Text missileText;
 		Sprite sprite;
 		float speed;
 	};
@@ -66,7 +57,6 @@ public:
 	Explosion explosion;
 	Explosion bigExplosion;
 	vector<Explosion> explosions;
-	Health playerHealth;
 	vector<Bullet> bulletsLeft;
 	vector<Bullet> bulletsRight;
 	Bullet bulletLeft;
@@ -77,6 +67,8 @@ public:
 	static bool shouldRemoveBullet(Bullet& bullet);
 	static bool shouldRemoveMissile(Missile& missile);
 	static bool shouldRemoveExplosion(Explosion& explosion);
+	static void resetMissileCounter();
+	static bool startedFiring;
 
 private:
 	float moveSpeed;
@@ -89,7 +81,7 @@ private:
 	Clock bigExplosionClock;
 	bool shouldDisappear;
 	bool shouldExplode;
-	bool startedFiring;
+
 	bool firstTime;
 };
 #endif

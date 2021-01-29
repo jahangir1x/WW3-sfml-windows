@@ -7,11 +7,10 @@ class GameHandler
 {
 public:
 	void Start();
-	void ShowMenu();
 	void Help();
 	void Credits();
-	void Play();
 	void ExitConfirm();
+	void gameLoop();
 	// add more level here
 	sf::RenderWindow window;
 	sf::Event event;

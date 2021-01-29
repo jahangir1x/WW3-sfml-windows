@@ -20,6 +20,7 @@ public:
 
 private:
 	Vector2i mousePosition;
+	Vector2i mousePositionClicked;
 	bool clicked;
 	MenuResult result;
 
@@ -40,5 +41,7 @@ private:
 	IntRect exitRect;
 	Sprite exitSprite;
 	Clock exitClock;
+
+	Clock menuClock;
 };
 #endif

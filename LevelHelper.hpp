@@ -2,6 +2,7 @@
 #define LevelHelper_air321
 
 #include "BaseEnemy.hpp"
+#include "Boss.hpp"
 #include "Collision.h"
 #include "Enemy1.hpp"
 #include "Enemy2.hpp"
@@ -17,6 +18,8 @@ using namespace sf;
 class LevelHelper
 {
 public:
+	static unsigned int retriesLeft;
+	static bool shouldKeepPlaying();
 	void isHitBody(Player& player, Enemy1& enemy);
 	void isHitBullet(Player& player, Enemy1& enemy);
 	void isHitMissile(Player& player, Enemy1& enemy);
@@ -41,7 +44,12 @@ public:
 	void isHitBullet(Player& player, Enemy6& enemy);
 	void isHitMissile(Player& player, Enemy6& enemy);
 
+	void isHitBody(Player& player, Boss& enemy);
+	void isHitBullet(Player& player, Boss& enemy);
+	void isHitMissile(Player& player, Boss& enemy);
+
 private:
+	vector<String> quotes;
 	// unsigned int i;
 };
 

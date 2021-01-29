@@ -1,13 +1,16 @@
 #include "MainMenu.hpp"
+#include "GameUI.hpp"
 #include "GetRes.hpp"
+#include "Helper.hpp"
 
 using namespace std;
 using namespace sf;
 
 MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 {
+	GameUI::init();
 	gameLogoSprite.setTexture(GetRes::gameLogoTex);
-	gameLogoSprite.setPosition(286, 46);
+	gameLogoSprite.setPosition(Helper::windowWidth() / 2 - gameLogoSprite.getGlobalBounds().width / 2, 46);
 
 	playSprite.setTexture(GetRes::playButtonTex);
 	playRect.left = 0;
@@ -15,7 +18,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	playRect.width = 371;
 	playRect.height = 148;
 	playSprite.setTextureRect(playRect);
-	playSprite.setPosition(366, 245);
+	playSprite.setPosition(Helper::windowWidth() / 2 - playSprite.getGlobalBounds().width / 2, 245);
 
 	helpSprite.setTexture(GetRes::helpButtonTex);
 	helpRect.left = 0;
@@ -23,7 +26,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	helpRect.width = 371;
 	helpRect.height = 148;
 	helpSprite.setTextureRect(helpRect);
-	helpSprite.setPosition(366, 393);
+	helpSprite.setPosition(Helper::windowWidth() / 2 - helpSprite.getGlobalBounds().width / 2, 393);
 
 	creditsSprite.setTexture(GetRes::creditsButtonTex);
 	creditsRect.left = 0;
@@ -31,7 +34,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	creditsRect.width = 371;
 	creditsRect.height = 148;
 	creditsSprite.setTextureRect(creditsRect);
-	creditsSprite.setPosition(366, 541);
+	creditsSprite.setPosition(Helper::windowWidth() / 2 - creditsSprite.getGlobalBounds().width / 2, 541);
 
 	exitSprite.setTexture(GetRes::exitButtonTex);
 	exitRect.left = 0;
@@ -39,9 +42,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	exitRect.width = 371;
 	exitRect.height = 148;
 	exitSprite.setTextureRect(exitRect);
-	exitSprite.setPosition(366, 689);
+	exitSprite.setPosition(Helper::windowWidth() / 2 - exitSprite.getGlobalBounds().width / 2, 689);
 
 	clicked = false;
+	result = Nothing;
+	Helper::resetClock();
 
 	while (window.isOpen())
 	{
@@ -50,6 +55,13 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 			if (menuEvent.type == Event::MouseMoved)
 			{
 				mousePosition = Mouse::getPosition(window);
+			}
+			else if (menuEvent.type == Event::MouseButtonReleased && menuEvent.mouseButton.button == Mouse::Left)
+			{
+				mousePositionClicked = Mouse::getPosition(window);
+				GameUI::handleClose(window, mousePositionClicked);
+				clicked = true;
+				menuClock.restart();
 			}
 			else if (menuEvent.type == Event::Closed)
 			{
@@ -60,36 +72,38 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 
 		if (playClock.getElapsedTime().asSeconds() > 0.08)
 		{
-			if (!clicked)
+			// if (!clicked)
+			// {
+			if (playSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 			{
-				if (playSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+				// cout << "mouse" << endl;
+				if (playRect.left < 2597)
 				{
-					// cout << "mouse" << endl;
-					if (playRect.left < 2597)
-					{
-						playRect.left += playRect.width;
-						playSprite.setTextureRect(playRect);
-					}
-				}
-				else if (playRect.left > 0)
-				{
-					playRect.left -= playRect.width;
+					playRect.left += playRect.width;
 					playSprite.setTextureRect(playRect);
 				}
-				playClock.restart();
 			}
-			else
+			else if (playRect.left > 0)
 			{
-				// cout << "clicked";
-				// clicked = false;
-				return result;
+				playRect.left -= playRect.width;
+				playSprite.setTextureRect(playRect);
 			}
+			playClock.restart();
+			// }
+			// 	else
+			// 	{
+			// 		if (playClock.getElapsedTime().asSeconds() > 0.08)
+			// 		{
+			// 			// cout << "clicked";
+			// 			// clicked = false;
+			// 			return result;
+			// 		}
+			// 	}
 		}
-		if (Mouse::isButtonPressed(Mouse::Left) && playSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+		if (clicked && playSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
-			playRect.left = 2968;
+			playRect.left = 2969;
 			playSprite.setTextureRect(playRect);
-			clicked = true;
 			result = Play;
 			cout << "result : play" << endl;
 			playClock.restart();
@@ -97,36 +111,27 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 
 		if (helpClock.getElapsedTime().asSeconds() > 0.08)
 		{
-			if (!clicked)
+			if (helpSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 			{
-				if (helpSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+				// cout << "mouse" << endl;
+				if (helpRect.left < 2597)
 				{
-					// cout << "mouse" << endl;
-					if (helpRect.left < 2597)
-					{
-						helpRect.left += helpRect.width;
-						helpSprite.setTextureRect(helpRect);
-					}
-				}
-				else if (helpRect.left > 0)
-				{
-					helpRect.left -= helpRect.width;
+					helpRect.left += helpRect.width;
 					helpSprite.setTextureRect(helpRect);
 				}
-				helpClock.restart();
 			}
-			else
+			else if (helpRect.left > 0)
 			{
-				// cout << "clicked";
-				// clicked = false;
-				return result;
+				helpRect.left -= helpRect.width;
+				helpSprite.setTextureRect(helpRect);
 			}
+			helpClock.restart();
 		}
-		if (Mouse::isButtonPressed(Mouse::Left) && helpSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+		if (clicked && helpSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
-			helpRect.left = 2968;
+			helpRect.left = 2969;
 			helpSprite.setTextureRect(helpRect);
-			clicked = true;
+
 			result = Help;
 			cout << "result : help" << endl;
 			helpClock.restart();
@@ -134,36 +139,27 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 
 		if (creditsClock.getElapsedTime().asSeconds() > 0.08)
 		{
-			if (!clicked)
+			if (creditsSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 			{
-				if (creditsSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+				// cout << "mouse" << endl;
+				if (creditsRect.left < 2597)
 				{
-					// cout << "mouse" << endl;
-					if (creditsRect.left < 2597)
-					{
-						creditsRect.left += creditsRect.width;
-						creditsSprite.setTextureRect(creditsRect);
-					}
-				}
-				else if (creditsRect.left > 0)
-				{
-					creditsRect.left -= creditsRect.width;
+					creditsRect.left += creditsRect.width;
 					creditsSprite.setTextureRect(creditsRect);
 				}
-				creditsClock.restart();
 			}
-			else
+			else if (creditsRect.left > 0)
 			{
-				// cout << "clicked";
-				// clicked = false;
-				return result;
+				creditsRect.left -= creditsRect.width;
+				creditsSprite.setTextureRect(creditsRect);
 			}
+			creditsClock.restart();
 		}
-		if (Mouse::isButtonPressed(Mouse::Left) && creditsSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+		if (clicked && creditsSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
-			creditsRect.left = 2968;
+			creditsRect.left = 2969;
 			creditsSprite.setTextureRect(creditsRect);
-			clicked = true;
+
 			result = Credits;
 			cout << "result : credits" << endl;
 			creditsClock.restart();
@@ -171,39 +167,35 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 
 		if (exitClock.getElapsedTime().asSeconds() > 0.08)
 		{
-			if (!clicked)
+			if (exitSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 			{
-				if (exitSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+				// cout << "mouse" << endl;
+				if (exitRect.left < 2597)
 				{
-					// cout << "mouse" << endl;
-					if (exitRect.left < 2597)
-					{
-						exitRect.left += exitRect.width;
-						exitSprite.setTextureRect(exitRect);
-					}
-				}
-				else if (exitRect.left > 0)
-				{
-					exitRect.left -= exitRect.width;
+					exitRect.left += exitRect.width;
 					exitSprite.setTextureRect(exitRect);
 				}
-				exitClock.restart();
 			}
-			else
+			else if (exitRect.left > 0)
 			{
-				// cout << "clicked";
-				// clicked = false;
-				return result;
+				exitRect.left -= exitRect.width;
+				exitSprite.setTextureRect(exitRect);
 			}
+			exitClock.restart();
 		}
-		if (Mouse::isButtonPressed(Mouse::Left) && exitSprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+		if (clicked && exitSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
-			exitRect.left = 2968;
+			exitRect.left = 2969;
 			exitSprite.setTextureRect(exitRect);
-			clicked = true;
+
 			result = Exit;
 			cout << "result : exit" << endl;
 			exitClock.restart();
+		}
+
+		if (result != Nothing && menuClock.getElapsedTime().asSeconds() > 0.8)
+		{
+			return result;
 		}
 
 		window.clear(Color::Black);
@@ -212,6 +204,9 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 		window.draw(helpSprite);
 		window.draw(creditsSprite);
 		window.draw(exitSprite);
+
+		GameUI::showMenuUI(window);
+
 		window.display();
 	}
 	return Nothing;

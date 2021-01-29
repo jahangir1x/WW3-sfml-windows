@@ -10,6 +10,7 @@ using namespace std;
 class BaseEnemy
 {
 public:
+	int missileCount;
 	BaseEnemy();
 	enum Style
 	{
@@ -19,7 +20,8 @@ public:
 		BlueHazard = 3,
 		GreenGwen = 4,
 		RedRanger = 5,
-		PurplePunk = 6
+		PurplePunk = 6,
+		ShakaLala = 7
 	};
 	void Show(RenderWindow& window);
 	void setStyle(Style style);
@@ -32,21 +34,42 @@ public:
 	float bulletDamage;	 //damage of player
 	float missileDamage; //damage of player
 	float hitBodyDamage;
+	enum ShootingType
+	{
+		Straight = 0,
+		ToPlayer = 1,
+		Sine = 2,
+		Circle = 3
+	};
 
 	struct Bullet
 	{
 		Sprite sprite;
 		float speed;
-		Vector2f velocity; // need this for non vertical shooting
-		float rotation;	   // need this for sine wave like shooting
+		Vector2f velocity;		 // need this for non vertical shooting
+		float rotation;			 // need this for sine wave like shooting
+		int y_sign;				 // to hit player above enemy
+		bool shouldStopCircling; // need this for circle shoot
+		float radius;
+		float center_y;
+		float center_x;
+		Vector2f playerPos;
+		ShootingType shootingStyle;
 	};
 	struct Missile
 	{
-		int missileCount;
 		Sprite sprite;
 		float speed;
-		Vector2f velocity; // need this for non vertical shooting
-		float rotation;	   // need this for sine wave like shooting
+		Vector2f velocity;		 // need this for non vertical shooting
+		float rotation;			 // need this for sine wave like shooting
+		int y_sign;				 // need this for circle shoot
+		bool shouldStopCircling; // need this for circle shoot
+		float radius;			 // need this for circle shoot
+		float center_y;			 // need this for circle shoot
+		float center_x;			 // need this for circle shoot
+		Vector2f playerPos;		 // need this for circle shoot
+		ShootingType shootingStyle;
+		int sign; // randomize left or right firing
 	};
 	struct Explosion
 	{
@@ -76,7 +99,10 @@ protected:
 	void moveUp(float speed = 400);
 	void moveDown(float speed = 400);
 	unsigned int i;
+	float radius;
+	float temp;
 	unsigned int j;
+	double pi;
 	int bulletInterval;
 	int missileInterval;
 	Texture* chosenTexture;

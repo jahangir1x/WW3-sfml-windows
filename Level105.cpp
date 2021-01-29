@@ -4,127 +4,141 @@ using namespace sf;
 
 void Level105::Show(RenderWindow& window, Event& event)
 {
-	cout << "in level 105 " << endl;
-	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
-	LevelHelper levelhelp;
-	Helper::resetEnemyDiedCounter();
-	Background background;
-	Player yuri; // our hero
-	bool someone_is_alive;
-	unsigned int i;
-	vector<Enemy2> first_enemies(4);  // create 2 enemies
-	vector<Enemy2> second_enemies(1); // create 3 enemies
-	vector<Enemy2> third_enemies(6);
-
-	while (window.isOpen())
+	while (LevelHelper::shouldKeepPlaying())
 	{
-		Helper::resetClock();
-		while (window.pollEvent(event))
+		cout << "in level 105 " << endl;
+		Success success;
+		LevelFailed levelFailedObj;
+		LevelHelper levelhelp;
+		GameUI::init();
+		Helper::resetEnemyDiedCounter();
+		Player::resetMissileCounter();
+		Background background;
+		Player yuri;
+		bool someone_is_alive;
+		unsigned int i;
+		vector<Enemy2> first_enemies(4);  // create 2 enemies
+		vector<Enemy2> second_enemies(1); // create 3 enemies
+		vector<Enemy2> third_enemies(6);
+
+		while (window.isOpen())
 		{
-			if (event.type == Event::Closed)
+			Helper::resetClock();
+			while (window.pollEvent(event))
 			{
-				window.close();
-			}
-			else if (event.type == Event::MouseButtonReleased)
-			{
-				if (event.mouseButton.button == Mouse::Left)
+				if (event.type == Event::Closed)
+				{
+					window.close();
+					exit(0);
+				}
+				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
+					GameUI::handleClose(window, Mouse::getPosition(window));
+					success.handleClose(Mouse::getPosition(window));
+					levelFailedObj.handleClose(Mouse::getPosition(window));
 				}
 			}
-		}
-		window.clear(Color::Blue);
-		background.Show(window);
-		if (Mouse::isButtonPressed(Mouse::Right))
-		{
-			yuri.fireMissile();
-		}
-		yuri.fireBullet();
-		if (Keyboard::isKeyPressed(Keyboard::A))
-		{
-			yuri.moveLeft();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::D))
-		{
-			yuri.moveRight();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::W))
-		{
-			yuri.moveUp();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::S))
-		{
-			yuri.moveDown();
-		}
-
-		someone_is_alive = false; // আমরা চাচ্ছি প্রথমে 4 টা, তারপর 4 টা, তারপর 5  টা enemy একসাথে আসবে ।
-
-		for (auto& this_enemy : first_enemies) // range based for loop + reference operator ফাস্ট হবে ।
-		{
-			if (this_enemy.isDead == false )
+			window.clear(Color::Blue);
+			background.Show(window);
+			if (Mouse::isButtonPressed(Mouse::Right))
 			{
-				cout << "first " << endl;
-				if (someone_is_alive == false)
-					someone_is_alive = true;
-				this_enemy.move(300);
-				this_enemy.fireBullet(yuri, 3850,1800, 400);
-				this_enemy.fireMissile(yuri, 3000, 1000, 295);
-				levelhelp.isHitBody(yuri, this_enemy);
-				levelhelp.isHitBullet(yuri, this_enemy);
-				levelhelp.isHitMissile(yuri, this_enemy);
-				this_enemy.Show(window);
+				yuri.fireMissile();
+			}
+			yuri.fireBullet();
+			if (Keyboard::isKeyPressed(Keyboard::A))
+			{
+				yuri.moveLeft();
+			}
+			if (Keyboard::isKeyPressed(Keyboard::D))
+			{
+				yuri.moveRight();
+			}
+			if (Keyboard::isKeyPressed(Keyboard::W))
+			{
+				yuri.moveUp();
+			}
+			if (Keyboard::isKeyPressed(Keyboard::S))
+			{
+				yuri.moveDown();
 			}
 
+			someone_is_alive = false; // আমরা চাচ্ছি প্রথমে 4 টা, তারপর 4 টা, তারপর 5  টা enemy একসাথে আসবে ।
 
-		}
-
-		if (someone_is_alive == false)
-		{
-			for (i = 0; i < second_enemies.size(); i++)
+			for (auto& this_enemy : first_enemies) // range based for loop + reference operator ফাস্ট হবে ।
 			{
-				if (second_enemies[i].isDead == false)
+				if (this_enemy.isDead == false)
 				{
-					cout << "second" << endl;
+					cout << "first " << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
-					second_enemies[i].move(370);
-					second_enemies[i].fireBullet(yuri, 400,500, 400);
-					second_enemies[i].fireMissile(yuri, 700, 500, 295);
-					levelhelp.isHitBody(yuri, second_enemies[i]);
-					levelhelp.isHitBullet(yuri, second_enemies[i]);
-					levelhelp.isHitMissile(yuri, second_enemies[i]);
-					second_enemies[i].Show(window);
+					this_enemy.move(300);
+					this_enemy.fireBullet(yuri, 3850, 1800, 400);
+					this_enemy.fireMissile(yuri, 3000, 1000, 295);
+					levelhelp.isHitBody(yuri, this_enemy);
+					levelhelp.isHitBullet(yuri, this_enemy);
+					levelhelp.isHitMissile(yuri, this_enemy);
+					this_enemy.Show(window);
 				}
 			}
-		}
 
-		if (someone_is_alive == false)
-		{
-			for (i = 0; i < third_enemies.size(); i++)
+			if (someone_is_alive == false)
 			{
-				if (third_enemies[i].isDead == false)
+				for (i = 0; i < second_enemies.size(); i++)
 				{
-					cout << "third" << endl;
-					if (someone_is_alive == false)
-						someone_is_alive = true;
-					third_enemies[i].move(300);
-					third_enemies[i].fireBullet(yuri, 3800,1800, 400);
-					third_enemies[i].fireMissile(yuri, 4900, 1000, 295);
-					levelhelp.isHitBody(yuri, third_enemies[i]);
-					levelhelp.isHitBullet(yuri, third_enemies[i]);
-					levelhelp.isHitMissile(yuri, third_enemies[i]);
-					third_enemies[i].Show(window);
+					if (second_enemies[i].isDead == false)
+					{
+						cout << "second" << endl;
+						if (someone_is_alive == false)
+							someone_is_alive = true;
+						second_enemies[i].move(370);
+						second_enemies[i].fireBullet(yuri, 400, 500, 400);
+						second_enemies[i].fireMissile(yuri, 700, 500, 295);
+						levelhelp.isHitBody(yuri, second_enemies[i]);
+						levelhelp.isHitBullet(yuri, second_enemies[i]);
+						levelhelp.isHitMissile(yuri, second_enemies[i]);
+						second_enemies[i].Show(window);
+					}
 				}
 			}
-		}
 
-		if (Helper::enemiesDied() == 11)
-		{
-			return; // show next level
+			if (someone_is_alive == false)
+			{
+				for (i = 0; i < third_enemies.size(); i++)
+				{
+					if (third_enemies[i].isDead == false)
+					{
+						cout << "third" << endl;
+						if (someone_is_alive == false)
+							someone_is_alive = true;
+						third_enemies[i].move(300);
+						third_enemies[i].fireBullet(yuri, 3800, 1800, 400);
+						third_enemies[i].fireMissile(yuri, 4900, 1000, 295);
+						levelhelp.isHitBody(yuri, third_enemies[i]);
+						levelhelp.isHitBullet(yuri, third_enemies[i]);
+						levelhelp.isHitMissile(yuri, third_enemies[i]);
+						third_enemies[i].Show(window);
+					}
+				}
+			}
+
+			yuri.Show(window);
+			if (Helper::enemiesDied() == 11)
+			{
+				if (success.isFinishedShowing(window))
+				{
+					return;
+				}
+			}
+			if (yuri.isDead)
+			{
+				if (levelFailedObj.isFinishedShowing(window))
+				{
+					break;
+				}
+			}
+			GameUI::showPlayerUI(window);
+			window.display();
 		}
-		yuri.Show(window);
-		if (yuri.isDead)
-			levelFailedObj.Show(window, event); // show level failed
-		window.display();
 	}
 }

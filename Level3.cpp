@@ -1,91 +1,109 @@
 #include "Level3.hpp" // level header file
+#include "GameUI.hpp"
+#include "Success.hpp"
 using namespace std;
 using namespace sf;
 
 void Level3::Show(RenderWindow& window, Event& event)
 {
-	cout << "in level 3 " << endl;
-	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
-	LevelHelper levelhelp;
-	Success successObj;
-	Helper::resetEnemyDiedCounter();
-	Helper::resetClock();
-	Background background;
-	Player yuri; // our hero
-	Enemy5 enemy;
-	enemy.enemySprite.setScale(1, 1);		// 2x enemy. আমাদের enemy sprite ভালো করার জন্য sprite গুলা ২ গুন সাইজের বানানো হইছে... তাই scale = 1 = ২ গুন sprite
-	enemy.bulletLeft.sprite.setScale(1, 1); // 2x left bullets < notice: it is bulletLeft not bulletsLeft >
-	enemy.bulletRight.sprite.setScale(2, 2);
-	enemy.missile.sprite.setScale(2, 2);
-	enemy.bigExplosion.sprite.setScale(2, 2);
-	enemy.explosion.sprite.setScale(2, 2);
-	enemy.bulletDamage = 20;  // একটা বুলেট প্লেয়ারের গায়ে লাগলে প্লেয়ারের ২০ লাইফ কমবে...
-	enemy.missileDamage = 30; // একটা মিসাইল প্লেয়ারের গায়ে লাগলে প্লেয়ারের ৩০ লাইফ কমবে...
-	enemy.healthValue = 300;  // enemey এর লাইফ এখন ৩০০
-
-	while (window.isOpen())
+	while (LevelHelper::shouldKeepPlaying())
 	{
-		Helper::resetClock();
-		while (window.pollEvent(event))
+		////// mandatory //////
+		cout << "in level 3 " << endl;
+		Success success;
+		LevelFailed levelFailedObj;
+		LevelHelper levelhelp;
+		GameUI::init();
+		Helper::resetEnemyDiedCounter();
+		Player::resetMissileCounter();
+		Background background;
+		Player yuri;
+		////// mandatory //////
+
+		yuri.healthValue = 3;
+		vector<Enemy3> enemies(1);
+
+		while (window.isOpen())
 		{
-			if (event.type == Event::Closed)
+			Helper::resetClock();
+			while (window.pollEvent(event))
 			{
-				window.close();
-			}
-			else if (event.type == Event::MouseButtonReleased)
-			{
-				if (event.mouseButton.button == Mouse::Left)
+				if (event.type == Event::Closed)
 				{
-					yuri.startFiringBullet();
+					window.close();
+					exit(0);
+				}
+
+				else if (event.type == Event::MouseButtonReleased)
+				{
+					if (event.mouseButton.button == Mouse::Left)
+					{
+						yuri.startFiringBullet();
+						GameUI::handleClose(window, Mouse::getPosition(window));
+						success.handleClose(Mouse::getPosition(window));
+						levelFailedObj.handleClose(Mouse::getPosition(window));
+					}
 				}
 			}
-		}
-		window.clear(Color::Blue);
-		background.Show(window);
-		if (Mouse::isButtonPressed(Mouse::Right))
-		{
-			yuri.fireMissile();
-		}
-		yuri.fireBullet();
-		if (Keyboard::isKeyPressed(Keyboard::A))
-		{
-			yuri.moveLeft();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::D))
-		{
-			yuri.moveRight();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::W))
-		{
-			yuri.moveUp();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::S))
-		{
-			yuri.moveDown();
-		}
-
-		enemy.move(300);
-		enemy.fireBullet(yuri, 4000, 2000, 400);
-		enemy.fireMissile(yuri, 5000, 1000, 300);
-		levelhelp.isHitBody(yuri, enemy);
-		levelhelp.isHitBullet(yuri, enemy);
-		levelhelp.isHitMissile(yuri, enemy);
-
-		cout << "enemy health: " << enemy.healthValue << endl;
-		cout << "player health: " << yuri.playerHealth.healthValue << endl;
-
-		enemy.Show(window);
-		yuri.Show(window);
-		if (yuri.isDead)
-			levelFailedObj.Show(window, event); // show level failed
-		if (Helper::enemiesDied() == 1)
-		{
-			successObj.Show(window);
-			if (successObj.getState() == Success::Proceed)
+			window.clear(Color::Blue);
+			background.Show(window);
+			if (Mouse::isButtonPressed(Mouse::Right))
 			{
-				return;
+				yuri.fireMissile();
 			}
+			yuri.fireBullet();
+			if (Keyboard::isKeyPressed(Keyboard::A))
+			{
+				yuri.moveLeft();
+			}
+			if (Keyboard::isKeyPressed(Keyboard::D))
+			{
+				yuri.moveRight();
+			}
+			if (Keyboard::isKeyPressed(Keyboard::W))
+			{
+				yuri.moveUp();
+			}
+			if (Keyboard::isKeyPressed(Keyboard::S))
+			{
+				yuri.moveDown();
+			}
+
+			// cout << "rand: " << Helper::randRange(-900.3, -400.9) << endl;
+
+			for (auto& enemy : enemies)
+			{
+				// enemy.healthValue = 5;
+				enemy.move(300);
+				enemy.fireBullet(yuri, 4000, 2000, 400);
+				enemy.fireMissile(yuri, 5000, 1000, 300);
+				levelhelp.isHitBody(yuri, enemy);
+				levelhelp.isHitBullet(yuri, enemy);
+				levelhelp.isHitMissile(yuri, enemy);
+				enemy.Show(window);
+			}
+
+			yuri.Show(window);
+
+			if (yuri.isDead)
+			{
+				if (levelFailedObj.isFinishedShowing(window))
+				{
+					break;
+				}
+			}
+
+			if (Helper::enemiesDied() == 1)
+			{
+				if (success.isFinishedShowing(window))
+				{
+					return;
+				}
+			}
+
+			GameUI::showPlayerUI(window);
+
+			window.display();
 		}
-		window.display();
 	}
 }

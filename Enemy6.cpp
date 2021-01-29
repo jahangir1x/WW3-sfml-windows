@@ -25,29 +25,15 @@ void Enemy6::Show(RenderWindow& window)
 
 	for (auto& bullet : bulletsLeft)
 	{
-		bullet.sprite.move(sin(bullet.rotation) * 200 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
-		if (bullet.rotation >= 180)
-		{
-			bullet.rotation = 0.1;
-		}
-		else
-		{
-			bullet.rotation += 0.1;
-		}
+		bullet.sprite.move(sin(bullet.rotation) * 100 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
+		bullet.rotation += 400 * Helper::SecondsPerFrame() * pi / 180.0;
 	}
 	bulletsLeft.erase(remove_if(bulletsLeft.begin(), bulletsLeft.end(), Enemy6::shouldRemoveBullet), bulletsLeft.end());
 
 	for (auto& bullet : bulletsRight)
 	{
-		bullet.sprite.move(sin(bullet.rotation) * 200 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
-		if (bullet.rotation >= 180)
-		{
-			bullet.rotation = 0.1;
-		}
-		else
-		{
-			bullet.rotation += 0.1;
-		}
+		bullet.sprite.move(sin(bullet.rotation) * 100 * Helper::SecondsPerFrame(), bullet.speed * Helper::SecondsPerFrame());
+		bullet.rotation += 400 * Helper::SecondsPerFrame() * pi / 180.0;
 	}
 	bulletsRight.erase(remove_if(bulletsRight.begin(), bulletsRight.end(), Enemy6::shouldRemoveBullet), bulletsRight.end());
 
@@ -63,15 +49,8 @@ void Enemy6::Show(RenderWindow& window)
 
 	for (auto& missile : missiles)
 	{
-		missile.sprite.move(sin(missile.rotation) * 200 * Helper::SecondsPerFrame(), missile.speed * Helper::SecondsPerFrame());
-		if (missile.rotation >= 180)
-		{
-			missile.rotation = 0.1;
-		}
-		else
-		{
-			missile.rotation += 0.1;
-		}
+		missile.sprite.move(sin(missile.rotation) * 100 * Helper::SecondsPerFrame(), missile.speed * Helper::SecondsPerFrame());
+		missile.rotation += 400 * Helper::SecondsPerFrame() * pi / 180.0;
 	}
 	missiles.erase(remove_if(missiles.begin(), missiles.end(), Enemy6::shouldRemoveMissile), missiles.end());
 
@@ -142,18 +121,16 @@ void Enemy6::fireBullet(Player& player, int interval_milliseconds, int interval_
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
 			bulletLeft.rotation = 0;
-			bulletLeft.sprite.setRotation(Helper::getRotation(bulletLeft.sprite.getPosition().x + (sin(bulletLeft.rotation + 0.1) * 2), bulletLeft.sprite.getPosition().y + 25, bulletLeft.sprite.getPosition().x, bulletLeft.sprite.getPosition().y) - 90);
 			bulletsLeft.push_back(bulletLeft);
 
 			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
 			bulletRight.speed = speed;
 			bulletRight.rotation = 0;
-			bulletRight.sprite.setRotation(Helper::getRotation(bulletRight.sprite.getPosition().x + (sin(bulletRight.rotation + 0.1) * 2), bulletRight.sprite.getPosition().y + 25, bulletRight.sprite.getPosition().x, bulletRight.sprite.getPosition().y) - 90);
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();
 			isBulletIntervalSet = false;
 			if (0)
-				cout << "dummy: " << player.playerHealth.healthValue << endl;
+				cout << "dummy: " << player.healthValue << endl;
 		}
 	}
 }
@@ -162,7 +139,7 @@ void Enemy6::fireMissile(Player& player, int interval_milliseconds, int interval
 {
 	if (!isDying)
 	{
-		if (missile.missileCount > 0)
+		if (missileCount > 0)
 		{
 			if (!isMissileIntervalSet)
 			{
@@ -171,16 +148,15 @@ void Enemy6::fireMissile(Player& player, int interval_milliseconds, int interval
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
-				missile.sprite.setPosition(enemySprite.getPosition().x + enemyRect.width / 2 - 5, enemySprite.getPosition().y + 40);
+				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
 				missile.rotation = 0;
-				missile.sprite.setRotation(Helper::getRotation(missile.sprite.getPosition().x + (sin(missile.rotation + 0.1) * 2), missile.sprite.getPosition().y + 25, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90);
 				missiles.push_back(missile);
 				missileClock.restart();
-				missile.missileCount--;
+				missileCount--;
 				isMissileIntervalSet = false;
 				if (0) // to bypass g++ -Werror=unused-variable
-					cout << "dummy: " << player.playerHealth.healthValue << endl;
+					cout << "dummy: " << player.healthValue << endl;
 			}
 		}
 	}

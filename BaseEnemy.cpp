@@ -74,6 +74,7 @@ BaseEnemy::BaseEnemy()
 	bulletDamage = 5;
 	missileDamage = 8;
 	hitBodyDamage = 9;
+	pi = 2 * asin(1.0);
 
 	bulletLeft.speed = 500;
 	bulletLeft.sprite.setTexture(GetRes::enemyBulletTex);
@@ -83,7 +84,8 @@ BaseEnemy::BaseEnemy()
 
 	missile.speed = 400;
 	missile.sprite.setTexture(GetRes::enemyMissileTex);
-	missile.missileCount = 9;
+	missileCount = 9;
+	Helper::resetClock();
 }
 
 bool BaseEnemy::shouldRemoveBullet(Bullet& bullet)
@@ -134,7 +136,6 @@ void BaseEnemy::Show(RenderWindow& window)
 		{
 			enemyRect.left += enemyRect.width;
 		}
-		// cout << "left: " << playerRect.left << endl;
 		enemySprite.setTexture(*chosenTexture);
 		enemySprite.setTextureRect(enemyRect);
 		enemyClock.restart();
@@ -245,6 +246,9 @@ void BaseEnemy::setStyle(Style style)
 			break;
 		case PurplePunk:
 			chosenTexture = &GetRes::enemyBodyTex7;
+			break;
+		case ShakaLala:
+			chosenTexture = &GetRes::bossBodyTex;
 			break;
 		default:
 			chosenTexture = &GetRes::enemyBodyTex1;
