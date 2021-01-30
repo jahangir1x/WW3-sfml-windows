@@ -1,10 +1,10 @@
-#include "Level100.hpp" // level header file
+#include "Level101.hpp" // level header file
 using namespace std;
 using namespace sf;
 
-void Level100::Show(RenderWindow& window, Event& event)
+void Level101::Show(RenderWindow& window, Event& event)
 {
-	cout << "in level 100 " << endl;
+	cout << "in level 101 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
 	Helper::resetEnemyDiedCounter();
@@ -67,8 +67,8 @@ void Level100::Show(RenderWindow& window, Event& event)
 				if (someone_is_alive == false)
 					someone_is_alive = true;
 				this_enemy.move(300);
-				this_enemy.fireBullet(yuri, 4000,2000, 400);
-				this_enemy.fireMissile(yuri, 5000, 1000, 300);
+				this_enemy.fireBullet(yuri, 3800,1800, 405);
+				this_enemy.fireMissile(yuri, 4800, 1000, 305);
 				levelhelp.isHitBody(yuri, this_enemy);
 				levelhelp.isHitBullet(yuri, this_enemy);
 				levelhelp.isHitMissile(yuri, this_enemy);
@@ -86,8 +86,8 @@ void Level100::Show(RenderWindow& window, Event& event)
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					second_enemies[i].move(300);
-					second_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-					second_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+					second_enemies[i].fireBullet(yuri, 3800,1800, 405);
+					second_enemies[i].fireMissile(yuri, 4800, 1000, 305);
 					levelhelp.isHitBody(yuri, second_enemies[i]);
 					levelhelp.isHitBullet(yuri, second_enemies[i]);
 					levelhelp.isHitMissile(yuri, second_enemies[i]);
@@ -106,8 +106,8 @@ void Level100::Show(RenderWindow& window, Event& event)
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					third_enemies[i].move(300);
-					third_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-					third_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+					third_enemies[i].fireBullet(yuri, 3800,1800, 405);
+					third_enemies[i].fireMissile(yuri, 4800, 1000, 305);
 					levelhelp.isHitBody(yuri, third_enemies[i]);
 					levelhelp.isHitBullet(yuri, third_enemies[i]);
 					levelhelp.isHitMissile(yuri, third_enemies[i]);
@@ -126,3 +126,4 @@ void Level100::Show(RenderWindow& window, Event& event)
 		window.display();
 	}
 }
+

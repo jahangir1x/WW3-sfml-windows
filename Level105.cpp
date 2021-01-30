@@ -1,10 +1,10 @@
-#include "Level100.hpp" // level header file
+#include "Level105.hpp" // level header file
 using namespace std;
 using namespace sf;
 
-void Level100::Show(RenderWindow& window, Event& event)
+void Level105::Show(RenderWindow& window, Event& event)
 {
-	cout << "in level 100 " << endl;
+	cout << "in level 105 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
 	Helper::resetEnemyDiedCounter();
@@ -12,9 +12,9 @@ void Level100::Show(RenderWindow& window, Event& event)
 	Player yuri; // our hero
 	bool someone_is_alive;
 	unsigned int i;
-	vector<Enemy2> first_enemies(2);  // create 2 enemies
-	vector<Enemy2> second_enemies(3); // create 3 enemies
-	vector<Enemy2> third_enemies(4);
+	vector<Enemy2> first_enemies(4);  // create 2 enemies
+	vector<Enemy2> second_enemies(1); // create 3 enemies
+	vector<Enemy2> third_enemies(6);
 
 	while (window.isOpen())
 	{
@@ -57,23 +57,25 @@ void Level100::Show(RenderWindow& window, Event& event)
 			yuri.moveDown();
 		}
 
-		someone_is_alive = false; // আমরা চাচ্ছি প্রথমে ২ টা, তারপর ৩ টা, তারপর ৪ টা enemy একসাথে আসবে ।
+		someone_is_alive = false; // আমরা চাচ্ছি প্রথমে 4 টা, তারপর 4 টা, তারপর 5  টা enemy একসাথে আসবে ।
 
 		for (auto& this_enemy : first_enemies) // range based for loop + reference operator ফাস্ট হবে ।
 		{
-			if (this_enemy.isDead == false)
+			if (this_enemy.isDead == false )
 			{
-				cout << "first" << endl;
+				cout << "first " << endl;
 				if (someone_is_alive == false)
 					someone_is_alive = true;
 				this_enemy.move(300);
-				this_enemy.fireBullet(yuri, 4000,2000, 400);
-				this_enemy.fireMissile(yuri, 5000, 1000, 300);
+				this_enemy.fireBullet(yuri, 3850,1800, 400);
+				this_enemy.fireMissile(yuri, 3000, 1000, 295);
 				levelhelp.isHitBody(yuri, this_enemy);
 				levelhelp.isHitBullet(yuri, this_enemy);
 				levelhelp.isHitMissile(yuri, this_enemy);
 				this_enemy.Show(window);
 			}
+
+
 		}
 
 		if (someone_is_alive == false)
@@ -85,9 +87,9 @@ void Level100::Show(RenderWindow& window, Event& event)
 					cout << "second" << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
-					second_enemies[i].move(300);
-					second_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-					second_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+					second_enemies[i].move(370);
+					second_enemies[i].fireBullet(yuri, 400,500, 400);
+					second_enemies[i].fireMissile(yuri, 700, 500, 295);
 					levelhelp.isHitBody(yuri, second_enemies[i]);
 					levelhelp.isHitBullet(yuri, second_enemies[i]);
 					levelhelp.isHitMissile(yuri, second_enemies[i]);
@@ -106,8 +108,8 @@ void Level100::Show(RenderWindow& window, Event& event)
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					third_enemies[i].move(300);
-					third_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-					third_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+					third_enemies[i].fireBullet(yuri, 3800,1800, 400);
+					third_enemies[i].fireMissile(yuri, 4900, 1000, 295);
 					levelhelp.isHitBody(yuri, third_enemies[i]);
 					levelhelp.isHitBullet(yuri, third_enemies[i]);
 					levelhelp.isHitMissile(yuri, third_enemies[i]);
@@ -116,7 +118,7 @@ void Level100::Show(RenderWindow& window, Event& event)
 			}
 		}
 
-		if (Helper::enemiesDied() == 9)
+		if (Helper::enemiesDied() == 11)
 		{
 			return; // show next level
 		}

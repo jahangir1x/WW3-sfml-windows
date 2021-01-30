@@ -1,10 +1,10 @@
-#include "Level100.hpp" // level header file
+#include "Level104.hpp" // level header file
 using namespace std;
 using namespace sf;
 
-void Level100::Show(RenderWindow& window, Event& event)
+void Level104::Show(RenderWindow& window, Event& event)
 {
-	cout << "in level 100 " << endl;
+	cout << "in level 104 " << endl;
 	LevelFailed levelFailedObj; // create levelFailed object to show level failed message
 	LevelHelper levelhelp;
 	Helper::resetEnemyDiedCounter();
@@ -12,9 +12,9 @@ void Level100::Show(RenderWindow& window, Event& event)
 	Player yuri; // our hero
 	bool someone_is_alive;
 	unsigned int i;
-	vector<Enemy2> first_enemies(2);  // create 2 enemies
-	vector<Enemy2> second_enemies(3); // create 3 enemies
-	vector<Enemy2> third_enemies(4);
+	vector<Enemy2> first_enemies(1);  // create 2 enemies
+	vector<Enemy2> second_enemies(1); // create 3 enemies
+	//vector<Enemy2> third_enemies(5);
 
 	while (window.isOpen())
 	{
@@ -66,9 +66,9 @@ void Level100::Show(RenderWindow& window, Event& event)
 				cout << "first" << endl;
 				if (someone_is_alive == false)
 					someone_is_alive = true;
-				this_enemy.move(300);
-				this_enemy.fireBullet(yuri, 4000,2000, 400);
-				this_enemy.fireMissile(yuri, 5000, 1000, 300);
+				this_enemy.move(350);
+				this_enemy.fireBullet(yuri, 500,400, 400);
+				this_enemy.fireMissile(yuri, 3000, 1000, 295);
 				levelhelp.isHitBody(yuri, this_enemy);
 				levelhelp.isHitBullet(yuri, this_enemy);
 				levelhelp.isHitMissile(yuri, this_enemy);
@@ -85,9 +85,9 @@ void Level100::Show(RenderWindow& window, Event& event)
 					cout << "second" << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
-					second_enemies[i].move(300);
-					second_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-					second_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+					second_enemies[i].move(370);
+					second_enemies[i].fireBullet(yuri, 500,400, 400);
+					second_enemies[i].fireMissile(yuri, 3000, 1000, 295);
 					levelhelp.isHitBody(yuri, second_enemies[i]);
 					levelhelp.isHitBullet(yuri, second_enemies[i]);
 					levelhelp.isHitMissile(yuri, second_enemies[i]);
@@ -96,7 +96,7 @@ void Level100::Show(RenderWindow& window, Event& event)
 			}
 		}
 
-		if (someone_is_alive == false)
+		/*if (someone_is_alive == false)
 		{
 			for (i = 0; i < third_enemies.size(); i++)
 			{
@@ -106,17 +106,17 @@ void Level100::Show(RenderWindow& window, Event& event)
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					third_enemies[i].move(300);
-					third_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-					third_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+					third_enemies[i].fireBullet(yuri, 3800,1800, 400);
+					third_enemies[i].fireMissile(yuri, 4900, 1000, 295);
 					levelhelp.isHitBody(yuri, third_enemies[i]);
 					levelhelp.isHitBullet(yuri, third_enemies[i]);
 					levelhelp.isHitMissile(yuri, third_enemies[i]);
 					third_enemies[i].Show(window);
 				}
 			}
-		}
+		} */
 
-		if (Helper::enemiesDied() == 9)
+		if (Helper::enemiesDied() == 2)
 		{
 			return; // show next level
 		}
@@ -126,3 +126,4 @@ void Level100::Show(RenderWindow& window, Event& event)
 		window.display();
 	}
 }
+

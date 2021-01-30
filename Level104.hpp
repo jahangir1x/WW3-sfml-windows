@@ -1,5 +1,5 @@
-#ifndef Level102_air321
-#define Level102_air321
+#ifndef Level104_air321
+#define Level104_air321
 #include "Background.hpp"
 #include "Enemy1.hpp"
 #include "Enemy2.hpp"
@@ -12,7 +12,7 @@
 #include "LevelHelper.hpp"
 #include "Player.hpp"
 using namespace sf; // don't forget this or you would have to initialize everything with sf::
-class Level102
+class Level104
 {
 public:
 	void Show(RenderWindow& window, Event& event);
