@@ -69,6 +69,7 @@ public:
 	static bool shouldRemoveExplosion(Explosion& explosion);
 	static void resetMissileCounter();
 	static bool startedFiring;
+	static bool isMute;
 
 private:
 	float moveSpeed;
@@ -81,7 +82,11 @@ private:
 	Clock bigExplosionClock;
 	bool shouldDisappear;
 	bool shouldExplode;
-
 	bool firstTime;
+	Sound bulletSound;
+	Sound missileSound;
+	Sound bulletHitSound;
+	Sound missileHitSound;
+	Sound explodedSound;
 };
 #endif

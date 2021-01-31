@@ -110,6 +110,7 @@ void Enemy5::Show(RenderWindow& window)
 
 void Enemy5::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
 {
+
 	if (!isDying)
 	{
 		if (!isBulletIntervalSet)
@@ -119,6 +120,10 @@ void Enemy5::fireBullet(Player& player, int interval_milliseconds, int interval_
 		}
 		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
 		{
+			if (isMute == false)
+			{
+				bulletSound.play();
+			}
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
 			bulletLeft.rotation = 0;
@@ -138,6 +143,7 @@ void Enemy5::fireBullet(Player& player, int interval_milliseconds, int interval_
 
 void Enemy5::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed) // we don't need the player. we included it for easier level management
 {
+
 	if (!isDying)
 	{
 		if (missileCount > 0)
@@ -149,6 +155,10 @@ void Enemy5::fireMissile(Player& player, int interval_milliseconds, int interval
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
 				missile.rotation = 0;

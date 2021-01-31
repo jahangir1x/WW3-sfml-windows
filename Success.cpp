@@ -1,7 +1,8 @@
 #include "Success.hpp"
-
+#include "BaseEnemy.hpp"
 #include "GetRes.hpp"
 #include "Helper.hpp"
+#include "Player.hpp"
 
 using namespace std;
 using namespace sf;
@@ -49,12 +50,17 @@ Success::Success()
 
 	bodySprite.setScale(bodyScale, bodyScale);
 	starSprite.setScale(starScale, starScale);
-
+	successSound.setBuffer(GetRes::successMessageSound);
+	clickSound.setBuffer(GetRes::menuClickSound);
+	soundPlayed = false;
+	clickSoundPlayed = false;
 	Helper::resetClock();
 }
 
 bool Success::isFinishedShowing(RenderWindow& window)
 {
+	BaseEnemy::isMute = true;
+	Player::isMute = true;
 	buttonSprite.setPosition(bodySprite.getPosition().x + bodySprite.getGlobalBounds().width / 2 - 10 - buttonSprite.getGlobalBounds().width / 2, bodySprite.getPosition().y + bodySprite.getGlobalBounds().height / 2 - 10 - buttonSprite.getGlobalBounds().height / 2);
 	buttonSprite.setScale(buttonScale, buttonScale);
 
@@ -72,6 +78,11 @@ bool Success::isFinishedShowing(RenderWindow& window)
 
 	if (bodyClock.getElapsedTime().asSeconds() > 0.005 && bodyScale < 1.0 && shouldClose == false)
 	{
+		if (soundPlayed == false)
+		{
+			successSound.play();
+			soundPlayed = true;
+		}
 		bodyScale += 0.01 * 90 * Helper::SecondsPerFrame();
 
 		bodyClock.restart();
@@ -181,6 +192,11 @@ void Success::handleClose(Vector2i mousePos)
 {
 	if (buttonSprite.getGlobalBounds().contains(Vector2f(mousePos)))
 	{
+		if (clickSoundPlayed == false)
+		{
+			clickSound.play();
+			clickSoundPlayed = false;
+		}
 		shouldClose = true;
 	}
 }

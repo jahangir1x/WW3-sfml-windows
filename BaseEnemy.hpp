@@ -92,6 +92,7 @@ public:
 	static bool shouldRemoveBullet(Bullet& bullet);
 	static bool shouldRemoveMissile(Missile& missile);
 	static bool shouldRemoveExplosion(Explosion& explosion);
+	static bool isMute;
 
 protected:
 	void moveLeft(float speed = 400);
@@ -129,5 +130,10 @@ protected:
 	Vector2f bulletOriginPosLeft;
 	Vector2f bulletOriginPosRight;
 	Vector2f missileOriginPos;
+	Sound bulletSound;
+	Sound missileSound;
+	Sound bulletHitSound;
+	Sound missileHitSound;
+	Sound explodedSound;
 };
 #endif

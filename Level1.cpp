@@ -12,7 +12,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 	while (LevelHelper::shouldKeepPlaying())
 	{
 		Puzzle puzzle;
-		puzzle.make(3, 4, 5, 21, 7, 7, 10000);
+		puzzle.make(3, 4, 5, 21, 7, 7, 60);
 
 		////// mandatory //////
 		cout << "in level 1 " << endl;
@@ -24,19 +24,28 @@ void Level1::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		CustomText custext1;
-		CustomText custext2;
-		CustomText custext3;
 		////// mandatory //////
 
 		// yuri.healthValue = 4;
-		vector<Boss> enemies(1);
-		for (auto& boss : enemies)
-		{
-			boss.setStyle(Boss::Style::ShakaLala);
-			boss.healthValue=800;
+		CustomText custext1;
+		CustomText custext2;
+		Boss boss;
 
-		}
+		Music music;
+		music.openFromFile("res/music/boss.wav");
+		music.setVolume(20);
+		music.play();
+
+		boss.setStyle(Boss::Style::ShakaLala);
+		boss.enemySprite.setScale(0.6, 0.6);
+		boss.bulletDamage = 15;
+		boss.missileDamage = 25;
+		boss.healthValue = 500;
+
+		boss.healthValue = 800;
+		bool isHit = false;
+		float playerHealth = 90;
+
 		while (window.isOpen())
 		{
 			Helper::resetClock();
@@ -82,55 +91,52 @@ void Level1::Show(RenderWindow& window, Event& event)
 				yuri.moveDown();
 			}
 
-			for (auto& enemy : enemies)
-			{
-				// enemy.healthValue = 5;
-				enemy.move(300);
-				enemy.missileCount = 10;
-				enemy.fireBullet(yuri, 1000, 0, 500);
-				enemy.fireMissile(yuri, 1000, 0, 400);
+			custext1.Show(window, "Caution: MIG93 approaching", 80, 200, 200, 2, true, 0.1);
+			cout << "first" << endl;
 
-				levelhelp.isHitBody(yuri, enemy);
-				levelhelp.isHitBullet(yuri, enemy);
-				levelhelp.isHitMissile(yuri, enemy);
-				enemy.Show(window);
+			if (custext1.hidingFinished)
+			{
+				boss.move(400);
+			}
+			boss.missileCount = 10;
+			boss.fireBullet(yuri, 2000, 100, 550);
+			boss.fireMissile(yuri, 3000, 2000, 400);
+
+			levelhelp.isHitBody(yuri, boss);
+			levelhelp.isHitBullet(yuri, boss);
+			levelhelp.isHitMissile(yuri, boss);
+			boss.Show(window);
+			if (playerHealth > yuri.healthValue && isHit == false)
+			{
+				isHit = true;
 			}
 
+			if (isHit == true && custext2.hidingFinished == false)
+			{
+				custext2.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
+			}
+
+			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false)
+			{
+				puzzle.Show(window, event);
+			}
 			yuri.Show(window);
 
 			// cout << "state: " << success.getState() << endl;
-			if (yuri.isDead)
+			if (yuri.isDead || puzzle.getState() == Puzzle::Failed)
 			{
 				if (levelFailedObj.isFinishedShowing(window))
 				{
 					break;
 				}
 			}
-//            enemies[0].healthValue = 3;
+			//            enemies[0].healthValue = 3;
 			if (Helper::enemiesDied() == 1)
 			{
-				 if (puzzle.getState() == Puzzle::Nothing)
-				 {
-
-				 	puzzle.Show(window, event);
-				 	cout << "fin" << endl;
-				 }
-				 if (puzzle.getState() == Puzzle::Solved)
-				 {
-                    if (success.isFinishedShowing(window) == true)
-                    {
-                        return;
-                    }
-				 }
-
-                else
-                {
-                    if (levelFailedObj.isFinishedShowing(window))
-                    {
-                        cout << "showing failed" << endl;
-                        break;
-                    }
-                }
+				if (success.isFinishedShowing(window) == true)
+				{
+					return;
+				}
 			}
 			GameUI::showPlayerUI(window);
 			window.display();

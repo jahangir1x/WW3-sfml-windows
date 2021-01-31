@@ -16,7 +16,6 @@ void Level112::Show(RenderWindow& window, Event& event)
 		Background background;
 		Player yuri;
 		bool someone_is_alive;
-		unsigned int i;
 		CustomText custext1;
 		CustomText custext2;
 		CustomText custext3;

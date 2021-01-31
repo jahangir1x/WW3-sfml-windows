@@ -3,6 +3,7 @@
 
 using namespace std;
 using namespace sf;
+#include "CustomText.hpp"
 
 class Puzzle
 {
@@ -11,6 +12,10 @@ private:
 	bool stopWatchStarted;
 	bool shouldStopEverything;
 	bool can_click;
+	IntRect buttonRect;
+	vector<Sprite> buttons;
+	RectangleShape watchRectangle;
+	CustomText custext;
 	enum Rotation
 	{
 		no_rotation = 0,
@@ -56,7 +61,6 @@ private:
 	float secondsRemainStore;
 	float secondsRemain;
 
-
 public:
 	Puzzle();
 	enum State
@@ -73,5 +77,7 @@ public:
 	InputMeter inMeter1;
 	InputMeter inMeter2;
 	Puzzle::State state;
+	int k;
+	unsigned i, j;
 };
 #endif

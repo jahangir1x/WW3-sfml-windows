@@ -1,7 +1,9 @@
 #include "LevelFailed.hpp"
+#include "BaseEnemy.hpp"
 #include "GetRes.hpp"
 #include "Helper.hpp"
 #include "LevelHelper.hpp"
+#include "Player.hpp"
 
 using namespace std;
 using namespace sf;
@@ -10,11 +12,12 @@ LevelFailed::LevelFailed()
 	completeString = "You Died";
 
 	quoteString = quotes[rand() % quotes.size()];
+	// quoteString = quotes[0];
 	quoteText.setString(quoteString);
 
 	buttonRect.left = 0;
 	buttonRect.top = 0;
-	buttonRect.width = 281;
+	buttonRect.width = tryAgainWidth;
 	buttonRect.height = 84;
 
 	screenRect.setSize(Vector2f(Helper::windowWidth(), Helper::windowHeight()));
@@ -56,17 +59,23 @@ LevelFailed::LevelFailed()
 
 	bodySprite.setScale(bodyScale, bodyScale * 1.9);
 	starSprite.setScale(starScale, starScale);
-
+	failedSound.setBuffer(GetRes::failedMessageSound);
+	clickSound.setBuffer(GetRes::menuClickSound);
+	soundPlayed = false;
+	clickSoundPlayed = false;
 	Helper::resetClock();
 }
 
 bool LevelFailed::isFinishedShowing(RenderWindow& window)
 {
+	BaseEnemy::isMute = true;
+	Player::isMute = true;
 	buttonSprite.setPosition(bodySprite.getPosition().x + bodySprite.getGlobalBounds().width / 2 - 10 - buttonSprite.getGlobalBounds().width / 2, bodySprite.getPosition().y + bodySprite.getGlobalBounds().height / 2 - 10 - buttonSprite.getGlobalBounds().height / 2);
 	buttonSprite.setScale(buttonScale, buttonScale);
 	if (LevelHelper::retriesLeft - 1 == 0)
 	{
 		buttonSprite.setTexture(GetRes::playAgain);
+		buttonRect.width = playAgainWidth;
 	}
 	if (rectClock.getElapsedTime().asSeconds() > 0.0005 && alpha < 255.0)
 	{
@@ -82,6 +91,11 @@ bool LevelFailed::isFinishedShowing(RenderWindow& window)
 
 	if (bodyClock.getElapsedTime().asSeconds() > 0.005 && bodyScale < 1.0 && shouldClose == false)
 	{
+		if (soundPlayed == false)
+		{
+			failedSound.play();
+			soundPlayed = true;
+		}
 		bodyScale += 0.01 * 90 * Helper::SecondsPerFrame();
 
 		bodyClock.restart();
@@ -135,7 +149,7 @@ bool LevelFailed::isFinishedShowing(RenderWindow& window)
 	}
 	else if (buttonClock.getElapsedTime().asSeconds() > time && buttonScale >= 1.0 && shouldClose == false)
 	{
-		if (buttonRect.left == 1124)
+		if (buttonRect.left == buttonRect.width * 4)
 		{
 			sign = -1;
 		}
@@ -200,6 +214,11 @@ void LevelFailed::handleClose(Vector2i mousePos)
 {
 	if (buttonSprite.getGlobalBounds().contains(Vector2f(mousePos)))
 	{
+		if (clickSoundPlayed == false)
+		{
+			clickSound.play();
+			clickSoundPlayed = false;
+		}
 		shouldClose = true;
 	}
 }

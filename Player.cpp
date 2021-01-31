@@ -11,6 +11,7 @@ using namespace sf;
 float Player::healthValue;
 unsigned int Player::missileCount = 9;
 bool Player::startedFiring;
+bool Player::isMute;
 
 Player::Player()
 {
@@ -58,6 +59,7 @@ Player::Player()
 	shouldExplode = false;
 	startedFiring = false;
 	firstTime = true;
+	isMute = false;
 	bulletDamage = 5;
 	missileDamage = 8;
 	hitBodyDamage = 9;
@@ -84,6 +86,11 @@ Player::Player()
 	// missileCountString.setPosition(70, 25);
 	// missileCountString.setStyle(Text::Bold);
 	Helper::storePlayerHeight(playerSprite.getGlobalBounds().height);
+	bulletSound.setBuffer(GetRes::playerBulletSound);
+	missileSound.setBuffer(GetRes::playerMissileSound);
+	bulletHitSound.setBuffer(GetRes::playerBulletExplosionSound);
+	missileHitSound.setBuffer(GetRes::playerMissileExplosionSound);
+	explodedSound.setBuffer(GetRes::playerExplodedSound);
 	Helper::resetClock();
 }
 
@@ -259,6 +266,10 @@ void Player::fireBullet()
 		{
 			if (bulletClock.getElapsedTime().asSeconds() > 0.2)
 			{
+				if (isMute == false)
+				{
+					bulletSound.play();
+				}
 				bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
 				bulletsLeft.push_back(bulletLeft);
 				bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
@@ -282,6 +293,10 @@ void Player::fireMissile()
 		{
 			if (missileClock.getElapsedTime().asSeconds() > 0.5)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.sprite.setPosition(playerSprite.getPosition().x + playerSprite.getGlobalBounds().width / 2 - 5, playerSprite.getPosition().y + 20);
 				missiles.push_back(missile);
 				missileClock.restart();
@@ -360,6 +375,7 @@ void Player::show_explosion_bullet(Vector2f pos)
 	explosion.sprite.setScale(1, 1);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
+	bulletHitSound.play();
 }
 void Player::show_explosion_missile(Vector2f pos)
 {
@@ -367,4 +383,5 @@ void Player::show_explosion_missile(Vector2f pos)
 	explosion.sprite.setScale(2, 2);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
+	missileHitSound.play();
 }

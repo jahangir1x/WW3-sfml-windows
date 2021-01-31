@@ -1,5 +1,5 @@
 #include "GameHandler.hpp"
-
+using namespace std;
 int main(void)
 {
 	GameHandler gamehandler;

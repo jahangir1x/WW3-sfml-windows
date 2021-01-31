@@ -105,6 +105,7 @@ void Enemy3::Show(RenderWindow& window)
 
 void Enemy3::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
+
 	if (!isDying)
 	{
 		if (!isBulletIntervalSet)
@@ -114,6 +115,10 @@ void Enemy3::fireBullet(Player& player, int interval_milliseconds, int interval_
 		}
 		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
 		{
+			if (isMute == false)
+			{
+				bulletSound.play();
+			}
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
 			bulletsLeft.push_back(bulletLeft);
@@ -130,6 +135,7 @@ void Enemy3::fireBullet(Player& player, int interval_milliseconds, int interval_
 
 void Enemy3::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
+
 	if (!isDying)
 	{
 		if (missileCount > 0)
@@ -141,6 +147,10 @@ void Enemy3::fireMissile(Player& player, int interval_milliseconds, int interval
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
 				missiles.push_back(missile);

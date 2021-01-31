@@ -11,6 +11,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	GameUI::init();
 	gameLogoSprite.setTexture(GetRes::gameLogoTex);
 	gameLogoSprite.setPosition(Helper::windowWidth() / 2 - gameLogoSprite.getGlobalBounds().width / 2, 46);
+	menuBackSprite.setTexture(GetRes::menuBackTex);
+	widthScale = Helper::windowWidth() / menuBackSprite.getGlobalBounds().width;
+	heightScale = Helper::windowHeight() / menuBackSprite.getGlobalBounds().height;
+	menuBackSprite.setScale(max(widthScale, heightScale), max(widthScale, heightScale));
+	menuBackSprite.setPosition(0, 0);
 
 	playSprite.setTexture(GetRes::playButtonTex);
 	playRect.left = 0;
@@ -46,6 +51,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 
 	clicked = false;
 	result = Nothing;
+	menuHover.setBuffer(GetRes::menuHoverSound);
+	menuClick.setBuffer(GetRes::menuClickSound);
+	hoverSoundPlayed = false;
+	clickSoundPlayed = false;
+
 	Helper::resetClock();
 
 	while (window.isOpen())
@@ -70,6 +80,8 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 			}
 		}
 
+		// music.play();
+
 		if (playClock.getElapsedTime().asSeconds() > 0.08)
 		{
 			// if (!clicked)
@@ -79,29 +91,30 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 				// cout << "mouse" << endl;
 				if (playRect.left < 2597)
 				{
+					if (hoverSoundPlayed == false)
+					{
+						menuHover.play();
+						hoverSoundPlayed = true;
+					}
 					playRect.left += playRect.width;
 					playSprite.setTextureRect(playRect);
 				}
 			}
 			else if (playRect.left > 0)
 			{
+				hoverSoundPlayed = false;
 				playRect.left -= playRect.width;
 				playSprite.setTextureRect(playRect);
 			}
 			playClock.restart();
-			// }
-			// 	else
-			// 	{
-			// 		if (playClock.getElapsedTime().asSeconds() > 0.08)
-			// 		{
-			// 			// cout << "clicked";
-			// 			// clicked = false;
-			// 			return result;
-			// 		}
-			// 	}
 		}
 		if (clicked && playSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
+			if (clickSoundPlayed == false)
+			{
+				menuClick.play();
+				clickSoundPlayed = true;
+			}
 			playRect.left = 2969;
 			playSprite.setTextureRect(playRect);
 			result = Play;
@@ -116,12 +129,18 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 				// cout << "mouse" << endl;
 				if (helpRect.left < 2597)
 				{
+					if (hoverSoundPlayed == false)
+					{
+						menuHover.play();
+						hoverSoundPlayed = true;
+					}
 					helpRect.left += helpRect.width;
 					helpSprite.setTextureRect(helpRect);
 				}
 			}
 			else if (helpRect.left > 0)
 			{
+				hoverSoundPlayed = false;
 				helpRect.left -= helpRect.width;
 				helpSprite.setTextureRect(helpRect);
 			}
@@ -129,6 +148,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 		}
 		if (clicked && helpSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
+			if (clickSoundPlayed == false)
+			{
+				menuClick.play();
+				clickSoundPlayed = true;
+			}
 			helpRect.left = 2969;
 			helpSprite.setTextureRect(helpRect);
 
@@ -144,12 +168,18 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 				// cout << "mouse" << endl;
 				if (creditsRect.left < 2597)
 				{
+					if (hoverSoundPlayed == false)
+					{
+						menuHover.play();
+						hoverSoundPlayed = true;
+					}
 					creditsRect.left += creditsRect.width;
 					creditsSprite.setTextureRect(creditsRect);
 				}
 			}
 			else if (creditsRect.left > 0)
 			{
+				hoverSoundPlayed = false;
 				creditsRect.left -= creditsRect.width;
 				creditsSprite.setTextureRect(creditsRect);
 			}
@@ -157,6 +187,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 		}
 		if (clicked && creditsSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
+			if (clickSoundPlayed == false)
+			{
+				menuClick.play();
+				clickSoundPlayed = true;
+			}
 			creditsRect.left = 2969;
 			creditsSprite.setTextureRect(creditsRect);
 
@@ -172,12 +207,18 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 				// cout << "mouse" << endl;
 				if (exitRect.left < 2597)
 				{
+					if (hoverSoundPlayed == false)
+					{
+						menuHover.play();
+						hoverSoundPlayed = true;
+					}
 					exitRect.left += exitRect.width;
 					exitSprite.setTextureRect(exitRect);
 				}
 			}
 			else if (exitRect.left > 0)
 			{
+				hoverSoundPlayed = false;
 				exitRect.left -= exitRect.width;
 				exitSprite.setTextureRect(exitRect);
 			}
@@ -185,6 +226,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 		}
 		if (clicked && exitSprite.getGlobalBounds().contains(mousePositionClicked.x, mousePositionClicked.y))
 		{
+			if (clickSoundPlayed == false)
+			{
+				menuClick.play();
+				clickSoundPlayed = true;
+			}
 			exitRect.left = 2969;
 			exitSprite.setTextureRect(exitRect);
 
@@ -198,7 +244,8 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 			return result;
 		}
 
-		window.clear(Color::Black);
+		window.clear(Color::White);
+		window.draw(menuBackSprite);
 		window.draw(gameLogoSprite);
 		window.draw(playSprite);
 		window.draw(helpSprite);

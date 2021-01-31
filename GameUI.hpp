@@ -35,5 +35,6 @@ private:
 	static Sprite closeButton;
 	static unsigned int i;
 	static unsigned int j;
+	static Sound clickSound;
 };
 #endif

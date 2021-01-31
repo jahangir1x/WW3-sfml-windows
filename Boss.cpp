@@ -196,6 +196,7 @@ void Boss::fireBullet(Player& player, int interval_milliseconds, int interval_of
 	// fireBulletCircle(player, interval_milliseconds, interval_offset, speed);
 	// return;
 	// fireBulletSine(player, interval_milliseconds, interval_offset, speed);
+
 	switch (rand() % 3)
 	{
 		case 0:
@@ -214,8 +215,9 @@ void Boss::fireBullet(Player& player, int interval_milliseconds, int interval_of
 
 void Boss::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
-	fireMissileCircle(player, interval_milliseconds, interval_offset, speed);
-	return;
+
+	// fireMissileCircle(player, interval_milliseconds, interval_offset, speed);
+	// return;
 	switch (rand() % 3)
 	{
 		case 0:
@@ -243,6 +245,11 @@ void Boss::fireBulletCircle(Player& player, int interval_milliseconds, int inter
 		}
 		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
 		{
+
+			if (isMute == false)
+			{
+				bulletSound.play();
+			}
 			bulletLeft.shootingStyle = Circle;
 			bulletLeft.playerPos = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
 				Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot
@@ -305,6 +312,10 @@ void Boss::fireBulletSine(Player& player, int interval_milliseconds, int interva
 		}
 		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
 		{
+			if (isMute == false)
+			{
+				bulletSound.play();
+			}
 			bulletLeft.shootingStyle = Sine;
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.speed = speed;
@@ -337,6 +348,10 @@ void Boss::fireBulletToPlayer(Player& player, int interval_milliseconds, int int
 		}
 		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
 		{
+			if (isMute == false)
+			{
+				bulletSound.play();
+			}
 			bulletLeft.shootingStyle = ToPlayer;
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.sprite.setOrigin(bulletLeft.sprite.getGlobalBounds().width / 2, 0);
@@ -378,6 +393,10 @@ void Boss::fireMissileSine(Player& player, int interval_milliseconds, int interv
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.shootingStyle = Sine;
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.speed = speed;
@@ -407,6 +426,10 @@ void Boss::fireMissileToPlayer(Player& player, int interval_milliseconds, int in
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.shootingStyle = ToPlayer;
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.sprite.setOrigin(missile.sprite.getGlobalBounds().width / 2, 0);
@@ -439,6 +462,10 @@ void Boss::fireMissileCircle(Player& player, int interval_milliseconds, int inte
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.shootingStyle = Circle;
 				missile.playerPos = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
 					Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot

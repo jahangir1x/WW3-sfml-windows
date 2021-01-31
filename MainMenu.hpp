@@ -23,6 +23,9 @@ private:
 	Vector2i mousePositionClicked;
 	bool clicked;
 	MenuResult result;
+	Sprite menuBackSprite;
+	float widthScale;
+	float heightScale;
 
 	Sprite gameLogoSprite;
 
@@ -43,5 +46,9 @@ private:
 	Clock exitClock;
 
 	Clock menuClock;
+	Sound menuHover;
+	Sound menuClick;
+	bool hoverSoundPlayed;
+	bool clickSoundPlayed;
 };
 #endif

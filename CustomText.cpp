@@ -13,6 +13,8 @@ CustomText::CustomText()
 	waiting_finished = false;
 	text.setFont(GetRes::techFont);
 	text.setFillColor(Color(255, green_blue, green_blue));
+	typeWrite.setBuffer(GetRes::typeWriterSound);
+	shouldMute = false;
 }
 
 void CustomText::Show(RenderWindow& window, sf::String str, unsigned int char_size, float pos_x, float pos_y, float hide_after_seconds, bool shouldHighlight, float text_popping_delay, sf::Color color)
@@ -49,6 +51,10 @@ void CustomText::Show(RenderWindow& window, sf::String str, unsigned int char_si
 	{
 		if (clock.getElapsedTime().asSeconds() > text_popping_delay)
 		{
+			if (shouldMute == false)
+			{
+				typeWrite.play();
+			}
 			text.setString(str.substring(0, currentLength));
 			currentLength++;
 			clock.restart();

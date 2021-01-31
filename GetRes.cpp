@@ -8,6 +8,7 @@ Font GetRes::gameFont;
 Font GetRes::techFont;
 Texture GetRes::explosionTex;
 Texture GetRes::gameLogoTex;
+Texture GetRes::menuBackTex;
 Texture GetRes::creditsButtonTex;
 Texture GetRes::exitButtonTex;
 Texture GetRes::helpButtonTex;
@@ -58,13 +59,33 @@ Texture GetRes::outMeterHand;
 Texture GetRes::inMeterHand;
 Texture GetRes::outMeterHint;
 
-GetRes::GetRes()
+SoundBuffer GetRes::enemyBulletSound;
+SoundBuffer GetRes::enemyMissileSound;
+SoundBuffer GetRes::enemyExplodedSound;
+SoundBuffer GetRes::enemyBulletExplosionSound;
+SoundBuffer GetRes::enemyMissileExplosionSound;
+SoundBuffer GetRes::playerBulletSound;
+SoundBuffer GetRes::playerMissileSound;
+SoundBuffer GetRes::playerExplodedSound;
+SoundBuffer GetRes::playerBulletExplosionSound;
+SoundBuffer GetRes::playerMissileExplosionSound;
+SoundBuffer GetRes::playerFlySound;
+SoundBuffer GetRes::failedMessageSound;
+SoundBuffer GetRes::successMessageSound;
+SoundBuffer GetRes::menuClickSound;
+SoundBuffer GetRes::menuHoverSound;
+SoundBuffer GetRes::typeWriterSound;
+Texture GetRes::outMeterSuccess;
+Texture GetRes::dummyButtons;
+
+void GetRes::init()
 {
 	boldFont.loadFromFile("res/Roboto-Bold.ttf");
 	gameFont.loadFromFile("res/Roboto-Regular.ttf");
 	techFont.loadFromFile("res/AgencyFB-Regular.ttf");
 	explosionTex.loadFromFile("res/explosion.png");
 	gameLogoTex.loadFromFile("res/game_logo.png");
+	menuBackTex.loadFromFile("res/menu_background.jpg");
 	creditsButtonTex.loadFromFile("res/credits_button.png");
 	exitButtonTex.loadFromFile("res/exit_button.png");
 	helpButtonTex.loadFromFile("res/help_button.png");
@@ -114,9 +135,30 @@ GetRes::GetRes()
 	outMeterHand.loadFromFile("res/output_hand.png");
 	inMeterHand.loadFromFile("res/input_hand.png");
 	outMeterHint.loadFromFile("res/output_hint.png");
+	outMeterSuccess.loadFromFile("res/output_complete.png");
+	dummyButtons.loadFromFile("res/dummy_button.png");
+
+	enemyBulletSound.loadFromFile("res/music/enemy_bullet.wav");
+	enemyMissileSound.loadFromFile("res/music/enemy_missile.wav");
+	enemyExplodedSound.loadFromFile("res/music/enemy_exploded.wav");
+	enemyBulletExplosionSound.loadFromFile("res/music/enemy_explosion_bullet.ogg");
+	enemyMissileExplosionSound.loadFromFile("res/music/enemy_explosion_missile.wav");
+	playerBulletSound.loadFromFile("res/music/player_bullet.ogg");
+	playerMissileSound.loadFromFile("res/music/player_missile.wav");
+	playerExplodedSound.loadFromFile("res/music/player_exploded.wav");
+	playerBulletExplosionSound.loadFromFile("res/music/player_explosion_bullet.wav");
+	playerMissileExplosionSound.loadFromFile("res/music/player_explosion_missile.wav");
+	playerFlySound.loadFromFile("res/music/player_flyaway.wav");
+	failedMessageSound.loadFromFile("res/music/failed.wav");
+	successMessageSound.loadFromFile("res/music/success.ogg");
+	menuClickSound.loadFromFile("res/music/menu_clicked.wav");
+	menuHoverSound.loadFromFile("res/music/menu_hover.wav");
+	typeWriterSound.loadFromFile("res/music/typewriter.ogg");
 
 	explosionTex.setSmooth(true);
+	outMeterSuccess.setSmooth(true);
 	gameLogoTex.setSmooth(true);
+	menuBackTex.setSmooth(true);
 	creditsButtonTex.setSmooth(true);
 	exitButtonTex.setSmooth(true);
 	helpButtonTex.setSmooth(true);
@@ -131,6 +173,7 @@ GetRes::GetRes()
 	enemyBodyTex6.setSmooth(true);
 	enemyBodyTex7.setSmooth(true);
 	bossBodyTex.setSmooth(true);
+	dummyButtons.setSmooth(true);
 	playerBulletTex.setSmooth(true);
 	playerMissileTex.setSmooth(true);
 	playerBodyTex.setSmooth(true);

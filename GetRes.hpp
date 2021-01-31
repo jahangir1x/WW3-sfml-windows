@@ -6,13 +6,14 @@ using namespace std;
 class GetRes
 {
 public:
-	GetRes();
+	void init();
 	static Font boldFont;
 	static Font gameFont;
 	static Font techFont;
 	static Texture explosionTex;
 	static Texture gameLogoTex;
 
+	static Texture menuBackTex;
 	static Texture creditsButtonTex;
 	static Texture exitButtonTex;
 	static Texture helpButtonTex;
@@ -71,5 +72,23 @@ public:
 	static Texture outMeterHand;
 	static Texture inMeterHand;
 	static Texture outMeterHint;
+	static Texture outMeterSuccess;
+	static Texture dummyButtons;
+	static SoundBuffer enemyBulletSound;
+	static SoundBuffer enemyMissileSound;
+	static SoundBuffer enemyExplodedSound;
+	static SoundBuffer enemyBulletExplosionSound;
+	static SoundBuffer enemyMissileExplosionSound;
+	static SoundBuffer playerBulletSound;
+	static SoundBuffer playerMissileSound;
+	static SoundBuffer playerExplodedSound;
+	static SoundBuffer playerBulletExplosionSound;
+	static SoundBuffer playerMissileExplosionSound;
+	static SoundBuffer playerFlySound;
+	static SoundBuffer failedMessageSound;
+	static SoundBuffer successMessageSound;
+	static SoundBuffer menuClickSound;
+	static SoundBuffer menuHoverSound;
+	static SoundBuffer typeWriterSound;
 };
 #endif

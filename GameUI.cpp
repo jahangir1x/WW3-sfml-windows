@@ -15,6 +15,7 @@ Sprite GameUI::closeButton;
 GameUI::CursorStates GameUI::cursorState;
 unsigned int GameUI::i;
 unsigned int GameUI::j;
+Sound GameUI::clickSound;
 
 void GameUI::init()
 {
@@ -30,8 +31,8 @@ void GameUI::init()
 
 	cursorRect.left = 0;
 	cursorRect.top = 0;
-	cursorRect.width = 37;
-	cursorRect.height = 45;
+	cursorRect.width = 38;
+	cursorRect.height = 46;
 
 	cursorSprite.setTexture(GetRes::cursor);
 	cursorSprite.setTextureRect(cursorRect);
@@ -56,6 +57,7 @@ void GameUI::init()
 	// 	retrySprites.push_back(retrySprite);
 	// 	j += 31;
 	// }
+	clickSound.setBuffer(GetRes::menuClickSound);
 	Helper::resetClock();
 }
 
@@ -98,15 +100,15 @@ void GameUI::showPlayerUI(RenderWindow& window)
 
 	if (cursorState == Left)
 	{
-		cursorRect.left = 37;
+		cursorRect.left = cursorRect.width;
 	}
 	else if (cursorState == Right)
 	{
-		cursorRect.left = 74;
+		cursorRect.left = cursorRect.width * 2;
 	}
 	else if (cursorState == Both)
 	{
-		cursorRect.left = 111;
+		cursorRect.left = cursorRect.width * 3;
 	}
 	else
 	{
@@ -152,15 +154,15 @@ void GameUI::showMenuUI(RenderWindow& window)
 
 	if (cursorState == Left)
 	{
-		cursorRect.left = 37;
+		cursorRect.left = cursorRect.width;
 	}
 	else if (cursorState == Right)
 	{
-		cursorRect.left = 74;
+		cursorRect.left = cursorRect.width * 2;
 	}
 	else if (cursorState == Both)
 	{
-		cursorRect.left = 111;
+		cursorRect.left = cursorRect.width * 3;
 	}
 	else
 	{
@@ -177,9 +179,9 @@ void GameUI::handleClose(RenderWindow& window, Vector2i MousePos)
 {
 	if (closeButton.getGlobalBounds().contains(Vector2f(MousePos)))
 	{
-		// add logic here
+		clickSound.play();
+
 		window.close();
 		exit(0);
 	}
 }
-

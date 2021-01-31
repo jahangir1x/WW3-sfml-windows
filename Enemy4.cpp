@@ -106,6 +106,7 @@ void Enemy4::Show(RenderWindow& window)
 
 void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
+
 	if (!isDying)
 	{
 		if (!isBulletIntervalSet)
@@ -115,6 +116,10 @@ void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_
 		}
 		else if (bulletClock.getElapsedTime().asMilliseconds() > bulletInterval)
 		{
+			if (isMute == false)
+			{
+				bulletSound.play();
+			}
 			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
 			bulletLeft.sprite.setOrigin(bulletLeft.sprite.getGlobalBounds().width / 2, 0);
 
@@ -143,6 +148,7 @@ void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_
 
 void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval_offset, float speed)
 {
+
 	if (!isDying)
 	{
 		if (missileCount > 0)
@@ -154,6 +160,10 @@ void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval
 			}
 			else if (missileClock.getElapsedTime().asMilliseconds() > missileInterval)
 			{
+				if (isMute == false)
+				{
+					missileSound.play();
+				}
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.sprite.setOrigin(missile.sprite.getGlobalBounds().width / 2, 0);
 

@@ -44,6 +44,10 @@ protected:
 	Clock rectClock;
 	Clock textClock;
 	Clock buttonClock;
+	Sound successSound;
+	Sound clickSound;
+	bool soundPlayed;
+	bool clickSoundPlayed;
 };
 
 #endif

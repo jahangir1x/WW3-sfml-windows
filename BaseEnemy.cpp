@@ -5,6 +5,8 @@
 using namespace std;
 using namespace sf;
 
+bool BaseEnemy::isMute;
+
 BaseEnemy::BaseEnemy()
 {
 	i = rand() % 7;
@@ -71,6 +73,7 @@ BaseEnemy::BaseEnemy()
 	firstTime = true;
 	isBulletIntervalSet = false;
 	isMissileIntervalSet = false;
+	isMute = false;
 	bulletDamage = 5;
 	missileDamage = 8;
 	hitBodyDamage = 9;
@@ -85,6 +88,13 @@ BaseEnemy::BaseEnemy()
 	missile.speed = 400;
 	missile.sprite.setTexture(GetRes::enemyMissileTex);
 	missileCount = 9;
+
+	bulletSound.setBuffer(GetRes::enemyBulletSound);
+	missileSound.setBuffer(GetRes::enemyMissileSound);
+	bulletHitSound.setBuffer(GetRes::enemyBulletExplosionSound);
+	missileHitSound.setBuffer(GetRes::enemyMissileExplosionSound);
+	explodedSound.setBuffer(GetRes::enemyExplodedSound);
+
 	Helper::resetClock();
 }
 
@@ -263,6 +273,7 @@ void BaseEnemy::Die()
 	bigExplosion.sprite.setScale(3, 3);
 	if (!shouldExplode)
 	{
+		explodedSound.play();
 		shouldExplode = true;
 	}
 }
@@ -337,6 +348,7 @@ void BaseEnemy::show_explosion_bullet(Vector2f pos)
 	explosion.sprite.setScale(1, 1);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
+	bulletHitSound.play();
 }
 void BaseEnemy::show_explosion_missile(Vector2f pos)
 {
@@ -344,4 +356,5 @@ void BaseEnemy::show_explosion_missile(Vector2f pos)
 	explosion.sprite.setScale(2, 2);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
+	missileHitSound.play();
 }

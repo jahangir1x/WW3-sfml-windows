@@ -1,4 +1,5 @@
 #include "Puzzle.hpp"
+#include "CustomText.hpp"
 #include "GameUI.hpp"
 #include "GetRes.hpp"
 #include "Helper.hpp"
@@ -10,6 +11,7 @@ using namespace std;
 using namespace sf;
 Puzzle::Puzzle()
 {
+	custext.shouldMute = true;
 	state = Nothing;
 	solved = false;
 	GameUI::init();
@@ -25,8 +27,34 @@ Puzzle::Puzzle()
 
 	stopWatchText.setFont(GetRes::techFont);
 	stopWatchText.setString("99");
-	stopWatchText.setFillColor(Color::Red);
+	stopWatchText.setFillColor(Color(223, 75, 75));
 	stopWatchText.setPosition(20, 20);
+	watchRectangle.setSize(Vector2f(312, 74));
+	watchRectangle.setPosition(10, 15);
+	watchRectangle.setFillColor(Color(71, 71, 71));
+
+	buttons.resize(Helper::randRange(3, 8));
+	for (auto& sprite : buttons)
+	{
+		sprite.setTexture(GetRes::dummyButtons);
+		buttonRect.left = 0;
+		buttonRect.top = 0;
+		buttonRect.width = 57;
+		buttonRect.height = 150;
+		if (bool(rand() % 2))
+		{
+			buttonRect.left = 0;
+		}
+		else
+		{
+			buttonRect.left = buttonRect.width;
+		}
+		sprite.setTextureRect(buttonRect);
+		sprite.setRotation(rand() % 360);
+		k = Helper::randRange(50, 160);
+		sprite.setScale(k / 100.0, k / 100.0);
+		sprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(0, Helper::windowHeight())); // set random position
+	}
 
 	meter1active = false;
 	meter2active = false;
@@ -87,10 +115,34 @@ void Puzzle::make(int outTicksInit, int outHintTicks, int inTicksInit1, int inTi
 	stopWatchText.setCharacterSize(40);
 	stopWatch.restart();
 	secondsRemainStore = timeRemain;
+
+	for (i = 0; i < buttons.size(); i++)
+	{
+		for (j = i + 1; j < buttons.size(); j++)
+		{
+			if (i == j)
+			{
+				continue;
+			}
+			else
+			{
+				if (buttons[j].getGlobalBounds().intersects(buttons[i].getGlobalBounds()) || outMeter.meterSprite.getGlobalBounds().intersects(buttons[i].getGlobalBounds()) || inMeter1.meterSprite.getGlobalBounds().intersects(buttons[i].getGlobalBounds()) || inMeter2.meterSprite.getGlobalBounds().intersects(buttons[i].getGlobalBounds()) || watchRectangle.getGlobalBounds().intersects(buttons[i].getGlobalBounds())) // check if it intersects then set it outside
+				{
+					buttons[i].setPosition(Helper::windowWidth() + 100, Helper::windowHeight() + 100);
+				}
+			}
+		}
+	}
 }
 
 void Puzzle::Show(RenderWindow& window, Event& event)
 {
+
+	Music music;
+	music.openFromFile("res/music/tension.wav");
+	music.setVolume(30);
+	music.play();
+
 	while (window.isOpen())
 	{
 		if (stopWatchStarted == false)
@@ -130,7 +182,12 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 				}
 			}
 		}
-		window.clear(Color::Blue);
+		window.clear(Color(45, 45, 45));
+		for (auto& sprite : buttons)
+		{
+			window.draw(sprite);
+		}
+		window.draw(watchRectangle);
 
 		if (meter1active == false)
 		{
@@ -318,11 +375,12 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 			state = Failed;
 			break;
 		}
-		stopWatchText.setString(to_string(int(secondsRemain)));
+		stopWatchText.setString("Time Remaining: " + to_string(int(secondsRemain)));
 
 		// winning
 		if (outMeter.handSprite.getRotation() == outMeter.hintSprite.getRotation())
 		{
+			outMeter.meterSprite.setTexture(GetRes::outMeterSuccess);
 			cout << "win" << endl;
 			meter1active = false;
 			meter2active = false;
@@ -330,6 +388,11 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 			solved = true;
 			state = Solved;
 			break;
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			cout << "mpos: " << Mouse::getPosition(window).x << " " << Mouse::getPosition(window).y << endl;
 		}
 
 		//display
@@ -344,6 +407,9 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 		window.draw(inMeter2.handSprite);
 
 		window.draw(stopWatchText);
+
+		custext.Show(window, "Select left and right meter and\npress A and D to calibrate.\nYour goal is to set the same rotation\nto both hands of the output meter.", 24, watchRectangle.getPosition().x, watchRectangle.getPosition().y + watchRectangle.getSize().y + 10, -1, true, 0.01);
+
 		GameUI::showMenuUI(window);
 
 		window.display();

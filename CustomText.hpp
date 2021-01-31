@@ -12,6 +12,7 @@ public:
 	Text text;
 	bool fullShowed;
 	bool hidingFinished;
+	bool shouldMute;
 
 private:
 	unsigned int currentLength;
@@ -23,5 +24,6 @@ private:
 	bool waiting_finished;
 	float time_to_wait;
 	Clock highlightClock;
+	Sound typeWrite;
 };
 #endif

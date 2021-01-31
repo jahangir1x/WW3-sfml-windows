@@ -21,4 +21,3 @@ public:
 	void Show(RenderWindow& window, Event& event);
 };
 #endif
-

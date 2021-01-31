@@ -22,7 +22,6 @@ void Level2::Show(RenderWindow& window, Event& event)
 		CustomText custext2;
 		CustomText custext3;
 		////// mandatory //////
-
 		bool someone_is_alive;
 		unsigned int i;
 		vector<Enemy3> first_enemies(3);  // create 2 enemies
@@ -93,7 +92,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
-				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
+					custext1.Show(window, "Wave 1", 80, 200, 200, 2, true, 0.1);
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					this_enemy.move(300);
@@ -112,7 +111,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 				{
 					if (second_enemies[i].isDead == false)
 					{
-					    if (custext1.hidingFinished == true)
+						if (custext1.hidingFinished == true)
 						{
 							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
 						}
@@ -135,7 +134,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 				{
 					if (third_enemies[i].isDead == false)
 					{
-					    if (custext2.hidingFinished == true)
+						if (custext2.hidingFinished == true)
 						{
 							custext3.Show(window, "Wave 3", 80, 200, 200, 2, true, 0.1);
 						}
