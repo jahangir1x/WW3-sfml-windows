@@ -39,7 +39,7 @@ using namespace sf;
 void GameHandler::Start()
 {
 	window.create(VideoMode(1100, 900), "World War 3", Style::Fullscreen);
-	window.setFramerateLimit(30);
+	window.setFramerateLimit(90);
 	window.setMouseCursorVisible(false);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 	Helper::seedRand();
