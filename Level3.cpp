@@ -33,30 +33,17 @@ void Level3::Show(RenderWindow& window, Event& event)
 		for (auto& enemy : first_enemies)
 		{
 			enemy.setStyle(Enemy3::Style::RedRider);
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
 
 		}
 		for (auto& enemy : second_enemies)
 		{
 			enemy.setStyle(Enemy3::Style::PurplePunk);
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
+
 		}
 		for (auto& enemy : third_enemies)
 		{
 			enemy.setStyle(Enemy3::Style::BlueBolt);
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
+
 		}
 
 

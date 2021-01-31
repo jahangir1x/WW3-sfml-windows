@@ -25,31 +25,9 @@ void Level107::Show(RenderWindow& window, Event& event)
 		vector<Enemy3> second_enemies(7); // create 3 enemies
 		vector<Enemy5> third_enemies(6);
 
-		for (auto& enemy : first_enemies)
-		{
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
 
-		}
-		for (auto& enemy : second_enemies)
-		{
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
-		}
-		for (auto& enemy : third_enemies)
-		{
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
-		}
+
+
 
 		while (window.isOpen())
 		{
@@ -99,7 +77,7 @@ void Level107::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
-				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
+					custext1.Show(window, "Wave 1", 80, 200, 200, 2, true, 0.1);
 					cout << "first" << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;

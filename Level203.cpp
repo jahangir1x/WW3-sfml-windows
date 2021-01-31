@@ -25,33 +25,6 @@ void Level203::Show(RenderWindow& window, Event& event)
 		vector<Enemy1> second_enemies(3); // create 3 enemies
 		vector<Enemy6> third_enemies(6);
 
-		for (auto& enemy : first_enemies)
-		{
-
-			enemy.enemySprite.setScale(0.35, 0.35);
-			enemy.bulletLeft.sprite.setScale(1, 1);
-			enemy.bulletRight.sprite.setScale(1, 1);
-			enemy.missile.sprite.setScale(0.8, 0.8);
-			enemy.bigExplosion.sprite.setScale(1, 1);
-		}
-		for (auto& enemy : second_enemies)
-		{
-			enemy.enemySprite.setScale(0.35, 0.35);
-			enemy.bulletLeft.sprite.setScale(1, 1);
-			enemy.bulletRight.sprite.setScale(1, 1);
-			enemy.missile.sprite.setScale(0.8, 0.8);
-			enemy.bigExplosion.sprite.setScale(1, 1);
-		}
-		for (auto& enemy : third_enemies)
-		{
-
-			enemy.enemySprite.setScale(0.35, 0.35);
-			enemy.bulletLeft.sprite.setScale(1, 1);
-			enemy.bulletRight.sprite.setScale(1, 1);
-			enemy.missile.sprite.setScale(0.8, 0.8);
-			enemy.bigExplosion.sprite.setScale(1, 1);
-		}
-
 		while (window.isOpen())
 		{
 			Helper::resetClock();

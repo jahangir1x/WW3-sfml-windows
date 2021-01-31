@@ -29,11 +29,11 @@ void Level101::Show(RenderWindow& window, Event& event)
 		Enemy1 enemy; // create 2 enemies
 
 		enemy.setStyle(Enemy3::Style::BlueBolt);
-		enemy.enemySprite.setScale(1, 1);
-		enemy.bulletLeft.sprite.setScale(2, 2);
-		enemy.bulletRight.sprite.setScale(2, 2);
-		enemy.missile.sprite.setScale(1.5, 1.5);
-		enemy.bigExplosion.sprite.setScale(2, 2);
+		enemy.enemySprite.setScale(1 * Helper::getScalingFactor(), 1 * Helper::getScalingFactor());
+		enemy.bulletLeft.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
+		enemy.bulletRight.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
+		enemy.missile.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
+		enemy.bigExplosion.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
 		enemy.bulletDamage = 15;
 		enemy.missileDamage = 25;
 		enemy.healthValue = 300;

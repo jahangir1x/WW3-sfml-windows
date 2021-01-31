@@ -74,12 +74,11 @@ void Background::Show(RenderWindow& window)
 			}
 		}
 
-
 		for (auto& element : elements)
 		{
 			element.setRotation(rand() % 360); // set random rotation
 			k = Helper::randRange(50, 100);
-			element.setScale(k / 100.0, k / 100.0);																												 // set random scale
+			element.setScale(k / 100.0 * Helper::getScalingFactor(), k / 100.0 * Helper::getScalingFactor());													 // set random scale
 			element.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(-Helper::windowHeight(), -element.getGlobalBounds().height * 2)); // set random position
 		}
 

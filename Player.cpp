@@ -22,7 +22,7 @@ Player::Player()
 	playerRect.width = 170;
 	playerSprite.setTextureRect(playerRect);
 	playerSprite.setPosition(Helper::windowWidth() / 2 - playerRect.width / 2, Helper::windowHeight() - playerRect.height - 30);
-	playerSprite.setScale(0.5, 0.5);
+	playerSprite.setScale(0.5 * Helper::getScalingFactor(), 0.5 * Helper::getScalingFactor());
 
 	healthValue = 100;
 	// playerHealth.outsideRect.setPosition(33, 9);
@@ -251,7 +251,7 @@ void Player::Die()
 {
 	bigExplosion.sprite.setOrigin(25.5, 32.5);
 	bigExplosion.sprite.setPosition(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2);
-	bigExplosion.sprite.setScale(3, 3);
+	bigExplosion.sprite.setScale(3 * Helper::getScalingFactor(), 3 * Helper::getScalingFactor());
 	if (!shouldExplode)
 	{
 		shouldExplode = true;
@@ -372,7 +372,7 @@ void Player::moveRight()
 void Player::show_explosion_bullet(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(1, 1);
+	explosion.sprite.setScale(1 * Helper::getScalingFactor(), 1 * Helper::getScalingFactor());
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	bulletHitSound.play();
@@ -380,7 +380,7 @@ void Player::show_explosion_bullet(Vector2f pos)
 void Player::show_explosion_missile(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(2, 2);
+	explosion.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	missileHitSound.play();

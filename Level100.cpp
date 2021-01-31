@@ -28,30 +28,16 @@ void Level100::Show(RenderWindow& window, Event& event)
 		for (auto& enemy : first_enemies)
 		{
 			enemy.setStyle(Enemy3::Style::GreenGwen);
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
-
 		}
 		for (auto& enemy : second_enemies)
 		{
 			enemy.setStyle(Enemy5::Style::BlueHazard);
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
+
 		}
 		for (auto& enemy : third_enemies)
 		{
 			enemy.setStyle(Enemy3::Style::YellowZen);
-			enemy.enemySprite.setScale(0.35,0.35);
-			enemy.bulletLeft.sprite.setScale(1,1);
-			enemy.bulletRight.sprite.setScale(1,1);
-			enemy.missile.sprite.setScale(0.8,0.8);
-			enemy.bigExplosion.sprite.setScale(1,1);
+
 		}
 
 		while (window.isOpen())
@@ -102,7 +88,7 @@ void Level100::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
-				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
+					custext1.Show(window, "Wave 1", 80, 200, 200, 2, true, 0.1);
 					cout << "first" << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
@@ -120,10 +106,10 @@ void Level100::Show(RenderWindow& window, Event& event)
 			{
 				for (i = 0; i < second_enemies.size(); i++)
 				{
-				    if (custext1.hidingFinished == true)
-						{
-							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
-						}
+					if (custext1.hidingFinished == true)
+					{
+						custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
+					}
 					if (second_enemies[i].isDead == false)
 					{
 						cout << "second" << endl;
@@ -146,7 +132,7 @@ void Level100::Show(RenderWindow& window, Event& event)
 				{
 					if (third_enemies[i].isDead == false)
 					{
-					    if (custext2.hidingFinished == true)
+						if (custext2.hidingFinished == true)
 						{
 							custext3.Show(window, "Wave 3", 80, 200, 200, 2, true, 0.1);
 						}

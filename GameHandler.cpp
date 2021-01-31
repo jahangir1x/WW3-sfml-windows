@@ -43,6 +43,7 @@ void GameHandler::Start()
 	window.setMouseCursorVisible(false);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 	Helper::seedRand();
+	Helper::setScaling();
 
 	backMusic.openFromFile("res/music/MenuBackSound.wav");
 	backMusic.setLoop(true);

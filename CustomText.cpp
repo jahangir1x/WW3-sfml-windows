@@ -24,6 +24,7 @@ void CustomText::Show(RenderWindow& window, sf::String str, unsigned int char_si
 
 	if (shouldHighlight == true)
 	{
+        text.setOutlineColor(Color::Red);
 		if (highlightClock.getElapsedTime().asSeconds() > 0.001)
 		{
 			if (green_blue >= 174)

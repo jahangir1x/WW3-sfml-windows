@@ -103,4 +103,15 @@ float getPlayerHeight()
 	return _playerHeight;
 }
 
+float _scalingFactor;
+
+void setScaling()
+{
+	_scalingFactor = Helper::windowWidth() / 1920.0;
+}
+
+float getScalingFactor()
+{
+	return _scalingFactor;
+}
 }

@@ -30,33 +30,6 @@ void Level202::Show(RenderWindow& window, Event& event)
 		CustomText custext4;
 		bool isHit = false;
 
-		for (auto& enemy : first_enemies)
-		{
-
-			enemy.enemySprite.setScale(0.35, 0.35);
-			enemy.bulletLeft.sprite.setScale(1, 1);
-			enemy.bulletRight.sprite.setScale(1, 1);
-			enemy.missile.sprite.setScale(0.8, 0.8);
-			enemy.bigExplosion.sprite.setScale(1, 1);
-		}
-		for (auto& enemy : second_enemies)
-		{
-			enemy.enemySprite.setScale(0.35, 0.35);
-			enemy.bulletLeft.sprite.setScale(1, 1);
-			enemy.bulletRight.sprite.setScale(1, 1);
-			enemy.missile.sprite.setScale(0.8, 0.8);
-			enemy.bigExplosion.sprite.setScale(1, 1);
-		}
-		for (auto& enemy : third_enemies)
-		{
-
-			enemy.enemySprite.setScale(0.35, 0.35);
-			enemy.bulletLeft.sprite.setScale(1, 1);
-			enemy.bulletRight.sprite.setScale(1, 1);
-			enemy.missile.sprite.setScale(0.8, 0.8);
-			enemy.bigExplosion.sprite.setScale(1, 1);
-		}
-
 		while (window.isOpen())
 		{
 			Helper::resetClock();
