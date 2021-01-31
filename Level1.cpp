@@ -12,7 +12,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 	while (LevelHelper::shouldKeepPlaying())
 	{
 		Puzzle puzzle;
-		puzzle.make(3, 4, 5, 6, 7, 8, 10000);
+		puzzle.make(3, 4, 5, 21, 7, 7, 10000);
 
 		////// mandatory //////
 		cout << "in level 1 " << endl;
@@ -24,6 +24,9 @@ void Level1::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		CustomText custext1;
+		CustomText custext2;
+		CustomText custext3;
 		////// mandatory //////
 
 		// yuri.healthValue = 4;
@@ -31,6 +34,8 @@ void Level1::Show(RenderWindow& window, Event& event)
 		for (auto& boss : enemies)
 		{
 			boss.setStyle(Boss::Style::ShakaLala);
+			boss.healthValue=800;
+
 		}
 		while (window.isOpen())
 		{

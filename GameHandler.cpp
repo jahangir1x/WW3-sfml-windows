@@ -60,24 +60,14 @@ void GameHandler::gameLoop()
 		result = mainmenu.Show(window, event);
 		if (result == MainMenu::Play)
 		{
-//			cout << "level103" << endl;
-//			Level103 level103;
-//			level103.Show(window, event);
-//			if (LevelHelper::retriesLeft == 0)
-//			{
-//				LevelHelper::retriesLeft = 6;
-//				continue;
-//			}
-			cout << "level1" << endl;
-			Level1 level1;
-			level1.Show(window, event);
+		    cout << "level2" << endl;
+			Level2 level2;
+			level2.Show(window, event);
 			if (LevelHelper::retriesLeft == 0)
 			{
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
-
-			// level init segment---
 
 			cout << "level3" << endl;
 			Level3 level3;
@@ -88,16 +78,6 @@ void GameHandler::gameLoop()
 				continue;
 			}
 
-			// level end segment---
-
-			cout << "level2" << endl;
-			Level2 level2;
-			level2.Show(window, event);
-			if (LevelHelper::retriesLeft == 0)
-			{
-				LevelHelper::retriesLeft = 6;
-				continue;
-			}
 			cout << "level100" << endl;
 			Level100 level100;
 			level100.Show(window, event);
@@ -114,22 +94,25 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
-			// cout << "level102" << endl;
-			// Level102 level102;
-			// level102.Show(window, event);
-			// if (LevelHelper::retriesLeft == 0)
-			// {
-			// 	LevelHelper::retriesLeft = 6;
-			// 	continue;
-			// }
-			// cout << "level103" << endl;
-			// Level103 level103;
-			// level103.Show(window, event);
-			// if (LevelHelper::retriesLeft == 0)
-			// {
-			// 	LevelHelper::retriesLeft = 6;
-			// 	continue;
-			// }
+
+            cout << "level102" << endl;
+            Level102 level102;
+            level102.Show(window, event);
+            if (LevelHelper::retriesLeft == 0)
+            {
+                LevelHelper::retriesLeft = 6;
+                continue;
+            }
+
+            cout << "level103" << endl;
+            Level103 level103;
+            level103.Show(window, event);
+            if (LevelHelper::retriesLeft == 0)
+            {
+			 	LevelHelper::retriesLeft = 6;
+			 	continue;
+            }
+
 			cout << "level104" << endl;
 			Level104 level104;
 			level104.Show(window, event);
@@ -146,6 +129,7 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
+
 			cout << "level106" << endl;
 			Level106 level106;
 			level106.Show(window, event);
@@ -154,6 +138,7 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
+
 			cout << "level107" << endl;
 			Level107 level107;
 			level107.Show(window, event);
@@ -162,6 +147,7 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
+
 			cout << "level108" << endl;
 			Level108 level108;
 			level108.Show(window, event);
@@ -170,6 +156,7 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
+
 			cout << "level109" << endl;
 			Level109 level109;
 			level109.Show(window, event);
@@ -197,6 +184,14 @@ void GameHandler::gameLoop()
 			cout << "level112" << endl;
 			Level112 level112;
 			level112.Show(window, event);
+			if (LevelHelper::retriesLeft == 0)
+			{
+				LevelHelper::retriesLeft = 6;
+				continue;
+			}
+			cout << "level1" << endl;
+			Level1 level1;
+			level1.Show(window, event);
 			if (LevelHelper::retriesLeft == 0)
 			{
 				LevelHelper::retriesLeft = 6;

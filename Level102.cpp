@@ -16,10 +16,44 @@ void Level102::Show(RenderWindow& window, Event& event)
 		Background background;
 		Player yuri;
 		bool someone_is_alive;
+		CustomText custext1;
+		CustomText custext2;
+		CustomText custext3;
+
 		unsigned int i;
-		vector<Enemy2> first_enemies(3);  // create 2 enemies
-		vector<Enemy2> second_enemies(3); // create 3 enemies
-		vector<Enemy2> third_enemies(4);
+		vector<Enemy3> first_enemies(3);  // create 2 enemies
+		vector<Enemy3> second_enemies(3); // create 3 enemies
+		vector<Enemy3> third_enemies(4);
+
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::RedRider);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::PurplePunk);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+		}
+		for (auto& enemy : third_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::GreenGwen);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+		}
+
 
 		while (window.isOpen())
 		{
@@ -69,12 +103,13 @@ void Level102::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
+				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
 					cout << "first" << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					this_enemy.move(300);
-					this_enemy.fireBullet(yuri, 3850, 1800, 400);
-					this_enemy.fireMissile(yuri, 4700, 1000, 295);
+					this_enemy.fireBullet(yuri, 3000, 1200, 430);
+					this_enemy.fireMissile(yuri, 4400, 1000, 330);
 					levelhelp.isHitBody(yuri, this_enemy);
 					levelhelp.isHitBullet(yuri, this_enemy);
 					levelhelp.isHitMissile(yuri, this_enemy);
@@ -86,14 +121,18 @@ void Level102::Show(RenderWindow& window, Event& event)
 			{
 				for (i = 0; i < second_enemies.size(); i++)
 				{
+				    if (custext1.hidingFinished == true)
+						{
+							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
+						}
 					if (second_enemies[i].isDead == false)
 					{
 						cout << "second" << endl;
 						if (someone_is_alive == false)
 							someone_is_alive = true;
 						second_enemies[i].move(300);
-						second_enemies[i].fireBullet(yuri, 3850, 1800, 400);
-						second_enemies[i].fireMissile(yuri, 4700, 1000, 295);
+						second_enemies[i].fireBullet(yuri, 3000, 1200, 430);
+						second_enemies[i].fireMissile(yuri, 4400, 1000, 330);
 						levelhelp.isHitBody(yuri, second_enemies[i]);
 						levelhelp.isHitBullet(yuri, second_enemies[i]);
 						levelhelp.isHitMissile(yuri, second_enemies[i]);
@@ -108,12 +147,16 @@ void Level102::Show(RenderWindow& window, Event& event)
 				{
 					if (third_enemies[i].isDead == false)
 					{
+					    if (custext2.hidingFinished == true)
+						{
+							custext3.Show(window, "Wave 3", 80, 200, 200, 2, true, 0.1);
+						}
 						cout << "third" << endl;
 						if (someone_is_alive == false)
 							someone_is_alive = true;
 						third_enemies[i].move(290);
-						third_enemies[i].fireBullet(yuri, 3850, 1800, 400);
-						third_enemies[i].fireMissile(yuri, 4800, 1000, 295);
+						third_enemies[i].fireBullet(yuri, 3000, 1200, 430);
+						third_enemies[i].fireMissile(yuri, 4400, 1000, 330);
 						levelhelp.isHitBody(yuri, third_enemies[i]);
 						levelhelp.isHitBullet(yuri, third_enemies[i]);
 						levelhelp.isHitMissile(yuri, third_enemies[i]);

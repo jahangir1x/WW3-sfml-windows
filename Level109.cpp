@@ -1,4 +1,5 @@
 #include "Level109.hpp" // level header file
+#include "Puzzle.hpp"
 using namespace std;
 using namespace sf;
 
@@ -6,6 +7,10 @@ void Level109::Show(RenderWindow& window, Event& event)
 {
 	while (LevelHelper::shouldKeepPlaying())
 	{
+	    Puzzle puzzle;
+
+		puzzle.make(29, 0, 21, 30, 12, 11, 10000);
+
 		cout << "in level 109 " << endl;
 		Success success;
 		LevelFailed levelFailedObj;
@@ -17,9 +22,24 @@ void Level109::Show(RenderWindow& window, Event& event)
 		Player yuri;
 		bool someone_is_alive;
 		unsigned int i;
-		vector<Enemy1> first_enemies(6);  // create 2 enemies
-		vector<Enemy1> second_enemies(6); // create 3 enemies
-		vector<Enemy1> third_enemies(6);
+		CustomText custext1;
+		CustomText custext2;
+		CustomText custext3;
+
+		vector<Enemy4> first_enemies(1);  // create 2 enemies
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::RedRanger);
+			enemy.enemySprite.setScale(1,1);
+			enemy.bulletLeft.sprite.setScale(2,2);
+			enemy.bulletRight.sprite.setScale(2,2);
+			enemy.missile.sprite.setScale(1.5,1.5);
+			enemy.bigExplosion.sprite.setScale(2,2);
+			enemy.bulletDamage=25;
+			enemy.missileDamage=40;
+			enemy.healthValue=700;
+
+		}
 
 		while (window.isOpen())
 		{
@@ -69,12 +89,13 @@ void Level109::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
+				    custext1.Show(window,"Beware,Noyan is Angry", 80, 200, 200, 2,true,0.1);
 					cout << "first " << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
-					this_enemy.move(300);
-					this_enemy.fireBullet(yuri, 4000, 2000, 300);
-					this_enemy.fireMissile(yuri, 3000, 2000, 350);
+					this_enemy.move(310);
+					this_enemy.fireBullet(yuri, 500, 400, 440);
+					this_enemy.fireMissile(yuri, 500, 300, 400);
 					levelhelp.isHitBody(yuri, this_enemy);
 					levelhelp.isHitBullet(yuri, this_enemy);
 					levelhelp.isHitMissile(yuri, this_enemy);
@@ -82,60 +103,42 @@ void Level109::Show(RenderWindow& window, Event& event)
 				}
 			}
 
-			if (someone_is_alive == false)
-			{
-				for (i = 0; i < second_enemies.size(); i++)
-				{
-					if (second_enemies[i].isDead == false)
-					{
-						cout << "second" << endl;
-						if (someone_is_alive == false)
-							someone_is_alive = true;
-						second_enemies[i].move(310);
-						second_enemies[i].fireBullet(yuri, 4500, 1900, 400);
-						second_enemies[i].fireMissile(yuri, 2900, 1000, 295);
-						levelhelp.isHitBody(yuri, second_enemies[i]);
-						levelhelp.isHitBullet(yuri, second_enemies[i]);
-						levelhelp.isHitMissile(yuri, second_enemies[i]);
-						second_enemies[i].Show(window);
-					}
-				}
-			}
 
-			if (someone_is_alive == false)
-			{
-				for (i = 0; i < third_enemies.size(); i++)
-				{
-					if (third_enemies[i].isDead == false)
-					{
-						cout << "third" << endl;
-						if (someone_is_alive == false)
-							someone_is_alive = true;
-						third_enemies[i].move(300);
-						third_enemies[i].fireBullet(yuri, 4000, 2000, 450);
-						third_enemies[i].fireMissile(yuri, 3000, 2000, 450);
-						levelhelp.isHitBody(yuri, third_enemies[i]);
-						levelhelp.isHitBullet(yuri, third_enemies[i]);
-						levelhelp.isHitMissile(yuri, third_enemies[i]);
-						third_enemies[i].Show(window);
-					}
-				}
-			}
 
-			yuri.Show(window);
-			if (Helper::enemiesDied() == 18)
-			{
-				if (success.isFinishedShowing(window))
-				{
-					return;
-				}
-			}
+			 yuri.Show(window);
+
 			if (yuri.isDead)
 			{
 				if (levelFailedObj.isFinishedShowing(window))
 				{
 					break;
 				}
+			}
+//            enemies[0].healthValue = 3;
+			if (Helper::enemiesDied() == 1)
+			{
+				 if (puzzle.getState() == Puzzle::Nothing)
+				 {
+
+				 	puzzle.Show(window, event);
+				 	cout << "fin" << endl;
+				 }
+				 if (puzzle.getState() == Puzzle::Solved)
+				 {
+                    if (success.isFinishedShowing(window) == true)
+                    {
+                        return;
+                    }
+				 }
+
+                else
+                {
+                    if (levelFailedObj.isFinishedShowing(window))
+                    {
+                        cout << "showing failed" << endl;
+                        break;
+                    }
+                }
 			}
 			GameUI::showPlayerUI(window);
 			window.display();

@@ -15,12 +15,44 @@ void Level100::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		CustomText custext1;
+		CustomText custext2;
+		CustomText custext3;
 
 		bool someone_is_alive;
 		unsigned int i;
-		vector<Enemy2> first_enemies(2);  // create 2 enemies
-		vector<Enemy2> second_enemies(3); // create 3 enemies
-		vector<Enemy2> third_enemies(4);
+		vector<Enemy3> first_enemies(5);  // create 2 enemies
+		vector<Enemy5> second_enemies(3); // create 3 enemies
+		vector<Enemy3> third_enemies(5);
+
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::GreenGwen);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy5::Style::BlueHazard);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+		}
+		for (auto& enemy : third_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::YellowZen);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+		}
 
 		while (window.isOpen())
 		{
@@ -70,12 +102,13 @@ void Level100::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
+				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
 					cout << "first" << endl;
 					if (someone_is_alive == false)
 						someone_is_alive = true;
-					this_enemy.move(300);
-					this_enemy.fireBullet(yuri, 4000, 2000, 400);
-					this_enemy.fireMissile(yuri, 5000, 1000, 300);
+					this_enemy.move(320);
+					this_enemy.fireBullet(yuri, 3800, 2000, 400);
+					this_enemy.fireMissile(yuri, 4500, 1000, 300);
 					levelhelp.isHitBody(yuri, this_enemy);
 					levelhelp.isHitBullet(yuri, this_enemy);
 					levelhelp.isHitMissile(yuri, this_enemy);
@@ -87,14 +120,18 @@ void Level100::Show(RenderWindow& window, Event& event)
 			{
 				for (i = 0; i < second_enemies.size(); i++)
 				{
+				    if (custext1.hidingFinished == true)
+						{
+							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
+						}
 					if (second_enemies[i].isDead == false)
 					{
 						cout << "second" << endl;
 						if (someone_is_alive == false)
 							someone_is_alive = true;
-						second_enemies[i].move(300);
-						second_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-						second_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+						second_enemies[i].move(320);
+						second_enemies[i].fireBullet(yuri, 3800, 2000, 400);
+						second_enemies[i].fireMissile(yuri, 4500, 1000, 300);
 						levelhelp.isHitBody(yuri, second_enemies[i]);
 						levelhelp.isHitBullet(yuri, second_enemies[i]);
 						levelhelp.isHitMissile(yuri, second_enemies[i]);
@@ -109,12 +146,16 @@ void Level100::Show(RenderWindow& window, Event& event)
 				{
 					if (third_enemies[i].isDead == false)
 					{
+					    if (custext2.hidingFinished == true)
+						{
+							custext3.Show(window, "Wave 3", 80, 200, 200, 2, true, 0.1);
+						}
 						cout << "third" << endl;
 						if (someone_is_alive == false)
 							someone_is_alive = true;
-						third_enemies[i].move(300);
-						third_enemies[i].fireBullet(yuri, 4000, 2000, 400);
-						third_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+						third_enemies[i].move(320);
+						third_enemies[i].fireBullet(yuri, 3800, 2000, 400);
+						third_enemies[i].fireMissile(yuri, 4500, 1000, 300);
 						levelhelp.isHitBody(yuri, third_enemies[i]);
 						levelhelp.isHitBullet(yuri, third_enemies[i]);
 						levelhelp.isHitMissile(yuri, third_enemies[i]);
@@ -124,7 +165,7 @@ void Level100::Show(RenderWindow& window, Event& event)
 			}
 
 			yuri.Show(window);
-			if (Helper::enemiesDied() == 9)
+			if (Helper::enemiesDied() == 13)
 			{
 				if (success.isFinishedShowing(window))
 				{

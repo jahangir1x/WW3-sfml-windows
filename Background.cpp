@@ -1,6 +1,6 @@
 #include "Background.hpp"
 #include "GetRes.hpp"
-// i
+//
 Background::Background()
 {
 	scenery = Scenes(rand() % 2); // set random scenery

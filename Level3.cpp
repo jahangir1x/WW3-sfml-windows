@@ -18,10 +18,47 @@ void Level3::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		CustomText custext1;
+		CustomText custext2;
+		CustomText custext3;
 		////// mandatory //////
 
-		yuri.healthValue = 3;
-		vector<Enemy3> enemies(1);
+		//yuri.healthValue = 3;
+		bool someone_is_alive;
+		unsigned int i;
+		vector<Enemy3> first_enemies(4);  // create 2 enemies
+		vector<Enemy4> second_enemies(3); // create 3 enemies
+		vector<Enemy3> third_enemies(4);
+
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::RedRider);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::PurplePunk);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+		}
+		for (auto& enemy : third_enemies)
+		{
+			enemy.setStyle(Enemy3::Style::BlueBolt);
+			enemy.enemySprite.setScale(0.35,0.35);
+			enemy.bulletLeft.sprite.setScale(1,1);
+			enemy.bulletRight.sprite.setScale(1,1);
+			enemy.missile.sprite.setScale(0.8,0.8);
+			enemy.bigExplosion.sprite.setScale(1,1);
+		}
+
 
 		while (window.isOpen())
 		{
@@ -70,18 +107,71 @@ void Level3::Show(RenderWindow& window, Event& event)
 			}
 
 			// cout << "rand: " << Helper::randRange(-900.3, -400.9) << endl;
+            someone_is_alive = false; // আমরা চাচ্ছি প্রথমে ২ টা, তারপর ৩ টা, তারপর ৪ টা enemy একসাথে আসবে ।
 
-			for (auto& enemy : enemies)
+			for (auto& this_enemy : first_enemies) // range based for loop + reference operator ফাস্ট হবে ।
 			{
-				// enemy.healthValue = 5;
-				enemy.move(300);
-				enemy.fireBullet(yuri, 4000, 2000, 400);
-				enemy.fireMissile(yuri, 5000, 1000, 300);
-				levelhelp.isHitBody(yuri, enemy);
-				levelhelp.isHitBullet(yuri, enemy);
-				levelhelp.isHitMissile(yuri, enemy);
-				enemy.Show(window);
+				if (this_enemy.isDead == false)
+				{
+				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
+					if (someone_is_alive == false)
+						someone_is_alive = true;
+					this_enemy.move(300);
+					this_enemy.fireBullet(yuri, 4000, 2000, 400);
+					this_enemy.fireMissile(yuri, 5000, 1000, 300);
+					levelhelp.isHitBody(yuri, this_enemy);
+					levelhelp.isHitBullet(yuri, this_enemy);
+					levelhelp.isHitMissile(yuri, this_enemy);
+					this_enemy.Show(window);
+				}
 			}
+
+			if (someone_is_alive == false)
+			{
+				for (i = 0; i < second_enemies.size(); i++)
+				{
+					if (second_enemies[i].isDead == false)
+					{
+					    if (custext1.hidingFinished == true)
+						{
+							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
+						}
+						if (someone_is_alive == false)
+							someone_is_alive = true;
+						second_enemies[i].move(300);
+						second_enemies[i].fireBullet(yuri, 4000, 2000, 400);
+						second_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+						levelhelp.isHitBody(yuri, second_enemies[i]);
+						levelhelp.isHitBullet(yuri, second_enemies[i]);
+						levelhelp.isHitMissile(yuri, second_enemies[i]);
+						second_enemies[i].Show(window);
+					}
+				}
+			}
+
+			if (someone_is_alive == false)
+			{
+				for (i = 0; i < third_enemies.size(); i++)
+				{
+					if (third_enemies[i].isDead == false)
+					{
+					    if (custext2.hidingFinished == true)
+						{
+							custext3.Show(window, "Wave 3", 80, 200, 200, 2, true, 0.1);
+						}
+						if (someone_is_alive == false)
+							someone_is_alive = true;
+						third_enemies[i].move(300);
+						third_enemies[i].fireBullet(yuri, 4000, 2000, 400);
+						third_enemies[i].fireMissile(yuri, 5000, 1000, 300);
+						levelhelp.isHitBody(yuri, third_enemies[i]);
+						levelhelp.isHitBullet(yuri, third_enemies[i]);
+						levelhelp.isHitMissile(yuri, third_enemies[i]);
+						third_enemies[i].Show(window);
+					}
+				}
+			}
+
 
 			yuri.Show(window);
 
@@ -93,7 +183,7 @@ void Level3::Show(RenderWindow& window, Event& event)
 				}
 			}
 
-			if (Helper::enemiesDied() == 1)
+			if (Helper::enemiesDied() == 11)
 			{
 				if (success.isFinishedShowing(window))
 				{

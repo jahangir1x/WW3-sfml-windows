@@ -18,13 +18,16 @@ void Level2::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		CustomText custext1;
+		CustomText custext2;
+		CustomText custext3;
 		////// mandatory //////
 
 		bool someone_is_alive;
 		unsigned int i;
 		vector<Enemy3> first_enemies(3);  // create 2 enemies
-		vector<Enemy1> second_enemies(7); // create 3 enemies
-		vector<Enemy4> third_enemies(8);
+		vector<Enemy3> second_enemies(3); // create 3 enemies
+		vector<Enemy3> third_enemies(3);
 
 		for (auto& enemy : first_enemies)
 		{
@@ -32,11 +35,11 @@ void Level2::Show(RenderWindow& window, Event& event)
 		}
 		for (auto& enemy : second_enemies)
 		{
-			enemy.setStyle(Enemy1::Style::PurplePunk);
+			enemy.setStyle(Enemy3::Style::PurplePunk);
 		}
 		for (auto& enemy : third_enemies)
 		{
-			enemy.setStyle(Enemy4::Style::YellowZen);
+			enemy.setStyle(Enemy3::Style::YellowZen);
 		}
 
 		while (window.isOpen())
@@ -90,6 +93,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 			{
 				if (this_enemy.isDead == false)
 				{
+				    custext1.Show(window,"Wave 1", 80, 200, 200, 2,true,0.1);
 					if (someone_is_alive == false)
 						someone_is_alive = true;
 					this_enemy.move(300);
@@ -108,6 +112,10 @@ void Level2::Show(RenderWindow& window, Event& event)
 				{
 					if (second_enemies[i].isDead == false)
 					{
+					    if (custext1.hidingFinished == true)
+						{
+							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
+						}
 						if (someone_is_alive == false)
 							someone_is_alive = true;
 						second_enemies[i].move(300);
@@ -127,6 +135,10 @@ void Level2::Show(RenderWindow& window, Event& event)
 				{
 					if (third_enemies[i].isDead == false)
 					{
+					    if (custext2.hidingFinished == true)
+						{
+							custext3.Show(window, "Wave 3", 80, 200, 200, 2, true, 0.1);
+						}
 						if (someone_is_alive == false)
 							someone_is_alive = true;
 						third_enemies[i].move(300);
@@ -149,7 +161,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 				}
 			}
 
-			if (Helper::enemiesDied() == 1)
+			if (Helper::enemiesDied() == 9)
 			{
 				if (success.isFinishedShowing(window))
 				{
