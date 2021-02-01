@@ -22,6 +22,11 @@ void Story::Show(RenderWindow& window, Event& event)
 	backTex.loadFromFile("res/story.png");
 	backTex.setSmooth(true);
 	backSprite.setTexture(backTex);
+	text.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	text2.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	text3.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	text4.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	backSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
 	backSprite.setPosition(Helper::windowWidth() / 2 - backSprite.getGlobalBounds().width / 2, Helper::windowHeight() / 2 - backSprite.getGlobalBounds().height / 2);
 
 	GameUI::init();

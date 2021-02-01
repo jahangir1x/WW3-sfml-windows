@@ -103,15 +103,26 @@ float getPlayerHeight()
 	return _playerHeight;
 }
 
-float _scalingFactor;
+float _widthScalingFactor;
+float _heightScalingFactor;
 
-void setScaling()
+void setWidthScaling()
 {
-	_scalingFactor = Helper::windowWidth() / 1920.0;
+	_widthScalingFactor = Helper::windowWidth() / 1920.0;
 }
 
-float getScalingFactor()
+float getWidthScalingFactor()
 {
-	return _scalingFactor;
+	return _widthScalingFactor;
+}
+
+void setHeightScaling()
+{
+	_heightScalingFactor = Helper::windowHeight() / 1080.0;
+}
+
+float getHeightScalingFactor()
+{
+	return _heightScalingFactor;
 }
 }

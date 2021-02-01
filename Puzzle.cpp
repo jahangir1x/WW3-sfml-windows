@@ -52,7 +52,7 @@ Puzzle::Puzzle()
 		sprite.setTextureRect(buttonRect);
 		sprite.setRotation(rand() % 360);
 		k = Helper::randRange(50, 160);
-		sprite.setScale(k / 100.0 * Helper::getScalingFactor(), k / 100.0 * Helper::getScalingFactor());
+		sprite.setScale(k / 100.0 * Helper::getWidthScalingFactor(), k / 100.0 * Helper::getWidthScalingFactor());
 		sprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(0, Helper::windowHeight())); // set random position
 	}
 

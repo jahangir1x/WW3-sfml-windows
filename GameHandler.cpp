@@ -38,12 +38,13 @@ using namespace sf;
 
 void GameHandler::Start()
 {
-	window.create(VideoMode(1100, 900), "World War 3", Style::Fullscreen);
+	window.create(VideoMode(1366, 768), "World War 3", Style::Fullscreen);
 	window.setFramerateLimit(90);
 	window.setMouseCursorVisible(false);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
 	Helper::seedRand();
-	Helper::setScaling();
+	Helper::setWidthScaling();
+	Helper::setHeightScaling();
 
 	backMusic.openFromFile("res/music/MenuBackSound.wav");
 	backMusic.setLoop(true);

@@ -10,7 +10,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 {
 	GameUI::init();
 	gameLogoSprite.setTexture(GetRes::gameLogoTex);
-	gameLogoSprite.setPosition(Helper::windowWidth() / 2 - gameLogoSprite.getGlobalBounds().width / 2, 46);
+	gameLogoSprite.setPosition(Helper::windowWidth() / 2 - gameLogoSprite.getGlobalBounds().width / 2, 30);
 	menuBackSprite.setTexture(GetRes::menuBackTex);
 	widthScale = Helper::windowWidth() / menuBackSprite.getGlobalBounds().width;
 	heightScale = Helper::windowHeight() / menuBackSprite.getGlobalBounds().height;
@@ -23,7 +23,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	playRect.width = 371;
 	playRect.height = 148;
 	playSprite.setTextureRect(playRect);
-	playSprite.setPosition(Helper::windowWidth() / 2 - playSprite.getGlobalBounds().width / 2, 245);
+	playSprite.setPosition(Helper::windowWidth() / 2 - playSprite.getGlobalBounds().width / 2, gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
 
 	helpSprite.setTexture(GetRes::helpButtonTex);
 	helpRect.left = 0;
@@ -31,7 +31,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	helpRect.width = 371;
 	helpRect.height = 148;
 	helpSprite.setTextureRect(helpRect);
-	helpSprite.setPosition(Helper::windowWidth() / 2 - helpSprite.getGlobalBounds().width / 2, 393);
+	helpSprite.setPosition(Helper::windowWidth() / 2 - helpSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
 
 	creditsSprite.setTexture(GetRes::creditsButtonTex);
 	creditsRect.left = 0;
@@ -39,7 +39,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	creditsRect.width = 371;
 	creditsRect.height = 148;
 	creditsSprite.setTextureRect(creditsRect);
-	creditsSprite.setPosition(Helper::windowWidth() / 2 - creditsSprite.getGlobalBounds().width / 2, 541);
+	creditsSprite.setPosition(Helper::windowWidth() / 2 - creditsSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0 * 2.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
 
 	exitSprite.setTexture(GetRes::exitButtonTex);
 	exitRect.left = 0;
@@ -47,7 +47,7 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	exitRect.width = 371;
 	exitRect.height = 148;
 	exitSprite.setTextureRect(exitRect);
-	exitSprite.setPosition(Helper::windowWidth() / 2 - exitSprite.getGlobalBounds().width / 2, 689);
+	exitSprite.setPosition(Helper::windowWidth() / 2 - exitSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0 * 3.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
 
 	clicked = false;
 	result = Nothing;

@@ -51,7 +51,7 @@ void CreditsMenu::Show(RenderWindow& window, Event& event)
 	buttonSprite.setTextureRect(buttonRect);
 	buttonSprite.setPosition(10, 10);
 	// ControlSprite.setPosition(Helper::windowWidth() / 2 - ControlSprite.getGlobalBounds().width / 2, Helper::windowHeight() / 2 - ControlSprite.getGlobalBounds().height / 2);
-	ControlSprite.setScale(0.6 * Helper::getScalingFactor(), 0.6 * Helper::getScalingFactor());
+	ControlSprite.setScale(0.6 * Helper::getWidthScalingFactor(), 0.6 * Helper::getWidthScalingFactor());
 	ControlSprite.setPosition(buttonSprite.getPosition().x, buttonSprite.getGlobalBounds().top + buttonSprite.getGlobalBounds().height + 20);
 	Clock buttonClock;
 	bool shouldClose = false;
@@ -127,7 +127,6 @@ void CreditsMenu::Show(RenderWindow& window, Event& event)
 		for (auto& text : texts)
 		{
 			text.move(0, -70 * Helper::SecondsPerFrame());
-			cout << "posa: " << text.getPosition().x << " " << text.getPosition().y << endl;
 		}
 
 		window.draw(ControlSprite);

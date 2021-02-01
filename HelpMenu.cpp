@@ -12,12 +12,14 @@ void HelpMenu::Show(RenderWindow& window, Event& event)
 	Texture controlTex;
 	Texture buttonTex;
 	controlTex.loadFromFile("res/help_menu.png");
+	controlTex.setSmooth(true);
 	buttonTex.loadFromFile("res/back_button.png");
 	Sprite ControlSprite(controlTex);
 	Sprite buttonSprite(buttonTex);
 	IntRect buttonRect(0, 0, 141.6, 84);
 	buttonSprite.setTextureRect(buttonRect);
 	buttonSprite.setPosition(10, 10);
+	ControlSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
 	ControlSprite.setPosition(Helper::windowWidth() / 2 - ControlSprite.getGlobalBounds().width / 2, Helper::windowHeight() / 2 - ControlSprite.getGlobalBounds().height / 2);
 	Clock buttonClock;
 	bool shouldClose = false;

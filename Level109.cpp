@@ -34,11 +34,11 @@ void Level109::Show(RenderWindow& window, Event& event)
 		music.play();
 
 		enemy.setStyle(Enemy3::Style::RedRanger);
-		enemy.enemySprite.setScale(1 * Helper::getScalingFactor(), 1 * Helper::getScalingFactor());
-		enemy.bulletLeft.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
-		enemy.bulletRight.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
-		enemy.missile.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
-		enemy.bigExplosion.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
+		enemy.enemySprite.setScale(1 * Helper::getWidthScalingFactor(), 1 * Helper::getWidthScalingFactor());
+		enemy.bulletLeft.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+		enemy.bulletRight.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+		enemy.missile.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+		enemy.bigExplosion.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
 		enemy.bulletDamage = 25;
 		enemy.missileDamage = 40;
 		enemy.healthValue = 700;

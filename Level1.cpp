@@ -37,7 +37,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 		music.play();
 
 		boss.setStyle(Boss::Style::ShakaLala);
-		boss.enemySprite.setScale(0.6 * Helper::getScalingFactor(), 0.6 * Helper::getScalingFactor());
+		boss.enemySprite.setScale(0.6 * Helper::getWidthScalingFactor(), 0.6 * Helper::getWidthScalingFactor());
 		boss.bulletDamage = 15;
 		boss.missileDamage = 25;
 		boss.healthValue = 500;

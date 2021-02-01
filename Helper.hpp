@@ -18,7 +18,9 @@ void resetEnemyDiedCounter();
 float getRotation(float to_x, float to_y, float from_x, float from_y);
 void storePlayerHeight(float height);
 float getPlayerHeight();
-void setScaling();
-float getScalingFactor();
+void setWidthScaling();
+float getWidthScalingFactor();
+void setHeightScaling();
+float getHeightScalingFactor();
 }
 #endif

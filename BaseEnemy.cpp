@@ -43,7 +43,7 @@ BaseEnemy::BaseEnemy()
 	enemyRect.height = 224;
 	enemyRect.width = 170;
 	enemySprite.setTextureRect(enemyRect);
-	enemySprite.setScale(0.5 * Helper::getScalingFactor(), 0.5 * Helper::getScalingFactor());
+	enemySprite.setScale(0.5 * Helper::getWidthScalingFactor(), 0.5 * Helper::getWidthScalingFactor());
 	enemySprite.setPosition(Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width - 10), Helper::randRange(-800, -300));
 
 	explosion.sprite.setTexture(GetRes::explosionTex);
@@ -270,7 +270,7 @@ void BaseEnemy::Die()
 {
 	bigExplosion.sprite.setOrigin(25.5, 32.5);
 	bigExplosion.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 2, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2);
-	bigExplosion.sprite.setScale(3 * Helper::getScalingFactor(), 3 * Helper::getScalingFactor());
+	bigExplosion.sprite.setScale(3 * Helper::getWidthScalingFactor(), 3 * Helper::getWidthScalingFactor());
 	if (!shouldExplode)
 	{
 		explodedSound.play();
@@ -345,7 +345,7 @@ void BaseEnemy::moveRight(float speed)
 void BaseEnemy::show_explosion_bullet(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(1 * Helper::getScalingFactor(), 1 * Helper::getScalingFactor());
+	explosion.sprite.setScale(1 * Helper::getWidthScalingFactor(), 1 * Helper::getWidthScalingFactor());
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	bulletHitSound.play();
@@ -353,7 +353,7 @@ void BaseEnemy::show_explosion_bullet(Vector2f pos)
 void BaseEnemy::show_explosion_missile(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(2 * Helper::getScalingFactor(), 2 * Helper::getScalingFactor());
+	explosion.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	missileHitSound.play();
