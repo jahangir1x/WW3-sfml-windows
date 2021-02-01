@@ -38,7 +38,7 @@ using namespace sf;
 
 void GameHandler::Start()
 {
-	window.create(VideoMode(1366, 768), "World War 3", Style::Fullscreen);
+	window.create(VideoMode(1100, 768), "World War 3", Style::Fullscreen);
 	window.setFramerateLimit(90);
 	window.setMouseCursorVisible(false);
 	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
@@ -60,7 +60,7 @@ void GameHandler::Start()
 	gameLoop();
 }
 
-void GameHandler::Help(RenderWindow& window, Event& event)
+void GameHandler::Help(RenderWindow &window, Event &event)
 {
 	cout << "help" << endl;
 	HelpMenu help;
@@ -68,7 +68,7 @@ void GameHandler::Help(RenderWindow& window, Event& event)
 	return;
 }
 
-void GameHandler::Credits(RenderWindow& window, Event& event)
+void GameHandler::Credits(RenderWindow &window, Event &event)
 {
 	cout << "credits" << endl;
 	CreditsMenu credits;
@@ -76,7 +76,7 @@ void GameHandler::Credits(RenderWindow& window, Event& event)
 	return;
 }
 
-void GameHandler::ExitConfirm(RenderWindow& window, Event& event)
+void GameHandler::ExitConfirm(RenderWindow &window, Event &event)
 {
 	cout << "exitconfirm" << endl;
 	cout << window.getSize().x << event.type << endl;
