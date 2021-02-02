@@ -134,7 +134,6 @@ bool LevelFailed::isFinishedShowing(RenderWindow& window)
 	if (custextquote.fullShowed == true)
 	{
 		custextquote.text.setScale(textScale, textScale);
-		cout << "text size: " << custextquote.text.getLocalBounds().width << " " << custextquote.text.getLocalBounds().height << endl;
 	}
 
 	if (buttonClock.getElapsedTime().asSeconds() > time && custext.fullShowed == true && buttonScale < 1.0 && shouldClose == false)

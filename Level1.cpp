@@ -1,8 +1,5 @@
 #include "Level1.hpp" // level header file
-#include "Boss.hpp"
-#include "CustomText.hpp"
 #include "GameUI.hpp"
-#include "Puzzle.hpp"
 #include "Success.hpp"
 using namespace std;
 using namespace sf;
@@ -11,11 +8,8 @@ void Level1::Show(RenderWindow& window, Event& event)
 {
 	while (LevelHelper::shouldKeepPlaying())
 	{
-		Puzzle puzzle;
-		puzzle.make(3, 4, 5, 21, 7, 7, 60);
-
 		////// mandatory //////
-		cout << "in level 1 " << endl;
+		cout << "in level 2 " << endl;
 		Success success;
 		LevelFailed levelFailedObj;
 		LevelHelper levelhelp;
@@ -24,27 +18,12 @@ void Level1::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		////// mandatory //////
-
-		// yuri.healthValue = 4;
 		CustomText custext1;
 		CustomText custext2;
-		Boss boss;
-
-		Music music;
-		music.openFromFile("res/music/boss.wav");
-		music.setVolume(20);
-		music.play();
-
-		boss.setStyle(Boss::Style::ShakaLala);
-		boss.enemySprite.setScale(0.6 * Helper::getWidthScalingFactor(), 0.6 * Helper::getWidthScalingFactor());
-		boss.bulletDamage = 15;
-		boss.missileDamage = 25;
-		boss.healthValue = 500;
-
-		boss.healthValue = 800;
-		bool isHit = false;
-		float playerHealth = 90;
+		////// mandatory //////
+		bool someone_is_alive;
+		vector<Enemy1> first_enemies(2);
+		vector<Enemy2> second_enemies(3);
 
 		while (window.isOpen())
 		{
@@ -56,24 +35,24 @@ void Level1::Show(RenderWindow& window, Event& event)
 					window.close();
 					exit(0);
 				}
-
-				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
+				else if (event.type == Event::MouseButtonReleased)
 				{
-					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					if (event.mouseButton.button == Mouse::Left)
+					{
+						yuri.startFiringBullet();
+						GameUI::handleClose(window, Mouse::getPosition(window));
+						success.handleClose(Mouse::getPosition(window));
+						levelFailedObj.handleClose(Mouse::getPosition(window));
+					}
 				}
 			}
-
 			window.clear(Color::Blue);
 			background.Show(window);
-			yuri.fireBullet();
-
 			if (Mouse::isButtonPressed(Mouse::Right))
 			{
 				yuri.fireMissile();
 			}
+			yuri.fireBullet();
 			if (Keyboard::isKeyPressed(Keyboard::A))
 			{
 				yuri.moveLeft();
@@ -91,54 +70,68 @@ void Level1::Show(RenderWindow& window, Event& event)
 				yuri.moveDown();
 			}
 
-			custext1.Show(window, "Caution: MIG93 approaching", 80, 200, 200, 2, true, 0.1);
-			cout << "first" << endl;
+			someone_is_alive = false;
 
-			if (custext1.hidingFinished)
+			for (auto& this_enemy : first_enemies)
 			{
-				boss.move(400);
-			}
-			boss.missileCount = 10;
-			boss.fireBullet(yuri, 2000, 100, 550);
-			boss.fireMissile(yuri, 3000, 2000, 400);
-
-			levelhelp.isHitBody(yuri, boss);
-			levelhelp.isHitBullet(yuri, boss);
-			levelhelp.isHitMissile(yuri, boss);
-			boss.Show(window);
-			if (playerHealth > yuri.healthValue && isHit == false)
-			{
-				isHit = true;
-			}
-
-			if (isHit == true && custext2.hidingFinished == false)
-			{
-				custext2.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
+				if (this_enemy.isDead == false)
+				{
+					custext1.Show(window, "Wave 1", 80, 200, 200, 2, true, 0.1);
+					if (someone_is_alive == false)
+						someone_is_alive = true;
+					this_enemy.move(300);
+					this_enemy.fireBullet(yuri, 4000, 2000, 400);
+					this_enemy.fireMissile(yuri, 5000, 1000, 300);
+					levelhelp.isHitBody(yuri, this_enemy);
+					levelhelp.isHitBullet(yuri, this_enemy);
+					levelhelp.isHitMissile(yuri, this_enemy);
+					this_enemy.Show(window);
+				}
 			}
 
-			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false)
+			if (someone_is_alive == false)
 			{
-				puzzle.Show(window, event);
+				for (auto& this_enemy : second_enemies)
+				{
+					if (this_enemy.isDead == false)
+					{
+						if (custext1.hidingFinished == true)
+						{
+							custext2.Show(window, "Wave 2", 80, 200, 200, 2, true, 0.1);
+						}
+						if (someone_is_alive == false)
+							someone_is_alive = true;
+						this_enemy.move(300);
+						this_enemy.fireBullet(yuri, 4000, 2000, 400);
+						this_enemy.fireMissile(yuri, 5000, 1000, 300);
+						levelhelp.isHitBody(yuri, this_enemy);
+						levelhelp.isHitBullet(yuri, this_enemy);
+						levelhelp.isHitMissile(yuri, this_enemy);
+						this_enemy.Show(window);
+					}
+				}
 			}
+
 			yuri.Show(window);
-
-			// cout << "state: " << success.getState() << endl;
-			if (yuri.isDead || puzzle.getState() == Puzzle::Failed)
+			if (yuri.isDead)
 			{
 				if (levelFailedObj.isFinishedShowing(window))
+
 				{
 					break;
 				}
 			}
-			//            enemies[0].healthValue = 3;
-			if (Helper::enemiesDied() == 1)
+
+			if (Helper::enemiesDied() == 5)
 			{
-				if (success.isFinishedShowing(window) == true)
+				if (success.isFinishedShowing(window))
 				{
 					return;
 				}
 			}
+
 			GameUI::showPlayerUI(window);
+
 			window.display();
 		}
 	}

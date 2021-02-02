@@ -119,10 +119,12 @@ void Enemy1::fireBullet(Player& player, int interval_milliseconds, int interval_
 			{
 				bulletSound.play();
 			}
-			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
+
+			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.speed = speed;
 			bulletsLeft.push_back(bulletLeft);
-			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
+
 			bulletRight.speed = speed;
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();

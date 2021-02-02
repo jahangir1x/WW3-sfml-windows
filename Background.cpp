@@ -4,9 +4,10 @@
 Background::Background()
 {
 	scenery = Scenes(rand() % 2); // set random scenery
+	// scenery = Land;
 	if (scenery == Sea)
 	{
-		backScene.blending_pos = -3095;
+		backScene.blending_pos = -1889;
 		backScene.backSprite.setTexture(GetRes::seaTex);
 		backScene.element1Sprite.setTexture(GetRes::seaElem1);
 		backScene.element2Sprite.setTexture(GetRes::seaElem2);
@@ -16,13 +17,17 @@ Background::Background()
 	}
 	else if (scenery == Land)
 	{
-		backScene.blending_pos = -3912;
+		backScene.blending_pos = -3072;
 		backScene.backSprite.setTexture(GetRes::landTex);
 		backScene.element1Sprite.setTexture(GetRes::landElem1);
 		backScene.element2Sprite.setTexture(GetRes::landElem2);
 		backScene.element3Sprite.setTexture(GetRes::landElem3);
 		backScene.element4Sprite.setTexture(GetRes::landElem4);
 		backScene.element5Sprite.setTexture(GetRes::landElem5);
+	}
+	if (Helper::windowWidth() > 1920)
+	{
+		widthScale = Helper::windowWidth() / backScene.backSprite.getGlobalBounds().width;
 	}
 	backScene.backSprite.setPosition(0, -backScene.backSprite.getGlobalBounds().height + Helper::windowHeight());
 	shouldRenewElements = false;
@@ -78,7 +83,7 @@ void Background::Show(RenderWindow& window)
 		{
 			element.setRotation(rand() % 360); // set random rotation
 			k = Helper::randRange(50, 100);
-			element.setScale(k / 100.0 * Helper::getWidthScalingFactor(), k / 100.0 * Helper::getWidthScalingFactor());													 // set random scale
+			element.setScale(k / 100.0 * Helper::getWidthScalingFactor(), k / 100.0 * Helper::getWidthScalingFactor());											 // set random scale
 			element.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(-Helper::windowHeight(), -element.getGlobalBounds().height * 2)); // set random position
 		}
 

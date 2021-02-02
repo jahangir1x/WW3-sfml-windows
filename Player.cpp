@@ -270,9 +270,11 @@ void Player::fireBullet()
 				{
 					bulletSound.play();
 				}
-				bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
+				// bulletLeft.sprite.setPosition(playerSprite.getPosition().x + 16, playerSprite.getPosition().y + 68);
+				bulletLeft.sprite.setPosition(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 8.0, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2.0);
 				bulletsLeft.push_back(bulletLeft);
-				bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
+				// bulletRight.sprite.setPosition(playerSprite.getPosition().x + 66, playerSprite.getPosition().y + 68);
+				bulletRight.sprite.setPosition(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width * 7.0 / 8.0, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2.0);
 				bulletsRight.push_back(bulletRight);
 				bulletClock.restart();
 			}

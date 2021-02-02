@@ -119,10 +119,10 @@ void Enemy3::fireBullet(Player& player, int interval_milliseconds, int interval_
 			{
 				bulletSound.play();
 			}
-			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
+			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.speed = speed;
 			bulletsLeft.push_back(bulletLeft);
-			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletRight.speed = speed;
 			bulletsRight.push_back(bulletRight);
 			bulletClock.restart();
@@ -184,7 +184,7 @@ void Enemy3::move(float speed)
 			}
 			moveInit = true;
 		}
-		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6)
+		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 20)
 		{
 			moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
 			moveNorm *= Helper::SecondsPerFrame() * speed;

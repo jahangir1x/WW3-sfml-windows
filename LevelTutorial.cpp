@@ -31,6 +31,7 @@ void LevelTutorial::Show(RenderWindow& window, Event& event)
 		Vector2f playerPos = yuri.playerSprite.getPosition();
 		unsigned int missileCount = yuri.missileCount;
 		Enemy1 enemy;
+
 		////// mandatory //////
 		while (window.isOpen())
 		{

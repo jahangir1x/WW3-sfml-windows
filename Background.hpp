@@ -13,6 +13,7 @@ public:
 	static bool shouldRemoveElement(Sprite& sprite);
 
 private:
+	float widthScale;
 	struct Scene
 	{
 		Sprite backSprite;

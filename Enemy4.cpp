@@ -120,7 +120,7 @@ void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_
 			{
 				bulletSound.play();
 			}
-			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
+			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.sprite.setOrigin(bulletLeft.sprite.getGlobalBounds().width / 2, 0);
 
 			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
@@ -130,7 +130,7 @@ void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_
 			bulletLeft.sprite.setRotation(Helper::getRotation(tempVect.x, tempVect.y, bulletLeft.sprite.getPosition().x, bulletLeft.sprite.getPosition().y) - 90); // 'rotation - 90', since sprite texture is vertical by default
 			bulletLeft.velocity *= speed;
 			bulletsLeft.push_back(bulletLeft);
-			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletRight.sprite.setOrigin(bulletRight.sprite.getGlobalBounds().width / 2, 0);
 
 			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
@@ -202,7 +202,7 @@ void Enemy4::move(float speed)
 			}
 			moveInit = true;
 		}
-		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6)
+		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 20)
 		{
 			moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
 			moveNorm *= Helper::SecondsPerFrame() * speed;

@@ -253,7 +253,7 @@ void Boss::fireBulletCircle(Player& player, int interval_milliseconds, int inter
 			bulletLeft.shootingStyle = Circle;
 			bulletLeft.playerPos = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
 				Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot
-			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
+			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.speed = speed;
 
 			bulletLeft.shouldStopCircling = false;
@@ -275,7 +275,7 @@ void Boss::fireBulletCircle(Player& player, int interval_milliseconds, int inter
 			bulletRight.shootingStyle = Circle;
 			bulletRight.playerPos = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
 				Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot
-			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletRight.speed = speed;
 
 			bulletRight.shouldStopCircling = false;
@@ -317,14 +317,14 @@ void Boss::fireBulletSine(Player& player, int interval_milliseconds, int interva
 				bulletSound.play();
 			}
 			bulletLeft.shootingStyle = Sine;
-			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
+			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.speed = speed;
 			bulletLeft.rotation = 0;
 			bulletLeft.sprite.setRotation(0);
 			bulletsLeft.push_back(bulletLeft);
 
 			bulletRight.shootingStyle = Sine;
-			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletRight.speed = speed;
 			bulletRight.rotation = 0;
 			bulletRight.sprite.setRotation(0);
@@ -353,7 +353,7 @@ void Boss::fireBulletToPlayer(Player& player, int interval_milliseconds, int int
 				bulletSound.play();
 			}
 			bulletLeft.shootingStyle = ToPlayer;
-			bulletLeft.sprite.setPosition(enemySprite.getPosition().x + 16, enemySprite.getPosition().y + 60);
+			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.sprite.setOrigin(bulletLeft.sprite.getGlobalBounds().width / 2, 0);
 
 			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
@@ -364,7 +364,7 @@ void Boss::fireBulletToPlayer(Player& player, int interval_milliseconds, int int
 			bulletLeft.velocity *= speed;
 			bulletsLeft.push_back(bulletLeft);
 			bulletRight.shootingStyle = ToPlayer;
-			bulletRight.sprite.setPosition(enemySprite.getPosition().x + 66, enemySprite.getPosition().y + 60);
+			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletRight.sprite.setOrigin(bulletRight.sprite.getGlobalBounds().width / 2, 0);
 
 			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
@@ -525,7 +525,7 @@ void Boss::move(float speed)
 			}
 			moveInit = true;
 		}
-		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 6)
+		else if (Helper::pointsDistance(enemySprite.getGlobalBounds().left, enemySprite.getGlobalBounds().top, movePos.x, movePos.y) > 20)
 		{
 			moveNorm = Helper::getNormalizedVector(movePos, enemySprite.getPosition());
 			moveNorm *= Helper::SecondsPerFrame() * speed;

@@ -55,6 +55,33 @@ Puzzle::Puzzle()
 		sprite.setScale(k / 100.0 * Helper::getWidthScalingFactor(), k / 100.0 * Helper::getWidthScalingFactor());
 		sprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(0, Helper::windowHeight())); // set random position
 	}
+	outMeter.meterSprite.setOrigin(outMeter.meterSprite.getGlobalBounds().width / 2.0, outMeter.meterSprite.getGlobalBounds().height / 2.0);
+	outMeter.handSprite.setOrigin(outMeter.handSprite.getGlobalBounds().width / 12.0, outMeter.handSprite.getGlobalBounds().height / 2);
+	outMeter.hintSprite.setOrigin(outMeter.hintSprite.getGlobalBounds().width / 12.0, outMeter.hintSprite.getGlobalBounds().height / 2);
+
+	inMeter1.meterSprite.setOrigin(inMeter1.meterSprite.getGlobalBounds().width / 2, inMeter1.meterSprite.getGlobalBounds().height / 2);
+	inMeter1.handSprite.setOrigin(inMeter1.handSprite.getGlobalBounds().width / 12.0, inMeter1.handSprite.getGlobalBounds().height / 2);
+
+	inMeter2.meterSprite.setOrigin(inMeter2.meterSprite.getGlobalBounds().width / 2, inMeter2.meterSprite.getGlobalBounds().height / 2);
+	inMeter2.handSprite.setOrigin(inMeter2.handSprite.getGlobalBounds().width / 12.0, inMeter2.handSprite.getGlobalBounds().height / 2);
+
+	outMeter.meterSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	inMeter1.meterSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	inMeter2.meterSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	outMeter.handSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	outMeter.hintSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	inMeter1.handSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	inMeter2.handSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+
+	outMeter.meterSprite.setPosition(Helper::windowWidth() / 2, (outMeter.meterSprite.getGlobalBounds().height / 2) + 20);
+	outMeter.handSprite.setPosition(outMeter.meterSprite.getPosition().x, outMeter.meterSprite.getPosition().y);
+	outMeter.hintSprite.setPosition(outMeter.meterSprite.getPosition().x, outMeter.meterSprite.getPosition().y);
+
+	inMeter1.meterSprite.setPosition(Helper::windowWidth() / 4, outMeter.meterSprite.getPosition().y + outMeter.meterSprite.getGlobalBounds().height + 20);
+	inMeter1.handSprite.setPosition(inMeter1.meterSprite.getPosition().x, inMeter1.meterSprite.getPosition().y);
+
+	inMeter2.meterSprite.setPosition(Helper::windowWidth() * 3 / 4, outMeter.meterSprite.getPosition().y + outMeter.meterSprite.getGlobalBounds().height + 20);
+	inMeter2.handSprite.setPosition(inMeter2.meterSprite.getPosition().x, inMeter2.meterSprite.getPosition().y);
 
 	meter1active = false;
 	meter2active = false;
@@ -70,35 +97,11 @@ Puzzle::Puzzle()
 
 void Puzzle::make(int outTicksInit, int outHintTicks, int inTicksInit1, int inTicks1, int inTicksInit2, int inTicks2, float timeRemain)
 {
-
-	// out meter
-	outMeter.meterSprite.setOrigin(outMeter.meterSprite.getGlobalBounds().width / 2, outMeter.meterSprite.getGlobalBounds().height / 2);
-	outMeter.handSprite.setOrigin(10, outMeter.handSprite.getGlobalBounds().height / 2);
-	outMeter.hintSprite.setOrigin(10, outMeter.hintSprite.getGlobalBounds().height / 2);
-
-	outMeter.meterSprite.setPosition(Helper::windowWidth() / 2, (outMeter.meterSprite.getGlobalBounds().height / 2) + 20);
-	outMeter.handSprite.setPosition(outMeter.meterSprite.getPosition().x, outMeter.meterSprite.getPosition().y);
-	outMeter.hintSprite.setPosition(outMeter.meterSprite.getPosition().x, outMeter.meterSprite.getPosition().y);
-
 	outMeter.handSprite.setRotation(outTicksInit * 360 / 30);
 	outMeter.hintSprite.setRotation(outHintTicks * 360 / 30);
 
-	// meter 1
-	inMeter1.meterSprite.setOrigin(inMeter1.meterSprite.getGlobalBounds().width / 2, inMeter1.meterSprite.getGlobalBounds().height / 2);
-	inMeter1.handSprite.setOrigin(10, inMeter1.handSprite.getGlobalBounds().height / 2);
-
-	inMeter1.meterSprite.setPosition(Helper::windowWidth() / 4, outMeter.meterSprite.getPosition().y + outMeter.meterSprite.getGlobalBounds().height + 20);
-	inMeter1.handSprite.setPosition(inMeter1.meterSprite.getPosition().x, inMeter1.meterSprite.getPosition().y);
-
 	inMeter1.handSprite.setRotation(inTicksInit1 * 360 / 30);
 	inMeter1.handRotation = inTicks1 * 360 / 30;
-
-	//meter 2
-	inMeter2.meterSprite.setOrigin(inMeter2.meterSprite.getGlobalBounds().width / 2, inMeter2.meterSprite.getGlobalBounds().height / 2);
-	inMeter2.handSprite.setOrigin(10, inMeter2.handSprite.getGlobalBounds().height / 2);
-
-	inMeter2.meterSprite.setPosition(Helper::windowWidth() * 3 / 4, outMeter.meterSprite.getPosition().y + outMeter.meterSprite.getGlobalBounds().height + 20);
-	inMeter2.handSprite.setPosition(inMeter2.meterSprite.getPosition().x, inMeter2.meterSprite.getPosition().y);
 
 	inMeter2.handSprite.setRotation(inTicksInit2 * 360 / 30);
 	inMeter2.handRotation = inTicks2 * 360 / 30;
@@ -140,7 +143,7 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 
 	Music music;
 	music.openFromFile("res/music/tension.wav");
-	music.setVolume(30);
+	music.setVolume(60);
 	music.play();
 
 	while (window.isOpen())
@@ -199,6 +202,13 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 			{
 				inMeter1.meterSprite.setTexture(GetRes::inMeter);
 			}
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			cout << "omet: " << outMeter.meterSprite.getPosition().x << " " << outMeter.meterSprite.getPosition().y << endl;
+			cout << "oh: " << outMeter.handSprite.getPosition().x << " " << outMeter.handSprite.getPosition().y << endl;
+			cout << "mous: :" << Mouse::getPosition(window).x << " " << Mouse::getPosition(window).y << endl;
 		}
 
 		if (meter2active == false)
