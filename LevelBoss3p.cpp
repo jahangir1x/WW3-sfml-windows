@@ -8,7 +8,7 @@ void LevelBoss3p::Show(RenderWindow& window, Event& event)
 	while (LevelHelper::shouldKeepPlaying())
 	{
 		Puzzle puzzle;
-		puzzle.make(14, 6, 9, 3, 9, 5, 60);
+		puzzle.makeRandom(60);
 		cout << "in level 101 " << endl;
 		Success success;
 		LevelFailed levelFailedObj;
@@ -18,7 +18,6 @@ void LevelBoss3p::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;

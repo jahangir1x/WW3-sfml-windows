@@ -16,14 +16,12 @@ void LevelBossI6::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext4;
 
 		bool inversed = false;
 		float inverseStart = 90;
-		float inverseEnd = 35;
 
 		Enemy6 enemy;
 
@@ -120,20 +118,20 @@ void LevelBossI6::Show(RenderWindow& window, Event& event)
 
 			if (inverseStart > yuri.healthValue && yuri.isDead == false)
 			{
-				if (inverseEnd > yuri.healthValue)
+				// if (inverseEnd > yuri.healthValue)
+				// {
+				// 	cout << "normal at: " << yuri.healthValue << endl;
+				// 	inversed = false;
+				// }
+				// else
+				// {
+				custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
+				if (custext4.fullShowed)
 				{
-					cout << "normal at: " << yuri.healthValue << endl;
-					inversed = false;
+					cout << "inverting at: " << yuri.healthValue << endl;
+					inversed = true;
 				}
-				else
-				{
-					custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
-					if (custext4.fullShowed)
-					{
-						cout << "inverting at: " << yuri.healthValue << endl;
-						inversed = true;
-					}
-				}
+				// }
 			}
 
 			yuri.Show(window);

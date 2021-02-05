@@ -15,12 +15,12 @@ void LevelInversed4::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
 		CustomText custext3;
 		CustomText custext4;
+		CustomText custext5;
 		bool someone_is_alive;
 		vector<Enemy1> first_enemies1(2);
 		vector<Enemy2> first_enemies2(2);
@@ -33,10 +33,54 @@ void LevelInversed4::Show(RenderWindow& window, Event& event)
 		vector<Enemy4> fourth_enemies1(3);
 		vector<Enemy1> fourth_enemies2(3);
 		vector<Enemy2> fourth_enemies3(2);
+		for (auto& enemy : first_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(6));
+		}
+		for (auto& enemy : first_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : first_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : second_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : second_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : third_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(1));
+		}
+		for (auto& enemy : third_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
+		for (auto& enemy : third_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(6));
+		}
+		for (auto& enemy : fourth_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : fourth_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : fourth_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
 
 		bool inversed = false;
-		float playerHealth = 90;
-		bool isHit = false;
+		float inverseStart = 90;
+		float inverseEnd = 35;
 
 		while (window.isOpen())
 		{
@@ -305,19 +349,22 @@ void LevelInversed4::Show(RenderWindow& window, Event& event)
 				}
 			}
 
-			if (playerHealth > yuri.healthValue && isHit == false && yuri.isDead == false)
+			if (inverseStart > yuri.healthValue && yuri.isDead == false)
 			{
-				isHit = true;
-			}
-
-			if (isHit == true && custext4.hidingFinished == false)
-			{
-				custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
-			}
-
-			if (custext4.fullShowed)
-			{
-				inversed = true;
+				if (inverseEnd > yuri.healthValue)
+				{
+					cout << "normal at: " << yuri.healthValue << endl;
+					inversed = false;
+				}
+				else
+				{
+					custext5.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
+					if (custext5.fullShowed)
+					{
+						cout << "inverting at: " << yuri.healthValue << endl;
+						inversed = true;
+					}
+				}
 			}
 
 			yuri.Show(window);

@@ -123,8 +123,8 @@ void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_
 			bulletLeft.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletLeft.sprite.setOrigin(bulletLeft.sprite.getGlobalBounds().width / 2, 0);
 
-			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
-				Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot
+			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left - player.playerSprite.getGlobalBounds().width, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width * 2),
+				Helper::randRange(player.playerSprite.getGlobalBounds().top - player.playerSprite.getGlobalBounds().height, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height * 2)); // stores where to shoot
 
 			bulletLeft.velocity = Helper::getNormalizedVector(tempVect, bulletLeft.sprite.getPosition());
 			bulletLeft.sprite.setRotation(Helper::getRotation(tempVect.x, tempVect.y, bulletLeft.sprite.getPosition().x, bulletLeft.sprite.getPosition().y) - 90); // 'rotation - 90', since sprite texture is vertical by default
@@ -133,8 +133,8 @@ void Enemy4::fireBullet(Player& player, int interval_milliseconds, int interval_
 			bulletRight.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width * 7.0 / 8.0, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2.0);
 			bulletRight.sprite.setOrigin(bulletRight.sprite.getGlobalBounds().width / 2, 0);
 
-			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
-				Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot
+			tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left - player.playerSprite.getGlobalBounds().width, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width * 2),
+				Helper::randRange(player.playerSprite.getGlobalBounds().top - player.playerSprite.getGlobalBounds().height, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height * 2)); // stores where to shoot
 
 			bulletRight.velocity = Helper::getNormalizedVector(tempVect, bulletRight.sprite.getPosition());
 			bulletRight.sprite.setRotation(Helper::getRotation(tempVect.x, tempVect.y, bulletRight.sprite.getPosition().x, bulletRight.sprite.getPosition().y) - 90); // 'rotation - 90', since sprite texture is vertical by default
@@ -167,8 +167,8 @@ void Enemy4::fireMissile(Player& player, int interval_milliseconds, int interval
 				missile.sprite.setPosition(enemySprite.getPosition().x + enemySprite.getGlobalBounds().width / 2 - 5, enemySprite.getPosition().y + 40);
 				missile.sprite.setOrigin(missile.sprite.getGlobalBounds().width / 2, 0);
 
-				tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width),
-					Helper::randRange(player.playerSprite.getGlobalBounds().top, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height)); // stores where to shoot
+				tempVect = Vector2f(Helper::randRange(player.playerSprite.getGlobalBounds().left - player.playerSprite.getGlobalBounds().width, player.playerSprite.getGlobalBounds().left + player.playerSprite.getGlobalBounds().width * 2),
+					Helper::randRange(player.playerSprite.getGlobalBounds().top - player.playerSprite.getGlobalBounds().height, player.playerSprite.getGlobalBounds().top + player.playerSprite.getGlobalBounds().height * 2)); // stores where to shoot
 
 				missile.velocity = Helper::getNormalizedVector(tempVect, missile.sprite.getPosition());
 				missile.sprite.setRotation(Helper::getRotation(tempVect.x, tempVect.y, missile.sprite.getPosition().x, missile.sprite.getPosition().y) - 90); // 'rotation - 90', since sprite texture is vertical by default

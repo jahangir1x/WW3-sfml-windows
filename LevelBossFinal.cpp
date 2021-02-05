@@ -12,7 +12,8 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 	while (LevelHelper::shouldKeepPlaying())
 	{
 		Puzzle puzzle;
-		puzzle.make(3, 4, 5, 4, 7, 7, 60);
+		// puzzle.make(3, 4, 5, 4, 7, 7, 60);
+		puzzle.makeRandom(35);
 
 		////// mandatory //////
 		cout << "in level 1 " << endl;
@@ -24,7 +25,7 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		////// mandatory //////
 
 		CustomText custext1;
@@ -40,15 +41,13 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 
 		boss.setStyle(Boss::Style::ShakaLala);
 		boss.enemySprite.setScale(0.6, 0.6);
-		boss.bulletDamage = 18;
-		boss.missileDamage = 32;
+		boss.bulletDamage = 12;
+		boss.missileDamage = 18;
 
-		boss.healthValue = 1000;
-		bool isHit = false;
-		bool isHitAgain = false;
+		boss.healthValue = 750;
 		bool inversed = false;
-		float playerHealth = 90;
-		float playerHealthInverse = 70;
+		float puzzleHealth = 90;
+		float inverseHealth = 70;
 
 		while (window.isOpen())
 		{
@@ -73,6 +72,10 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 			window.clear(Color::Blue);
 			background.Show(window);
 			yuri.fireBullet();
+			if (Mouse::isButtonPressed(Mouse::Right))
+			{
+				yuri.fireMissile();
+			}
 
 			if (!inversed)
 			{
@@ -127,34 +130,28 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 			levelhelp.isHitBullet(yuri, boss);
 			levelhelp.isHitMissile(yuri, boss);
 			boss.Show(window);
-			if (playerHealth > yuri.healthValue && isHit == false)
+			if (puzzleHealth > yuri.healthValue && yuri.isDead == false)
 			{
-				isHit = true;
-			}
-
-			if (isHit == true && custext2.hidingFinished == false)
-			{
-				custext2.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
-			}
-
-			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false && Helper::enemiesDied() < 1)
-			{
-				puzzle.Show(window, event);
-			}
-
-			if (playerHealthInverse > yuri.healthValue && puzzle.getState() == Puzzle::Solved)
-			{
-				isHitAgain = true;
-			}
-
-			if (isHitAgain == true && custext2.hidingFinished == true && custext3.hidingFinished == false)
-			{
-				custext3.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
-			}
-
-			if (custext3.fullShowed)
-			{
-				inversed = true;
+				if (custext2.hidingFinished)
+				{
+					if (puzzle.getState() == Puzzle::Nothing && Helper::enemiesDied() < 1)
+					{
+						puzzle.Show(window, event);
+					}
+					if (inverseHealth > yuri.healthValue && custext2.hidingFinished)
+					{
+						cout << "inverse: " << yuri.healthValue << endl;
+						custext3.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
+						if (custext3.fullShowed)
+						{
+							inversed = true;
+						}
+					}
+				}
+				else
+				{
+					custext2.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
+				}
 			}
 
 			yuri.Show(window);

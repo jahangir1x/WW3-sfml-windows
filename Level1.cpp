@@ -18,13 +18,22 @@ void Level1::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		CustomText custext1;
 		CustomText custext2;
 		////// mandatory //////
 		bool someone_is_alive;
 		vector<Enemy1> first_enemies(2);
 		vector<Enemy2> second_enemies(3);
+
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(1));
+		}
 
 		while (window.isOpen())
 		{

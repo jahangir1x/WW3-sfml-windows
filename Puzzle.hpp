@@ -8,6 +8,15 @@ using namespace sf;
 class Puzzle
 {
 private:
+	int leftTurns;
+	int rightTurns;
+	int leftTicks;
+	int rightTicks;
+	int outHandPos;
+	int hintHandPos;
+	int totalDisplacement;
+	int leftSign;
+	int rightSign;
 	bool solved;
 	bool stopWatchStarted;
 	bool shouldStopEverything;
@@ -70,6 +79,7 @@ public:
 		Failed = 2
 	};
 	void make(int outTicksInit, int outHintTicks, int inTicksInit1, int inTicks1, int inTicksInit2, int inTicks2, float timeRemain);
+	void makeRandom(float timeRemain);
 	void Show(RenderWindow& window, Event& event);
 	State getState();
 	// vector<InputMeter> inMeters;

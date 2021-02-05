@@ -16,13 +16,34 @@ void Level5::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		bool someone_is_alive;
 		vector<Enemy3> first_enemies(4);
 		vector<Enemy4> second_enemies1(2);
 		vector<Enemy3> second_enemies2(2);
 		vector<Enemy5> third_enemies1(3);
 		vector<Enemy4> third_enemies2(2);
+
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : second_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : second_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : third_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(6));
+		}
+		for (auto& enemy : third_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
 
 		CustomText custext1;
 		CustomText custext2;

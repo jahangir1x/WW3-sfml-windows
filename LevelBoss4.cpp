@@ -16,7 +16,6 @@ void LevelBoss4::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 

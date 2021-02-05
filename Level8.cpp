@@ -15,7 +15,6 @@ void Level8::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
@@ -28,7 +27,30 @@ void Level8::Show(RenderWindow& window, Event& event)
 		vector<Enemy3> third_enemies(7);
 		vector<Enemy5> fourth_enemies1(4);
 		vector<Enemy6> fourth_enemies2(4);
-
+		for (auto& enemy : first_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(1));
+		}
+		for (auto& enemy : first_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : third_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : fourth_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : fourth_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(6));
+		}
 		while (window.isOpen())
 		{
 			Helper::resetClock();

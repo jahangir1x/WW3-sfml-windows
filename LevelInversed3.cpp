@@ -15,12 +15,12 @@ void LevelInversed3::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
 		CustomText custext3;
 		CustomText custext4;
+		CustomText custext5;
 		bool someone_is_alive;
 		vector<Enemy1> first_enemies1(3);
 		vector<Enemy6> first_enemies2(2);
@@ -28,6 +28,30 @@ void LevelInversed3::Show(RenderWindow& window, Event& event)
 		vector<Enemy4> third_enemies1(3);
 		vector<Enemy2> third_enemies2(4);
 		vector<Enemy5> fourth_enemies(7);
+		for (auto& enemy : first_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
+		for (auto& enemy : first_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(1));
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : third_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : third_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : fourth_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
 
 		bool inversed = false;
 		float inverseStart = 90;
@@ -230,8 +254,8 @@ void LevelInversed3::Show(RenderWindow& window, Event& event)
 				}
 				else
 				{
-					custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
-					if (custext4.fullShowed)
+					custext5.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
+					if (custext5.fullShowed)
 					{
 						cout << "inverting at: " << yuri.healthValue << endl;
 						inversed = true;

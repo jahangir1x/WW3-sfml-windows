@@ -18,7 +18,7 @@ void Level2::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		CustomText custext1;
 		CustomText custext2;
 		////// mandatory //////
@@ -26,7 +26,14 @@ void Level2::Show(RenderWindow& window, Event& event)
 		bool someone_is_alive;
 		vector<Enemy2> first_enemies(3);
 		vector<Enemy3> second_enemies(4);
-
+		for (auto& enemy : first_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
 		while (window.isOpen())
 		{
 			Helper::resetClock();

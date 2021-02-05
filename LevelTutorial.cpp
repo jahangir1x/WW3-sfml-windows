@@ -19,7 +19,7 @@ void LevelTutorial::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		CustomText custext1;
 		CustomText custext2;
 		CustomText custext3;

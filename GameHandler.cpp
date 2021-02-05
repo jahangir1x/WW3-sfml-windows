@@ -48,7 +48,7 @@ using namespace sf;
 void GameHandler::Start()
 {
 	window.create(VideoMode(1100, 768), "World War 3", Style::Fullscreen); // invalid resolution is intentional
-	window.setFramerateLimit(90);
+	window.setFramerateLimit(40);
 	window.setMouseCursorVisible(false);
 	View view(FloatRect(0, 0, window.getSize().x * 1080.0 / window.getSize().y, 1080.0));
 	window.setView(view);
@@ -104,7 +104,7 @@ void GameHandler::gameLoop()
 
 			// test region -----------------
 
-			// EndScene eendscene;
+			// LevelBoss3p eendscene;
 			// eendscene.Show(window, event);
 			// if (LevelHelper::retriesLeft == 0)
 			// {
@@ -299,8 +299,6 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
-
-			// beta test done----
 
 			Level11 level11;
 			level11.Show(window, event);

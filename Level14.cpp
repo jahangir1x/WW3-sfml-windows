@@ -15,7 +15,6 @@ void Level14::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
@@ -40,6 +39,70 @@ void Level14::Show(RenderWindow& window, Event& event)
 		vector<Enemy1> sixth_enemies1(3);
 		vector<Enemy5> sixth_enemies2(2);
 		vector<Enemy2> sixth_enemies3(3);
+		for (auto& enemy : first_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : first_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : second_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : second_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(6));
+		}
+		for (auto& enemy : second_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
+		for (auto& enemy : third_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(1));
+		}
+		for (auto& enemy : third_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : third_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : fourth_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : fourth_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : fourth_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(6));
+		}
+		for (auto& enemy : fifth_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
+		for (auto& enemy : fifth_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(1));
+		}
+		for (auto& enemy : sixth_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : sixth_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : sixth_enemies3)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
 
 		while (window.isOpen())
 		{

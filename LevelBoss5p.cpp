@@ -10,7 +10,8 @@ void LevelBoss5p::Show(RenderWindow& window, Event& event)
 
 		Puzzle puzzle;
 
-		puzzle.make(23, 9, 0, 9, 0, 11, 60);
+		// puzzle.make(23, 9, 0, 9, 0, 11, 60);
+		puzzle.makeRandom(40);
 		cout << "in level 105 " << endl;
 		Success success;
 		LevelFailed levelFailedObj;
@@ -20,7 +21,7 @@ void LevelBoss5p::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		bool someone_is_alive;
 
 		CustomText custext1;

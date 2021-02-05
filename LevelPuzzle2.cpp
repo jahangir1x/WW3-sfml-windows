@@ -8,7 +8,8 @@ void LevelPuzzle2::Show(RenderWindow& window, Event& event)
 	while (LevelHelper::shouldKeepPlaying())
 	{
 		Puzzle puzzle;
-		puzzle.make(14, 6, 9, 3, 9, 5, 60);
+		// puzzle.make(14, 6, 9, 3, 9, 5, 60);
+		puzzle.makeRandom(50);
 		cout << "in level 101 " << endl;
 		Success success;
 		LevelFailed levelFailedObj;
@@ -18,7 +19,6 @@ void LevelPuzzle2::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
@@ -32,6 +32,26 @@ void LevelPuzzle2::Show(RenderWindow& window, Event& event)
 		vector<Enemy4> second_enemies(4);
 		vector<Enemy6> third_enemies1(3);
 		vector<Enemy2> third_enemies2(4);
+		for (auto& enemy : first_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(3));
+		}
+		for (auto& enemy : first_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(5));
+		}
+		for (auto& enemy : second_enemies)
+		{
+			enemy.setStyle(Enemy1::Style(4));
+		}
+		for (auto& enemy : third_enemies1)
+		{
+			enemy.setStyle(Enemy1::Style(2));
+		}
+		for (auto& enemy : third_enemies2)
+		{
+			enemy.setStyle(Enemy1::Style(0));
+		}
 
 		bool isHit = false;
 		float playerHealth = 90;

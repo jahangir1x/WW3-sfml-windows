@@ -138,6 +138,24 @@ void Puzzle::make(int outTicksInit, int outHintTicks, int inTicksInit1, int inTi
 	}
 }
 
+void Puzzle::makeRandom(float timeRemain)
+{
+	leftSign = (rand() % 2) ? 1 : -1; // choose random multiplier
+	rightSign = (rand() % 2) ? 1 : -1;
+
+	leftTurns = Helper::randRange(2, 12);
+	rightTurns = Helper::randRange(2, 12);
+	leftTicks = Helper::randRange(2, 12);
+	rightTicks = Helper::randRange(2, 12);
+	totalDisplacement = (leftSign * leftTurns * leftTicks + rightSign * rightTurns * rightTicks) % 30; // total 30 ticks displacement = a*b + c*d = e % 30
+	// cout << "left: " << leftSign * leftTurns << " " << leftTicks << endl;
+	// cout << "right: " << rightSign * rightTurns << " " << rightTicks << endl;
+	// cout << "out: " << totalDisplacement << endl;
+	outHandPos = rand() % 30;
+	hintHandPos = (outHandPos + totalDisplacement) % 30;
+	make(outHandPos, hintHandPos, rand() % 30, leftTicks, rand() % 30, rightTicks, timeRemain);
+}
+
 void Puzzle::Show(RenderWindow& window, Event& event)
 {
 

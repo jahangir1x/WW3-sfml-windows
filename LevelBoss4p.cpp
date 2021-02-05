@@ -9,7 +9,8 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 	{
 		Puzzle puzzle;
 
-		puzzle.make(29, 0, 21, 7, 12, 6, 60);
+		// puzzle.make(29, 0, 21, 7, 12, 6, 60);
+		puzzle.makeRandom(45);
 
 		cout << "in level 109 " << endl;
 		Success success;
@@ -20,7 +21,7 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
-		// yuri.healthValue = 500;
+
 		bool someone_is_alive;
 		CustomText custext1;
 		CustomText custext2;
