@@ -16,26 +16,28 @@ void LevelBossI2::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 
 		CustomText custext1;
-		bool inversed = false;
-		float playerHealth = 90;
 		CustomText custext4;
-		bool isHit = false;
+
+		bool inversed = false;
+		float inverseStart = 90;
+		float inverseEnd = 35;
 
 		Enemy2 enemy;
 
-		enemy.enemySprite.setScale(1 * Helper::getWidthScalingFactor(), 1 * Helper::getWidthScalingFactor());
-		enemy.bulletLeft.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
-		enemy.bulletRight.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
-		enemy.missile.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
-		enemy.bigExplosion.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+		enemy.enemySprite.setScale(1, 1);
+		enemy.bulletLeft.sprite.setScale(1, 1);
+		enemy.bulletRight.sprite.setScale(1, 1);
+		enemy.missile.sprite.setScale(1, 1);
+
 		enemy.bulletDamage = 15;
 		enemy.missileDamage = 24;
 		enemy.healthValue = 600;
 		Music music;
 		music.openFromFile("res/music/boss.wav");
-		music.setVolume(60);
+		music.setVolume(80);
 		music.play();
 
 		while (window.isOpen())
@@ -51,9 +53,9 @@ void LevelBossI2::Show(RenderWindow& window, Event& event)
 				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+					success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+					levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 			window.clear(Color::Blue);
@@ -108,29 +110,32 @@ void LevelBossI2::Show(RenderWindow& window, Event& event)
 			{
 				enemy.move(340);
 			}
-			enemy.fireBullet(yuri, 4000, 3900, 490);
-			enemy.fireMissile(yuri, 4000, 3900, 485);
+			enemy.missileCount = 10; // infinite missile
+			enemy.fireBullet(yuri, 1000, 900, 490);
+			enemy.fireMissile(yuri, 2000, 1900, 485);
 			levelhelp.isHitBody(yuri, enemy);
 			levelhelp.isHitBullet(yuri, enemy);
 			levelhelp.isHitMissile(yuri, enemy);
 			enemy.Show(window);
 
+			if (inverseStart > yuri.healthValue && yuri.isDead == false)
+			{
+				if (inverseEnd > yuri.healthValue)
+				{
+					cout << "normal at: " << yuri.healthValue << endl;
+					inversed = false;
+				}
+				else
+				{
+					custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
+					if (custext4.fullShowed)
+					{
+						cout << "inverting at: " << yuri.healthValue << endl;
+						inversed = true;
+					}
+				}
+			}
 			yuri.Show(window);
-
-			if (playerHealth > yuri.healthValue && isHit == false && yuri.isDead == false)
-			{
-				isHit = true;
-			}
-
-			if (isHit == true && custext4.hidingFinished == false)
-			{
-				custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
-			}
-
-			if (custext4.fullShowed)
-			{
-				inversed = true;
-			}
 
 			if (yuri.isDead)
 			{

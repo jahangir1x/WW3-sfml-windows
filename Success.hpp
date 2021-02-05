@@ -11,12 +11,11 @@ public:
 	Success();
 	bool isFinishedShowing(RenderWindow& window);
 	void textShow(RenderWindow& window, String str, unsigned int char_size, float pos_x, float pos_y);
-	void handleClose(Vector2i mousePos);
+	void handleClose(Vector2f mousePos);
 	Sprite buttonSprite;
 
 protected:
 	CustomText custext;
-	Vector2i mousePos;
 	bool clicked;
 	Sprite titleSprite;
 	Sprite bodySprite;

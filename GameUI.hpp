@@ -12,7 +12,7 @@ public:
 	static void reset();
 	static void showPlayerUI(RenderWindow& window);
 	static void showMenuUI(RenderWindow& window);
-	static void handleClose(RenderWindow& window, Vector2i MousePos);
+	static void handleClose(RenderWindow& window, Vector2f MousePos);
 
 	enum CursorStates
 	{

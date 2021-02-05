@@ -51,7 +51,7 @@ void CreditsMenu::Show(RenderWindow& window, Event& event)
 	buttonSprite.setTextureRect(buttonRect);
 	buttonSprite.setPosition(10, 10);
 	// ControlSprite.setPosition(Helper::windowWidth() / 2 - ControlSprite.getGlobalBounds().width / 2, Helper::windowHeight() / 2 - ControlSprite.getGlobalBounds().height / 2);
-	ControlSprite.setScale(0.6 * Helper::getWidthScalingFactor(), 0.6 * Helper::getWidthScalingFactor());
+	ControlSprite.setScale(0.6, 0.6);
 	ControlSprite.setPosition(buttonSprite.getPosition().x, buttonSprite.getGlobalBounds().top + buttonSprite.getGlobalBounds().height + 20);
 	Clock buttonClock;
 	bool shouldClose = false;
@@ -78,8 +78,8 @@ void CreditsMenu::Show(RenderWindow& window, Event& event)
 			{
 				if (event.mouseButton.button == Mouse::Left)
 				{
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					mousePos = Vector2f(Mouse::getPosition(window));
+					mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
+					GameUI::handleClose(window, mousePos);
 				}
 			}
 		}

@@ -56,6 +56,7 @@ public:
 
 	static Texture failedStar;
 	static Texture failedText;
+	static Texture gameOverText;
 
 	static Texture playAgain;
 	static Texture tryAgain;

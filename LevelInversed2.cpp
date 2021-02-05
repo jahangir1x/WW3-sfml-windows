@@ -15,10 +15,12 @@ void LevelInversed2::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
 		CustomText custext3;
+		CustomText custext4;
 		bool someone_is_alive;
 		vector<Enemy2> first_enemies1(3);
 		vector<Enemy6> first_enemies2(2);
@@ -27,9 +29,8 @@ void LevelInversed2::Show(RenderWindow& window, Event& event)
 		vector<Enemy2> third_enemies2(4);
 
 		bool inversed = false;
-		float playerHealth = 90;
-		CustomText custext4;
-		bool isHit = false;
+		float inverseStart = 90;
+		float inverseEnd = 40;
 
 		while (window.isOpen())
 		{
@@ -44,9 +45,9 @@ void LevelInversed2::Show(RenderWindow& window, Event& event)
 				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+					success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+					levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 			window.clear(Color::Blue);
@@ -196,19 +197,22 @@ void LevelInversed2::Show(RenderWindow& window, Event& event)
 				}
 			}
 
-			if (playerHealth > yuri.healthValue && isHit == false && yuri.isDead == false)
+			if (inverseStart > yuri.healthValue && yuri.isDead == false)
 			{
-				isHit = true;
-			}
-
-			if (isHit == true && custext4.hidingFinished == false)
-			{
-				custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
-			}
-
-			if (custext4.fullShowed)
-			{
-				inversed = true;
+				if (inverseEnd > yuri.healthValue)
+				{
+					cout << "normal at: " << yuri.healthValue << endl;
+					inversed = false;
+				}
+				else
+				{
+					custext4.Show(window, "Malfunction: Movement controls inversed.", 40, 20, 120, -1, true, 0.01);
+					if (custext4.fullShowed)
+					{
+						cout << "inverting at: " << yuri.healthValue << endl;
+						inversed = true;
+					}
+				}
 			}
 
 			yuri.Show(window);

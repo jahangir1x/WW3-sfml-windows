@@ -52,7 +52,7 @@ Puzzle::Puzzle()
 		sprite.setTextureRect(buttonRect);
 		sprite.setRotation(rand() % 360);
 		k = Helper::randRange(50, 160);
-		sprite.setScale(k / 100.0 * Helper::getWidthScalingFactor(), k / 100.0 * Helper::getWidthScalingFactor());
+		sprite.setScale(k / 100.0, k / 100.0);
 		sprite.setPosition(Helper::randRange(0, Helper::windowWidth()), Helper::randRange(0, Helper::windowHeight())); // set random position
 	}
 	outMeter.meterSprite.setOrigin(outMeter.meterSprite.getGlobalBounds().width / 2.0, outMeter.meterSprite.getGlobalBounds().height / 2.0);
@@ -65,13 +65,13 @@ Puzzle::Puzzle()
 	inMeter2.meterSprite.setOrigin(inMeter2.meterSprite.getGlobalBounds().width / 2, inMeter2.meterSprite.getGlobalBounds().height / 2);
 	inMeter2.handSprite.setOrigin(inMeter2.handSprite.getGlobalBounds().width / 12.0, inMeter2.handSprite.getGlobalBounds().height / 2);
 
-	outMeter.meterSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	inMeter1.meterSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	inMeter2.meterSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	outMeter.handSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	outMeter.hintSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	inMeter1.handSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	inMeter2.handSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	outMeter.meterSprite.setScale(1, 1);
+	inMeter1.meterSprite.setScale(1, 1);
+	inMeter2.meterSprite.setScale(1, 1);
+	outMeter.handSprite.setScale(1, 1);
+	outMeter.hintSprite.setScale(1, 1);
+	inMeter1.handSprite.setScale(1, 1);
+	inMeter2.handSprite.setScale(1, 1);
 
 	outMeter.meterSprite.setPosition(Helper::windowWidth() / 2, (outMeter.meterSprite.getGlobalBounds().height / 2) + 20);
 	outMeter.handSprite.setPosition(outMeter.meterSprite.getPosition().x, outMeter.meterSprite.getPosition().y);
@@ -143,7 +143,7 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 
 	Music music;
 	music.openFromFile("res/music/tension.wav");
-	music.setVolume(60);
+	music.setVolume(80);
 	music.play();
 
 	while (window.isOpen())
@@ -163,11 +163,11 @@ void Puzzle::Show(RenderWindow& window, Event& event)
 			}
 			else if (event.type == Event::MouseMoved)
 			{
-				mousePosition = Vector2f(Mouse::getPosition(window));
+				mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
 			}
 			else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 			{
-				mousePositionClicked = Mouse::getPosition(window);
+				mousePositionClicked = window.mapPixelToCoords(Mouse::getPosition(window));
 				GameUI::handleClose(window, mousePositionClicked);
 			}
 			else if (event.type == Event::KeyReleased)

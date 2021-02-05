@@ -23,7 +23,8 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	playRect.width = 371;
 	playRect.height = 148;
 	playSprite.setTextureRect(playRect);
-	playSprite.setPosition(Helper::windowWidth() / 2 - playSprite.getGlobalBounds().width / 2, gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
+	playSprite.setScale(1.1, 1.1);
+	playSprite.setPosition(Helper::windowWidth() / 2 - playSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height) / 2.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height - playSprite.getGlobalBounds().height * 2);
 
 	helpSprite.setTexture(GetRes::helpButtonTex);
 	helpRect.left = 0;
@@ -31,7 +32,10 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	helpRect.width = 371;
 	helpRect.height = 148;
 	helpSprite.setTextureRect(helpRect);
-	helpSprite.setPosition(Helper::windowWidth() / 2 - helpSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
+	helpSprite.setScale(1.1, 1.1);
+
+	// helpSprite.setPosition(Helper::windowWidth() / 2 - helpSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
+	helpSprite.setPosition(Helper::windowWidth() / 2 - helpSprite.getGlobalBounds().width / 2, playSprite.getGlobalBounds().top + playSprite.getGlobalBounds().height);
 
 	creditsSprite.setTexture(GetRes::creditsButtonTex);
 	creditsRect.left = 0;
@@ -39,7 +43,9 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	creditsRect.width = 371;
 	creditsRect.height = 148;
 	creditsSprite.setTextureRect(creditsRect);
-	creditsSprite.setPosition(Helper::windowWidth() / 2 - creditsSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0 * 2.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
+	creditsSprite.setScale(1.1, 1.1);
+
+	creditsSprite.setPosition(Helper::windowWidth() / 2 - creditsSprite.getGlobalBounds().width / 2, helpSprite.getGlobalBounds().top + helpSprite.getGlobalBounds().height);
 
 	exitSprite.setTexture(GetRes::exitButtonTex);
 	exitRect.left = 0;
@@ -47,7 +53,10 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 	exitRect.width = 371;
 	exitRect.height = 148;
 	exitSprite.setTextureRect(exitRect);
-	exitSprite.setPosition(Helper::windowWidth() / 2 - exitSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0 * 3.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
+	// exitSprite.setPosition(Helper::windowWidth() / 2 - exitSprite.getGlobalBounds().width / 2, ((Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 40) / 4.0 * 3.0) + gameLogoSprite.getGlobalBounds().top + gameLogoSprite.getGlobalBounds().height + 40);
+	exitSprite.setScale(1.1, 1.1);
+
+	exitSprite.setPosition(Helper::windowWidth() / 2 - exitSprite.getGlobalBounds().width / 2, creditsSprite.getGlobalBounds().top + creditsSprite.getGlobalBounds().height);
 
 	clicked = false;
 	result = Nothing;
@@ -64,11 +73,11 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 		{
 			if (menuEvent.type == Event::MouseMoved)
 			{
-				mousePosition = Mouse::getPosition(window);
+				mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
 			}
 			else if (menuEvent.type == Event::MouseButtonReleased && menuEvent.mouseButton.button == Mouse::Left)
 			{
-				mousePositionClicked = Mouse::getPosition(window);
+				mousePositionClicked = window.mapPixelToCoords(Mouse::getPosition(window));
 				GameUI::handleClose(window, mousePositionClicked);
 				clicked = true;
 				menuClock.restart();
@@ -242,6 +251,12 @@ MainMenu::MenuResult MainMenu::Show(RenderWindow& window, Event& menuEvent)
 		if (result != Nothing && menuClock.getElapsedTime().asSeconds() > 0.8)
 		{
 			return result;
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			cout << "de: " << (Helper::windowHeight() - gameLogoSprite.getGlobalBounds().top - gameLogoSprite.getGlobalBounds().height - 30 * 2.0) << endl;
+			cout << "dd: " << gameLogoSprite.getGlobalBounds().height << endl;
 		}
 
 		window.clear(Color::White);

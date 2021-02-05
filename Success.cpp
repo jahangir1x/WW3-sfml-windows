@@ -188,9 +188,9 @@ bool Success::isFinishedShowing(RenderWindow& window)
 	return false;
 }
 
-void Success::handleClose(Vector2i mousePos)
+void Success::handleClose(Vector2f mousePos)
 {
-	if (buttonSprite.getGlobalBounds().contains(Vector2f(mousePos)))
+	if (buttonSprite.getGlobalBounds().contains(mousePos))
 	{
 		if (clickSoundPlayed == false)
 		{

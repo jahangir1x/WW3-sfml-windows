@@ -20,6 +20,7 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 		bool someone_is_alive;
 		CustomText custext1;
 		CustomText custext2;
@@ -27,16 +28,17 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 		float playerHealth = 90;
 
 		Enemy4 enemy;
+
 		Music music;
 		music.openFromFile("res/music/boss.wav");
-		music.setVolume(60);
+		music.setVolume(80);
 		music.play();
 
-		enemy.enemySprite.setScale(1 * Helper::getWidthScalingFactor(), 1 * Helper::getWidthScalingFactor());
-		enemy.bulletLeft.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
-		enemy.bulletRight.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
-		enemy.missile.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
-		enemy.bigExplosion.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+		enemy.enemySprite.setScale(1, 1);
+		enemy.bulletLeft.sprite.setScale(1, 1);
+		enemy.bulletRight.sprite.setScale(1, 1);
+		enemy.missile.sprite.setScale(1, 1);
+
 		enemy.bulletDamage = 10;
 		enemy.missileDamage = 15;
 		enemy.healthValue = 600;
@@ -54,9 +56,9 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+					success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+					levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 			window.clear(Color::Blue);
@@ -91,8 +93,9 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 			{
 				enemy.move(360);
 			}
-			enemy.fireBullet(yuri, 2900, 2300, 690);
-			enemy.fireMissile(yuri, 2000, 1600, 660);
+			enemy.missileCount = 10; // infinite missile
+			enemy.fireBullet(yuri, 1000, 900, 690);
+			enemy.fireMissile(yuri, 1000, 900, 660);
 			levelhelp.isHitBody(yuri, enemy);
 			levelhelp.isHitBullet(yuri, enemy);
 			levelhelp.isHitMissile(yuri, enemy);
@@ -108,7 +111,7 @@ void LevelBoss4p::Show(RenderWindow& window, Event& event)
 				custext2.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
 			}
 
-			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false)
+			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false && Helper::enemiesDied() < 1)
 			{
 				puzzle.Show(window, event);
 			}

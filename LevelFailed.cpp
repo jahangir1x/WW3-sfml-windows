@@ -76,6 +76,8 @@ bool LevelFailed::isFinishedShowing(RenderWindow& window)
 	{
 		buttonSprite.setTexture(GetRes::playAgain);
 		buttonRect.width = playAgainWidth;
+		completeString = "Game Over";
+		textSprite.setTexture(GetRes::gameOverText);
 	}
 	if (rectClock.getElapsedTime().asSeconds() > 0.0005 && alpha < 255.0)
 	{
@@ -209,9 +211,9 @@ bool LevelFailed::isFinishedShowing(RenderWindow& window)
 	return false;
 }
 
-void LevelFailed::handleClose(Vector2i mousePos)
+void LevelFailed::handleClose(Vector2f mousePos)
 {
-	if (buttonSprite.getGlobalBounds().contains(Vector2f(mousePos)))
+	if (buttonSprite.getGlobalBounds().contains(mousePos))
 	{
 		if (clickSoundPlayed == false)
 		{

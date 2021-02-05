@@ -22,7 +22,7 @@ Player::Player()
 	playerRect.width = 170;
 	playerSprite.setTextureRect(playerRect);
 	playerSprite.setPosition(Helper::windowWidth() / 2 - playerRect.width / 2, Helper::windowHeight() - playerRect.height - 30);
-	playerSprite.setScale(0.5 * Helper::getWidthScalingFactor(), 0.5 * Helper::getWidthScalingFactor());
+	playerSprite.setScale(0.5, 0.5);
 
 	healthValue = 100;
 	// playerHealth.outsideRect.setPosition(33, 9);
@@ -66,12 +66,15 @@ Player::Player()
 
 	bulletLeft.speed = 500;
 	bulletLeft.sprite.setTexture(GetRes::playerBulletTex);
+	bulletLeft.sprite.setScale(0.5, 0.5);
 
 	bulletRight.speed = 500;
 	bulletRight.sprite.setTexture(GetRes::playerBulletTex);
+	bulletRight.sprite.setScale(0.5, 0.5);
 
 	missile.speed = 400;
 	missile.sprite.setTexture(GetRes::playerMissileTex);
+	missile.sprite.setScale(0.5, 0.5);
 	// missile.missileText.setFont(GetRes::gameFont);
 	// missile.missileText.setCharacterSize(14);
 	// missile.missileText.setFillColor(Color(255, 0, 0, 190));
@@ -251,7 +254,7 @@ void Player::Die()
 {
 	bigExplosion.sprite.setOrigin(25.5, 32.5);
 	bigExplosion.sprite.setPosition(playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height / 2);
-	bigExplosion.sprite.setScale(3 * Helper::getWidthScalingFactor(), 3 * Helper::getWidthScalingFactor());
+	bigExplosion.sprite.setScale(3, 3);
 	if (!shouldExplode)
 	{
 		shouldExplode = true;
@@ -374,7 +377,7 @@ void Player::moveRight()
 void Player::show_explosion_bullet(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(1 * Helper::getWidthScalingFactor(), 1 * Helper::getWidthScalingFactor());
+	explosion.sprite.setScale(1, 1);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	bulletHitSound.play();
@@ -382,7 +385,7 @@ void Player::show_explosion_bullet(Vector2f pos)
 void Player::show_explosion_missile(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+	explosion.sprite.setScale(2, 2);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	missileHitSound.play();

@@ -43,7 +43,7 @@ BaseEnemy::BaseEnemy()
 	enemyRect.height = 224;
 	enemyRect.width = 170;
 	enemySprite.setTextureRect(enemyRect);
-	enemySprite.setScale(0.5 * Helper::getWidthScalingFactor(), 0.5 * Helper::getWidthScalingFactor());
+	enemySprite.setScale(0.5, 0.5);
 	enemySprite.setPosition(Helper::randRange(0, Helper::windowWidth() - enemySprite.getGlobalBounds().width - 10), Helper::randRange(-800, -300));
 
 	explosion.sprite.setTexture(GetRes::explosionTex);
@@ -59,6 +59,8 @@ BaseEnemy::BaseEnemy()
 	bigExplosion.rect.height = 65;
 	bigExplosion.rect.width = 51;
 	bigExplosion.sprite.setTextureRect(explosion.rect);
+	bigExplosion.sprite.setOrigin(25.5, 32.5);
+	bigExplosion.sprite.setScale(3, 3);
 
 	healthValue = 100;
 
@@ -81,12 +83,16 @@ BaseEnemy::BaseEnemy()
 
 	bulletLeft.speed = 500;
 	bulletLeft.sprite.setTexture(GetRes::enemyBulletTex);
+	bulletLeft.sprite.setScale(0.5, 0.5);
 
 	bulletRight.speed = 500;
 	bulletRight.sprite.setTexture(GetRes::enemyBulletTex);
+	bulletRight.sprite.setScale(0.5, 0.5);
 
 	missile.speed = 400;
 	missile.sprite.setTexture(GetRes::enemyMissileTex);
+	missile.sprite.setScale(0.5, 0.5);
+
 	missileCount = 9;
 
 	bulletSound.setBuffer(GetRes::enemyBulletSound);
@@ -268,9 +274,7 @@ void BaseEnemy::setStyle(Style style)
 
 void BaseEnemy::Die()
 {
-	bigExplosion.sprite.setOrigin(25.5, 32.5);
 	bigExplosion.sprite.setPosition(enemySprite.getGlobalBounds().left + enemySprite.getGlobalBounds().width / 2, enemySprite.getGlobalBounds().top + enemySprite.getGlobalBounds().height / 2);
-	bigExplosion.sprite.setScale(3 * Helper::getWidthScalingFactor(), 3 * Helper::getWidthScalingFactor());
 	if (!shouldExplode)
 	{
 		explodedSound.play();
@@ -345,7 +349,7 @@ void BaseEnemy::moveRight(float speed)
 void BaseEnemy::show_explosion_bullet(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(1 * Helper::getWidthScalingFactor(), 1 * Helper::getWidthScalingFactor());
+	explosion.sprite.setScale(1, 1);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	bulletHitSound.play();
@@ -353,7 +357,7 @@ void BaseEnemy::show_explosion_bullet(Vector2f pos)
 void BaseEnemy::show_explosion_missile(Vector2f pos)
 {
 	explosion.sprite.setOrigin(25.5, 32.5);
-	explosion.sprite.setScale(2 * Helper::getWidthScalingFactor(), 2 * Helper::getWidthScalingFactor());
+	explosion.sprite.setScale(2, 2);
 	explosion.sprite.setPosition(pos);
 	explosions.push_back(explosion);
 	missileHitSound.play();

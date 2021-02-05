@@ -24,9 +24,9 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 		////// mandatory //////
 
-		// yuri.healthValue = 4;
 		CustomText custext1;
 		CustomText custext2;
 		CustomText custext3;
@@ -35,11 +35,11 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 
 		Music music;
 		music.openFromFile("res/music/boss.wav");
-		music.setVolume(60);
+		music.setVolume(80);
 		music.play();
 
 		boss.setStyle(Boss::Style::ShakaLala);
-		boss.enemySprite.setScale(0.6 * Helper::getWidthScalingFactor(), 0.6 * Helper::getWidthScalingFactor());
+		boss.enemySprite.setScale(0.6, 0.6);
 		boss.bulletDamage = 18;
 		boss.missileDamage = 32;
 
@@ -64,9 +64,9 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+					success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+					levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 
@@ -120,8 +120,8 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 				boss.move(400);
 			}
 			boss.missileCount = 10;
-			boss.fireBullet(yuri, 3000, 2800, 800);
-			boss.fireMissile(yuri, 3000, 2800, 780);
+			boss.fireBullet(yuri, 1000, 900, 800);
+			boss.fireMissile(yuri, 1000, 900, 780);
 
 			levelhelp.isHitBody(yuri, boss);
 			levelhelp.isHitBullet(yuri, boss);
@@ -137,7 +137,7 @@ void LevelBossFinal::Show(RenderWindow& window, Event& event)
 				custext2.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
 			}
 
-			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false)
+			if (custext2.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false && Helper::enemiesDied() < 1)
 			{
 				puzzle.Show(window, event);
 			}

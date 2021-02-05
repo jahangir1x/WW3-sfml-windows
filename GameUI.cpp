@@ -36,7 +36,7 @@ void GameUI::init()
 
 	cursorSprite.setTexture(GetRes::cursor);
 	cursorSprite.setTextureRect(cursorRect);
-	cursorSprite.setPosition(Vector2f(Mouse::getPosition()));
+	// cursorSprite.setPosition(Vector2f(Mouse::getPosition()));
 
 	closeButton.setTexture(GetRes::closeButton);
 	closeButton.setPosition(Helper::windowWidth() - closeButton.getGlobalBounds().width, 0);
@@ -80,7 +80,7 @@ void GameUI::showPlayerUI(RenderWindow& window)
 		j += 31;
 	}
 
-	cursorSprite.setPosition(Vector2f(Mouse::getPosition(window)));
+	cursorSprite.setPosition(window.mapPixelToCoords(Mouse::getPosition(window)));
 	if (Player::startedFiring)
 	{
 		cursorState = Left;
@@ -134,7 +134,7 @@ void GameUI::showPlayerUI(RenderWindow& window)
 
 void GameUI::showMenuUI(RenderWindow& window)
 {
-	cursorSprite.setPosition(Vector2f(Mouse::getPosition(window)));
+	cursorSprite.setPosition(window.mapPixelToCoords(Mouse::getPosition(window)));
 	if (Mouse::isButtonPressed(Mouse::Left))
 	{
 		cursorState = Left;
@@ -175,9 +175,9 @@ void GameUI::showMenuUI(RenderWindow& window)
 	window.draw(cursorSprite);
 }
 
-void GameUI::handleClose(RenderWindow& window, Vector2i MousePos)
+void GameUI::handleClose(RenderWindow& window, Vector2f MousePos)
 {
-	if (closeButton.getGlobalBounds().contains(Vector2f(MousePos)))
+	if (closeButton.getGlobalBounds().contains(MousePos))
 	{
 		clickSound.play();
 

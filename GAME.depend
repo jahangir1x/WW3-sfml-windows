@@ -817,18 +817,18 @@
 	<SFML/Window.hpp>
 	<bits/stdc++.h>
 
-1612250669 source:c:\users\zinis\cdblk\main_ww3_project\background.cpp
+1612420379 source:c:\users\zinis\cdblk\main_ww3_project\background.cpp
 	"Background.hpp"
 	"GetRes.hpp"
 
 1612160489 c:\users\zinis\cdblk\main_ww3_project\background.hpp
 	"Helper.hpp"
 
-1612250792 c:\users\zinis\cdblk\main_ww3_project\helper.hpp
+1612421121 c:\users\zinis\cdblk\main_ww3_project\helper.hpp
 
-1612035288 c:\users\zinis\cdblk\main_ww3_project\getres.hpp
+1612517063 c:\users\zinis\cdblk\main_ww3_project\getres.hpp
 
-1612250680 source:c:\users\zinis\cdblk\main_ww3_project\baseenemy.cpp
+1612449555 source:c:\users\zinis\cdblk\main_ww3_project\baseenemy.cpp
 	"BaseEnemy.hpp"
 	"GetRes.hpp"
 	"Helper.hpp"
@@ -842,9 +842,9 @@
 	"GetRes.hpp"
 	"MainMenu.hpp"
 
-1612007057 c:\users\zinis\cdblk\main_ww3_project\mainmenu.hpp
+1612418872 c:\users\zinis\cdblk\main_ww3_project\mainmenu.hpp
 
-1612072825 c:\users\zinis\cdblk\main_ww3_project\levelfailed.hpp
+1612420017 c:\users\zinis\cdblk\main_ww3_project\levelfailed.hpp
 	"CustomText.hpp"
 
 1611991674 c:\users\zinis\cdblk\main_ww3_project\player.hpp
@@ -926,14 +926,14 @@
 	"LevelFailed.hpp"
 	"Player.hpp"
 
-1612163063 source:c:\users\zinis\cdblk\main_ww3_project\getres.cpp
+1612517092 source:c:\users\zinis\cdblk\main_ww3_project\getres.cpp
 	"GetRes.hpp"
 	"Helper.hpp"
 
-1612250792 source:c:\users\zinis\cdblk\main_ww3_project\helper.cpp
+1612421125 source:c:\users\zinis\cdblk\main_ww3_project\helper.cpp
 	"Helper.hpp"
 
-1612198095 source:c:\users\zinis\cdblk\main_ww3_project\level1.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level1.cpp
 	"Level1.hpp"
 	"GameUI.hpp"
 	"Success.hpp"
@@ -964,7 +964,7 @@
 	"Helper.hpp"
 	"Player.hpp"
 
-1612234977 source:c:\users\zinis\cdblk\main_ww3_project\level2.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level2.cpp
 	"Level2.hpp"
 	"GameUI.hpp"
 	"Success.hpp"
@@ -982,7 +982,7 @@
 	"LevelHelper.hpp"
 	"Player.hpp"
 
-1612261858 source:c:\users\zinis\cdblk\main_ww3_project\level3.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level3.cpp
 	"Level3.hpp"
 
 1612185475 c:\users\zinis\cdblk\main_ww3_project\level3.hpp
@@ -1001,7 +1001,7 @@
 	"Player.hpp"
 	"Success.hpp"
 
-1612264690 source:c:\users\zinis\cdblk\main_ww3_project\levelfailed.cpp
+1612517206 source:c:\users\zinis\cdblk\main_ww3_project\levelfailed.cpp
 	"LevelFailed.hpp"
 	"BaseEnemy.hpp"
 	"GetRes.hpp"
@@ -1009,19 +1009,19 @@
 	"LevelHelper.hpp"
 	"Player.hpp"
 
-1611943492 source:c:\users\zinis\cdblk\main_ww3_project\levelhelper.cpp
+1612517248 source:c:\users\zinis\cdblk\main_ww3_project\levelhelper.cpp
 	"LevelHelper.hpp"
 
 1611986036 source:c:\users\zinis\cdblk\main_ww3_project\main.cpp
 	"GameHandler.hpp"
 
-1612251092 source:c:\users\zinis\cdblk\main_ww3_project\mainmenu.cpp
+1612421403 source:c:\users\zinis\cdblk\main_ww3_project\mainmenu.cpp
 	"MainMenu.hpp"
 	"GameUI.hpp"
 	"GetRes.hpp"
 	"Helper.hpp"
 
-1612259467 source:c:\users\zinis\cdblk\main_ww3_project\player.cpp
+1612433886 source:c:\users\zinis\cdblk\main_ww3_project\player.cpp
 	"Player.hpp"
 	"Collision.h"
 	"GameHandler.hpp"
@@ -1029,7 +1029,7 @@
 	"Helper.hpp"
 	"LevelFailed.hpp"
 
-1612265721 source:c:\users\zinis\cdblk\main_ww3_project\gamehandler.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\gamehandler.cpp
 	"GameHandler.hpp"
 	"CreditsMenu.hpp"
 	"EndScene.hpp"
@@ -1112,10 +1112,10 @@
 	"Player.hpp"
 	"Success.hpp"
 
-1611993939 c:\users\zinis\cdblk\main_ww3_project\success.hpp
+1612420017 c:\users\zinis\cdblk\main_ww3_project\success.hpp
 	"CustomText.hpp"
 
-1611996034 source:c:\users\zinis\cdblk\main_ww3_project\success.cpp
+1612420017 source:c:\users\zinis\cdblk\main_ww3_project\success.cpp
 	"Success.hpp"
 	"BaseEnemy.hpp"
 	"GetRes.hpp"
@@ -1128,10 +1128,10 @@
 
 1612021817 c:\users\zinis\cdblk\main_ww3_project\customtext.hpp
 
-1611988985 c:\users\zinis\cdblk\main_ww3_project\gameui.hpp
+1612418961 c:\users\zinis\cdblk\main_ww3_project\gameui.hpp
 	"Player.hpp"
 
-1612009700 source:c:\users\zinis\cdblk\main_ww3_project\gameui.cpp
+1612418961 source:c:\users\zinis\cdblk\main_ww3_project\gameui.cpp
 	"GameUI.hpp"
 	"GetRes.hpp"
 	"LevelHelper.hpp"
@@ -1148,10 +1148,10 @@
 	"GetRes.hpp"
 	"Helper.hpp"
 
-1612062809 c:\users\zinis\cdblk\main_ww3_project\puzzle.hpp
+1612419460 c:\users\zinis\cdblk\main_ww3_project\puzzle.hpp
 	"CustomText.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\puzzle.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\puzzle.cpp
 	"Puzzle.hpp"
 	"CustomText.hpp"
 	"GameUI.hpp"
@@ -1374,7 +1374,7 @@
 1612079090 source:c:\users\zinis\cdblk\main_ww3_project\level112.cpp
 	"Level112.hpp"
 
-1612251187 source:c:\users\zinis\cdblk\main_ww3_project\creditsmenu.cpp
+1612420378 source:c:\users\zinis\cdblk\main_ww3_project\creditsmenu.cpp
 	"CreditsMenu.hpp"
 	"CustomText.hpp"
 	"GameUI.hpp"
@@ -1383,15 +1383,16 @@
 
 1612039745 c:\users\zinis\cdblk\main_ww3_project\creditsmenu.hpp
 
-1612025163 source:c:\users\zinis\cdblk\main_ww3_project\endscene.cpp
+1612421204 source:c:\users\zinis\cdblk\main_ww3_project\endscene.cpp
 	"EndScene.hpp"
 	"CustomText.hpp"
 	"GameUI.hpp"
+	"GetRes.hpp"
 	"LevelHelper.hpp"
 
 1612014169 c:\users\zinis\cdblk\main_ww3_project\endscene.hpp
 
-1612250792 source:c:\users\zinis\cdblk\main_ww3_project\helpmenu.cpp
+1612420449 source:c:\users\zinis\cdblk\main_ww3_project\helpmenu.cpp
 	"HelpMenu.hpp"
 	"CustomText.hpp"
 	"GameUI.hpp"
@@ -1514,7 +1515,7 @@
 	"Player.hpp"
 	"Success.hpp"
 
-1612258151 source:c:\users\zinis\cdblk\main_ww3_project\leveltutorial.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\leveltutorial.cpp
 	"LevelTutorial.hpp"
 	"CustomText.hpp"
 	"GameUI.hpp"
@@ -1539,7 +1540,7 @@
 
 1612041168 c:\users\zinis\cdblk\main_ww3_project\loading.hpp
 
-1612250792 source:c:\users\zinis\cdblk\main_ww3_project\story.cpp
+1612420449 source:c:\users\zinis\cdblk\main_ww3_project\story.cpp
 	"Story.hpp"
 	"CustomText.hpp"
 	"GameUI.hpp"
@@ -1992,69 +1993,69 @@
 	"Player.hpp"
 	"Success.hpp"
 
-1612263479 source:c:\users\zinis\cdblk\main_ww3_project\level10.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level10.cpp
 	"Level10.hpp"
 
-1612263479 source:c:\users\zinis\cdblk\main_ww3_project\level11.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level11.cpp
 	"Level11.hpp"
 
-1612263468 source:c:\users\zinis\cdblk\main_ww3_project\level12.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level12.cpp
 	"Level12.hpp"
 
-1612263468 source:c:\users\zinis\cdblk\main_ww3_project\level13.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level13.cpp
 	"Level13.hpp"
 
-1612263479 source:c:\users\zinis\cdblk\main_ww3_project\level14.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level14.cpp
 	"Level14.hpp"
 
-1612263468 source:c:\users\zinis\cdblk\main_ww3_project\level4.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level4.cpp
 	"Level4.hpp"
 
-1612263479 source:c:\users\zinis\cdblk\main_ww3_project\level5.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level5.cpp
 	"Level5.hpp"
 	"CustomText.hpp"
 
-1612263479 source:c:\users\zinis\cdblk\main_ww3_project\level6.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level6.cpp
 	"Level6.hpp"
 
-1612263479 source:c:\users\zinis\cdblk\main_ww3_project\level7.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level7.cpp
 	"Level7.hpp"
 
-1612263478 source:c:\users\zinis\cdblk\main_ww3_project\level8.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level8.cpp
 	"Level8.hpp"
 
-1612263478 source:c:\users\zinis\cdblk\main_ww3_project\level9.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\level9.cpp
 	"Level9.hpp"
 
-1612265363 source:c:\users\zinis\cdblk\main_ww3_project\levelboss1.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss1.cpp
 	"LevelBoss1.hpp"
 	"Puzzle.hpp"
 
-1612265363 source:c:\users\zinis\cdblk\main_ww3_project\levelboss3p.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss3p.cpp
 	"LevelBoss3p.hpp"
 	"Puzzle.hpp"
 
-1612265363 source:c:\users\zinis\cdblk\main_ww3_project\levelboss4.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss4.cpp
 	"LevelBoss4.hpp"
 	"Puzzle.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\levelboss4p.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss4p.cpp
 	"LevelBoss4p.hpp"
 	"Puzzle.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\levelboss5p.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss5p.cpp
 	"LevelBoss5p.hpp"
 	"Puzzle.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\levelboss6.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss6.cpp
 	"LevelBoss6.hpp"
 	"Puzzle.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\levelboss6p.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelboss6p.cpp
 	"LevelBoss6p.hpp"
 	"Puzzle.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\levelbossfinal.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelbossfinal.cpp
 	"LevelBossFinal.hpp"
 	"Boss.hpp"
 	"CustomText.hpp"
@@ -2062,35 +2063,35 @@
 	"Puzzle.hpp"
 	"Success.hpp"
 
-1612265362 source:c:\users\zinis\cdblk\main_ww3_project\levelbossi2.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelbossi2.cpp
 	"LevelBossI2.hpp"
 	"Puzzle.hpp"
 
-1612265363 source:c:\users\zinis\cdblk\main_ww3_project\levelbossi4.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelbossi4.cpp
 	"LevelBossI4.hpp"
 	"Puzzle.hpp"
 
-1612265363 source:c:\users\zinis\cdblk\main_ww3_project\levelbossi6.cpp
+1612520768 source:c:\users\zinis\cdblk\main_ww3_project\levelbossi6.cpp
 	"LevelBossI6.hpp"
 	"Puzzle.hpp"
 
-1612263468 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed1.cpp
+1612519750 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed1.cpp
 	"LevelInversed1.hpp"
 
-1612263478 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed2.cpp
+1612520257 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed2.cpp
 	"LevelInversed2.hpp"
 
-1612263478 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed3.cpp
+1612520406 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed3.cpp
 	"LevelInversed3.hpp"
 
-1612261858 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed4.cpp
+1612518361 source:c:\users\zinis\cdblk\main_ww3_project\levelinversed4.cpp
 	"LevelInversed4.hpp"
 
-1612263468 source:c:\users\zinis\cdblk\main_ww3_project\levelpuzzle1.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\levelpuzzle1.cpp
 	"LevelPuzzle1.hpp"
 	"Puzzle.hpp"
 
-1612263478 source:c:\users\zinis\cdblk\main_ww3_project\levelpuzzle2.cpp
+1612452433 source:c:\users\zinis\cdblk\main_ww3_project\levelpuzzle2.cpp
 	"LevelPuzzle2.hpp"
 	"Puzzle.hpp"
 

@@ -47,7 +47,7 @@ private:
 		// bool targetRotationSet;
 	};
 	Vector2f mousePosition;
-	Vector2i mousePositionClicked;
+	Vector2f mousePositionClicked;
 	float temp;
 	bool meter1active;
 	bool meter2active;

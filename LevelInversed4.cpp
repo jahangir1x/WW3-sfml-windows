@@ -15,6 +15,7 @@ void LevelInversed4::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
@@ -50,9 +51,9 @@ void LevelInversed4::Show(RenderWindow& window, Event& event)
 				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+					success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+					levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 			window.clear(Color::Blue);
@@ -320,7 +321,7 @@ void LevelInversed4::Show(RenderWindow& window, Event& event)
 			}
 
 			yuri.Show(window);
-			if (Helper::enemiesDied() == 8)
+			if (Helper::enemiesDied() == 29)
 			{
 				if (success.isFinishedShowing(window))
 				{

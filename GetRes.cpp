@@ -45,6 +45,7 @@ Texture GetRes::CompleteText;
 Texture GetRes::CompleteButton;
 Texture GetRes::failedStar;
 Texture GetRes::failedText;
+Texture GetRes::gameOverText;
 Texture GetRes::playAgain;
 Texture GetRes::tryAgain;
 Texture GetRes::closeButton;
@@ -90,8 +91,8 @@ void GetRes::init()
 	exitButtonTex.loadFromFile("res/exit_button.png");
 	helpButtonTex.loadFromFile("res/help_button.png");
 	playButtonTex.loadFromFile("res/play_button.png");
-	enemyBulletTex.loadFromFile("res/enemy_bullet.png");
-	enemyMissileTex.loadFromFile("res/enemy_missile.png");
+	enemyBulletTex.loadFromFile("res/enemy_bullet2.png");
+	enemyMissileTex.loadFromFile("res/enemy_missile2.png");
 	enemyBodyTex1.loadFromFile("res/enemy1_spritesheet.png");
 	enemyBodyTex2.loadFromFile("res/enemy2_spritesheet.png");
 	enemyBodyTex3.loadFromFile("res/enemy3_spritesheet.png");
@@ -100,8 +101,8 @@ void GetRes::init()
 	enemyBodyTex6.loadFromFile("res/enemy6_spritesheet.png");
 	enemyBodyTex7.loadFromFile("res/enemy7_spritesheet.png");
 	bossBodyTex.loadFromFile("res/boss_spritesheet.png");
-	playerBulletTex.loadFromFile("res/player_bullet.png");
-	playerMissileTex.loadFromFile("res/player_missile.png");
+	playerBulletTex.loadFromFile("res/player_bullet2.png");
+	playerMissileTex.loadFromFile("res/player_missile2.png");
 	playerBodyTex.loadFromFile("res/player_spritesheet.png");
 	seaTex.loadFromFile("res/sea_texture.png");
 	seaElem1.loadFromFile("res/sea_elem1.png");
@@ -122,6 +123,7 @@ void GetRes::init()
 	CompleteButton.loadFromFile("res/proceed_spritesheet.png");
 	failedStar.loadFromFile("res/failed_star.png");
 	failedText.loadFromFile("res/failed.png");
+	gameOverText.loadFromFile("res/game_over.png");
 	playAgain.loadFromFile("res/play_again.png");
 	tryAgain.loadFromFile("res/try_again.png");
 	closeButton.loadFromFile("res/close.png");
@@ -196,6 +198,7 @@ void GetRes::init()
 	CompleteButton.setSmooth(true);
 	failedStar.setSmooth(true);
 	failedText.setSmooth(true);
+	gameOverText.setSmooth(true);
 	playAgain.setSmooth(true);
 	tryAgain.setSmooth(true);
 	closeButton.setSmooth(true);

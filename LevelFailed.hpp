@@ -10,7 +10,7 @@ class LevelFailed
 public:
 	LevelFailed();
 	bool isFinishedShowing(RenderWindow& window);
-	void handleClose(Vector2i mousePos);
+	void handleClose(Vector2f mousePos);
 
 protected:
 	CustomText custext;

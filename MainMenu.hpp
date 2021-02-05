@@ -19,8 +19,8 @@ public:
 	MenuResult Show(RenderWindow& window, Event& menuEvent);
 
 private:
-	Vector2i mousePosition;
-	Vector2i mousePositionClicked;
+	Vector2f mousePosition;
+	Vector2f mousePositionClicked;
 	bool clicked;
 	MenuResult result;
 	Sprite menuBackSprite;

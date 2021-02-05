@@ -18,6 +18,7 @@ void Level1::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 		CustomText custext1;
 		CustomText custext2;
 		////// mandatory //////
@@ -40,9 +41,9 @@ void Level1::Show(RenderWindow& window, Event& event)
 					if (event.mouseButton.button == Mouse::Left)
 					{
 						yuri.startFiringBullet();
-						GameUI::handleClose(window, Mouse::getPosition(window));
-						success.handleClose(Mouse::getPosition(window));
-						levelFailedObj.handleClose(Mouse::getPosition(window));
+						GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+						success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+						levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 					}
 				}
 			}

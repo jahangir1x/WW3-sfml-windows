@@ -18,6 +18,7 @@ void LevelPuzzle1::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 
 		CustomText custext1;
 		CustomText custext2;
@@ -35,11 +36,6 @@ void LevelPuzzle1::Show(RenderWindow& window, Event& event)
 		bool isHit = false;
 		float playerHealth = 90;
 
-		Music music;
-		music.openFromFile("res/music/boss.wav");
-		music.setVolume(25);
-		music.play();
-
 		while (window.isOpen())
 		{
 			Helper::resetClock();
@@ -53,9 +49,9 @@ void LevelPuzzle1::Show(RenderWindow& window, Event& event)
 				else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 				{
 					yuri.startFiringBullet();
-					GameUI::handleClose(window, Mouse::getPosition(window));
-					success.handleClose(Mouse::getPosition(window));
-					levelFailedObj.handleClose(Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+					success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+					levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 			window.clear(Color::Blue);
@@ -192,7 +188,7 @@ void LevelPuzzle1::Show(RenderWindow& window, Event& event)
 				custext4.Show(window, "ZenMeter failed to calibrate. You need to calibrate manually.", 40, 20, 120, 4, true, 0.01);
 			}
 
-			if (custext4.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false)
+			if (custext4.hidingFinished == true && puzzle.getState() == Puzzle::Nothing && yuri.isDead == false && Helper::enemiesDied() < 14)
 			{
 				puzzle.Show(window, event);
 			}

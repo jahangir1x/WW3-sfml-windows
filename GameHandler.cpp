@@ -47,17 +47,18 @@ using namespace sf;
 
 void GameHandler::Start()
 {
-	window.create(VideoMode(1100, 768), "World War 3", Style::Fullscreen);
+	window.create(VideoMode(1100, 768), "World War 3", Style::Fullscreen); // invalid resolution is intentional
 	window.setFramerateLimit(90);
 	window.setMouseCursorVisible(false);
-	Helper::storeWindowSize(window.getSize().x, window.getSize().y);
+	View view(FloatRect(0, 0, window.getSize().x * 1080.0 / window.getSize().y, 1080.0));
+	window.setView(view);
+	// Helper::storeWindowSize(window.getSize().x, window.getSize().y);
+	Helper::storeWindowSize(view.getSize().x, view.getSize().y);
 	Helper::seedRand();
-	Helper::setWidthScaling();
-	Helper::setHeightScaling();
 
 	backMusic.openFromFile("res/music/MenuBackSound.wav");
 	backMusic.setLoop(true);
-	backMusic.setVolume(60);
+	backMusic.setVolume(80);
 	backMusic.play();
 
 	Loading loading;
@@ -100,6 +101,18 @@ void GameHandler::gameLoop()
 		if (result == MainMenu::Play)
 		{
 			backMusic.stop();
+
+			// test region -----------------
+
+			// EndScene eendscene;
+			// eendscene.Show(window, event);
+			// if (LevelHelper::retriesLeft == 0)
+			// {
+			// 	LevelHelper::retriesLeft = 6;
+			// 	continue;
+			// }
+
+			// test region ---------------------
 
 			cout << "story" << endl;
 			Story story;
@@ -195,8 +208,6 @@ void GameHandler::gameLoop()
 				continue;
 			}
 
-			// beta test done -------------
-
 			LevelBoss4p levelboss4p;
 			levelboss4p.Show(window, event);
 			if (LevelHelper::retriesLeft == 0)
@@ -288,6 +299,9 @@ void GameHandler::gameLoop()
 				LevelHelper::retriesLeft = 6;
 				continue;
 			}
+
+			// beta test done----
+
 			Level11 level11;
 			level11.Show(window, event);
 			if (LevelHelper::retriesLeft == 0)

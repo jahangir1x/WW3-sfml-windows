@@ -18,11 +18,11 @@ void Level2::Show(RenderWindow& window, Event& event)
 		Player::resetMissileCounter();
 		Background background;
 		Player yuri;
+		// yuri.healthValue = 500;
 		CustomText custext1;
 		CustomText custext2;
 		////// mandatory //////
 
-		//yuri.healthValue = 3;
 		bool someone_is_alive;
 		vector<Enemy2> first_enemies(3);
 		vector<Enemy3> second_enemies(4);
@@ -43,9 +43,9 @@ void Level2::Show(RenderWindow& window, Event& event)
 					if (event.mouseButton.button == Mouse::Left)
 					{
 						yuri.startFiringBullet();
-						GameUI::handleClose(window, Mouse::getPosition(window));
-						success.handleClose(Mouse::getPosition(window));
-						levelFailedObj.handleClose(Mouse::getPosition(window));
+						GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
+						success.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
+						levelFailedObj.handleClose(window.mapPixelToCoords(Mouse::getPosition(window)));
 					}
 				}
 			}

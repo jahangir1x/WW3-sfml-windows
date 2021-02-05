@@ -3,7 +3,7 @@
 using namespace std;
 using namespace sf;
 
-unsigned int LevelHelper::retriesLeft = 6;
+unsigned int LevelHelper::retriesLeft = 2;
 
 bool LevelHelper::shouldKeepPlaying()
 {

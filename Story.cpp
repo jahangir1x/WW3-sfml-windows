@@ -22,11 +22,11 @@ void Story::Show(RenderWindow& window, Event& event)
 	backTex.loadFromFile("res/story.png");
 	backTex.setSmooth(true);
 	backSprite.setTexture(backTex);
-	text.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	text2.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	text3.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	text4.text.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
-	backSprite.setScale(Helper::getHeightScalingFactor(), Helper::getHeightScalingFactor());
+	text.text.setScale(1, 1);
+	text2.text.setScale(1, 1);
+	text3.text.setScale(1, 1);
+	text4.text.setScale(1, 1);
+	backSprite.setScale(1, 1);
 	backSprite.setPosition(Helper::windowWidth() / 2 - backSprite.getGlobalBounds().width / 2, Helper::windowHeight() / 2 - backSprite.getGlobalBounds().height / 2);
 
 	GameUI::init();
@@ -45,7 +45,7 @@ void Story::Show(RenderWindow& window, Event& event)
 			{
 				if (event.mouseButton.button == Mouse::Left)
 				{
-					GameUI::handleClose(window, Mouse::getPosition(window));
+					GameUI::handleClose(window, window.mapPixelToCoords(Mouse::getPosition(window)));
 				}
 			}
 		}
