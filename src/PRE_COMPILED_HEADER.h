@@ -5,5 +5,9 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <math.h>
+#include <chrono>
+#include <random>
 #endif

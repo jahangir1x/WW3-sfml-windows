@@ -2095,3 +2095,916 @@
 	"LevelPuzzle2.hpp"
 	"Puzzle.hpp"
 
+1612420379 source:c:\users\zinis\cdblk\main_ww3_project\src\background.cpp
+	"Background.hpp"
+	"GetRes.hpp"
+
+1612160489 c:\users\zinis\cdblk\main_ww3_project\src\background.hpp
+	"Helper.hpp"
+
+1612421121 c:\users\zinis\cdblk\main_ww3_project\src\helper.hpp
+
+1612517063 c:\users\zinis\cdblk\main_ww3_project\src\getres.hpp
+
+1612449555 source:c:\users\zinis\cdblk\main_ww3_project\src\baseenemy.cpp
+	"BaseEnemy.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1611991290 c:\users\zinis\cdblk\main_ww3_project\src\baseenemy.hpp
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1612071979 c:\users\zinis\cdblk\main_ww3_project\src\gamehandler.hpp
+	"GetRes.hpp"
+	"MainMenu.hpp"
+
+1612418872 c:\users\zinis\cdblk\main_ww3_project\src\mainmenu.hpp
+
+1612551796 c:\users\zinis\cdblk\main_ww3_project\src\levelfailed.hpp
+	"CustomText.hpp"
+
+1612021817 c:\users\zinis\cdblk\main_ww3_project\src\customtext.hpp
+
+1611991674 c:\users\zinis\cdblk\main_ww3_project\src\player.hpp
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+
+1612258216 source:c:\users\zinis\cdblk\main_ww3_project\src\boss.cpp
+	"Boss.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1611928208 c:\users\zinis\cdblk\main_ww3_project\src\boss.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1609430867 source:c:\users\zinis\cdblk\main_ww3_project\src\collision.cpp
+	"Collision.h"
+	<SFML/Graphics.hpp>
+	<map>
+
+1609433656 c:\users\zinis\cdblk\main_ww3_project\src\collision.h
+	<SFML/Graphics.hpp>
+
+1612420378 source:c:\users\zinis\cdblk\main_ww3_project\src\creditsmenu.cpp
+	"CreditsMenu.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelHelper.hpp"
+
+1612039745 c:\users\zinis\cdblk\main_ww3_project\src\creditsmenu.hpp
+
+1612418961 c:\users\zinis\cdblk\main_ww3_project\src\gameui.hpp
+	"Player.hpp"
+
+1611919176 c:\users\zinis\cdblk\main_ww3_project\src\levelhelper.hpp
+	"BaseEnemy.hpp"
+	"Boss.hpp"
+	"Collision.h"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"Helper.hpp"
+	"Player.hpp"
+
+1611231724 c:\users\zinis\cdblk\main_ww3_project\src\enemy1.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1611231816 c:\users\zinis\cdblk\main_ww3_project\src\enemy2.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1611231815 c:\users\zinis\cdblk\main_ww3_project\src\enemy3.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1611231814 c:\users\zinis\cdblk\main_ww3_project\src\enemy4.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1611231814 c:\users\zinis\cdblk\main_ww3_project\src\enemy5.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1611231814 c:\users\zinis\cdblk\main_ww3_project\src\enemy6.hpp
+	"BaseEnemy.hpp"
+	"GameHandler.hpp"
+	"LevelFailed.hpp"
+	"Player.hpp"
+
+1612079653 source:c:\users\zinis\cdblk\main_ww3_project\src\customtext.cpp
+	"CustomText.hpp"
+	"GetRes.hpp"
+
+1612421204 source:c:\users\zinis\cdblk\main_ww3_project\src\endscene.cpp
+	"EndScene.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"GetRes.hpp"
+	"LevelHelper.hpp"
+
+1612014169 c:\users\zinis\cdblk\main_ww3_project\src\endscene.hpp
+
+1612258221 source:c:\users\zinis\cdblk\main_ww3_project\src\enemy1.cpp
+	"Enemy1.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612539403 source:c:\users\zinis\cdblk\main_ww3_project\src\enemy2.cpp
+	"Enemy2.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612258208 source:c:\users\zinis\cdblk\main_ww3_project\src\enemy3.cpp
+	"Enemy3.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612539404 source:c:\users\zinis\cdblk\main_ww3_project\src\enemy4.cpp
+	"Enemy4.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612258208 source:c:\users\zinis\cdblk\main_ww3_project\src\enemy5.cpp
+	"Enemy5.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612258208 source:c:\users\zinis\cdblk\main_ww3_project\src\enemy6.cpp
+	"Enemy6.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1613583978 source:c:\users\zinis\cdblk\main_ww3_project\src\gamehandler.cpp
+	"GameHandler.hpp"
+	"CreditsMenu.hpp"
+	"EndScene.hpp"
+	"GetRes.hpp"
+	"HelpMenu.hpp"
+	"Helper.hpp"
+	"Level1.hpp"
+	"Level10.hpp"
+	"Level11.hpp"
+	"Level12.hpp"
+	"Level13.hpp"
+	"Level14.hpp"
+	"Level2.hpp"
+	"Level3.hpp"
+	"Level4.hpp"
+	"Level5.hpp"
+	"Level6.hpp"
+	"Level7.hpp"
+	"Level8.hpp"
+	"Level9.hpp"
+	"LevelBoss1.hpp"
+	"LevelBoss3p.hpp"
+	"LevelBoss4.hpp"
+	"LevelBoss4p.hpp"
+	"LevelBoss5p.hpp"
+	"LevelBoss6.hpp"
+	"LevelBoss6p.hpp"
+	"LevelBossFinal.hpp"
+	"LevelBossI2.hpp"
+	"LevelBossI4.hpp"
+	"LevelBossI6.hpp"
+	"LevelHelper.hpp"
+	"LevelInversed1.hpp"
+	"LevelInversed2.hpp"
+	"LevelInversed3.hpp"
+	"LevelInversed4.hpp"
+	"LevelPuzzle1.hpp"
+	"LevelPuzzle2.hpp"
+	"LevelTutorial.hpp"
+	"Loading.hpp"
+	"MainMenu.hpp"
+	"Player.hpp"
+	"Story.hpp"
+
+1612035381 c:\users\zinis\cdblk\main_ww3_project\src\helpmenu.hpp
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level1.hpp
+	"Background.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level10.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612420017 c:\users\zinis\cdblk\main_ww3_project\src\success.hpp
+	"CustomText.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level11.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level12.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level13.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level14.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185476 c:\users\zinis\cdblk\main_ww3_project\src\level2.hpp
+	"Background.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level3.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level4.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level5.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level6.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level7.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level8.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612185475 c:\users\zinis\cdblk\main_ww3_project\src\level9.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss1.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss3p.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss4.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss4p.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss5p.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss6.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612155953 c:\users\zinis\cdblk\main_ww3_project\src\levelboss6p.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612171527 c:\users\zinis\cdblk\main_ww3_project\src\levelbossfinal.hpp
+	"Background.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+
+1612246943 c:\users\zinis\cdblk\main_ww3_project\src\levelbossi2.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612159034 c:\users\zinis\cdblk\main_ww3_project\src\levelbossi4.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612159034 c:\users\zinis\cdblk\main_ww3_project\src\levelbossi6.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612156476 c:\users\zinis\cdblk\main_ww3_project\src\levelinversed1.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612158816 c:\users\zinis\cdblk\main_ww3_project\src\levelinversed2.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612158816 c:\users\zinis\cdblk\main_ww3_project\src\levelinversed3.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612158816 c:\users\zinis\cdblk\main_ww3_project\src\levelinversed4.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612159247 c:\users\zinis\cdblk\main_ww3_project\src\levelpuzzle1.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612159182 c:\users\zinis\cdblk\main_ww3_project\src\levelpuzzle2.hpp
+	"Background.hpp"
+	"CustomText.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+	"Success.hpp"
+
+1612010060 c:\users\zinis\cdblk\main_ww3_project\src\leveltutorial.hpp
+	"Background.hpp"
+	"Enemy1.hpp"
+	"Enemy2.hpp"
+	"Enemy3.hpp"
+	"Enemy4.hpp"
+	"Enemy5.hpp"
+	"Enemy6.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+
+1612041168 c:\users\zinis\cdblk\main_ww3_project\src\loading.hpp
+
+1612021572 c:\users\zinis\cdblk\main_ww3_project\src\story.hpp
+
+1612418961 source:c:\users\zinis\cdblk\main_ww3_project\src\gameui.cpp
+	"GameUI.hpp"
+	"GetRes.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+
+1612517092 source:c:\users\zinis\cdblk\main_ww3_project\src\getres.cpp
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612421125 source:c:\users\zinis\cdblk\main_ww3_project\src\helper.cpp
+	"Helper.hpp"
+
+1612420449 source:c:\users\zinis\cdblk\main_ww3_project\src\helpmenu.cpp
+	"HelpMenu.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelHelper.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level1.cpp
+	"Level1.hpp"
+	"GameUI.hpp"
+	"Success.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level10.cpp
+	"Level10.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level11.cpp
+	"Level11.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level12.cpp
+	"Level12.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level13.cpp
+	"Level13.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level14.cpp
+	"Level14.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level2.cpp
+	"Level2.hpp"
+	"GameUI.hpp"
+	"Success.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level3.cpp
+	"Level3.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level4.cpp
+	"Level4.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level5.cpp
+	"Level5.hpp"
+	"CustomText.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level6.cpp
+	"Level6.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level7.cpp
+	"Level7.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level8.cpp
+	"Level8.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\level9.cpp
+	"Level9.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss1.cpp
+	"LevelBoss1.hpp"
+	"Puzzle.hpp"
+
+1612547305 c:\users\zinis\cdblk\main_ww3_project\src\puzzle.hpp
+	"CustomText.hpp"
+
+1612551891 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss3p.cpp
+	"LevelBoss3p.hpp"
+	"Puzzle.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss4.cpp
+	"LevelBoss4.hpp"
+	"Puzzle.hpp"
+
+1612549268 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss4p.cpp
+	"LevelBoss4p.hpp"
+	"Puzzle.hpp"
+
+1612549274 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss5p.cpp
+	"LevelBoss5p.hpp"
+	"Puzzle.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss6.cpp
+	"LevelBoss6.hpp"
+	"Puzzle.hpp"
+
+1612549282 source:c:\users\zinis\cdblk\main_ww3_project\src\levelboss6p.cpp
+	"LevelBoss6p.hpp"
+	"Puzzle.hpp"
+
+1612549301 source:c:\users\zinis\cdblk\main_ww3_project\src\levelbossfinal.cpp
+	"LevelBossFinal.hpp"
+	"Boss.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"Puzzle.hpp"
+	"Success.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelbossi2.cpp
+	"LevelBossI2.hpp"
+	"Puzzle.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelbossi4.cpp
+	"LevelBossI4.hpp"
+	"Puzzle.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelbossi6.cpp
+	"LevelBossI6.hpp"
+	"Puzzle.hpp"
+
+1612517206 source:c:\users\zinis\cdblk\main_ww3_project\src\levelfailed.cpp
+	"LevelFailed.hpp"
+	"BaseEnemy.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+	"LevelHelper.hpp"
+	"Player.hpp"
+
+1612544979 source:c:\users\zinis\cdblk\main_ww3_project\src\levelhelper.cpp
+	"LevelHelper.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelinversed1.cpp
+	"LevelInversed1.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelinversed2.cpp
+	"LevelInversed2.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelinversed3.cpp
+	"LevelInversed3.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\levelinversed4.cpp
+	"LevelInversed4.hpp"
+
+1612549251 source:c:\users\zinis\cdblk\main_ww3_project\src\levelpuzzle1.cpp
+	"LevelPuzzle1.hpp"
+	"Puzzle.hpp"
+
+1612549260 source:c:\users\zinis\cdblk\main_ww3_project\src\levelpuzzle2.cpp
+	"LevelPuzzle2.hpp"
+	"Puzzle.hpp"
+
+1612544210 source:c:\users\zinis\cdblk\main_ww3_project\src\leveltutorial.cpp
+	"LevelTutorial.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"Success.hpp"
+
+1612095627 source:c:\users\zinis\cdblk\main_ww3_project\src\loading.cpp
+	"Loading.hpp"
+	"Helper.hpp"
+
+1611986036 source:c:\users\zinis\cdblk\main_ww3_project\src\main.cpp
+	"GameHandler.hpp"
+
+1612421403 source:c:\users\zinis\cdblk\main_ww3_project\src\mainmenu.cpp
+	"MainMenu.hpp"
+	"GameUI.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+
+1612433886 source:c:\users\zinis\cdblk\main_ww3_project\src\player.cpp
+	"Player.hpp"
+	"Collision.h"
+	"GameHandler.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+
+1612549176 source:c:\users\zinis\cdblk\main_ww3_project\src\puzzle.cpp
+	"Puzzle.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+	"LevelFailed.hpp"
+	"LevelHelper.hpp"
+	"Success.hpp"
+
+1612420449 source:c:\users\zinis\cdblk\main_ww3_project\src\story.cpp
+	"Story.hpp"
+	"CustomText.hpp"
+	"GameUI.hpp"
+	"Helper.hpp"
+	"LevelHelper.hpp"
+
+1612420017 source:c:\users\zinis\cdblk\main_ww3_project\src\success.cpp
+	"Success.hpp"
+	"BaseEnemy.hpp"
+	"GetRes.hpp"
+	"Helper.hpp"
+	"Player.hpp"
+
