@@ -8,7 +8,7 @@ The year is 2050. The relationship between Russia and the USA starts to worsen d
 ## Features
 
  - Variety of enemies.
- - Attractive in-game cursor.
+ - Attractive UI and in-game cursor.
  - Brain teasing puzzles.
  - Heart touching quotes about war, life and persistence.
  - And many more.
