@@ -2,16 +2,17 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Main_project" />
+		<Option title="WW3" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/GAME" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/WW3" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++14" />
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
@@ -23,12 +24,13 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/GAME" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/WW3" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++14" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -45,10 +47,10 @@
 			<Add option="-fexceptions" />
 			<Add option="-Winvalid-pch" />
 			<Add option='-include &quot;src/PRE_COMPILED_HEADER.h&quot;' />
-			<Add directory="C:/SFML-2.5.1/include" />
+			<Add directory="SFML-2.5.1/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/SFML-2.5.1/lib" />
+			<Add directory="SFML-2.5.1/lib" />
 		</Linker>
 		<Unit filename="openal32.dll" />
 		<Unit filename="sfml-audio-2.dll" />
