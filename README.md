@@ -14,12 +14,12 @@ The year is 2050. The relationship between Russia and the USA starts to worsen d
  - And many more.
 ## Releases
 
-*add releases*
+To play without building go to https://github.com/x00jahangir/SuperMeow/releases. Download the ZIP, extract and run.
 
 ## Build instructions
 
-*add build instructions*
+Open the project in CodeBlocks and build.
 
 ## License
 
-*add license*
+*waiting*
