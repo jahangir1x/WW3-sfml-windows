@@ -19,7 +19,7 @@ The year is 2050. The relationship between Russia and the USA starts to worsen d
  - And many more.
 ## Releases
 
-To play without building go to https://github.com/x00jahangir/SuperMeow/releases. Download the ZIP, extract and run.
+To play without building go to https://github.com/x00jahangir/WW3/releases. Download the ZIP, extract and run.
 
 ## Build instructions
 
