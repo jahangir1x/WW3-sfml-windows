@@ -2,7 +2,7 @@
 A 2D aircraft shooter game with attractive UI.
 
 ## Made by
- - Md. Jahangir Alam Rocky ( https://github.com/x00jahangir )
+ - Md. Jahangir Alam Rocky ( https://github.com/jahangir1x )
  - Md. Sourav ( https://github.com/MdSourav76046 )
  - Fouzia Zilani ( https://github.com/fouzia1146 )
 
