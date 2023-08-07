@@ -1,4 +1,4 @@
-# World War 3 (WW3)
+# WW3
 A 2D aircraft shooter game with attractive UI.
 
 ## Made by
